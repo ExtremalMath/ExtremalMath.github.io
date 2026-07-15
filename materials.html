@@ -63,25 +63,41 @@
             padding: 0;
         }
 
+        /* 修改了 file-item，使其支持块级布局以容纳预览区 */
         .file-item {
-            display: flex;
-            align-items: center;
-            padding: 20px;
             border: 1px solid #eee;
             border-radius: 8px;
             margin-bottom: 15px;
-            transition: background 0.2s, transform 0.1s;
+            background: #fff;
+            overflow: hidden; /* 防止圆角溢出 */
+            transition: box-shadow 0.2s;
         }
 
         .file-item:hover {
-            background-color: #fcfcfc;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
             border-color: #ddd;
-            transform: translateY(-2px);
+        }
+
+        /* 头部点击区域样式 */
+        .file-header {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            cursor: pointer;
+            user-select: none; /* 防止双击选中文本 */
+        }
+
+        .file-header:hover {
+            background-color: #fcfcfc;
         }
 
         .file-icon {
             font-size: 1.8em;
             margin-right: 20px;
+        }
+
+        .file-info {
+            flex-grow: 1;
         }
 
         .file-info a {
@@ -90,15 +106,42 @@
             font-weight: 600;
             font-size: 1.1em;
             display: block;
-        }
-        
-        .file-info a:hover {
-            color: var(--accent-color);
+            pointer-events: none; /* 让点击事件穿透到父级 div */
         }
 
         .file-info small {
             color: #888;
             font-size: 0.9em;
+        }
+
+        /* 箭头图标样式 */
+        .arrow-icon {
+            font-size: 0.8em;
+            color: #999;
+            transition: transform 0.3s ease; /* 添加旋转动画 */
+            margin-left: 10px;
+        }
+
+        /* 当 item 处于 active 状态时，旋转箭头 */
+        .file-item.active .arrow-icon {
+            transform: rotate(180deg);
+        }
+
+        /* 预览容器 */
+        .preview-container {
+            display: none; /* 默认隐藏 */
+            border-top: 1px dashed #eee;
+            background-color: #fafafa;
+            padding: 20px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+            border-radius: 4px;
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
         .footer {
@@ -111,6 +154,7 @@
         @media (max-width: 600px) {
             .container { padding: 40px 20px; }
             h1 { font-size: 2em; }
+            iframe { height: 400px; } /* 移动端减小高度 */
         }
     </style>
 </head>
@@ -126,50 +170,92 @@
         </p>
 
         <ul class="file-list">
-            <!-- 分类标题：图论作业 -->
-            <li style="margin-top: 30px; margin-bottom: 10px; font-family: 'Lora', serif; color: var(--primary-color); font-weight: bold;">
-                Graph Theory Homework
+            <!-- 分类标题 -->
+            <li style="margin-top: 30px; margin-bottom: 15px; font-family: 'Lora', serif; color: var(--primary-color); font-weight: bold; border-bottom: 2px solid #eee; padding-bottom: 5px;">
+                Graph Theory Homework (Preview Mode)
             </li>
 
             <!-- 文件 1: Exercise0526.pdf -->
             <li class="file-item">
-                <span class="file-icon">📝</span>
-                <div class="file-info">
-                    <a href="./notes/GraphTheoryHomework/Exercise0526.pdf" target="_blank">
-                        Exercise 0526
-                    </a>
-                    <small>Uploaded: May 2026</small>
+                <!-- 点击整个 header 区域触发 toggle -->
+                <div class="file-header" onclick="togglePreview(this)">
+                    <span class="file-icon">📄</span>
+                    <div class="file-info">
+                        <a href="#">Exercise 0526</a>
+                        <small>Uploaded: May 2026</small>
+                    </div>
+                    <span class="arrow-icon">▼</span>
+                </div>
+                <!-- 预览区域 -->
+                <div class="preview-container">
+                    <!-- data-src 用于懒加载，只有展开时才赋值给 src -->
+                    <iframe data-src="./notes/GraphTheoryHomework/Exercise0526.pdf"></iframe>
                 </div>
             </li>
 
             <!-- 文件 2: proofofinequation0521.pdf -->
             <li class="file-item">
-                <span class="file-icon">📄</span>
-                <div class="file-info">
-                    <a href="./notes/GraphTheoryHomework/proofofinequation0521.pdf" target="_blank">
-                        Proof of Inequality (0521)
-                    </a>
-                    <small>Uploaded: May 2026</small>
+                <div class="file-header" onclick="togglePreview(this)">
+                    <span class="file-icon">📄</span>
+                    <div class="file-info">
+                        <a href="#">Proof of Inequality 0521</a>
+                        <small>Uploaded: May 2026</small>
+                    </div>
+                    <span class="arrow-icon">▼</span>
+                </div>
+                <div class="preview-container">
+                    <iframe data-src="./notes/GraphTheoryHomework/proofofinequation0521.pdf"></iframe>
                 </div>
             </li>
 
             <!-- 文件 3: property0532.pdf -->
             <li class="file-item">
-                <span class="file-icon">📄</span>
-                <div class="file-info">
-                    <a href="./notes/GraphTheoryHomework/property0532.pdf" target="_blank">
-                        Property Analysis (0532)
-                    </a>
-                    <small>Uploaded: May 2026</small>
+                <div class="file-header" onclick="togglePreview(this)">
+                    <span class="file-icon">📄</span>
+                    <div class="file-info">
+                        <a href="#">Property 0532</a>
+                        <small>Uploaded: May 2026</small>
+                    </div>
+                    <span class="arrow-icon">▼</span>
+                </div>
+                <div class="preview-container">
+                    <iframe data-src="./notes/GraphTheoryHomework/property0532.pdf"></iframe>
                 </div>
             </li>
-
-
+        </ul>
 
         <div class="footer">
             &copy; 2026 ExtremalMath. Hosted on GitHub Pages.
         </div>
     </div>
+
+    <script>
+        function togglePreview(headerElement) {
+            // 找到当前的 li 元素
+            const listItem = headerElement.closest('.file-item');
+            // 找到预览容器
+            const previewContainer = listItem.querySelector('.preview-container');
+            // 找到 iframe
+            const iframe = previewContainer.querySelector('iframe');
+
+            // 切换 active 类（用于旋转箭头）
+            listItem.classList.toggle('active');
+
+            if (previewContainer.style.display === "block") {
+                // 如果当前是显示的，则隐藏
+                previewContainer.style.display = "none";
+            } else {
+                // 如果当前是隐藏的，则显示
+                previewContainer.style.display = "block";
+                
+                // 懒加载逻辑：如果 iframe 还没有 src，就从 data-src 获取
+                // 这样可以避免页面一打开就同时下载所有 PDF
+                if (!iframe.src || iframe.src === window.location.href) {
+                    iframe.src = iframe.getAttribute('data-src');
+                }
+            }
+        }
+    </script>
 
 </body>
 </html>
