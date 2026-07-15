@@ -4,20 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ExtremalMath | Home</title>
-    <!-- 引入 Google Fonts 提升排版质感 -->
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #2c3e50; /* 深蓝灰色，稳重 */
-            --accent-color: #0366d6;  /* GitHub 蓝，用于强调 */
-            --bg-color: #f8f9fa;      /* 浅灰背景 */
+            --primary-color: #2c3e50;
+            --accent-color: #0366d6;
+            --bg-color: #f8f9fa;
             --card-bg: #ffffff;
             --text-main: #333333;
             --text-light: #666666;
         }
 
         body {
-            font-family: 'Inter', sans-serif; /* 正文使用无衬线体，易读 */
+            font-family: 'Inter', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
             margin: 0;
@@ -39,9 +38,8 @@
             margin-bottom: 40px;
         }
 
-        /* 标题样式 */
         h1 {
-            font-family: 'Lora', serif; /* 标题使用衬线体，学术感 */
+            font-family: 'Lora', serif;
             font-size: 2.8em;
             margin-bottom: 10px;
             color: var(--primary-color);
@@ -61,13 +59,12 @@
             border-bottom: 1px dashed var(--accent-color);
             transition: all 0.3s ease;
         }
-        
+
         .email-link:hover {
             border-bottom: 1px solid var(--accent-color);
             background-color: rgba(3, 102, 214, 0.1);
         }
 
-        /* 核心按钮样式 */
         .nav-button {
             display: inline-block;
             margin: 30px 0;
@@ -75,7 +72,7 @@
             background-color: var(--primary-color);
             color: white;
             text-decoration: none;
-            border-radius: 50px; /* 胶囊形状 */
+            border-radius: 50px;
             font-weight: 600;
             font-size: 1.1em;
             box-shadow: 0 4px 15px rgba(44, 62, 80, 0.3);
@@ -88,64 +85,11 @@
             background-color: #1a252f;
         }
 
-        /* 分割线 */
         hr {
             border: 0;
             height: 1px;
             background: #eee;
             margin: 40px 0;
-        }
-
-        /* 资料列表区域 */
-        .resources-preview {
-            text-align: left;
-            margin-top: 20px;
-        }
-
-        .resources-preview h3 {
-            font-family: 'Lora', serif;
-            font-size: 1.4em;
-            margin-bottom: 20px;
-            color: var(--primary-color);
-            border-left: 4px solid var(--accent-color);
-            padding-left: 15px;
-        }
-
-        .file-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .file-item {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            border: 1px solid #eee;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            transition: background 0.2s;
-        }
-
-        .file-item:hover {
-            background-color: #fcfcfc;
-            border-color: #ddd;
-        }
-
-        .file-icon {
-            font-size: 1.5em;
-            margin-right: 15px;
-        }
-
-        .file-info a {
-            text-decoration: none;
-            color: var(--text-main);
-            font-weight: 600;
-            display: block;
-        }
-
-        .file-info small {
-            color: #888;
-            font-size: 0.85em;
         }
 
         .footer {
@@ -154,7 +98,6 @@
             color: #aaa;
         }
 
-        /* 移动端适配 */
         @media (max-width: 600px) {
             .container { padding: 40px 20px; }
             h1 { font-size: 2.2em; }
@@ -172,36 +115,9 @@
 
         <hr>
 
-        <!-- 核心跳转区域 -->
         <section>
             <p>Welcome to my digital space for mathematics and research.</p>
             <a href="about.html" class="nav-button">View Profile & Research</a>
-        </section>
-
-        <hr>
-
-        <!-- 资料预览区域 -->
-        <section class="resources-preview">
-            <h3>Latest Materials</h3>
-            <ul class="file-list">
-                <li class="file-item">
-                    <span class="file-icon">📄</span>
-                    <div class="file-info">
-                        <a href="./notes/lecture_notes_01.pdf">Lecture Notes: Intro to Graph Theory</a>
-                        <small>Uploaded: July 2026</small>
-                    </div>
-                </li>
-                <li class="file-item">
-                    <span class="file-icon">📝</span>
-                    <div class="file-info">
-                        <a href="./problem_sets/exam_prep.pdf">Exam Prep Guide & Solutions</a>
-                        <small>Uploaded: June 2026</small>
-                    </div>
-                </li>
-            </ul>
-            <p style="text-align: center; margin-top: 20px;">
-               <a href="materials.html" style="color: var(--accent-color); text-decoration: none; font-size: 0.9em;">See all resources →</a>
-            </p>
         </section>
 
         <div class="footer">
