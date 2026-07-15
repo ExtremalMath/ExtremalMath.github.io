@@ -1,2 +1,2 @@
 # ExtremalMath.github.io
-a website
+A personal website for a mathematics undergraduate student - used to store mathematical study materials
