@@ -3,52 +3,209 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ExtremalMath - Personal Academic Page</title>
+    <title>ExtremalMath | Home</title>
+    <!-- 引入 Google Fonts 提升排版质感 -->
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; }
-        header { border-bottom: 1px solid #eaecef; padding-bottom: 10px; margin-bottom: 20px; }
-        h1 { color: #24292e; }
-        h2 { color: #0366d6; margin-top: 30px; }
-        .file-list { list-style: none; padding: 0; }
-        .file-list li { background: #f6f8fa; margin-bottom: 10px; padding: 10px; border-radius: 6px; border: 1px solid #e1e4e8; }
-        .file-list a { text-decoration: none; color: #0366d6; font-weight: bold; }
-        .file-list a:hover { text-decoration: underline; }
-        .footer { margin-top: 50px; font-size: 0.9em; color: #6a737d; border-top: 1px solid #eaecef; padding-top: 10px; }
+        :root {
+            --primary-color: #2c3e50; /* 深蓝灰色，稳重 */
+            --accent-color: #0366d6;  /* GitHub 蓝，用于强调 */
+            --bg-color: #f8f9fa;      /* 浅灰背景 */
+            --card-bg: #ffffff;
+            --text-main: #333333;
+            --text-light: #666666;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif; /* 正文使用无衬线体，易读 */
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 700px;
+            width: 90%;
+            background: var(--card-bg);
+            padding: 60px 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        /* 标题样式 */
+        h1 {
+            font-family: 'Lora', serif; /* 标题使用衬线体，学术感 */
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            color: var(--text-light);
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .email-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            border-bottom: 1px dashed var(--accent-color);
+            transition: all 0.3s ease;
+        }
+        
+        .email-link:hover {
+            border-bottom: 1px solid var(--accent-color);
+            background-color: rgba(3, 102, 214, 0.1);
+        }
+
+        /* 核心按钮样式 */
+        .nav-button {
+            display: inline-block;
+            margin: 30px 0;
+            padding: 16px 40px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px; /* 胶囊形状 */
+            font-weight: 600;
+            font-size: 1.1em;
+            box-shadow: 0 4px 15px rgba(44, 62, 80, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(44, 62, 80, 0.4);
+            background-color: #1a252f;
+        }
+
+        /* 分割线 */
+        hr {
+            border: 0;
+            height: 1px;
+            background: #eee;
+            margin: 40px 0;
+        }
+
+        /* 资料列表区域 */
+        .resources-preview {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .resources-preview h3 {
+            font-family: 'Lora', serif;
+            font-size: 1.4em;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            border-left: 4px solid var(--accent-color);
+            padding-left: 15px;
+        }
+
+        .file-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .file-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            transition: background 0.2s;
+        }
+
+        .file-item:hover {
+            background-color: #fcfcfc;
+            border-color: #ddd;
+        }
+
+        .file-icon {
+            font-size: 1.5em;
+            margin-right: 15px;
+        }
+
+        .file-info a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 600;
+            display: block;
+        }
+
+        .file-info small {
+            color: #888;
+            font-size: 0.85em;
+        }
+
+        .footer {
+            margin-top: 50px;
+            font-size: 0.8em;
+            color: #aaa;
+        }
+
+        /* 移动端适配 */
+        @media (max-width: 600px) {
+            .container { padding: 40px 20px; }
+            h1 { font-size: 2.2em; }
+        }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Welcome to ExtremalMath</h1>
-        <p><strong>Undergraduate Mathematics Student</strong></p>
-        <p>Email: <a href="mailto:mymath2035@outlook.com">mymath2035@outlook.com</a></p>
-    </header>
+    <div class="container">
+        <header>
+            <h1>ExtremalMath</h1>
+            <p class="subtitle">Undergraduate Mathematics Student</p>
+            <p style="font-size: 0.9em;">Contact: <a href="mailto:mymath2035@outlook.com" class="email-link">mymath2035@outlook.com</a></p>
+        </header>
 
-    <section>
-        <h2>About Me & Research</h2>
-        <p>Hello! I am an undergraduate student majoring in Mathematics.</p>
-        <p>As of 2026, my primary research interest lies in <strong>Extremal Graph Theory</strong>. I am fascinated by the structural properties of graphs and optimization problems. Please note that my research direction is dynamic and may evolve as I explore other areas of discrete mathematics.</p>
-    </section>
+        <hr>
 
-    <section>
-        <h2>Study Materials</h2>
-        <p>Here you can find lecture notes, problem sets, and summaries I have compiled. Feel free to download them.</p>
-        
-        <!-- 这里是文件列表，你需要根据实际上传的文件修改链接 -->
-        <ul class="file-list">
-            <li>
-                📄 <a href="./notes/lecture_notes_01.pdf">Lecture Notes: Introduction to Graph Theory (PDF)</a>
-                <br><small>Uploaded: July 2026</small>
-            </li>
-            <li>
-                📄 <a href="./problem_sets/exam_prep.pdf">Exam Prep Guide & Solutions (PDF)</a>
-                <br><small>Uploaded: June 2026</small>
-            </li>
-        </ul>
-    </section>
+        <!-- 核心跳转区域 -->
+        <section>
+            <p>Welcome to my digital space for mathematics and research.</p>
+            <a href="about.html" class="nav-button">View Profile & Research</a>
+        </section>
 
-    <div class="footer">
-        <p>&copy; 2026 ExtremalMath. Hosted on GitHub Pages.</p>
+        <hr>
+
+        <!-- 资料预览区域 -->
+        <section class="resources-preview">
+            <h3>Latest Materials</h3>
+            <ul class="file-list">
+                <li class="file-item">
+                    <span class="file-icon">📄</span>
+                    <div class="file-info">
+                        <a href="./notes/lecture_notes_01.pdf">Lecture Notes: Intro to Graph Theory</a>
+                        <small>Uploaded: July 2026</small>
+                    </div>
+                </li>
+                <li class="file-item">
+                    <span class="file-icon">📝</span>
+                    <div class="file-info">
+                        <a href="./problem_sets/exam_prep.pdf">Exam Prep Guide & Solutions</a>
+                        <small>Uploaded: June 2026</small>
+                    </div>
+                </li>
+            </ul>
+            <p style="text-align: center; margin-top: 20px;">
+                <a href="about.html#materials" style="color: var(--accent-color); text-decoration: none; font-size: 0.9em;">See all resources →</a>
+            </p>
+        </section>
+
+        <div class="footer">
+            &copy; 2026 ExtremalMath. Hosted on GitHub Pages.
+        </div>
     </div>
 
 </body>
