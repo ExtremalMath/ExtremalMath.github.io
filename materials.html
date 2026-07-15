@@ -4,16 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ExtremalMath | Study Materials</title>
-    <!-- 引入与首页相同的字体，保持风格统一 -->
+    <!-- 引入与首页相同的字体 -->
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
+            /* 颜色方案与首页完全一致 */
             --primary-color: #2c3e50;
             --accent-color: #0366d6;
             --bg-color: #f8f9fa;
             --card-bg: #ffffff;
             --text-main: #333333;
             --text-light: #666666;
+            --border-color: #eaeaea;
         }
 
         body {
@@ -23,84 +25,97 @@
             margin: 0;
             padding: 0;
             display: flex;
-            justify-content: center;
-            min-height: 100vh;
+            justify-content: center; /* 水平居中 */
+            align-items: center;     /* 垂直居中 */
+            min-height: 100vh;       /* 最小高度为视口高度 */
+            line-height: 1.6;
         }
 
         .container {
             max-width: 700px;
             width: 90%;
             background: var(--card-bg);
-            padding: 60px 40px;
+            padding: 3rem 2rem; /* 与首页一致的内边距 */
             border-radius: 12px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            margin-top: 40px;
-            margin-bottom: 40px;
+            text-align: center; /* 文本居中 */
         }
 
         h1 {
             font-family: 'Lora', serif;
             font-size: 2.5em;
-            margin-bottom: 10px;
+            margin: 0 0 0.5rem 0;
             color: var(--primary-color);
-            text-align: center;
         }
 
         .back-link {
             display: inline-block;
-            margin-bottom: 30px;
+            margin-bottom: 1.5rem;
             color: var(--accent-color);
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 500;
+            font-size: 0.95rem;
         }
         
         .back-link:hover {
             text-decoration: underline;
         }
 
+        .intro-text {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: var(--border-color);
+            margin: 2rem 0;
+        }
+
+        /* 文件列表样式 */
         .file-list {
             list-style: none;
             padding: 0;
+            text-align: left; /* 列表内容左对齐 */
         }
 
-        /* 分类标题样式 */
         .category-header {
-            margin-top: 40px;
-            margin-bottom: 15px;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
             font-family: 'Lora', serif;
             color: var(--primary-color);
-            font-weight: bold;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 8px;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
             font-size: 1.2em;
         }
 
         .file-item {
-            display: block; /* 改为 block 以容纳内部折叠内容 */
-            border: 1px solid #eee;
+            border: 1px solid var(--border-color);
             border-radius: 8px;
-            margin-bottom: 15px;
-            transition: background 0.2s, transform 0.1s;
-            overflow: hidden; /* 防止圆角溢出 */
+            margin-bottom: 1rem;
+            transition: all 0.2s ease;
+            overflow: hidden;
         }
 
         .file-item:hover {
             background-color: #fcfcfc;
             border-color: #ddd;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
 
-        /* 点击区域样式 */
         .clickable-area {
             display: flex;
             align-items: center;
-            padding: 20px;
+            padding: 1rem;
             cursor: pointer;
-            user-select: none; /* 防止双击选中文本 */
+            user-select: none;
         }
 
         .file-icon {
-            font-size: 1.8em;
-            margin-right: 20px;
+            font-size: 1.5em;
+            margin-right: 1rem;
             flex-shrink: 0;
         }
 
@@ -112,32 +127,29 @@
             text-decoration: none;
             color: var(--text-main);
             font-weight: 600;
-            font-size: 1.1em;
             display: block;
-            pointer-events: none; /* 让点击事件穿透到父级 div */
+            pointer-events: none;
         }
         
         .file-info small {
             color: #888;
-            font-size: 0.9em;
+            font-size: 0.85em;
             display: block;
-            margin-top: 4px;
+            margin-top: 0.25rem;
         }
 
-        /* 箭头样式 */
         .arrow-icon {
             font-size: 0.8em;
             color: #999;
             transition: transform 0.3s ease;
-            margin-left: 10px;
+            margin-left: 1rem;
         }
 
-        /* 预览容器样式 */
         .preview-container {
-            display: none; /* 默认隐藏 */
-            border-top: 1px dashed #ddd;
+            display: none;
+            border-top: 1px dashed var(--border-color);
             background-color: #fafafa;
-            padding: 20px;
+            padding: 1rem;
         }
 
         .preview-container iframe {
@@ -150,18 +162,15 @@
         }
 
         .footer {
-            margin-top: 50px;
-            font-size: 0.8em;
-            color: #aaa;
-            text-align: center;
+            margin-top: 3rem;
+            font-size: 0.8rem;
+            color: #999;
         }
 
         @media (max-width: 600px) {
-            .container { padding: 40px 20px; }
+            .container { padding: 2rem 1.5rem; }
             h1 { font-size: 2em; }
-            .clickable-area { padding: 15px; }
-            .file-icon { font-size: 1.5em; margin-right: 15px; }
-            .file-info a { font-size: 1em; }
+            .clickable-area { padding: 0.8rem; }
             .preview-container iframe { height: 400px; }
         }
     </style>
@@ -169,40 +178,37 @@
 <body>
 
     <div class="container">
-        <!-- 返回首页的链接 -->
         <a href="index.html" class="back-link">← Back to Home</a>
-
+        
         <h1>Study Materials</h1>
-        <p style="text-align: center; color: var(--text-light); margin-bottom: 40px;">
+        <p class="intro-text">
             A collection of lecture notes, problem sets, and other resources.
         </p>
+
+        <hr>
 
         <ul class="file-list">
             
             <!-- ================= 分类 1: My Research ================= -->
             <li class="category-header">My Research</li>
 
-            <!-- 文件: Version1DtoC3.pdf -->
             <li class="file-item">
                 <div class="clickable-area" onclick="togglePreview(this)">
-                    <span class="file-icon">🔬</span> <!-- 使用显微镜图标代表研究 -->
+                    <span class="file-icon">🔬</span>
                     <div class="file-info">
                         <a href="#">Notes on Density conditions for triangles in multipartite graph TO Corollary3 Version1</a>
                         <small>Uploaded: July 2026</small>
                     </div>
                     <span class="arrow-icon">▼</span>
                 </div>
-                <!-- 预览区域 -->
                 <div class="preview-container">
                     <iframe data-src="./notes/Version1DtoC3.pdf"></iframe>
                 </div>
             </li>
 
-
             <!-- ================= 分类 2: Graph Theory Homework ================= -->
             <li class="category-header">Graph Theory Homework</li>
 
-            <!-- 文件 1: Exercise0526.pdf -->
             <li class="file-item">
                 <div class="clickable-area" onclick="togglePreview(this)">
                     <span class="file-icon">📄</span>
@@ -217,7 +223,6 @@
                 </div>
             </li>
 
-            <!-- 文件 2: proofofinequation0521.pdf -->
             <li class="file-item">
                 <div class="clickable-area" onclick="togglePreview(this)">
                     <span class="file-icon">📄</span>
@@ -232,7 +237,6 @@
                 </div>
             </li>
 
-            <!-- 文件 3: property0532.pdf -->
             <li class="file-item">
                 <div class="clickable-area" onclick="togglePreview(this)">
                     <span class="file-icon">📄</span>
@@ -254,24 +258,19 @@
         </div>
     </div>
 
-    <!-- 交互脚本 -->
     <script>
         function togglePreview(element) {
-            // 找到当前点击项对应的预览容器
             const container = element.nextElementSibling;
             const arrow = element.querySelector('.arrow-icon');
             const iframe = container.querySelector('iframe');
 
             if (container.style.display === "block") {
-                // 如果已展开，则收起
                 container.style.display = "none";
                 arrow.style.transform = "rotate(0deg)";
             } else {
-                // 如果未展开，则展开
                 container.style.display = "block";
                 arrow.style.transform = "rotate(180deg)";
                 
-                // 懒加载优化：只有第一次点击时才设置 src，避免页面加载时卡顿
                 if (!iframe.src || iframe.src === window.location.href) {
                     iframe.src = iframe.getAttribute('data-src');
                 }
