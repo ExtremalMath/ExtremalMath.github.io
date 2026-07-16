@@ -3,18 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ExtremalMath | Study Materials</title>
-    <!-- 引入与首页相同的字体 -->
+    <title>ExtremalMath | Materials</title>
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* 颜色方案与首页完全一致 */
             --primary-color: #2c3e50;
             --accent-color: #0366d6;
             --bg-color: #f8f9fa;
             --card-bg: #ffffff;
             --text-main: #333333;
-            --text-light: #666666;
             --border-color: #eaeaea;
         }
 
@@ -23,260 +20,115 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             margin: 0;
-            padding: 0;
             display: flex;
-            justify-content: center; /* 水平居中 */
-            align-items: center;     /* 垂直居中 */
-            min-height: 100vh;       /* 最小高度为视口高度 */
-            line-height: 1.6;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
 
         .container {
-            max-width: 700px;
+            max-width: 800px;
             width: 90%;
             background: var(--card-bg);
-            padding: 3rem 2rem; /* 与首页一致的内边距 */
+            padding: 3rem;
             border-radius: 12px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            text-align: center; /* 文本居中 */
+            text-align: center;
+        }
+
+        /* 左上角返回按钮样式 */
+        .back-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .back-link:hover {
+            color: var(--accent-color);
         }
 
         h1 {
             font-family: 'Lora', serif;
             font-size: 2.5em;
-            margin: 0 0 0.5rem 0;
-            color: var(--primary-color);
-        }
-
-        .back-link {
-            display: inline-block;
-            margin-bottom: 1.5rem;
-            color: var(--accent-color);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-        }
-        
-        .back-link:hover {
-            text-decoration: underline;
-        }
-
-        .intro-text {
-            color: var(--text-light);
             margin-bottom: 2rem;
-        }
-
-        hr {
-            border: 0;
-            height: 1px;
-            background: var(--border-color);
-            margin: 2rem 0;
-        }
-
-        /* 文件列表样式 */
-        .file-list {
-            list-style: none;
-            padding: 0;
-            text-align: left; /* 列表内容左对齐 */
-        }
-
-        .category-header {
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-            font-family: 'Lora', serif;
             color: var(--primary-color);
-            font-weight: 600;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 0.5rem;
-            font-size: 1.2em;
         }
 
-        .file-item {
+        /* 导航卡片网格布局 */
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .nav-card {
+            background: white;
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            margin-bottom: 1rem;
-            transition: all 0.2s ease;
-            overflow: hidden;
-        }
-
-        .file-item:hover {
-            background-color: #fcfcfc;
-            border-color: #ddd;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
-
-        .clickable-area {
-            display: flex;
-            align-items: center;
-            padding: 1rem;
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .file-icon {
-            font-size: 1.5em;
-            margin-right: 1rem;
-            flex-shrink: 0;
-        }
-
-        .file-info {
-            flex-grow: 1;
-        }
-
-        .file-info a {
+            padding: 2rem;
             text-decoration: none;
             color: var(--text-main);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-color: var(--accent-color);
+        }
+
+        .nav-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .nav-title {
             font-weight: 600;
-            display: block;
-            pointer-events: none;
-        }
-        
-        .file-info small {
-            color: #888;
-            font-size: 0.85em;
-            display: block;
-            margin-top: 0.25rem;
-        }
-
-        .arrow-icon {
-            font-size: 0.8em;
-            color: #999;
-            transition: transform 0.3s ease;
-            margin-left: 1rem;
-        }
-
-        .preview-container {
-            display: none;
-            border-top: 1px dashed var(--border-color);
-            background-color: #fafafa;
-            padding: 1rem;
-        }
-
-        .preview-container iframe {
-            width: 100%;
-            height: 600px;
-            border: none;
-            border-radius: 4px;
-            background-color: white;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
-
-        .footer {
-            margin-top: 3rem;
-            font-size: 0.8rem;
-            color: #999;
-        }
-
-        @media (max-width: 600px) {
-            .container { padding: 2rem 1.5rem; }
-            h1 { font-size: 2em; }
-            .clickable-area { padding: 0.8rem; }
-            .preview-container iframe { height: 400px; }
+            font-size: 1.1rem;
         }
     </style>
 </head>
 <body>
 
+    <!-- 返回主页链接 -->
+    <a href="index.html" class="back-link">← Back to Home</a>
+
     <div class="container">
-        <a href="index.html" class="back-link">← Back to Home</a>
-        
         <h1>Study Materials</h1>
-        <p class="intro-text">
-            A collection of lecture notes, problem sets, and other resources.
-        </p>
+        <p style="color: #666;">Select a category to view resources.</p>
 
-        <hr>
+        <div class="nav-grid">
+            <!-- 链接到作业页 -->
+            <a href="homework.html" class="nav-card">
+                <span class="nav-icon">📝</span>
+                <span class="nav-title">Homework</span>
+            </a>
 
-        <ul class="file-list">
-            
-            <!-- ================= 分类 1: My Research ================= -->
-            <li class="category-header">My Research</li>
+            <!-- 链接到论文页 -->
+            <a href="course-essay.html" class="nav-card">
+                <span class="nav-icon">🎓</span>
+                <span class="nav-title">Course Essay</span>
+            </a>
 
-            <li class="file-item">
-                <div class="clickable-area" onclick="togglePreview(this)">
-                    <span class="file-icon">🔬</span>
-                    <div class="file-info">
-                        <a href="#">Notes on Density conditions for triangles in multipartite graph TO Corollary3 Version1</a>
-                        <small>Uploaded: July 2026</small>
-                    </div>
-                    <span class="arrow-icon">▼</span>
-                </div>
-                <div class="preview-container">
-                    <iframe data-src="./notes/Version1DtoC3.pdf"></iframe>
-                </div>
-            </li>
-
-            <!-- ================= 分类 2: Graph Theory Homework ================= -->
-            <li class="category-header">Graph Theory Homework</li>
-
-            <li class="file-item">
-                <div class="clickable-area" onclick="togglePreview(this)">
-                    <span class="file-icon">📄</span>
-                    <div class="file-info">
-                        <a href="#">Exercise 0526</a>
-                        <small>Uploaded: May 2026</small>
-                    </div>
-                    <span class="arrow-icon">▼</span>
-                </div>
-                <div class="preview-container">
-                    <iframe data-src="./notes/GraphTheoryHomework/Exercise0526.pdf"></iframe>
-                </div>
-            </li>
-
-            <li class="file-item">
-                <div class="clickable-area" onclick="togglePreview(this)">
-                    <span class="file-icon">📄</span>
-                    <div class="file-info">
-                        <a href="#">Proof of Inequality 0521</a>
-                        <small>Uploaded: May 2026</small>
-                    </div>
-                    <span class="arrow-icon">▼</span>
-                </div>
-                <div class="preview-container">
-                    <iframe data-src="./notes/GraphTheoryHomework/proofofinequation0521.pdf"></iframe>
-                </div>
-            </li>
-
-            <li class="file-item">
-                <div class="clickable-area" onclick="togglePreview(this)">
-                    <span class="file-icon">📄</span>
-                    <div class="file-info">
-                        <a href="#">Property 0532</a>
-                        <small>Uploaded: May 2026</small>
-                    </div>
-                    <span class="arrow-icon">▼</span>
-                </div>
-                <div class="preview-container">
-                    <iframe data-src="./notes/GraphTheoryHomework/property0532.pdf"></iframe>
-                </div>
-            </li>
-
-        </ul>
-
-        <div class="footer">
-            &copy; 2026 ExtremalMath. All rights reserved.
+            <!-- 链接到笔记页 -->
+            <a href="notes.html" class="nav-card">
+                <span class="nav-icon">📚</span>
+                <span class="nav-title">Notes</span>
+            </a>
         </div>
     </div>
-
-    <script>
-        function togglePreview(element) {
-            const container = element.nextElementSibling;
-            const arrow = element.querySelector('.arrow-icon');
-            const iframe = container.querySelector('iframe');
-
-            if (container.style.display === "block") {
-                container.style.display = "none";
-                arrow.style.transform = "rotate(0deg)";
-            } else {
-                container.style.display = "block";
-                arrow.style.transform = "rotate(180deg)";
-                
-                if (!iframe.src || iframe.src === window.location.href) {
-                    iframe.src = iframe.getAttribute('data-src');
-                }
-            }
-        }
-    </script>
 
 </body>
 </html>
