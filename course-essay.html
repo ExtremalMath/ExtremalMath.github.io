@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExtremalMath | Course Essay</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #0366d6;
+            --bg-color: #f8f9fa;
+            --border-color: #eaeaea;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 700px;
+            width: 100%;
+            background: #fff;
+            padding: 2.5rem 2rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        h1 {
+            font-family: 'Lora', serif;
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover { text-decoration: underline; }
+        
+        /* 列表样式 */
+        ul { list-style: none; padding: 0; }
+        li {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            transition: all 0.2s ease;
+            overflow: hidden;
+        }
+        li:hover {
+            background-color: #fcfcfc;
+            border-color: #ddd;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .clickable-area {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            cursor: pointer;
+            user-select: none;
+        }
+        .file-icon { font-size: 1.5em; margin-right: 1rem; }
+        .file-info { flex-grow: 1; }
+        .file-info a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            display: block;
+            pointer-events: none; /* 让点击事件穿透到父级 div */
+        }
+        .arrow-icon {
+            font-size: 0.8em;
+            color: #999;
+            transition: transform 0.3s ease;
+        }
+        
+        /* 预览区域 */
+        .preview-container {
+            display: none;
+            border-top: 1px dashed var(--border-color);
+            background-color: #fafafa;
+            padding: 1rem;
+        }
+        .preview-container iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+            border-radius: 4px;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- 返回按钮指向 materials.html -->
+        <a href="materials.html" class="back-link">← Back to Materials</a>
+        
+        <h1>Course Essays</h1>
+        <p style="color:#666; margin-bottom: 2rem;">Term papers and final reports.</p>
+
+        <ul>
+            <!-- 文件 1 -->
+            <li>
+                <div class="clickable-area" onclick="togglePreview(this)">
+                    <span class="file-icon">📝</span>
+                    <div class="file-info">
+                        <a href="#">8th Edition Report</a>
+                    </div>
+                    <span class="arrow-icon">▼</span>
+                </div>
+                <div class="preview-container">
+                    <!-- 请确保路径正确 -->
+                    <iframe data-src="./notes/essay/8thedition.pdf"></iframe>
+                </div>
+            </li>
+
+            <!-- 文件 2 -->
+            <li>
+                <div class="clickable-area" onclick="togglePreview(this)">
+                    <span class="file-icon">📝</span>
+                    <div class="file-info">
+                        <a href="#">Final Report 2</a>
+                    </div>
+                    <span class="arrow-icon">▼</span>
+                </div>
+                <div class="preview-container">
+                    <!-- 请确保路径正确 -->
+                    <iframe data-src="./notes/essay/FinalREPORT2.pdf"></iframe>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        function togglePreview(element) {
+            const container = element.nextElementSibling;
+            const arrow = element.querySelector('.arrow-icon');
+            const iframe = container.querySelector('iframe');
+
+            if (container.style.display === "block") {
+                container.style.display = "none";
+                arrow.style.transform = "rotate(0deg)";
+            } else {
+                container.style.display = "block";
+                arrow.style.transform = "rotate(180deg)";
+                
+                // 懒加载：只有点击时才加载 PDF，节省资源
+                if (!iframe.src || iframe.src === window.location.href) {
+                    iframe.src = iframe.getAttribute('data-src');
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
