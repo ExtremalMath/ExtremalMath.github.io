@@ -1,0 +1,40 @@
+name: Sync Gitee to GitHub (Force Overwrite)
+
+on:
+  # 方式1：定时同步（例如每天凌晨2点），防止漏掉推送钩子
+  schedule:
+    - cron: '0 2 * * *' 
+  # 方式2：手动触发（推荐用于首次强制覆盖）
+  workflow_dispatch:
+
+jobs:
+  force-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Gitee Repository
+        uses: actions/checkout@v3
+        with:
+          repository: ${{ github.repository }} # 这里假设仓库名一致，或者直接写 '用户名/仓库名'
+          ref: master                          # 指定要同步的主分支，根据实际改为 main 或 master
+          token: ${{ secrets.GITEE_TOKEN }}    # 使用 Gitee Token 拉取代码
+          fetch-depth: 0                       # 获取完整历史
+
+      - name: Force Push to GitHub
+        env:
+          # 使用 GitHub 自带的 GITHUB_TOKEN 进行推送，无需额外配置
+          GH_TOKEN: ${{ secrets.GITSYNC }} 
+        run: |
+          # 配置 Git 用户信息
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          
+          # 设置远程地址为当前 GitHub 仓库（使用 Token 鉴权）
+          git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git
+          
+          echo "⚠️ 正在强制推送 Gitee 代码到 GitHub..."
+          
+          # 核心命令：强制推送当前分支
+          git push origin HEAD --force
+          
+          # 如果需要连同标签一起强制覆盖，取消下面注释
+          # git push origin --tags --force
