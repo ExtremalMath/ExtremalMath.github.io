@@ -33,7 +33,7 @@
             padding: 40px 20px;
         }
 
-        /* 顶部导航栏 */
+        /* Header Styles */
         .header {
             display: flex;
             align-items: center;
@@ -61,11 +61,17 @@
         h1 {
             font-family: 'Lora', serif;
             font-size: 2rem;
-            margin: 0;
+            margin: 0 0 10px 0;
             color: var(--primary-color);
         }
 
-        /* 笔记卡片区域 */
+        .subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+
+        /* Note Card Styles */
         .note-card {
             background: var(--card-bg);
             border-radius: 12px;
@@ -75,20 +81,21 @@
             align-items: center;
             justify-content: space-between;
             border: 1px solid var(--border-color);
-            transition: transform 0.2s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
         .note-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(0,0,0,0.08);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
         }
 
         .file-info {
             display: flex;
             align-items: center;
+            flex: 1;
         }
 
-        /* 模拟PDF图标 */
+        /* PDF Icon Styling */
         .icon-box {
             width: 50px;
             height: 60px;
@@ -102,9 +109,10 @@
             font-size: 0.8rem;
             margin-right: 20px;
             position: relative;
+            flex-shrink: 0;
         }
         
-        /* 简单的折角效果 */
+        /* Folded corner effect */
         .icon-box::after {
             content: '';
             position: absolute;
@@ -118,9 +126,10 @@
 
         .details h2 {
             font-family: 'Lora', serif;
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             margin: 0 0 5px 0;
             color: var(--primary-color);
+            line-height: 1.4;
         }
 
         .details p {
@@ -129,28 +138,33 @@
             color: var(--text-secondary);
         }
 
-        /* 操作按钮 */
+        /* Action Buttons */
         .actions {
             display: flex;
             gap: 10px;
+            flex-shrink: 0;
+            margin-left: 20px;
         }
 
         .btn {
             text-decoration: none;
-            padding: 8px 16px;
+            padding: 10px 18px;
             border-radius: 6px;
             font-size: 0.9rem;
             font-weight: 500;
             transition: all 0.2s;
+            white-space: nowrap;
         }
 
         .btn-primary {
             background-color: var(--accent-color);
             color: white;
+            border: 1px solid var(--accent-color);
         }
 
         .btn-primary:hover {
             background-color: #0255b3;
+            border-color: #0255b3;
         }
 
         .btn-secondary {
@@ -162,17 +176,26 @@
         .btn-secondary:hover {
             border-color: var(--text-secondary);
             color: var(--text-main);
+            background-color: #fafafa;
         }
 
+        /* Mobile Responsiveness */
         @media (max-width: 600px) {
             .note-card {
                 flex-direction: column;
                 align-items: flex-start;
             }
+            
+            .file-info {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+
             .actions {
-                margin-top: 20px;
+                margin-left: 0;
                 width: 100%;
             }
+
             .btn {
                 flex: 1;
                 text-align: center;
@@ -183,28 +206,30 @@
 <body>
 
     <div class="container">
-        <!-- 头部返回 -->
+        <!-- Navigation -->
         <div class="header">
-            <a href="index.html" class="back-link"><span>&larr;</span> Back to Home</a>
+            <a href="materials.html" class="back-link"><span>&larr;</span> Back to Materials</a>
         </div>
 
         <h1>Course Notes</h1>
-        <p style="color: #666; margin-bottom: 30px;">Core study materials and reference documents.</p>
+        <p class="subtitle">Research papers and study materials.</p>
 
-        <!-- 唯一的笔记文件 -->
+        <!-- Single Note Item -->
         <div class="note-card">
             <div class="file-info">
                 <div class="icon-box">PDF</div>
                 <div class="details">
-                    <h2>Version1DtoC3.pdf</h2>
-                    <p>Calculus / Analysis Notes</p>
+                    <!-- Updated Title -->
+                    <h2>Notes on Density Conditions for Triangles in Multipartite Graph</h2>
+                    <!-- Updated Subtitle -->
+                    <p>Graph Theory / Extremal Combinatorics (V3)</p>
                 </div>
             </div>
             
             <div class="actions">
-                <!-- 请确保你的github仓库里确实有这个文件 -->
-                <a href="./notes/Version1DtoC3.pdf" target="_blank" class="btn btn-primary">Read Online</a>
-                <a href="./notes/Version1DtoC3.pdf" download class="btn btn-secondary">Download</a>
+                <!-- Updated Link Path based on screenshot -->
+                <a href="./notes/Notes_on_Density_conditions_for_triangles_in_multipartite_graph_V3.pdf" target="_blank" class="btn btn-primary">Read Online</a>
+                <a href="./notes/Notes_on_Density_conditions_for_triangles_in_multipartite_graph_V3.pdf" download class="btn btn-secondary">Download</a>
             </div>
         </div>
 
