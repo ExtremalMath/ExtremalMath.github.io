@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExtremalMath | Notes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #0366d6;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-main: #333;
+            --text-secondary: #666;
+            --border-color: #eaeaea;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 700px;
+            padding: 40px 20px;
+        }
+
+        /* 顶部导航栏 */
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--accent-color);
+        }
+
+        .back-link span {
+            margin-right: 5px;
+            font-size: 1.2rem;
+        }
+
+        h1 {
+            font-family: 'Lora', serif;
+            font-size: 2rem;
+            margin: 0;
+            color: var(--primary-color);
+        }
+
+        /* 笔记卡片区域 */
+        .note-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s ease;
+        }
+
+        .note-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0,0,0,0.08);
+        }
+
+        .file-info {
+            display: flex;
+            align-items: center;
+        }
+
+        /* 模拟PDF图标 */
+        .icon-box {
+            width: 50px;
+            height: 60px;
+            background-color: #ffebeb;
+            color: #d32f2f;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.8rem;
+            margin-right: 20px;
+            position: relative;
+        }
+        
+        /* 简单的折角效果 */
+        .icon-box::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            border-width: 0 12px 12px 0;
+            border-style: solid;
+            border-color: #fff #fff transparent transparent; 
+            box-shadow: -1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .details h2 {
+            font-family: 'Lora', serif;
+            font-size: 1.2rem;
+            margin: 0 0 5px 0;
+            color: var(--primary-color);
+        }
+
+        .details p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* 操作按钮 */
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #0255b3;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--text-secondary);
+            color: var(--text-main);
+        }
+
+        @media (max-width: 600px) {
+            .note-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .actions {
+                margin-top: 20px;
+                width: 100%;
+            }
+            .btn {
+                flex: 1;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- 头部返回 -->
+        <div class="header">
+            <a href="index.html" class="back-link"><span>&larr;</span> Back to Home</a>
+        </div>
+
+        <h1>Course Notes</h1>
+        <p style="color: #666; margin-bottom: 30px;">Core study materials and reference documents.</p>
+
+        <!-- 唯一的笔记文件 -->
+        <div class="note-card">
+            <div class="file-info">
+                <div class="icon-box">PDF</div>
+                <div class="details">
+                    <h2>Version1DtoC3.pdf</h2>
+                    <p>Calculus / Analysis Notes</p>
+                </div>
+            </div>
+            
+            <div class="actions">
+                <!-- 请确保你的github仓库里确实有这个文件 -->
+                <a href="./Version1DtoC3.pdf" target="_blank" class="btn btn-primary">Read Online</a>
+                <a href="./Version1DtoC3.pdf" download class="btn btn-secondary">Download</a>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
