@@ -15,14 +15,14 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: ${{ github.repository }} # 这里假设仓库名一致，或者直接写 '用户名/仓库名'
-          ref: master                          # 指定要同步的主分支，根据实际改为 main 或 master
-          token: ${{ secrets.GITEE_TOKEN }}    # 使用 Gitee Token 拉取代码
+          ref: master                          # ⚠️ 注意：如果你的Gitee主分支是 main，请改为 main
+          token: ${{ secrets.GITSYNC }}        # 👈 修改这里：使用你实际的密钥名称 GITSYNC
           fetch-depth: 0                       # 获取完整历史
 
       - name: Force Push to GitHub
         env:
           # 使用 GitHub 自带的 GITHUB_TOKEN 进行推送，无需额外配置
-          GH_TOKEN: ${{ secrets.GITSYNC }} 
+          GH_TOKEN: ${{ secrets.GITSYNC }}     # 这里也用 GITSYNC 确保一致性（虽然通常用 GITHUB_TOKEN 也可以）
         run: |
           # 配置 Git 用户信息
           git config user.name "GitHub Actions"
