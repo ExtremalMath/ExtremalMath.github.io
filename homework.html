@@ -50,6 +50,19 @@
         }
         .top-nav a:hover { color: var(--accent-color); }
 
+        /* 新增的说明文字样式 */
+        .note {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            color: #555;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background-color: #f8f9fa;
+            border-left: 4px solid var(--accent-color);
+            border-radius: 4px;
+        }
+
         .file-item {
             border: 1px solid var(--border-color);
             border-radius: 8px;
@@ -89,6 +102,11 @@
             <span style="font-weight: 600; color: var(--primary-color);">Graph Theory Homework</span>
         </div>
 
+        <!-- 新增的说明文字 -->
+        <div class="note">
+            These exercises are selected from the book <em>Large networks and graph limits</em> by László Lovász. Unless otherwise specified, the proofs are provided by myself.
+        </div>
+
         <div class="file-item">
             <div class="file-header" onclick="toggle(this)">
                 <span class="icon">✏️</span>
@@ -111,16 +129,8 @@
             </div>
         </div>
 
-        <div class="file-item">
-            <div class="file-header" onclick="toggle(this)">
-                <span class="icon">✏️</span>
-                <span class="name">Property 0532</span>
-                <span class="arrow">▼</span>
-            </div>
-            <div class="preview">
-                <iframe data-src="./notes/GraphTheoryHomework/property0532.pdf"></iframe>
-            </div>
-        </div>
+        <!-- "Property 0532" 文件项已删除 -->
+
     </div>
 
     <script>
