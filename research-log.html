@@ -40,26 +40,26 @@
     <a href="index.html" class="back-link">← Back to Home</a>
 
     <h1>📝 Research Log</h1>
-    <p>A detailed diary of my research journey in Extremal Graph Theory and related fields.</p>
+    <p>Notes on Density conditions for triangles in multipartite graphs.</p>
 
     <div class="log-timeline">
         <!-- 日志条目 1 -->
         <div class="log-item">
             <div class="log-header">
-                <div class="log-title">Update on H-free Graph Coloring</div>
-                <div class="log-date">July 17, 2026</div>
+                <div class="log-title">Proof of Critical Density for Triangles (Corollary 3)</div>
+                <div class="log-date">July 08, 2026</div>
             </div>
             <div class="log-content">
-                <p>I have made significant progress on bounding the chromatic number for specific classes of H-free graphs. The current focus is on refining the upper bound estimates using probabilistic methods.</p>
-                <p>Key takeaways:</p>
+                <p>Finalized the proof for the critical density $d_3(K_3)$. By analyzing the "Cyclic Triple" conditions ($\alpha\beta + \gamma > 1$, etc.), I demonstrated that the threshold is exactly the Golden Ratio $\tau \approx 0.618$.</p>
+                <p><strong>Key Steps:</strong></p>
                 <ul>
-                    <li>Explored the application of the Lovász Local Lemma in this context.</li>
-                    <li>Identified a potential pathway to improve the constant factor in the upper bound.</li>
+                    <li><strong>Lower Bound:</strong> Constructed a $C_5$ example where densities equal $\tau$, showing no triangle exists.</li>
+                    <li><strong>Upper Bound:</strong> Proved that if densities exceed $\tau$, the cyclic inequalities force a triangle to exist.</li>
                 </ul>
                 <div>
-                    <span class="log-tag">#GraphColoring</span>
-                    <span class="log-tag">#H-free</span>
-                    <span class="log-tag">#ProbabilisticMethod</span>
+                    <span class="log-tag">#ExtremalGraphTheory</span>
+                    <span class="log-tag">#GoldenRatio</span>
+                    <span class="log-tag">#TriangleDensity</span>
                 </div>
             </div>
         </div>
@@ -67,16 +67,31 @@
         <!-- 日志条目 2 -->
         <div class="log-item">
             <div class="log-header">
-                <div class="log-title">Literature Review: Turán-type Problems</div>
-                <div class="log-date">June 05, 2026</div>
+                <div class="log-title">Convex Hull Argument & Theorem 3</div>
+                <div class="log-date">July 05, 2026</div>
             </div>
             <div class="log-content">
-                <p>Completed a comprehensive review of recent papers regarding Turán-type problems in hypergraphs. The goal was to understand the current state-of-the-art and identify open questions.</p>
-                <p>Notable finding: Identified a potential gap in the existing proofs for k-uniform hypergraphs, which could be a promising direction for future work.</p>
+                <p>Worked on the proof for Theorem 3 using Carathéodory's Theorem. The goal was to show that a minimal counter-example (a weighted tripartite graph with no triangle but satisfying cyclic inequalities) cannot exist.</p>
+                <p>By reducing the vertex weights and applying convex combination arguments, I proved that any such minimal counter-example must have at most 2 vertices per part, leading to a contradiction.</p>
                 <div>
-                    <span class="log-tag">#TuránProblems</span>
-                    <span class="log-tag">#Hypergraphs</span>
-                    <span class="log-tag">#LiteratureReview</span>
+                    <span class="log-tag">#ConvexAnalysis</span>
+                    <span class="log-tag">#ProofStrategy</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 日志条目 3 -->
+        <div class="log-item">
+            <div class="log-header">
+                <div class="log-title">Drafting Notes: Density Definitions</div>
+                <div class="log-date">June 28, 2026</div>
+            </div>
+            <div class="log-content">
+                <p>Started organizing the research notes. Defined the edge density $d_{ij}$ between partitions $X_i$ and $X_j$. Clarified the relationship between the $n$-partite critical density $d_n(H)$ and the Turán number $ex(H, n)$.</p>
+                <p>Established the limit $d(H) = \lim_{n \to \infty} d_n(H)$ and its connection to the chromatic number $\chi(H)$ via the Erdős-Stone theorem.</p>
+                <div>
+                    <span class="log-tag">#Definitions</span>
+                    <span class="log-tag">#TuránNumber</span>
                 </div>
             </div>
         </div>
