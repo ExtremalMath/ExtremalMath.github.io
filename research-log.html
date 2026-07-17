@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Log - ExtremalMath</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; max-width: 860px; margin: 0 auto; padding: 40px 20px 60px; line-height: 1.7; color: #24292e; background: #fff; }
+        
+        /* 导航和通用样式 */
+        .back-link { display: inline-block; margin-bottom: 24px; text-decoration: none; color: #0366d6; font-weight: 600; transition: color 0.2s; }
+        .back-link:hover { color: #0245a0; text-decoration: underline; }
+        h1 { font-size: 2em; margin-bottom: 16px; color: #24292e; border-bottom: 2px solid #0366d6; padding-bottom: 16px; }
+        h2 { font-size: 1.4em; margin: 36px 0 14px; padding-bottom: 8px; border-bottom: 1px solid #e1e4e8; }
+        
+        /* 日志时间轴样式 */
+        .log-timeline { position: relative; padding-left: 30px; margin-top: 40px; }
+        .log-timeline::before { content: ''; position: absolute; left: 11px; top: 0; bottom: 0; width: 2px; background: #0366d6; }
+        
+        .log-item { position: relative; margin-bottom: 40px; }
+        .log-item::before { content: ''; position: absolute; left: -23px; top: 8px; width: 12px; height: 12px; background: #fff; border: 3px solid #0366d6; border-radius: 50%; }
+        
+        .log-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+        .log-title { font-size: 1.2em; font-weight: 600; color: #24292e; }
+        .log-date { font-size: 0.9em; color: #586069; font-weight: 500; }
+        
+        .log-content { font-size: 1em; color: #444; background: #f6f8fa; padding: 20px; border-radius: 6px; border-left: 4px solid #0366d6; }
+        .log-content p { margin-bottom: 12px; }
+        .log-content p:last-child { margin-bottom: 0; }
+        
+        .log-tag { display: inline-block; background: #f1f8ff; color: #0366d6; padding: 2px 10px; border-radius: 20px; font-size: 0.8em; border: 1px solid #c8e1ff; margin-right: 6px; }
+
+        /* 页脚 */
+        .footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid #e1e4e8; text-align: center; font-size: 0.85em; color: #959da5; }
+    </style>
+</head>
+<body>
+    <!-- 返回主页 -->
+    <a href="index.html" class="back-link">← Back to Home</a>
+
+    <h1>📝 Research Log</h1>
+    <p>A detailed diary of my research journey in Extremal Graph Theory and related fields.</p>
+
+    <div class="log-timeline">
+        <!-- 日志条目 1 -->
+        <div class="log-item">
+            <div class="log-header">
+                <div class="log-title">Update on H-free Graph Coloring</div>
+                <div class="log-date">July 17, 2026</div>
+            </div>
+            <div class="log-content">
+                <p>I have made significant progress on bounding the chromatic number for specific classes of H-free graphs. The current focus is on refining the upper bound estimates using probabilistic methods.</p>
+                <p>Key takeaways:</p>
+                <ul>
+                    <li>Explored the application of the Lovász Local Lemma in this context.</li>
+                    <li>Identified a potential pathway to improve the constant factor in the upper bound.</li>
+                </ul>
+                <div>
+                    <span class="log-tag">#GraphColoring</span>
+                    <span class="log-tag">#H-free</span>
+                    <span class="log-tag">#ProbabilisticMethod</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 日志条目 2 -->
+        <div class="log-item">
+            <div class="log-header">
+                <div class="log-title">Literature Review: Turán-type Problems</div>
+                <div class="log-date">June 05, 2026</div>
+            </div>
+            <div class="log-content">
+                <p>Completed a comprehensive review of recent papers regarding Turán-type problems in hypergraphs. The goal was to understand the current state-of-the-art and identify open questions.</p>
+                <p>Notable finding: Identified a potential gap in the existing proofs for k-uniform hypergraphs, which could be a promising direction for future work.</p>
+                <div>
+                    <span class="log-tag">#TuránProblems</span>
+                    <span class="log-tag">#Hypergraphs</span>
+                    <span class="log-tag">#LiteratureReview</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2026 ExtremalMath. Built with ❤️ and mathematics.</p>
+    </div>
+</body>
+</html>
