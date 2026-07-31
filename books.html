@@ -93,36 +93,28 @@
             border-radius: 4px;
         }
 
-        /* 新增的按钮样式 */
         .actions {
             display: flex;
-            gap: 10px;
+            gap: 1rem;
             margin-top: 1rem;
         }
         .btn {
-            display: inline-block;
             padding: 0.5rem 1rem;
-            border-radius: 4px;
+            border-radius: 6px;
             text-decoration: none;
             font-size: 0.9rem;
             font-weight: 600;
-            text-align: center;
-            cursor: pointer;
-            transition: background-color 0.2s;
         }
         .btn-primary {
             background-color: var(--accent-color);
-            color: #fff;
-        }
-        .btn-primary:hover {
-            background-color: #0255c2;
+            color: white;
         }
         .btn-secondary {
-            background-color: #6c757d;
-            color: #fff;
+            background-color: #eaeaea;
+            color: #333;
         }
-        .btn-secondary:hover {
-            background-color: #5a6268;
+        .btn:hover {
+            opacity: 0.9;
         }
     </style>
 </head>
@@ -130,7 +122,6 @@
     <div class="container">
         <div class="top-nav">
             <a href="materials.html">← Back to Materials</a>
-            <span style="font-weight: 600; color: var(--primary-color);">GTM 244 - Graph Theory</span>
         </div>
 
         <div class="note">
@@ -140,16 +131,15 @@
         <div class="file-item">
             <div class="file-header" onclick="toggle(this)">
                 <span class="icon">📕</span>
-                <span class="name">GTM 244 - Bondy J.A., Murty U.S.R. - Graph Theory</span>
+                <span class="name">GTM244-Bondy J A Murty USR-GraphTheory</span>
                 <span class="arrow">▼</span>
             </div>
             <div class="preview">
-                <iframe data-src="./books/GTM_244_Bondy_Murty_Graph_Theory.pdf"></iframe>
+                <iframe data-src="./book/GTM244BondyJAMurtyUSR-GraphTheory.pdf"></iframe>
             </div>
-            <!-- 新增的操作按钮 -->
             <div class="actions">
-                <a href="./book/GTM 244 - ISBN978-1-84628-969-9 - Bondy J.A., Murty U.S.R. - Graph Theory.pdf" target="_blank" class="btn btn-primary">Read Online</a>
-                <a href="./book/GTM 244 - ISBN978-1-84628-969-9 - Bondy J.A., Murty U.S.R. - Graph Theory.pdf" download class="btn btn-secondary">Download</a>
+                <a href="./book/GTM244BondyJAMurtyUSR-GraphTheory.pdf" target="_blank" class="btn btn-primary">Read Online</a>
+                <a href="./book/GTM244BondyJAMurtyUSR-GraphTheory.pdf" download class="btn btn-secondary">Download</a>
             </div>
         </div>
 
