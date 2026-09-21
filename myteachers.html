@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Instructors</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, "Microsoft YaHei", "PingFang SC", sans-serif;
+      background: #f5f6f8;
+      color: #1a1a1a;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 80px 20px;
+      line-height: 1.7;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 560px;
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 48px 44px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04),
+                  0 12px 32px rgba(0, 0, 0, 0.06);
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: #111;
+    }
+
+    .intro {
+      color: #888;
+      font-size: 14px;
+      font-style: italic;
+      margin-top: 10px;
+      margin-bottom: 36px;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    li {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid #f0f0f0;
+      transition: padding-left 0.25s ease;
+    }
+
+    li:last-child {
+      border-bottom: none;
+    }
+
+    li:hover {
+      padding-left: 6px;
+    }
+
+    .course {
+      color: #333;
+      font-size: 16px;
+      letter-spacing: 0.3px;
+    }
+
+    .teacher {
+      color: #1a1a1a;
+      font-size: 16px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 480px) {
+      body { padding: 40px 16px; }
+      .card { padding: 36px 26px; border-radius: 12px; }
+      h1 { font-size: 20px; }
+      li { font-size: 15px; }
+      .course, .teacher { font-size: 15px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>My Instructors</h1>
+    <p class="intro">"A teacher is like a candle—it consumes itself to light the way for others."</p>
+    <ul>
+      <li><span class="course">Mathematical Analysis</span><span class="teacher">张泽鑫</span></li>
+      <li><span class="course">Ordinary Differential Equations (ODE)</span><span class="teacher">蔡水明</span></li>
+      <li><span class="course">Mathematical Modeling &amp; Numerical Analysis</span><span class="teacher">王林君</span></li>
+      <li><span class="course">Real Analysis and Functional Analysis</span><span class="teacher">谈强</span></li>
+      <li><span class="course">Equations of Mathematical Physics (PDE)</span><span class="teacher">王俊</span></li>
+    </ul>
+  </div>
+</body>
+</html>
