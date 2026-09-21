@@ -43,9 +43,9 @@
             font-weight: 500;
         }
         .back-link:hover { text-decoration: underline; }
-        
+
         /* 列表样式 */
-        ul { list-style: none; padding: 0; }
+        ul { list-style: none; padding: 0; margin: 0; }
         li {
             border: 1px solid var(--border-color);
             border-radius: 8px;
@@ -58,42 +58,42 @@
             border-color: #ddd;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
-        .clickable-area {
+
+        /* 整行都是一个链接，点击后在新标签页打开文件 */
+        .file-item {
             display: flex;
             align-items: center;
             padding: 1rem;
+            text-decoration: none;
+            color: inherit;
             cursor: pointer;
-            user-select: none;
         }
         .file-icon { font-size: 1.5em; margin-right: 1rem; }
         .file-info { flex-grow: 1; }
-        .file-info a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 600;
+        .file-title {
             display: block;
-            pointer-events: none; /* 让点击事件穿透到父级 div */
+            font-weight: 600;
+            color: #333;
+            line-height: 1.4;
         }
-        .arrow-icon {
-            font-size: 0.8em;
+        .file-meta {
+            display: block;
+            font-size: 0.78rem;
             color: #999;
-            transition: transform 0.3s ease;
+            margin-top: 0.25rem;
+            letter-spacing: 0.02em;
         }
-        
-        /* 预览区域 */
-        .preview-container {
-            display: none;
-            border-top: 1px dashed var(--border-color);
-            background-color: #fafafa;
-            padding: 1rem;
+        .open-icon {
+            font-size: 1rem;
+            color: #bbb;
+            margin-left: 1rem;
+            transition: color 0.2s ease, transform 0.2s ease;
         }
-        .preview-container iframe {
-            width: 100%;
-            height: 600px;
-            border: none;
-            border-radius: 4px;
-            background-color: white;
+        .file-item:hover .open-icon {
+            color: var(--accent-color);
+            transform: translate(2px, -2px);
         }
+        .file-item:hover .file-title { color: var(--accent-color); }
     </style>
 </head>
 <body>
@@ -101,76 +101,57 @@
     <div class="container">
         <!-- 返回按钮指向 materials.html -->
         <a href="materials.html" class="back-link">← Back to Materials</a>
-        
+
         <h1>Course Essays</h1>
         <p style="color:#666; margin-bottom: 2rem;">Term papers and final reports.</p>
 
         <ul>
             <!-- 文件 1 -->
             <li>
-                <div class="clickable-area" onclick="togglePreview(this)">
+                <a class="file-item"
+                   href="./notes/essay/8thedition.pdf"
+                   target="_blank"
+                   rel="noopener noreferrer">
                     <span class="file-icon">📝</span>
                     <div class="file-info">
-                        <a href="#">"Mathematical Model": Construction of the Mathematical Model for Exhibition Hall Layout Design</a>
+                        <span class="file-title">"Mathematical Model": Construction of the Mathematical Model for Exhibition Hall Layout Design</span>
+                        <span class="file-meta">PDF · opens in a new tab</span>
                     </div>
-                    <span class="arrow-icon">▼</span>
-                </div>
-                <div class="preview-container">
-                    <!-- 请确保路径正确 -->
-                    <iframe data-src="./notes/essay/8thedition.pdf"></iframe>
-                </div>
+                    <span class="open-icon">↗</span>
+                </a>
             </li>
 
             <!-- 文件 2 -->
             <li>
-                <div class="clickable-area" onclick="togglePreview(this)">
+                <a class="file-item"
+                   href="./notes/essay/FinalREPORT2.pdf"
+                   target="_blank"
+                   rel="noopener noreferrer">
                     <span class="file-icon">📝</span>
                     <div class="file-info">
-                        <a href="#">"Data Structure":Data Structure Course Paper (including C language programs for booking tickets, guided tours, and calculating 24-point) 2</a>
+                        <span class="file-title">"Data Structure": Data Structure Course Paper (including C language programs for booking tickets, guided tours, and calculating 24-point) 2</span>
+                        <span class="file-meta">PDF · opens in a new tab</span>
                     </div>
-                    <span class="arrow-icon">▼</span>
-                </div>
-                <div class="preview-container">
-                    <!-- 请确保路径正确 -->
-                    <iframe data-src="./notes/essay/FinalREPORT2.pdf"></iframe>
-                </div>
+                    <span class="open-icon">↗</span>
+                </a>
             </li>
+
             <!-- 文件 3 -->
             <li>
-    <div class="clickable-area" onclick="togglePreview(this)">
-        <span class="file-icon">📝</span>
-        <div class="file-info">
-            <a href="#">2026 National Mathematical Modeling Competition - Problem A</a>
-        </div>
-        <span class="arrow-icon">▼</span>
-    </div>
-    <div class="preview-container">
-        <iframe data-src="./notes/Modeling_and_Application_of_Heat_and_Mass_Transfer_in_Medicinal_Material_Drying.pdf"></iframe>
-    </div>
-</li>
+                <a class="file-item"
+                   href="./notes/Modeling_and_Application_of_Heat_and_Mass_Transfer_in_Medicinal_Material_Drying.pdf"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    <span class="file-icon">📝</span>
+                    <div class="file-info">
+                        <span class="file-title">2026 National Mathematical Modeling Competition - Problem A</span>
+                        <span class="file-meta">PDF · opens in a new tab</span>
+                    </div>
+                    <span class="open-icon">↗</span>
+                </a>
+            </li>
         </ul>
     </div>
-
-    <script>
-        function togglePreview(element) {
-            const container = element.nextElementSibling;
-            const arrow = element.querySelector('.arrow-icon');
-            const iframe = container.querySelector('iframe');
-
-            if (container.style.display === "block") {
-                container.style.display = "none";
-                arrow.style.transform = "rotate(0deg)";
-            } else {
-                container.style.display = "block";
-                arrow.style.transform = "rotate(180deg)";
-                
-                // 懒加载：只有点击时才加载 PDF，节省资源
-                if (!iframe.src || iframe.src === window.location.href) {
-                    iframe.src = iframe.getAttribute('data-src');
-                }
-            }
-        }
-    </script>
 
 </body>
 </html>
