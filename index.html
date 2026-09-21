@@ -4,123 +4,93 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ExtremalMath | Home</title>
-    <!-- 引入 Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
     <style>
-        :root {
-            --primary-color: #2c3e50; /* 深蓝灰 */
-            --accent-color: #0366d6;  /* 链接蓝 */
-            --bg-color: #f8f9fa;      /* 浅灰背景 */
-            --card-bg: #ffffff;       /* 卡片白底 */
-            --text-main: #333333;
-            --text-light: #666666;
-            --border-radius: 12px;
-        }
-
+        /* 极致简化的 CSS，仅保留基础排版与居中 */
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f7f9fa;
+            color: #333;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            line-height: 1.6;
+            margin: 0;
+            line-height: 1.7;
         }
 
         .container {
-            background-color: var(--card-bg);
-            padding: 3rem 2rem;
-            border-radius: var(--border-radius);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            background-color: #ffffff;
+            padding: 48px 32px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             max-width: 600px;
             width: 90%;
             text-align: center;
         }
 
-        /* 头部区域 */
-        header {
-            margin-bottom: 2rem;
-        }
-
         h1 {
-            font-family: 'Lora', serif;
-            font-size: 2.5rem;
-            margin: 0 0 0.5rem 0;
-            color: var(--primary-color);
-            letter-spacing: -0.5px;
+            font-size: 26px;
+            margin: 0 0 8px 0;
+            color: #1a1a1a;
         }
 
         .subtitle {
-            font-size: 1.1rem;
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
-            font-weight: 400;
+            font-size: 15px;
+            color: #666;
+            margin-bottom: 28px;
         }
 
-        /* 简介文本 */
         .intro-text {
-            font-size: 1.05rem;
-            color: var(--text-main);
-            margin-bottom: 2.5rem;
+            font-size: 16px;
+            margin-bottom: 36px;
+            color: #444;
         }
 
-        /* 按钮组 */
-        .button-group {
+        .btn-group {
             display: flex;
-            gap: 1rem;
             justify-content: center;
-            flex-wrap: wrap;
+            gap: 16px;
         }
 
         .btn {
             display: inline-block;
-            padding: 0.8rem 1.5rem;
-            border-radius: 50px;
+            padding: 10px 24px;
+            border-radius: 6px;
             text-decoration: none;
+            font-size: 14px;
             font-weight: 500;
-            transition: transform 0.2s, box-shadow 0.2s;
-            font-size: 0.95rem;
-        }
-
-        .btn-primary {
-            background-color: var(--primary-color);
-            color: white;
-            box-shadow: 0 4px 12px rgba(44, 62, 80, 0.2);
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--primary-color);
-            border: 1px solid var(--primary-color);
+            transition: opacity 0.2s;
         }
 
         .btn:hover {
-            transform: translateY(-2px);
+            opacity: 0.85;
         }
 
-        .btn-primary:hover {
-            box-shadow: 0 6px 16px rgba(44, 62, 80, 0.3);
+        .btn-primary {
+            background-color: #2c3e50;
+            color: #ffffff;
         }
 
-        .btn-secondary:hover {
-            background-color: #f0f2f5;
+        .btn-secondary {
+            background-color: #edf2f7;
+            color: #2c3e50;
         }
 
-        /* 页脚 */
         footer {
-            margin-top: 3rem;
-            font-size: 0.8rem;
+            margin-top: 40px;
+            font-size: 12px;
             color: #999;
         }
 
-        /* 移动端适配 */
         @media (max-width: 480px) {
-            h1 { font-size: 2rem; }
-            .button-group { flex-direction: column; }
-            .btn { width: 100%; box-sizing: border-box; }
+            .btn-group {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .btn {
+                width: 100%;
+                box-sizing: border-box;
+            }
         }
     </style>
 </head>
@@ -128,21 +98,17 @@
 
     <div class="container">
         <header>
-            <!-- 网站/个人品牌名称 -->
             <h1>Extremal Math</h1>
-            <!-- 简短的身份描述 -->
             <div class="subtitle">Undergraduate Mathematics Student</div>
         </header>
 
         <main>
-            <!-- 简短的欢迎语和研究方向 -->
             <p class="intro-text">
-                Welcome to my academic space. I am an undergraduate student focusing on <strong>Extremal Graph Theory</strong> and <strong>Combinatorics</strong>.This is a website used for sharing personal study materials. 
+                Welcome to my academic space. I am an undergraduate student exploring <strong>Extremal Combinatorics</strong> and <strong>Mathematical Analysis</strong>, with a particular interest in <strong>Extremal Graph Theory</strong>, <strong>Functional Analysis</strong>, and <strong>Partial Differential Equations (PDE)</strong>. This is a website used for sharing personal study materials.
             </p>
 
-            <!-- 导航按钮 -->
-            <div class="button-group">
-                <a href="about.html" class="btn btn-primary">View Profile & Research</a>
+            <div class="btn-group">
+                <a href="about.html" class="btn btn-primary">View Profile &amp; Research</a>
                 <a href="materials.html" class="btn btn-secondary">Browse Study Materials</a>
             </div>
         </main>
