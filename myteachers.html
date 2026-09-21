@@ -48,6 +48,23 @@
       margin-bottom: 36px;
     }
 
+    .year {
+      margin-bottom: 28px;
+    }
+
+    .year:last-child {
+      margin-bottom: 0;
+    }
+
+    .year-title {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+    }
+
     ul {
       list-style: none;
     }
@@ -57,7 +74,7 @@
       align-items: baseline;
       justify-content: space-between;
       gap: 16px;
-      padding: 16px 0;
+      padding: 14px 0;
       border-bottom: 1px solid #f0f0f0;
       transition: padding-left 0.25s ease;
     }
@@ -96,13 +113,31 @@
   <div class="card">
     <h1>My Instructors</h1>
     <p class="intro">"A teacher is like a candle—it consumes itself to light the way for others."</p>
-    <ul>
-      <li><span class="course">Mathematical Analysis</span><span class="teacher">张泽鑫</span></li>
-      <li><span class="course">Ordinary Differential Equations (ODE)</span><span class="teacher">蔡水明</span></li>
-      <li><span class="course">Mathematical Modeling &amp; Numerical Analysis</span><span class="teacher">王林君</span></li>
-      <li><span class="course">Real Analysis and Functional Analysis</span><span class="teacher">谈强</span></li>
-      <li><span class="course">Equations of Mathematical Physics (PDE)</span><span class="teacher">王俊</span></li>
-    </ul>
+
+    <div class="year">
+      <div class="year-title">Freshman Year</div>
+      <ul>
+        <li><span class="course">Mathematical Analysis</span><span class="teacher">张泽鑫</span></li>
+        <li><span class="course">Ordinary Differential Equations (ODE)</span><span class="teacher">蔡水明</span></li>
+      </ul>
+    </div>
+
+    <div class="year">
+      <div class="year-title">Sophomore Year</div>
+      <ul>
+        <li><span class="course">Mathematical Modeling &amp; Numerical Analysis</span><span class="teacher">王林君</span></li>
+      </ul>
+    </div>
+
+    <div class="year">
+      <div class="year-title">Junior Year</div>
+      <ul>
+        <li><span class="course">Real Analysis and Functional Analysis</span><span class="teacher">谈强</span></li>
+        <li><span class="course">Equations of Mathematical Physics (PDE)</span><span class="teacher">王俊</span></li>
+        <li><span class="course">Finite Fields and Their Applications</span><span class="teacher">王世鹏</span></li>
+      </ul>
+    </div>
+
   </div>
 </body>
 </html>
