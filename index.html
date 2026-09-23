@@ -81,6 +81,46 @@
             font-size: 12px;
             color: #999;
         }
+                /* 更新日志区块样式 */
+        .divider {
+            border: 0;
+            border-top: 1px solid #eee;
+            margin: 36px 0 28px 0;
+        }
+        #changelog-section {
+            text-align: left;
+            font-size: 13px;
+        }
+        #changelog-section h3 {
+            font-size: 13px;
+            color: #888;
+            margin: 0 0 16px 0;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        #changelog-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        #changelog-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+            color: #444;
+        }
+        #changelog-list li:last-child {
+            border-bottom: none;
+        }
+        .log-date {
+            color: #aaa;
+            font-size: 12px;
+            white-space: nowrap;
+            margin-left: 16px;
+        }
 
         @media (max-width: 480px) {
             .btn-group {
@@ -111,6 +151,13 @@
                 <a href="about.html" class="btn btn-primary">View Profile &amp; Research</a>
                 <a href="materials.html" class="btn btn-secondary">Browse Study Materials</a>
             </div>
+                        <hr class="divider">
+            <section id="changelog-section">
+                <h3>Recent Updates</h3>
+                <ul id="changelog-list">
+                    <!-- 这里的内容将由 updates.js 自动生成 -->
+                </ul>
+            </section>
         </main>
 
         <footer>
@@ -118,6 +165,35 @@
             &copy; 2026 ExtremalMath. Hosted on GitHub Pages.
         </footer>
     </div>
+    
+<script src="updates.js"></script>
+<script>
+    // 等待网页结构加载完毕
+    document.addEventListener('DOMContentLoaded', () => {
+        const listContainer = document.getElementById('changelog-list');
+        
+        if (typeof siteUpdates === 'undefined' || siteUpdates.length === 0) {
+            listContainer.innerHTML = '<li style="color: #bbb; font-style: italic;">No updates yet.</li>';
+            return;
+        }
+
+        // 遍历 updates.js 中的数组，生成列表
+        listContainer.innerHTML = siteUpdates.map(update => {
+            // 将日期格式化为英文形式 (例如: Sep 23, 2026)
+            const dateObj = new Date(update.date);
+            const formattedDate = dateObj.toLocaleDateString('en-US', {
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric'
+            });
+
+            return `<li>
+                <span>${update.text}</span>
+                <span class="log-date">${formattedDate}</span>
+            </li>`;
+        }).join('');
+    });
+</script>
 <script defer src="https://events.vercount.one/js"></script>
 </body>
 </html>
