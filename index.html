@@ -81,7 +81,8 @@
             font-size: 12px;
             color: #999;
         }
-                /* 更新日志区块样式 */
+        
+        /* 更新日志区块样式 */
         .divider {
             border: 0;
             border-top: 1px solid #eee;
@@ -151,7 +152,8 @@
                 <a href="about.html" class="btn btn-primary">View Profile &amp; Research</a>
                 <a href="materials.html" class="btn btn-secondary">Browse Study Materials</a>
             </div>
-                        <hr class="divider">
+            
+            <hr class="divider">
             <section id="changelog-section">
                 <h3>Recent Updates</h3>
                 <ul id="changelog-list">
@@ -161,7 +163,7 @@
         </main>
 
         <footer>
-            <div class="visit-counter">visiters <span id="vercount_value_site_pv">Loading</span></div>
+            <div class="visit-counter">visitors <span id="vercount_value_site_pv">Loading</span></div>
             &copy; 2026 ExtremalMath. Hosted on GitHub Pages.
         </footer>
     </div>
@@ -177,8 +179,12 @@
             return;
         }
 
-        // 遍历 updates.js 中的数组，生成列表
-        listContainer.innerHTML = siteUpdates.map(update => {
+        // ⭐ 修改点：限制只显示最新的 3 条（数字可随时修改）
+        const limit = 3;
+        const recentUpdates = siteUpdates.slice(0, limit);
+
+        // 遍历截取后的数组，生成列表
+        listContainer.innerHTML = recentUpdates.map(update => {
             // 将日期格式化为英文形式 (例如: Sep 23, 2026)
             const dateObj = new Date(update.date);
             const formattedDate = dateObj.toLocaleDateString('en-US', {
