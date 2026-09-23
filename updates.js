@@ -8,6 +8,18 @@ const siteUpdates = [
         text: "Added Study Materials page and updated homepage layout" 
     },
     { 
+        date: "2026-09-21", 
+        text: "Added `myteachers` page showcasing my teachers and the courses they teach" 
+    },
+    { 
+        date: "2026-09-20", 
+        text: "Revamped the research log format and updated several entries" 
+    },
+    { 
+        date: "2026-09-19", 
+        text: "Uploaded files related to Mathematical Modeling" 
+    },
+    { 
         date: "2026-09-15", 
         text: "Updated About page with new research interests" 
     },
