@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExtremalMath | Teaching & Tutoring</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #0366d6;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-main: #333333;
+            --text-light: #666666;
+            --border-color: #eaeaea;
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 40px 20px;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+        .container {
+            max-width: 860px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 24px;
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        .back-link:hover { color: var(--accent-color); }
+        h1 {
+            font-family: 'Lora', serif;
+            font-size: 2.4em;
+            margin: 0 0 0.5rem 0;
+            color: var(--primary-color);
+        }
+        .subtitle {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+        .teaching-card {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.25rem;
+            transition: all 0.3s ease;
+            background: #fff;
+        }
+        .teaching-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border-color: var(--accent-color);
+        }
+        .teaching-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.5rem;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .teaching-title {
+            font-family: 'Lora', serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin: 0;
+        }
+        .teaching-period {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            white-space: nowrap;
+        }
+        .teaching-desc {
+            font-size: 0.95rem;
+            color: #444;
+            margin: 0.5rem 0 0.75rem 0;
+        }
+        .teaching-materials {
+            background: #f6f8fa;
+            border-left: 4px solid var(--accent-color);
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #444;
+            margin-top: 0.75rem;
+        }
+        .teaching-materials a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .teaching-materials a:hover { text-decoration: underline; }
+        @media (max-width: 480px) {
+            .container { padding: 2rem 1.25rem; }
+            h1 { font-size: 1.8em; }
+            .teaching-header { flex-direction: column; gap: 0.25rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="materials.html" class="back-link">← Back to Materials</a>
+        <h1>Teaching & Tutoring</h1>
+        <p class="subtitle">Materials and notes from tutoring, study groups, and peer teaching.</p>
+
+        <div class="teaching-card">
+            <div class="teaching-header">
+                <h3 class="teaching-title">Peer Tutoring: Mathematical Analysis</h3>
+                <span class="teaching-period">Spring 2026</span>
+            </div>
+            <p class="teaching-desc">
+                Weekly tutoring sessions for first-year students covering limits, continuity,
+                differentiation, and Riemann integration. Focused on problem-solving strategies
+                and proof writing.
+            </p>
+            <div class="teaching-materials">
+                <strong>Materials:</strong>
+                <a href="#">Handout 1 — Limits and Continuity (PDF)</a> ·
+                <a href="#">Handout 2 — Differentiation (PDF)</a>
+            </div>
+        </div>
+
+        <div class="teaching-card">
+            <div class="teaching-header">
+                <h3 class="teaching-title">Study Group: Combinatorics and Graph Theory</h3>
+                <span class="teaching-period">Fall 2025</span>
+            </div>
+            <p class="teaching-desc">
+                Organized a small reading group on extremal graph theory. We worked through
+                Turán's theorem, the Erdős–Stone theorem, and applications of the probabilistic method.
+            </p>
+            <div class="teaching-materials">
+                <strong>Materials:</strong>
+                <a href="#">Reading list and problem sets (PDF)</a>
+            </div>
+        </div>
+
+        <div class="teaching-card">
+            <div class="teaching-header">
+                <h3 class="teaching-title">Advice for Junior Students</h3>
+                <span class="teaching-period">Ongoing</span>
+            </div>
+            <p class="teaching-desc">
+                A collection of notes on how to study pure mathematics, choose courses,
+                prepare for competitions, and build good mathematical habits.
+            </p>
+            <div class="teaching-materials">
+                <strong>Materials:</strong>
+                <a href="#">Study Guide — How to Read a Math Textbook (PDF)</a>
+            </div>
+        </div>
+
+        <!-- 更多辅导内容按同样格式添加 -->
+    </div>
+</body>
+</html>
