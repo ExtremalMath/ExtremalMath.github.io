@@ -28,24 +28,46 @@
         }
         .back-link:hover { color: #0245a0; text-decoration: underline; }
 
-        /* 标题区 */
+        /* 标题区（包含圆形头像） */
         .hero {
+            display: flex;
+            align-items: center;
+            gap: 24px;
             border-bottom: 2px solid #0366d6;
             padding-bottom: 16px;
             margin-bottom: 32px;
         }
-        .hero h1 {
+
+        /* 圆形头像框 */
+        .avatar {
+            flex-shrink: 0;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: #f1f8ff;
+            border: 3px solid #0366d6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.2rem;
+            color: #0366d6;
+            font-family: 'Times New Roman', serif;
+            user-select: none;
+            box-shadow: 0 4px 12px rgba(3, 102, 214, 0.15);
+        }
+
+        .hero-info h1 {
             font-size: 2em;
             color: #24292e;
             margin-bottom: 4px;
         }
-        .hero .name-en {
+        .hero-info .name-en {
             font-size: 1.1em;
             color: #586069;
             font-weight: 400;
             margin-bottom: 6px;
         }
-        .hero .subtitle {
+        .hero-info .subtitle {
             font-size: 1.05em;
             color: #586069;
         }
@@ -253,20 +275,33 @@
         }
 
         .btn {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 8px 16px;
-    background: #0366d6;
-    color: #fff;
-    border-radius: 6px;
-    text-decoration: none;
-    font-size: 0.9em;
-    transition: background 0.2s;
-}
-.btn:hover {
-    background: #0245a0;
-}
-        
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 16px;
+            background: #0366d6;
+            color: #fff;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: background 0.2s;
+        }
+        .btn:hover {
+            background: #0245a0;
+        }
+
+        /* 响应式：小屏幕时头像和文字垂直排列 */
+        @media (max-width: 480px) {
+            .hero {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+            .avatar {
+                width: 80px;
+                height: 80px;
+                font-size: 2.5rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -274,11 +309,14 @@
     <!-- 返回首页 -->
     <a href="index.html" class="back-link">← Back to Home</a>
 
-    <!-- 标题区 -->
+    <!-- 标题区（圆形头像 + 姓名信息） -->
     <div class="hero">
-        <h1>Yuanbo Li</h1>
-        <p class="name-en">Bruce Lee</p>
-        <p class="subtitle">Undergraduate · School of Mathematical Sciences · Jiangsu University</p>
+        <div class="avatar">ℵ</div>
+        <div class="hero-info">
+            <h1>Yuanbo Li</h1>
+            <p class="name-en">Bruce Lee</p>
+            <p class="subtitle">Undergraduate · School of Mathematical Sciences · Jiangsu University</p>
+        </div>
     </div>
 
     <!-- 个人简介 -->
@@ -316,11 +354,10 @@
             <div class="period">– 2024</div>
         </div>
     </div>
+
     <!-- 老师 -->
-    <body>
- <h2><span class="icon">👨‍🏫</span> My Teachers</h2>
-  <a href="myteachers.html">My respected teacher</a>
-</body>
+    <h2><span class="icon">👨‍🏫</span> My Teachers</h2>
+    <a href="myteachers.html">My respected teacher</a>
 
     <h3 style="margin-top: 20px; font-size: 1em; color: #586069;">Core Coursework</h3>
     <div class="tag-list">
@@ -344,35 +381,34 @@
         </p>
     </div>
 
-   <div class="research-card" style="margin-top: 14px;">
-    <span class="status">● Completed Notes</span>
-    <h3>Notes: Density Conditions for Triangles in <em>Multipartite Graphs</em></h3>
-    <p>
-        Completed a rigorous reading and detailed note set on Bondy, Shen, Thomasse, and Thomassen's work. 
-        Explored edge density thresholds using convex hull theory (Carathéodory's theorem) and minimal counterexample analysis. 
-        Key results highlighted include the golden ratio bound (&tau; &asymp; 0.618) for tripartite graphs 
-        and the 1/2 threshold for infinite-partite graphs.
-        See notes in the Materials->Course essays
-    </p>
-</div>
     <div class="research-card" style="margin-top: 14px;">
-    <span class="status">● In Progress</span>
-    <h3>Studying: <em>Functional Analysis for PDEs</em></h3>
-    <p>
-        Focusing on the intersection of functional analysis and partial differential equations.
-        This area uses Banach and Hilbert space theory, weak topologies and duality, operator
-        and spectral theory, convex analysis, and monotone operator methods to study Sobolev
-        spaces, variational formulations, and the existence, uniqueness, and regularity of
-        weak solutions to elliptic and evolution equations.
-    </p>
-</div>
+        <span class="status">● Completed Notes</span>
+        <h3>Notes: Density Conditions for Triangles in <em>Multipartite Graphs</em></h3>
+        <p>
+            Completed a rigorous reading and detailed note set on Bondy, Shen, Thomasse, and Thomassen's work. 
+            Explored edge density thresholds using convex hull theory (Carathéodory's theorem) and minimal counterexample analysis. 
+            Key results highlighted include the golden ratio bound (&tau; &asymp; 0.618) for tripartite graphs 
+            and the 1/2 threshold for infinite-partite graphs.
+            See notes in the Materials->Course essays
+        </p>
+    </div>
+    <div class="research-card" style="margin-top: 14px;">
+        <span class="status">● In Progress</span>
+        <h3>Studying: <em>Functional Analysis for PDEs</em></h3>
+        <p>
+            Focusing on the intersection of functional analysis and partial differential equations.
+            This area uses Banach and Hilbert space theory, weak topologies and duality, operator
+            and spectral theory, convex analysis, and monotone operator methods to study Sobolev
+            spaces, variational formulations, and the existence, uniqueness, and regularity of
+            weak solutions to elliptic and evolution equations.
+        </p>
+    </div>
 
     <p class="research-note">
         Note: My research direction is dynamic and may evolve to explore other areas of discrete mathematics
         or combinatorics.
     </p>
     <a href="research-log.html" class="btn">View Full Research Diary →</a>
-
 
     <!-- 获奖与荣誉 -->
     <h2><span class="icon">🏆</span> Awards & Honors</h2>
@@ -384,7 +420,7 @@
     </ul>
 
     <!-- 技术技能 -->
-   <h2><span class="icon">🛠️</span> Technical Skills</h2>
+    <h2><span class="icon">🛠️</span> Technical Skills</h2>
     <div class="skills-grid">
         <div class="skill-item">
             <div class="skill-name">C</div>
