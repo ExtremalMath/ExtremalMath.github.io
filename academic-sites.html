@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExtremalMath | Academic Sites</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #0366d6;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-main: #333333;
+            --text-light: #666666; /* 修复了原文件中未定义的变量 */
+            --border-color: #eaeaea;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 90%;
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .back-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .back-link:hover {
+            color: var(--accent-color);
+        }
+
+        h1 {
+            font-family: 'Lora', serif;
+            font-size: 2.5em;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .subtitle {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .nav-card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-decoration: none;
+            color: var(--text-main);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-color: var(--accent-color);
+        }
+
+        .nav-icon {
+            font-size: 2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .nav-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .nav-desc {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="materials.html" class="back-link">← Back to Materials</a>
+
+    <div class="container">
+        <h1>Academic Sites</h1>
+        <p class="subtitle">Curated resources for books, papers, and mathematical research.</p>
+
+        <div class="nav-grid">
+            <!-- Springer -->
+            <a href="https://link.springer.com/" target="_blank" rel="noopener noreferrer" class="nav-card">
+                <span class="nav-icon">📚</span>
+                <span class="nav-title">Springer</span>
+                <span class="nav-desc">Books and journals in mathematics and sciences</span>
+            </a>
+
+            <!-- arXiv -->
+            <a href="https://arxiv.org/" target="_blank" rel="noopener noreferrer" class="nav-card">
+                <span class="nav-icon">📄</span>
+                <span class="nav-title">arXiv</span>
+                <span class="nav-desc">Open-access preprints for mathematics and physics</span>
+            </a>
+
+
+          
+        </div>
+    </div>
+
+</body>
+</html>
