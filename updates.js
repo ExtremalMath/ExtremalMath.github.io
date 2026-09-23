@@ -3,13 +3,9 @@
 // 格式：{ date: "YYYY-MM-DD", text: "更新内容" }
 
 const siteUpdates = [
-    { 
-        date: "2026-09-23", 
-        text: "Added Study Materials page and updated homepage layout" 
-    },
-    { 
-        date: "2026-09-21", 
-        text: "Added `myteachers` page showcasing my teachers and the courses they teach" 
+   { 
+    date: "2026-09-23", 
+    text: "Summary of recent updates: added myteachers page, refreshed research logs, and uploaded math modeling resources" 
     },
     { 
         date: "2026-09-20", 
