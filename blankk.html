@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Instructors | Coming Soon</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: #f5f6f8;
+      color: #1a1a1a;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 80px 20px;
+      line-height: 1.7;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 560px;
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 48px 44px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04),
+                  0 12px 32px rgba(0, 0, 0, 0.06);
+      text-align: center;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 28px;
+      color: #999;
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+    .back-link:hover {
+      color: #c0392b;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: #111;
+    }
+
+    .intro {
+      color: #888;
+      font-size: 14px;
+      font-style: italic;
+      margin-top: 10px;
+      margin-bottom: 36px;
+    }
+
+    .coming-soon {
+      padding: 40px 0;
+      color: #aaa;
+    }
+
+    .coming-soon .icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+      display: block;
+      opacity: 0.7;
+    }
+
+    .coming-soon .title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #666;
+      margin-bottom: 8px;
+    }
+
+    .coming-soon .desc {
+      font-size: 14px;
+      color: #999;
+      line-height: 1.7;
+    }
+
+    .mentorship {
+      margin-top: 8px;
+      padding: 20px 22px;
+      background: #f8f9fb;
+      border-left: 3px solid #c0392b;
+      border-radius: 8px;
+      text-align: left;
+    }
+
+    .mentorship-title {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #c0392b;
+      margin-bottom: 12px;
+    }
+
+    .mentorship p {
+      font-size: 15px;
+      color: #444;
+      margin-bottom: 10px;
+      line-height: 1.65;
+    }
+
+    .mentorship p:last-child {
+      margin-bottom: 0;
+    }
+
+    .mentorship strong {
+      color: #1a1a1a;
+      font-weight: 600;
+    }
+
+    .mentorship em {
+      font-style: italic;
+      color: #333;
+    }
+
+    @media (max-width: 480px) {
+      body { padding: 40px 16px; }
+      .card { padding: 36px 26px; border-radius: 12px; }
+      h1 { font-size: 20px; }
+      .coming-soon .icon { font-size: 40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <a href="index.html" class="back-link">← Back to Home</a>
+
+    <h1>My Instructors</h1>
+    <p class="intro">"A teacher is like a candle—it consumes itself to light the way for others."</p>
+
+    <!-- Placeholder: replace this block with real content when ready -->
+    <div class="coming-soon">
+      <span class="icon">⏳</span>
+      <div class="title">Coming Soon</div>
+      <div class="desc">
+        This page is currently under construction.<br>
+        Details about my courses and instructors will be added soon.
+      </div>
+    </div>
+
+    <!--
+    ============================================================
+    When you are ready to fill in the information, you can use the
+    structure below as a reference. Simply remove the comment markers.
+
+    <div class="year">
+      <div class="year-title">Freshman Year</div>
+      <ul>
+        <li><span class="course">Mathematical Analysis</span><span class="teacher">Zhang Zexin</span></li>
+        <li><span class="course">Ordinary Differential Equations (ODE)</span><span class="teacher">Cai Shuiming</span></li>
+      </ul>
+    </div>
+
+    <div class="year">
+      <div class="year-title">Sophomore Year</div>
+      <ul>
+        <li><span class="course">Mathematical Modeling &amp; Numerical Analysis</span><span class="teacher">Wang Linjun</span></li>
+        <li><span class="course">Data Structures and Algorithm Design</span><span class="teacher">Zhu Feng</span></li>
+        <li><span class="course">Complex Analysis</span><span class="teacher">Shen Wenqiang</span></li>
+      </ul>
+    </div>
+
+    <div class="year">
+      <div class="year-title">Junior Year</div>
+      <ul>
+        <li><span class="course">Real Analysis and Functional Analysis</span><span class="teacher">Tan Qiang</span></li>
+        <li><span class="course">Equations of Mathematical Physics (PDE)</span><span class="teacher">Wang Jun</span></li>
+        <li><span class="course">Finite Fields and Their Applications</span><span class="teacher">Wang Shipeng</span></li>
+      </ul>
+    </div>
+
+    <div class="mentorship">
+      <div class="mentorship-title">Mentorship</div>
+      <p>
+        <strong>Wang Shipeng</strong> — Guided me in <em>Extremal Graph Theory</em> and helped organize the reading seminar.
+      </p>
+      <p>
+        <strong>Zhang Zexin</strong> — Supervised my exploration and presentations on the intersection of <em>Functional Analysis</em> and <em>Partial Differential Equations</em>.
+      </p>
+    </div>
+    ============================================================
+    -->
+
+  </div>
+
+</body>
+</html>
