@@ -418,8 +418,10 @@
   document.querySelectorAll('.email-link').forEach(function (el) {
     var user = el.getAttribute('data-user');
     var domain = el.getAttribute('data-domain');
-    el.href = 'mailto:' + user + '@' + domain;
-      el.textContent = email;
+    var email = user + '@' + domain; // 先定义变量
+    el.href = 'mailto:' + email;
+    // el.textContent = email; // 不建议取消注释，会暴露邮箱
   });
+</script>
 </body>
 </html>
