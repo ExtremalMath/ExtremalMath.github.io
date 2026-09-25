@@ -9,12 +9,18 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-            max-width: 860px;
-            margin: 0 auto;
-            padding: 40px 20px 60px;
+            margin: 0;
+            padding: 0;
             line-height: 1.7;
             color: #24292e;
             background: #fff;
+        }
+
+        /* 页面主容器 */
+        .page {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px 60px;
         }
 
         /* 顶部导航 */
@@ -27,6 +33,44 @@
             transition: color 0.2s;
         }
         .back-link:hover { color: #0245a0; text-decoration: underline; }
+
+        /* 双栏布局 */
+        .layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 200px;
+            gap: 48px;
+            align-items: start;
+        }
+        .content { min-width: 0; }
+
+        /* 右侧粘性侧栏 */
+        .sidebar {
+            position: sticky;
+            top: 40px;
+        }
+        .side-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            padding: 16px;
+            background: #f6f8fa;
+            border: 1px solid #e1e4e8;
+            border-radius: 8px;
+        }
+        .side-link {
+            display: block;
+            padding: 6px 8px;
+            color: #0366d6;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.92em;
+            line-height: 1.4;
+            transition: background 0.15s, color 0.15s;
+        }
+        .side-link:hover {
+            background: #e1e4e8;
+            color: #0245a0;
+        }
 
         /* 标题区（包含圆形头像） */
         .hero {
@@ -274,22 +318,42 @@
             color: #959da5;
         }
 
-        .btn {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 8px 16px;
-            background: #0366d6;
-            color: #fff;
-            border-radius: 6px;
-            text-decoration: none;
-            font-size: 0.9em;
-            transition: background 0.2s;
-        }
-        .btn:hover {
-            background: #0245a0;
+        /* 响应式：小屏幕时头像和文字垂直排列，侧栏转为顶部横向滚动 */
+        @media (max-width: 840px) {
+            .layout {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .sidebar {
+                position: static;
+                order: -1;
+            }
+            .side-nav {
+                flex-direction: row;
+                gap: 8px;
+                overflow-x: auto;
+                padding: 0 0 10px;
+                background: none;
+                border: none;
+                border-bottom: 1px solid #e1e4e8;
+                border-radius: 0;
+                margin-bottom: 12px;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+            .side-nav::-webkit-scrollbar { display: none; }
+            .side-link {
+                flex: none;
+                white-space: nowrap;
+                padding: 8px 14px;
+                background: #f6f8fa;
+                border: 1px solid #e1e4e8;
+                border-radius: 20px;
+                font-size: 0.88em;
+            }
+            .side-link:hover { background: #e1e4e8; }
         }
 
-        /* 响应式：小屏幕时头像和文字垂直排列 */
         @media (max-width: 480px) {
             .hero {
                 flex-direction: column;
@@ -306,178 +370,196 @@
 </head>
 <body>
 
+<div class="page">
+
     <!-- 返回首页 -->
     <a href="index.html" class="back-link">← Back to Home</a>
 
-    <!-- 标题区（圆形头像 + 姓名信息） -->
-    <div class="hero">
-        <div class="avatar">ℵ</div>
-        <div class="hero-info">
-            <h1>Yuanbo Li</h1>
-            <p class="name-en">Bruce Lee</p>
-            <p class="subtitle">Undergraduate · School of Mathematical Sciences · Jiangsu University</p>
-        </div>
-    </div>
+    <div class="layout">
 
-    <!-- 个人简介 -->
-    <div class="bio">
-        <p>
-            Hello! I am <strong>Yuanbo Li (Bruce Lee)</strong> (a boy) ,an undergraduate student at the
-            <strong>School of Mathematical Sciences, Jiangsu University</strong>,
-            with a deep passion for pure mathematics and combinatorial optimization.
-            My long-term academic goal is to pursue graduate studies (Master's and Ph.D.) in mathematics,
-            contributing to the theoretical development of discrete mathematics.
-        </p>
-        <div class="motto">
-            "厚积薄发，以点破面。" — I believe in accumulating deep knowledge steadily,
-            and using focused breakthroughs to illuminate broader mathematical landscapes.
-        </div>
-    </div>
+        <!-- 主内容 -->
+        <main class="content">
 
-    <!-- 教育经历 -->
-    <h2><span class="icon">🎓</span> Education</h2>
-    <div class="timeline">
-        <div class="timeline-item">
-            <div class="degree">B.Sc. in Mathematics</div>
-            <div class="school">School of Mathematical Sciences, Jiangsu University</div>
-            <div class="period">2024 – Present</div>
-        </div>
-        <div class="timeline-item">
-            <div class="degree">Exchange Program — Data Science</div>
-            <div class="school">National University of Singapore (NUS)</div>
-            <div class="period">August 2025</div>
-            <div class="detail">Studied data science and related computational methods, with familiarity in token concepts and gradient descent algorithms used in large language models.</div>
-        </div>
-        <div class="timeline-item">
-            <div class="degree">High School Diploma</div>
-            <div class="school">Nanjing No.9 High School, Jiangsu Province</div>
-            <div class="period">– 2024</div>
-        </div>
-    </div>
+            <!-- 标题区（圆形头像 + 姓名信息） -->
+            <div class="hero">
+                <div class="avatar">ℵ</div>
+                <div class="hero-info">
+                    <h1>Yuanbo Li</h1>
+                    <p class="name-en">Bruce Lee</p>
+                    <p class="subtitle">Undergraduate · School of Mathematical Sciences · Jiangsu University</p>
+                </div>
+            </div>
 
-    <!-- 老师 -->
-    <h2><span class="icon">👨‍🏫</span> My Teachers</h2>
-    <a href="myteachers.html">My respected teacher</a>
+            <!-- 个人简介 -->
+            <div class="bio">
+                <p>
+                    Hello! I am <strong>Yuanbo Li (Bruce Lee)</strong> (a boy) ,an undergraduate student at the
+                    <strong>School of Mathematical Sciences, Jiangsu University</strong>,
+                    with a deep passion for pure mathematics and combinatorial optimization.
+                    My long-term academic goal is to pursue graduate studies (Master's and Ph.D.) in mathematics,
+                    contributing to the theoretical development of discrete mathematics.
+                </p>
+                <div class="motto">
+                    "厚积薄发，以点破面。" — I believe in accumulating deep knowledge steadily,
+                    and using focused breakthroughs to illuminate broader mathematical landscapes.
+                </div>
+            </div>
 
-    <h3 style="margin-top: 20px; font-size: 1em; color: #586069;">Core Coursework</h3>
-    <div class="tag-list">
-        <span class="tag">Mathematical Analysis</span>
-        <span class="tag">Advanced Algebra</span>
-        <span class="tag">Probability Theory & Mathematical Statistics</span>
-        <span class="tag">Combinatorics</span>
-        <span class="tag">Graph Theory</span>
-        <span class="tag">Real Analysis & Functional Analysis</span>
-    </div>
+            <!-- 教育经历 -->
+            <h2><span class="icon">🎓</span> Education</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="degree">B.Sc. in Mathematics</div>
+                    <div class="school">School of Mathematical Sciences, Jiangsu University</div>
+                    <div class="period">2024 – Present</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="degree">Exchange Program — Data Science</div>
+                    <div class="school">National University of Singapore (NUS)</div>
+                    <div class="period">August 2025</div>
+                    <div class="detail">Studied data science and related computational methods, with familiarity in token concepts and gradient descent algorithms used in large language models.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="degree">High School Diploma</div>
+                    <div class="school">Nanjing No.9 High School, Jiangsu Province</div>
+                    <div class="period">– 2024</div>
+                </div>
+            </div>
 
-    <!-- 研究兴趣 -->
-    <h2><span class="icon">🔬</span> Research Interests</h2>
-    <div class="research-card">
-        <h3>Extremal Graph Theory</h3>
-        <p>
-            My primary research focus is on <strong>Extremal Graph Theory</strong>, with a specific emphasis on
-            <em>H</em>-free graph problems. I am particularly interested in the structural properties of these graphs
-            and the associated optimization problems, including Turán-type extremal problems and related
-            enumeration questions.
-        </p>
-    </div>
+            <!-- 老师 -->
+            <h2><span class="icon">👨‍🏫</span> My Teachers</h2>
 
-    <div class="research-card" style="margin-top: 14px;">
-        <span class="status">● Completed Notes</span>
-        <h3>Notes: Density Conditions for Triangles in <em>Multipartite Graphs</em></h3>
-        <p>
-            Completed a rigorous reading and detailed note set on Bondy, Shen, Thomasse, and Thomassen's work. 
-            Explored edge density thresholds using convex hull theory (Carathéodory's theorem) and minimal counterexample analysis. 
-            Key results highlighted include the golden ratio bound (&tau; &asymp; 0.618) for tripartite graphs 
-            and the 1/2 threshold for infinite-partite graphs.
-            See notes in the Materials->Course essays
-        </p>
-    </div>
-    <div class="research-card" style="margin-top: 14px;">
-        <span class="status">● In Progress</span>
-        <h3>Studying: <em>Functional Analysis for PDEs</em></h3>
-        <p>
-            Focusing on the intersection of functional analysis and partial differential equations.
-            This area uses Banach and Hilbert space theory, weak topologies and duality, operator
-            and spectral theory, convex analysis, and monotone operator methods to study Sobolev
-            spaces, variational formulations, and the existence, uniqueness, and regularity of
-            weak solutions to elliptic and evolution equations.
-        </p>
-    </div>
+            <h3 style="margin-top: 20px; font-size: 1em; color: #586069;">Core Coursework</h3>
+            <div class="tag-list">
+                <span class="tag">Mathematical Analysis</span>
+                <span class="tag">Advanced Algebra</span>
+                <span class="tag">Probability Theory & Mathematical Statistics</span>
+                <span class="tag">Combinatorics</span>
+                <span class="tag">Graph Theory</span>
+                <span class="tag">Real Analysis & Functional Analysis</span>
+            </div>
 
-    <p class="research-note">
-        Note: My research direction is dynamic and may evolve to explore other areas of discrete mathematics
-        or combinatorics.
-    </p>
-    <a href="research-log.html" class="btn">View Full Research Diary →</a>
+            <!-- 研究兴趣 -->
+            <h2><span class="icon">🔬</span> Research Interests</h2>
+            <div class="research-card">
+                <h3>Extremal Graph Theory</h3>
+                <p>
+                    My primary research focus is on <strong>Extremal Graph Theory</strong>, with a specific emphasis on
+                    <em>H</em>-free graph problems. I am particularly interested in the structural properties of these graphs
+                    and the associated optimization problems, including Turán-type extremal problems and related
+                    enumeration questions.
+                </p>
+            </div>
 
-    <!-- 获奖与荣誉 -->
-    <h2><span class="icon">🏆</span> Awards & Honors</h2>
-    <ul class="award-list">
-        <li>
-            <span class="award-year">2025</span>
-            <span class="award-text">The 17th Chinese Mathematics Competitions (CMC), Category A — Provincial 3rd Prize, Jiangsu</span>
-        </li>
-    </ul>
+            <div class="research-card" style="margin-top: 14px;">
+                <span class="status">● Completed Notes</span>
+                <h3>Notes: Density Conditions for Triangles in <em>Multipartite Graphs</em></h3>
+                <p>
+                    Completed a rigorous reading and detailed note set on Bondy, Shen, Thomasse, and Thomassen's work. 
+                    Explored edge density thresholds using convex hull theory (Carathéodory's theorem) and minimal counterexample analysis. 
+                    Key results highlighted include the golden ratio bound (&tau; &asymp; 0.618) for tripartite graphs 
+                    and the 1/2 threshold for infinite-partite graphs.
+                    See notes in the Materials->Course essays
+                </p>
+            </div>
+            <div class="research-card" style="margin-top: 14px;">
+                <span class="status">● In Progress</span>
+                <h3>Studying: <em>Functional Analysis for PDEs</em></h3>
+                <p>
+                    Focusing on the intersection of functional analysis and partial differential equations.
+                    This area uses Banach and Hilbert space theory, weak topologies and duality, operator
+                    and spectral theory, convex analysis, and monotone operator methods to study Sobolev
+                    spaces, variational formulations, and the existence, uniqueness, and regularity of
+                    weak solutions to elliptic and evolution equations.
+                </p>
+            </div>
 
-    <section>
-  <h2>Now</h2>
-  <p><a href="nownow/now.html">what I'm doing now</a></p>
-</section>
+            <p class="research-note">
+                Note: My research direction is dynamic and may evolve to explore other areas of discrete mathematics
+                or combinatorics.
+            </p>
 
-    <!-- 技术技能 -->
-    <h2><span class="icon">🛠️</span> Technical Skills</h2>
-    <div class="skills-grid">
-        <div class="skill-item">
-            <div class="skill-name">C</div>
-            <div class="skill-desc">Algorithm implementation and numerical computation</div>
-        </div>
-        <div class="skill-item">
-            <div class="skill-name">MATLAB</div>
-            <div class="skill-desc">Matrix computation and data visualization</div>
-        </div>
-        <div class="skill-item">
-            <div class="skill-name">Java</div>
-            <div class="skill-desc">Object-oriented programming and software development</div>
-        </div>
-        <div class="skill-item">
-            <div class="skill-name">LaTeX</div>
-            <div class="skill-desc">Academic paper writing and typesetting</div>
-        </div>
-        <div class="skill-item">
-            <div class="skill-name">Python (Machine Learning)</div>
-            <div class="skill-desc">From Prof. Han Dun's course: regression, Bayesian classifiers, k-NN, decision trees, SVM, ensemble models, clustering, etc.</div>
-        </div>
-    </div>
+            <!-- 获奖与荣誉 -->
+            <h2><span class="icon">🏆</span> Awards & Honors</h2>
+            <ul class="award-list">
+                <li>
+                    <span class="award-year">2025</span>
+                    <span class="award-text">The 17th Chinese Mathematics Competitions (CMC), Category A — Provincial 3rd Prize, Jiangsu</span>
+                </li>
+            </ul>
 
-    <!-- 课外活动 -->
-    <h2><span class="icon">🏀</span> Beyond Mathematics</h2>
-    <p>Outside of my academic pursuits, I stay active and enjoy the following sports:</p>
-    <div class="hobby-list">
-        <span class="hobby-item">🏀 Basketball</span>
-        <span class="hobby-item">🏓 Table Tennis</span>
-        <span class="hobby-item">🏹 Archery</span>
-    </div>
+            <section>
+                <h2>Now</h2>
+            </section>
 
-    <!-- 联系方式 -->
-    <div class="contact-box">
-        <h3>📫 Contact & Links</h3>
-        <p>If you would like to discuss math, graph theory, or potential collaborations, feel free to reach out:</p>
-        <p>📧 Email: <a href="#" class="email-link" data-user="mymath2035" data-domain="outlook.com"> mymath2035 [at] outlook [dot] com</a></p>
-        <p>🔗 ORCID: <a href="https://orcid.org/0009-0007-8831-9591" target="_blank">0009-0007-8831-9591</a></p>
+            <!-- 技术技能 -->
+            <h2><span class="icon">🛠️</span> Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <div class="skill-name">C</div>
+                    <div class="skill-desc">Algorithm implementation and numerical computation</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">MATLAB</div>
+                    <div class="skill-desc">Matrix computation and data visualization</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Java</div>
+                    <div class="skill-desc">Object-oriented programming and software development</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">LaTeX</div>
+                    <div class="skill-desc">Academic paper writing and typesetting</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Python (Machine Learning)</div>
+                    <div class="skill-desc">From Prof. Han Dun's course: regression, Bayesian classifiers, k-NN, decision trees, SVM, ensemble models, clustering, etc.</div>
+                </div>
+            </div>
+
+            <!-- 课外活动 -->
+            <h2><span class="icon">🏀</span> Beyond Mathematics</h2>
+            <p>Outside of my academic pursuits, I stay active and enjoy the following sports:</p>
+            <div class="hobby-list">
+                <span class="hobby-item">🏀 Basketball</span>
+                <span class="hobby-item">🏓 Table Tennis</span>
+                <span class="hobby-item">🏹 Archery</span>
+            </div>
+
+            <!-- 联系方式 -->
+            <div class="contact-box">
+                <h3>📫 Contact & Links</h3>
+                <p>If you would like to discuss math, graph theory, or potential collaborations, feel free to reach out:</p>
+                <p>📧 Email: <a href="#" class="email-link" data-user="mymath2035" data-domain="outlook.com"> mymath2035 [at] outlook [dot] com</a></p>
+                <p>🔗 ORCID: <a href="https://orcid.org/0009-0007-8831-9591" target="_blank">0009-0007-8831-9591</a></p>
+            </div>
+
+        </main>
+
+        <!-- 右侧链接栏（原正文中的三个页面导航链接） -->
+        <aside class="sidebar" aria-label="Page links">
+            <nav class="side-nav">
+                <a href="myteachers.html" class="side-link">My respected teacher</a>
+                <a href="nownow/now.html" class="side-link">what I'm doing now</a>
+                <a href="research-log.html" class="side-link">View Full Research Diary →</a>
+            </nav>
+        </aside>
+
     </div>
 
     <!-- 页脚 -->
     <div class="footer">
         <p>© 2026 ExtremalMath. Built with ❤️ and mathematics. Github</p>
     </div>
-    
+
+</div>
+
 <script>
   document.querySelectorAll('.email-link').forEach(function (el) {
     var user = el.getAttribute('data-user');
     var domain = el.getAttribute('data-domain');
-    var email = user + '@' + domain; // 先定义变量
+    var email = user + '@' + domain;
     el.href = 'mailto:' + email;
-    // el.textContent = email; // 不建议取消注释，会暴露邮箱
   });
 </script>
 </body>
