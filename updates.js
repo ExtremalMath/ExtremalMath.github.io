@@ -5,7 +5,7 @@
 const siteUpdates = [
    { 
         date: "2026-09-25", 
-        text: "Added a 'Now' page to track current semester courses and reading" 
+        text: "Added a 'Now' page with a semester-based archive and on-demand loading of current and past semesters, redesigned the About page with a warm color theme, a sticky sidebar, and a green Aleph avatar, and polished the personal bio while adding department experience and volunteer work." 
     },
    { 
     date: "2026-09-23", 
