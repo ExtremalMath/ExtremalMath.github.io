@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Current Work</title>
+
+<style>
+  :root {
+    --bg:          #fbfaf7;
+    --ink:         #1b1b1b;
+    --muted:       #6d6a63;
+    --line:        #e3ded4;
+    --accent:      #8c2f39;
+    --accent-soft: #f4e9ea;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia,
+                 "Times New Roman", "Songti SC", serif;
+    font-size: 17px;
+    line-height: 1.62;
+  }
+
+  .page {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 36px 28px 72px;
+  }
+
+  /* ---------- top bar ---------- */
+
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    padding-bottom: 16px;
+    margin-bottom: 44px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .back-link {
+    font-family: var(--sans);
+    font-size: 0.86rem;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+  .back-link:hover { text-decoration: underline; }
+
+  .topbar-right {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ---------- layout ---------- */
+
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 232px;
+    gap: 64px;
+    align-items: start;
+  }
+
+  #semester-content { animation: fade-in 0.26s ease-out; }
+
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(5px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  .eyebrow {
+    margin: 0 0 10px;
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .semester-head h1 {
+    margin: 0 0 14px;
+    font-size: 2.4rem;
+    font-weight: 600;
+    line-height: 1.14;
+    letter-spacing: -0.012em;
+  }
+
+  .lede {
+    margin: 0;
+    max-width: 62ch;
+    color: var(--muted);
+  }
+
+  .block { margin-top: 46px; }
+
+  .block h2 {
+    margin: 0 0 16px;
+    padding-bottom: 9px;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--sans);
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 0.17em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .item-list { margin: 0; padding: 0; list-style: none; }
+
+  .item {
+    padding: 11px 0;
+    border-bottom: 1px dashed var(--line);
+  }
+  .item:last-child { border-bottom: none; }
+
+  .item-title { display: block; font-size: 1.05rem; line-height: 1.4; }
+
+  .item-sub {
+    display: block;
+    margin-top: 3px;
+    font-family: var(--sans);
+    font-size: 0.84rem;
+    color: var(--muted);
+  }
+
+  .footnote {
+    margin: 46px 0 0;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+  }
+  .footnote .lede { font-family: var(--sans); font-size: 0.84rem; }
+
+  .loading {
+    font-family: var(--sans);
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+
+  /* ---------- sidebar ---------- */
+
+  .sidebar { position: sticky; top: 40px; }
+
+  .sidebar-title {
+    margin: 0 0 14px;
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.19em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  #semester-list { display: flex; flex-direction: column; gap: 2px; }
+
+  .semester-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+    padding: 8px 10px;
+    border: none;
+    border-left: 2px solid transparent;
+    border-radius: 0 4px 4px 0;
+    background: none;
+    font: inherit;
+    font-size: 0.94rem;
+    color: var(--muted);
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .semester-btn:hover { background: #f2ede4; color: var(--ink); }
+  .semester-btn.is-active {
+    border-left-color: var(--accent);
+    background: var(--accent-soft);
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .semester-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .badge {
+    flex: none;
+    padding: 2px 7px;
+    border-radius: 999px;
+    background: var(--accent);
+    color: #fff;
+    font-family: var(--sans);
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .sidebar-note {
+    margin: 22px 0 0;
+    font-family: var(--sans);
+    font-size: 0.76rem;
+    line-height: 1.55;
+    color: var(--muted);
+  }
+
+  /* ---------- footer ---------- */
+
+  .site-footer {
+    margin-top: 72px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+  .site-footer p { margin: 0; }
+
+  /* ---------- responsive ---------- */
+
+  @media (max-width: 840px) {
+    .page { padding: 28px 20px 56px; }
+    .layout { grid-template-columns: 1fr; gap: 34px; }
+    .sidebar {
+      position: static;
+      order: -1;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+    #semester-list {
+      flex-direction: row;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .semester-btn {
+      width: auto;
+      flex: none;
+      white-space: nowrap;
+      border-left: none;
+      border-bottom: 2px solid transparent;
+      border-radius: 4px 4px 0 0;
+    }
+    .semester-btn.is-active {
+      border-left-color: transparent;
+      border-bottom-color: var(--accent);
+    }
+    .semester-btn .badge { display: none; }
+    .sidebar-note { display: none; }
+    .semester-head h1 { font-size: 1.95rem; }
+    .topbar { flex-wrap: wrap; }
+  }
+</style>
+</head>
+
+<body>
+  <div class="page">
+
+    <header class="topbar">
+      <a href="../about.html" class="back-link">back to about me</a>
+      <span class="topbar-right">Current Work</span>
+    </header>
+
+    <div class="layout">
+      <main id="semester-content" aria-live="polite">
+        <p class="loading">Loading…</p>
+      </main>
+
+      <aside class="sidebar">
+        <h2 class="sidebar-title">Semesters</h2>
+        <nav id="semester-list" aria-label="Semester archive"></nav>
+        <p class="sidebar-note">
+          Past semesters are archived permanently. Select one to look back
+          at what was being studied at the time.
+        </p>
+      </aside>
+    </div>
+
+    <footer class="site-footer">
+      <p>Updated <span id="footer-year"></span> · Archive is cumulative and never pruned.</p>
+    </footer>
+
+  </div>
+
+  <script src="data/semesters.js"></script>
+  <script>
+  (function () {
+    "use strict";
+
+    var contentEl = document.getElementById("semester-content");
+    var listEl    = document.getElementById("semester-list");
+    var yearEl    = document.getElementById("footer-year");
+
+    var FILES = Array.isArray(window.SEMESTER_FILES) ? window.SEMESTER_FILES.slice() : [];
+
+    if (FILES.length === 0) {
+      contentEl.innerHTML = '<p class="lede">No semester data yet.</p>';
+      return;
+    }
+
+    /* ---------- helpers ---------- */
+
+    function escapeHTML(value) {
+      return String(value == null ? "" : value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function fileToId(fileName) {
+      return fileName.replace(/\.js$/, "");
+    }
+
+    function labelFromFileName(fileName) {
+      var base = fileToId(fileName);
+      var m = base.match(/^(\d{4})([a-z]+)$/i);
+      if (!m) return base;
+      var term = m[2].charAt(0).toUpperCase() + m[2].slice(1).toLowerCase();
+      return m[1] + " " + term;
+    }
+
+    /* ---------- dynamic loader (cached) ---------- */
+
+    var loadCache = {};
+
+    function loadSemester(id) {
+      if (loadCache[id]) return loadCache[id];
+
+      loadCache[id] = new Promise(function (resolve, reject) {
+        if (window.SEMESTER_DATA && window.SEMESTER_DATA[id]) {
+          resolve(window.SEMESTER_DATA[id]);
+          return;
+        }
+        var script = document.createElement("script");
+        script.src = "data/" + id + ".js";
+        script.onload = function () {
+          var data = window.SEMESTER_DATA && window.SEMESTER_DATA[id];
+          if (data) resolve(data);
+          else reject(new Error("Script loaded but no data for " + id));
+        };
+        script.onerror = function () {
+          reject(new Error("Failed to load data/" + id + ".js"));
+        };
+        document.head.appendChild(script);
+      });
+
+      return loadCache[id];
+    }
+
+    /* ---------- rendering ---------- */
+
+    function renderItems(items) {
+      if (!Array.isArray(items) || items.length === 0) return "";
+      var rows = items.map(function (item) {
+        var title = typeof item === "string" ? item : (item.title || "");
+        var sub   = typeof item === "string" ? ""   : (item.sub   || "");
+        return (
+          '<li class="item">' +
+            '<span class="item-title">' + escapeHTML(title) + "</span>" +
+            (sub ? '<span class="item-sub">' + escapeHTML(sub) + "</span>" : "") +
+          "</li>"
+        );
+      }).join("");
+      return '<ul class="item-list">' + rows + "</ul>";
+    }
+
+    function renderNotes(notes) {
+      if (!notes) return "";
+      var paragraphs = Array.isArray(notes) ? notes : [notes];
+      var valid = paragraphs.filter(Boolean);
+      if (valid.length === 0) return "";
+      var body = valid.map(function (p) {
+        return '<p class="lede">' + escapeHTML(p) + "</p>";
+      }).join("");
+      return '<div class="footnote">' + body + "</div>";
+    }
+
+    function renderSemester(semester, isCurrent) {
+      var parts = [];
+
+      parts.push('<header class="semester-head">');
+      parts.push('<p class="eyebrow">' +
+        (isCurrent ? "Currently in progress" : "Archived semester") +
+        "</p>");
+      parts.push("<h1>" + escapeHTML(semester.title || semester.id) + "</h1>");
+      if (semester.summary) {
+        parts.push('<p class="lede">' + escapeHTML(semester.summary) + "</p>");
+      }
+      parts.push("</header>");
+
+      if (semester.courses && semester.courses.length) {
+        parts.push('<section class="block"><h2>Courses in progress</h2>' +
+          renderItems(semester.courses) + "</section>");
+      }
+      if (semester.reading && semester.reading.length) {
+        parts.push('<section class="block"><h2>Currently reading</h2>' +
+          renderItems(semester.reading) + "</section>");
+      }
+      parts.push(renderNotes(semester.notes));
+
+      contentEl.innerHTML = parts.join("");
+      document.title = (semester.title || semester.id) + " — Current Work";
+    }
+
+    function renderError(message) {
+      contentEl.innerHTML = '<p class="lede">' + escapeHTML(message) + "</p>";
+    }
+
+    /* ---------- sidebar ---------- */
+
+    var currentId = fileToId(FILES[FILES.length - 1]);
+
+    function renderSidebar() {
+      // 最新的显示在最上面
+      var ordered = FILES.slice().reverse();
+      listEl.innerHTML = ordered.map(function (fileName) {
+        var id = fileToId(fileName);
+        var label = labelFromFileName(fileName);
+        var isCurrent = id === currentId;
+        return (
+          '<button type="button" class="semester-btn" data-id="' + escapeHTML(id) + '">' +
+            "<span>" + escapeHTML(label) + "</span>" +
+            (isCurrent ? '<span class="badge">Now</span>' : "") +
+          "</button>"
+        );
+      }).join("");
+    }
+
+    function setActiveButton(id) {
+      var buttons = listEl.querySelectorAll(".semester-btn");
+      Array.prototype.forEach.call(buttons, function (btn) {
+        var active = btn.getAttribute("data-id") === id;
+        btn.classList.toggle("is-active", active);
+        btn.setAttribute("aria-current", active ? "true" : "false");
+      });
+    }
+
+    /* ---------- switching ---------- */
+
+    var showSeq = 0;
+
+    function showSemester(id, options) {
+      var opts = options || {};
+      var seq = ++showSeq;
+      var isCurrent = id === currentId;
+
+      setActiveButton(id);
+
+      if (opts.scrollToTop) {
+        var top = contentEl.getBoundingClientRect().top + window.pageYOffset - 24;
+        window.scrollTo({ top: top, behavior: "smooth" });
+      }
+
+      if (!loadCache[id] || !(window.SEMESTER_DATA && window.SEMESTER_DATA[id])) {
+        contentEl.innerHTML = '<p class="loading">Loading ' +
+          escapeHTML(labelFromFileName(id + ".js")) + "…</p>";
+      }
+
+      loadSemester(id).then(function (semester) {
+        if (seq !== showSeq) return;
+        renderSemester(semester, isCurrent);
+        if (window.location.hash !== "#" + id) {
+          if (window.history && window.history.replaceState) {
+            window.history.replaceState(null, "", "#" + id);
+          } else {
+            window.location.hash = id;
+          }
+        }
+      }).catch(function (err) {
+        if (seq !== showSeq) return;
+        renderError("Could not load this semester (" + err.message + ").");
+      });
+    }
+
+    /* ---------- events ---------- */
+
+    listEl.addEventListener("click", function (event) {
+      var btn = event.target.closest(".semester-btn");
+      if (!btn) return;
+      showSemester(btn.getAttribute("data-id"), { scrollToTop: true });
+    });
+
+    window.addEventListener("hashchange", function () {
+      var id = decodeURIComponent(window.location.hash.replace(/^#/, ""));
+      if (!id || FILES.indexOf(id + ".js") === -1) id = currentId;
+      showSemester(id, { scrollToTop: false });
+    });
+
+    /* ---------- init ---------- */
+
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    renderSidebar();
+
+    var initialId = decodeURIComponent(window.location.hash.replace(/^#/, ""));
+    if (!initialId || FILES.indexOf(initialId + ".js") === -1) {
+      initialId = currentId;
+    }
+    showSemester(initialId, { scrollToTop: false });
+
+  })();
+  </script>
+</body>
+</html>
