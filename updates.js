@@ -4,6 +4,10 @@
 
 const siteUpdates = [
    { 
+        date: "2026-09-25", 
+        text: "Added a 'Now' page to track current semester courses and reading" 
+    },
+   { 
     date: "2026-09-23", 
     text: "Summary of recent updates: added myteachers page, refreshed research logs, and uploaded math modeling resources" 
     },
