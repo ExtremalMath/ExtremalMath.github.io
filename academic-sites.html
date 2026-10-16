@@ -4,135 +4,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ExtremalMath | Academic Sites</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #2c3e50;
-            --accent-color: #0366d6;
-            --bg-color: #f8f9fa;
-            --card-bg: #ffffff;
-            --text-main: #333333;
-            --text-light: #666666;
-            --border-color: #eaeaea;
+            --bg:          #fbfaf7;
+            --ink:         #1b1b1b;
+            --muted:       #6d6a63;
+            --line:        #e3ded4;
+            --accent:      #8c2f39;
+            --accent-soft: #f4e9ea;
+            --accent-deep: #6b2229;
+            --green:       #3a5a40;
+            --green-soft:  #eaf0ea;
+            --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
         }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--sans); color: var(--ink); background: #fff; line-height: 1.7; }
+        .page { max-width: 720px; margin: 0 auto; padding: 40px 20px 60px; }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            margin: 0;
+        .back-link { display: inline-block; margin-bottom: 24px; text-decoration: none; color: var(--accent); font-weight: 600; }
+        .back-link:hover { color: var(--accent-deep); text-decoration: underline; }
+
+        .page-head { border-bottom: 2px solid var(--accent); padding-bottom: 12px; margin-bottom: 28px; }
+        .page-head h1 { font-size: 1.8em; color: var(--ink); }
+        .page-head .subtitle { color: var(--muted); margin-top: 4px; }
+
+        .res-row {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            min-height: 100vh;
-        }
-
-        .container {
-            max-width: 800px;
-            width: 90%;
-            background: var(--card-bg);
-            padding: 3rem;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            text-align: center;
-        }
-
-        .back-link {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            color: var(--text-light);
+            padding: 14px 10px;
+            border-bottom: 1px solid var(--line);
             text-decoration: none;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            transition: color 0.2s;
+            color: var(--ink);
+            transition: background 0.15s;
+            border-radius: 6px;
         }
-        
-        .back-link:hover {
-            color: var(--accent-color);
-        }
+        .res-row:hover { background: var(--accent-soft); }
+        .res-row .name { font-weight: 600; color: var(--accent); }
+        .res-row .sub { font-size: 0.88em; color: var(--muted); }
 
-        h1 {
-            font-family: 'Lora', serif;
-            font-size: 2.5em;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-        }
-
-        .subtitle {
-            color: var(--text-light);
-            margin-bottom: 2rem;
-        }
-
-        /* 统一的链接框 */
-        .link-box {
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 0.5rem 1.5rem;
-            margin-top: 2rem;
-            background: white;
-        }
-
-        .link-item {
-            display: block;
-            padding: 0.9rem 0;
-            text-decoration: none;
-            color: var(--text-main);
-            border-bottom: 1px solid #f0f0f0;
-            transition: color 0.2s;
-            text-align: left;
-        }
-
-        .link-item:last-child {
-            border-bottom: none;
-        }
-
-        .link-item:hover {
-            color: var(--accent-color);
-        }
-
-        .link-name {
-            font-weight: 600;
-            margin-right: 12px;
-        }
-
-        .link-desc {
-            font-size: 0.85rem;
-            color: var(--text-light);
-        }
-
+        .footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line); text-align: center; font-size: 0.85em; color: var(--muted); }
     </style>
 </head>
 <body>
+    <div class="page">
 
-    <a href="materials.html" class="back-link">← Back to Materials</a>
+        <a href="materials.html" class="back-link">← Back to Materials</a>
 
-    <div class="container">
-        <h1>Academic Sites</h1>
-        <p class="subtitle">Curated resources for books, papers, and mathematical research.</p>
-
-        <div class="link-box">
-            <!-- Springer -->
-            <a href="https://link.springer.com/" target="_blank" rel="noopener noreferrer" class="link-item">
-                <span class="link-name">Springer</span>
-                <span class="link-desc">Books and journals in mathematics and sciences</span>
-            </a>
-
-            <!-- arXiv -->
-            <a href="https://arxiv.org/" target="_blank" rel="noopener noreferrer" class="link-item">
-                <span class="link-name">arXiv</span>
-                <span class="link-desc">Open-access preprints for mathematics and physics</span>
-            </a>
-
-            <!-- MathWorld 中文版 -->
-            <a href="https://mathworld.net.cn/" target="_blank" rel="noopener noreferrer" class="link-item">
-                <span class="link-name">MathWorld 中文版</span>
-                <span class="link-desc">中文数学概念查询平台</span>
-            </a>
+        <div class="page-head">
+            <h1>Academic Sites</h1>
+            <p class="subtitle">Curated resources for books, papers, and mathematical research.</p>
         </div>
-    </div>
 
+        <a href="https://link.springer.com/" target="_blank" rel="noopener noreferrer" class="res-row">
+            <span class="name">Springer</span>
+            <span class="sub">Books and journals in mathematics and sciences</span>
+        </a>
+
+        <a href="https://arxiv.org/" target="_blank" rel="noopener noreferrer" class="res-row">
+            <span class="name">arXiv</span>
+            <span class="sub">Open-access preprints for mathematics and physics</span>
+        </a>
+
+        <a href="https://mathworld.net.cn/" target="_blank" rel="noopener noreferrer" class="res-row">
+            <span class="name">MathWorld 中文版</span>
+            <span class="sub">中文数学概念查询平台</span>
+        </a>
+
+        <div class="footer">
+            <p>© 2026 ExtremalMath</p>
+        </div>
+
+    </div>
 </body>
 </html>
