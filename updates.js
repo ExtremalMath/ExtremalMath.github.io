@@ -5,7 +5,7 @@
 const siteUpdates = [
    {
         date: "2026-10-16",
-        text: "1) Added a 'Talks and Reports' section (talks index page + a summary of the 2026-10-10 course talk applying Tuza's theorem to campus kitchen-waste routing), linked from the About page.<br>2) Unified the materials pages (homework, books, notes, course-essay, academic-sites) to the About style — compact, click-to-open links with no inline previews or arrows.<br>3) Added Finite Fields study notes (book/FiniteFields_FengLiao.pdf, Feng and Liao); split homework into completed (Lovász) and in-progress (Finite Fields).<br>4) Renamed the Books heading and marked all books for academic sharing only."
+        text: "1) Added a 'Talks and Reports' section (talks index page + a summary of the 2026-10-10 course talk applying Tuza's theorem to campus kitchen-waste routing), linked from the About page.<br>2) Unified the materials pages (homework, books, notes, course-essay, academic-sites) to the About style — compact, click-to-open links with no inline previews or arrows.<br>3) Added Finite Fields study notes (book/FiniteFields_FengLiao.pdf, Feng and Liao); split homework into completed (Lovász) and in-progress (Finite Fields).<br>4) Renamed the Books heading and marked all books for academic sharing only.<br>5) Added Feng &amp; Liao's Finite Fields and Their Applications (full textbook) to the Books page (book/FiniteFields_Applications_FengLiao.pdf)."
     },
    { 
         date: "2026-09-25", 
