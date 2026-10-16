@@ -123,6 +123,19 @@
             margin-left: 16px;
         }
 
+        .statement-link {
+            margin-top: 36px;
+            font-size: 13px;
+            color: #999;
+        }
+        .statement-link a {
+            color: #2c3e50;
+            text-decoration: none;
+        }
+        .statement-link a:hover {
+            text-decoration: underline;
+        }
+
         @media (max-width: 480px) {
             .btn-group {
                 flex-direction: column;
@@ -150,7 +163,7 @@
 
             <div class="btn-group">
                 <a href="about.html" class="btn btn-primary">View Profile &amp; Research</a>
-                <a href="materials.html" class="btn btn-secondary">Browse Study Materials</a>
+                <a href="study/materials.html" class="btn btn-secondary">Browse Study Materials</a>
             </div>
             
             <hr class="divider">
@@ -160,6 +173,8 @@
                     <!-- 这里的内容将由 updates.js 自动生成 -->
                 </ul>
             </section>
+
+            <p class="statement-link"><a href="statement.html">声明 / Statement</a></p>
         </main>
 
         <footer>

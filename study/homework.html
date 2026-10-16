@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ExtremalMath | Notes</title>
+    <title>ExtremalMath | Homework</title>
     <style>
         :root {
             --ink:         #1b1b1b;
@@ -20,9 +20,19 @@
         .back-link { display: inline-block; margin-bottom: 24px; text-decoration: none; color: var(--accent); font-weight: 600; }
         .back-link:hover { color: var(--accent-deep); text-decoration: underline; }
 
-        .page-head { border-bottom: 2px solid var(--accent); padding-bottom: 12px; margin-bottom: 28px; }
+        .page-head { border-bottom: 2px solid var(--accent); padding-bottom: 12px; margin-bottom: 32px; }
         .page-head h1 { font-size: 1.8em; color: var(--ink); }
         .page-head .subtitle { color: var(--muted); margin-top: 4px; }
+
+        .section { margin-top: 36px; }
+        .section h2 {
+            font-size: 1.25em;
+            color: var(--ink);
+            border-bottom: 1px solid var(--line);
+            padding-bottom: 6px;
+            margin-bottom: 12px;
+        }
+        .section .desc { color: var(--muted); font-size: 0.92em; margin-bottom: 10px; }
 
         .res-row {
             display: flex;
@@ -50,17 +60,33 @@
         <a href="materials.html" class="back-link">← Back to Materials</a>
 
         <div class="page-head">
-            <h1>Course Notes</h1>
-            <p class="subtitle">Research papers and study materials.</p>
+            <h1>Homework</h1>
+            <p class="subtitle">Course exercises and reading notes.</p>
         </div>
 
-        <a class="res-row" href="./notes/Notes_on_Density_conditions_for_triangles_in_multipartite_graph_V6.pdf" target="_blank" rel="noopener">
-            <span class="left">
-                <span class="name">Notes on Density Conditions for Triangles in Multipartite Graph</span>
-                <span class="sub">Graph Theory / Extremal Combinatorics (V6)</span>
-            </span>
-            <span class="tag">PDF</span>
-        </a>
+        <div class="section">
+            <h2>Large networks and graph limits — L. Lovász</h2>
+            <p class="desc">Completed. I have finished reading this book and will not add further exercises here. Unless otherwise specified, the proofs below are provided by myself.</p>
+
+            <a class="res-row" href="../notes/GraphTheoryHomework/Exercise0526.pdf" target="_blank" rel="noopener">
+                <span class="left"><span class="name">Exercise 0526</span></span>
+                <span class="tag">PDF</span>
+            </a>
+            <a class="res-row" href="../notes/GraphTheoryHomework/proofofinequation0521.pdf" target="_blank" rel="noopener">
+                <span class="left"><span class="name">Proof of Inequality 0521 and Property 0532</span></span>
+                <span class="tag">PDF</span>
+            </a>
+        </div>
+
+        <div class="section">
+            <h2>Finite Fields — 有限域及其应用 (Feng &amp; Liao)</h2>
+            <p class="desc">Currently reading. Exercise notes (T7T10) below.</p>
+
+            <a class="res-row" href="../book/FiniteFields_FengLiao.pdf" target="_blank" rel="noopener">
+                <span class="left"><span class="name">Exercise notes (T7T10)</span></span>
+                <span class="tag">PDF</span>
+            </a>
+        </div>
 
         <div class="footer">
             <p>© 2026 ExtremalMath</p>
