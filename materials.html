@@ -4,151 +4,110 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ExtremalMath | Materials</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #2c3e50;
-            --accent-color: #0366d6;
-            --bg-color: #f8f9fa;
-            --card-bg: #ffffff;
-            --text-main: #333333;
-            --border-color: #eaeaea;
+            --bg:          #fbfaf7;
+            --ink:         #1b1b1b;
+            --muted:       #6d6a63;
+            --line:        #e3ded4;
+            --accent:      #8c2f39;
+            --accent-soft: #f4e9ea;
+            --green:       #3a5a40;
+            --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            font-family: var(--sans);
             margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            padding: 0;
+            line-height: 1.7;
+            color: var(--ink);
+            background: #fff;
         }
 
-        .container {
-            max-width: 800px;
-            width: 90%;
-            background: var(--card-bg);
-            padding: 3rem;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            text-align: center;
-        }
+        .page { max-width: 720px; margin: 0 auto; padding: 40px 20px 60px; }
 
-        /* 左上角返回按钮样式 */
         .back-link {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            color: var(--text-light);
+            display: inline-block;
+            margin-bottom: 24px;
             text-decoration: none;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            transition: color 0.2s;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.95em;
         }
-        
-        .back-link:hover {
-            color: var(--accent-color);
-        }
+        .back-link:hover { text-decoration: underline; }
 
         h1 {
-            font-family: 'Lora', serif;
-            font-size: 2.5em;
-            margin-bottom: 2rem;
-            color: var(--primary-color);
+            font-size: 1.8em;
+            color: var(--ink);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 10px;
+            margin-bottom: 10px;
         }
+        .intro { color: var(--muted); margin-bottom: 26px; font-size: 0.96em; }
+        .intro p { margin: 0 0 4px; }
 
-        /* 导航卡片网格布局 */
-        .nav-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
+        .res-list { margin-top: 6px; }
 
-        .nav-card {
-            background: white;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 2rem;
-            text-decoration: none;
-            color: var(--text-main);
-            transition: all 0.3s ease;
+        .res-row {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 14px 2px;
+            border-bottom: 1px solid var(--line);
+            text-decoration: none;
+            color: var(--ink);
+            transition: color 0.15s;
         }
-
-        .nav-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            border-color: var(--accent-color);
+        .res-row:hover { color: var(--accent); }
+        .res-row .name { font-weight: 600; font-size: 1.02em; }
+        .res-row .tag {
+            font-size: 0.78em;
+            color: var(--muted);
+            font-weight: 400;
+            white-space: nowrap;
         }
+        .res-row:hover .tag { color: var(--accent); }
 
-        .nav-icon {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .nav-title {
-            font-weight: 600;
-            font-size: 1.1rem;
+        .footer {
+            margin-top: 44px;
+            padding-top: 18px;
+            border-top: 1px solid var(--line);
+            text-align: center;
+            font-size: 0.82em;
+            color: var(--muted);
         }
     </style>
 </head>
 <body>
 
-    <!-- 返回主页链接 -->
-    <a href="index.html" class="back-link">← Back to Home</a>
+<div class="page">
 
-    <div class="container">
-        <h1>Study Materials</h1>
-        <p style="color: #666;">Select a category to view resources.</p>
-        <p style="color: #666;">Almost all the studies involve artificial intelligence.</p>
+    <a href="index.html" class="back-link">&larr; Back to Home</a>
 
-        <div class="nav-grid">
-            <!-- 链接到作业页 -->
-            <a href="homework.html" class="nav-card">
-                <span class="nav-icon">📝</span>
-                <span class="nav-title">Homework</span>
-            </a>
-
-            <!-- 链接到论文页 -->
-            <a href="course-essay.html" class="nav-card">
-                <span class="nav-icon">🎓</span>
-                <span class="nav-title">Course Essay</span>
-            </a>
-
-            <!-- 链接到笔记页 -->
-            <a href="notes.html" class="nav-card">
-                <span class="nav-icon">📚</span>
-                <span class="nav-title">Notes</span>
-            </a>
-
-            <!-- 链接到书籍 -->
-            <a href="books.html" class="nav-card">
-                <span class="nav-icon">📕</span>
-                <span class="nav-title">Books</span>
-            </a>
-
-            <!-- ：学术网站导航卡片 -->
-            <a href="academic-sites.html" class="nav-card">
-                <span class="nav-icon">🌐</span>
-                <span class="nav-title">Academic Sites</span>
-            </a>
-
-            <!-- 暂时未处理好，修好了再放>
-            <a href="blankk.html" class="nav-card">
-                <span class="nav-icon">✏️</span>
-                <span class="nav-title">Teaching</span>
-            </a>
-            
-        </div>
+    <h1>Study Materials</h1>
+    <div class="intro">
+        <p>Select a category to view resources.</p>
+        <p>Almost all the studies involve artificial intelligence.</p>
     </div>
+
+    <div class="res-list">
+        <a href="homework.html" class="res-row"><span class="name">Homework</span></a>
+        <a href="course-essay.html" class="res-row"><span class="name">Course Essay</span></a>
+        <a href="notes.html" class="res-row"><span class="name">Notes</span></a>
+        <a href="books.html" class="res-row"><span class="name">Books</span></a>
+        <a href="academic-sites.html" class="res-row"><span class="name">Academic Sites</span></a>
+        <a href="blankk.html" class="res-row"><span class="name">Teaching</span><span class="tag">Coming soon</span></a>
+    </div>
+
+    <div class="footer">
+        &copy; 2026 ExtremalMath. Built with mathematics.
+    </div>
+
+</div>
 
 </body>
 </html>

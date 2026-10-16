@@ -5,7 +5,7 @@
 const siteUpdates = [
    {
         date: "2026-10-16",
-        text: "Added a 'Talks & Reports' section: a new talks.html index and a summary page for the 2026-10-10 course talk 'When Tuza's Conjecture Meets Kitchen-Waste Collection', applying Tuza's theorem (τ ≤ 2ν) on planar graphs to campus kitchen-waste collection routing. Linked from the About page."
+        text: "1) Added a 'Talks and Reports' section (talks index page + a summary of the 2026-10-10 course talk applying Tuza's theorem to campus kitchen-waste routing), linked from the About page.<br>2) Unified the materials pages (homework, books, notes, course-essay, academic-sites) to the About style — compact, click-to-open links with no inline previews or arrows.<br>3) Added Finite Fields study notes (book/FiniteFields_FengLiao.pdf, Feng and Liao); split homework into completed (Lovász) and in-progress (Finite Fields).<br>4) Renamed the Books heading and marked all books for academic sharing only."
     },
    { 
         date: "2026-09-25", 
