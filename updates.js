@@ -5,7 +5,7 @@
 const siteUpdates = [
    {
         date: "2026-10-16",
-        text: "On 2026-10-16, the site update added a Talks & Reports section with a Tuza-theorem talk summary, unified materials pages into a compact click-to-open style, added Finite Fields notes and the Feng & Liao textbook with reorganized homework, added a student Statement page and a C++ data-structure code section, reorganized the site into study/ and research/ areas with refreshed update dates, and cleaned up obsolete, duplicate, and misplaced files."
+        text: "Update added a Talks & Reports section with a Tuza-theorem talk summary, unified materials pages into a compact click-to-open style, added Finite Fields notes and the Feng & Liao textbook with reorganized homework, added a student Statement page and a C++ data-structure code section, reorganized the site into study/ and research/ areas with refreshed update dates, and cleaned up obsolete, duplicate, and misplaced files."
     },
    { 
         date: "2026-09-25", 
