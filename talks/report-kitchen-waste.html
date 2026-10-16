@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talk Summary | When Tuza's Conjecture Meets Kitchen-Waste Collection</title>
+    <style>
+        :root {
+            --ink:    #1b1b1b;
+            --muted:  #6d6a63;
+            --line:   #e3ded4;
+            --accent: #8c2f39;
+            --accent-soft: #f4e9ea;
+            --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--sans);
+            margin: 0;
+            padding: 48px 20px 64px;
+            line-height: 1.8;
+            color: var(--ink);
+            background: #fff;
+        }
+
+        .page { max-width: 720px; margin: 0 auto; }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 28px;
+            text-decoration: none;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+        .back-link:hover { text-decoration: underline; }
+
+        h1 {
+            font-size: 1.7em;
+            line-height: 1.35;
+            color: var(--ink);
+            margin-bottom: 6px;
+        }
+        .title-en { font-size: 1em; color: var(--muted); font-weight: 400; margin-bottom: 10px; }
+        .meta { font-size: 0.88em; color: var(--muted); margin-bottom: 24px; }
+
+        hr { border: 0; border-top: 1px solid var(--line); margin: 28px 0; }
+
+        h2 {
+            font-size: 1.25em;
+            color: var(--ink);
+            margin: 30px 0 12px;
+        }
+
+        .abstract {
+            border-left: 3px solid var(--accent);
+            background: #faf7f5;
+            padding: 14px 18px;
+            border-radius: 4px;
+            margin: 12px 0;
+        }
+        .abstract .label {
+            display: block;
+            font-size: 0.72rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+        .abstract p { margin: 0; }
+
+        .refs { padding-left: 22px; margin-top: 6px; }
+        .refs li { margin-bottom: 8px; font-size: 0.94em; color: var(--muted); }
+
+        .note {
+            margin-top: 26px;
+            font-size: 0.85em;
+            color: var(--muted);
+            font-style: italic;
+        }
+
+        footer {
+            margin-top: 40px;
+            padding-top: 16px;
+            border-top: 1px solid var(--line);
+            font-size: 0.82em;
+            color: var(--muted);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="page">
+
+    <a href="../about.html" class="back-link">&larr; About</a>
+
+    <h1>当 Tuza 猜想遇见餐厨收运</h1>
+    <p class="title-en">When Tuza&rsquo;s Conjecture Meets Kitchen-Waste Collection</p>
+    <p class="meta">汇报人：李元博（Bruce Lee）&nbsp;·&nbsp;数学科学学院 数据计算及应用 2401&nbsp;·&nbsp;2026-10-10</p>
+
+    <hr>
+
+    <h2>摘要 / Abstract</h2>
+
+    <div class="abstract">
+        <span class="label">中文摘要</span>
+        <p>本报告把图论中的 <strong>Tuza 猜想</strong>（三角形 packing&ndash;covering 猜想）引入<strong>校园餐厨垃圾收运路线优化</strong>。我们把校园路网抽象为平面图，把&ldquo;食堂&ndash;处理厂&rdquo;的收运闭环建模为三角形，用 <em>&nu;</em> 表示最多可同时安排的、互不抢路的三角闭环数（三角形打包数），用 <em>&tau;</em> 表示要打断所有三角闭环、最少需禁用的路段数（三角形边覆盖数）。平面图上的 Tuza 定理给出 <strong>&tau; &le; 2&nu;</strong>，意味着为消除所有三角闭环冲突而封路的路段数，不超过最大可行闭环数的两倍。报告说明了该结论为何适用于校园道路（平面图）、其与车辆路径问题（VRP）的分工，并以实例 &nu;=2 &rArr; &tau;&le;4 加以说明。核心启示：以三角闭环替代点对点路线可减少空驶、降低里程与碳排放，而冲突消除的理论代价存在可计算的常数倍上界。</p>
+    </div>
+
+    <div class="abstract">
+        <span class="label">English Abstract</span>
+        <p>This talk applies Tuza&rsquo;s conjecture on triangle packing and covering to the routing of campus kitchen-waste collection. Modeling the campus road network as a planar graph and each collection loop (canteen&ndash;canteen&ndash;plant) as a triangle, we let <em>&nu;</em> denote the maximum number of edge-disjoint triangular loops (triangle packing number) and <em>&tau;</em> the minimum number of road segments whose removal destroys all triangular loops (triangle edge-cover number). On planar graphs, Tuza&rsquo;s theorem gives <strong>&tau; &le; 2&nu;</strong>, bounding the road-segment closures needed to resolve all loop conflicts by twice the maximum feasible loops. We explain why campus roads qualify as planar graphs, contrast this bound with the vehicle routing problem (VRP), and illustrate it with the example &nu;=2 &rArr; &tau;&le;4. The takeaway: triangular loops cut empty mileage and emissions, while conflict elimination carries a provably bounded (constant-factor) cost.</p>
+    </div>
+
+    <h2>参考文献</h2>
+    <ol class="refs">
+        <li>Zs. Tuza. A conjecture on triangles of graphs. <em>Graphs and Combinatorics</em>, 6(4):373&ndash;380, 1990.</li>
+        <li>P. E. Haxell. Packing and covering triangles in graphs. <em>Discrete Mathematics</em>, 195(1&ndash;3):251&ndash;254, 1999.</li>
+        <li>S. Wang. A bound below 2.8 for Tuza&rsquo;s conjecture. Preprint, 2026.</li>
+        <li>L. Yi. An improved upper bound for Tuza&rsquo;s conjecture via 2-colorable triangle families. Preprint, 2026.</li>
+    </ol>
+
+    <p class="note">AI 使用说明：本汇报使用 AI 工具辅助文字润色，内容经作者审核，文责自负。</p>
+
+    <footer>
+        &copy; 2026 ExtremalMath. A summary page of the talk &ldquo;When Tuza&rsquo;s Conjecture Meets Kitchen-Waste Collection&rdquo;.
+    </footer>
+
+</div>
+
+</body>
+</html>

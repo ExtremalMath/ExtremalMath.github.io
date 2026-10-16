@@ -3,6 +3,10 @@
 // 格式：{ date: "YYYY-MM-DD", text: "更新内容" }
 
 const siteUpdates = [
+   {
+        date: "2026-10-16",
+        text: "Added a 'Talks & Reports' section: a new talks.html index and a summary page for the 2026-10-10 course talk 'When Tuza's Conjecture Meets Kitchen-Waste Collection', applying Tuza's theorem (τ ≤ 2ν) on planar graphs to campus kitchen-waste collection routing. Linked from the About page."
+    },
    { 
         date: "2026-09-25", 
         text: "Added a 'Now' page with a semester-based archive and on-demand loading of current and past semesters, redesigned the About page with a warm color theme, a sticky sidebar, and a green Aleph avatar, and polished the personal bio while adding department experience and volunteer work." 

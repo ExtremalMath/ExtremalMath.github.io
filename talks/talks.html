@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExtremalMath | Talks & Reports</title>
+    <style>
+        :root {
+            --bg:          #fbfaf7;
+            --ink:         #1b1b1b;
+            --muted:       #6d6a63;
+            --line:        #e3ded4;
+            --accent:      #8c2f39;
+            --accent-soft: #f4e9ea;
+            --accent-deep: #6b2229;
+            --green:       #3a5a40;
+            --green-soft:  #eaf0ea;
+            --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--sans);
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+            color: var(--ink);
+            background: #fff;
+        }
+
+        .page {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px 60px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 24px;
+            text-decoration: none;
+            color: var(--accent);
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+        .back-link:hover { color: var(--accent-deep); text-decoration: underline; }
+
+        .layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 248px;
+            gap: 52px;
+            align-items: start;
+        }
+        .content { min-width: 0; }
+
+        .sidebar { position: sticky; top: 40px; }
+        .side-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px 18px;
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+        }
+        .side-section { display: flex; flex-direction: column; gap: 6px; }
+        .side-title {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 6px;
+        }
+        .side-status { margin: 0; font-size: 0.9em; line-height: 1.6; color: var(--ink); }
+        .side-link {
+            display: block;
+            padding: 5px 0;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: color 0.15s;
+        }
+        .side-link:hover { color: var(--ink); text-decoration: underline; }
+        .side-meta { padding-top: 12px; border-top: 1px solid var(--line); font-size: 0.74rem; color: var(--muted); }
+
+        .hero {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 18px;
+            margin-bottom: 28px;
+        }
+        .avatar {
+            flex-shrink: 0;
+            width: 92px;
+            height: 92px;
+            border-radius: 50%;
+            background: var(--green-soft);
+            border: 3px solid var(--green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.6rem;
+            color: var(--green);
+            user-select: none;
+            box-shadow: 0 4px 12px rgba(58, 90, 64, 0.12);
+        }
+        .hero-info h1 { font-size: 1.9em; color: var(--ink); margin-bottom: 4px; }
+        .hero-info .subtitle { font-size: 1.02em; color: var(--muted); }
+
+        h2 {
+            font-size: 1.35em;
+            color: var(--ink);
+            margin: 34px 0 14px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--line);
+        }
+        h2 .icon { margin-right: 6px; }
+
+        .intro { color: var(--muted); margin-bottom: 18px; }
+
+        /* 汇报卡片 */
+        .talk-card {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-left: 4px solid var(--accent);
+            border-radius: 6px;
+            padding: 18px 20px;
+            margin-bottom: 16px;
+            transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+        }
+        .talk-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+            border-color: var(--accent);
+        }
+        .talk-card .talk-date {
+            display: inline-block;
+            background: var(--accent);
+            color: #fff;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.78em;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .talk-card .talk-type {
+            display: inline-block;
+            margin-left: 8px;
+            color: var(--green);
+            font-size: 0.82em;
+            font-weight: 600;
+        }
+        .talk-card h3 { font-size: 1.12em; color: var(--ink); margin-bottom: 4px; }
+        .talk-card .talk-en { font-size: 0.92em; color: var(--muted); margin-bottom: 8px; }
+        .talk-card .talk-desc { font-size: 0.95em; color: var(--muted); margin: 0; }
+        .talk-card .talk-more {
+            display: inline-block;
+            margin-top: 10px;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+        .talk-card:hover .talk-more { color: var(--accent-deep); text-decoration: underline; }
+
+        .footer {
+            margin-top: 44px;
+            padding-top: 20px;
+            border-top: 1px solid var(--line);
+            text-align: center;
+            font-size: 0.85em;
+            color: var(--muted);
+        }
+
+        @media (max-width: 840px) {
+            .layout { grid-template-columns: 1fr; gap: 20px; }
+            .sidebar { position: static; order: -1; }
+            .side-nav { flex-direction: row; gap: 8px; overflow-x: auto; padding: 0 0 10px; background: none; border: none; border-bottom: 1px solid var(--line); border-radius: 0; }
+            .side-nav::-webkit-scrollbar { display: none; }
+            .side-section { display: contents; }
+            .side-title, .side-status, .side-meta { display: none; }
+            .side-link { flex: none; white-space: nowrap; padding: 8px 14px; background: var(--bg); border: 1px solid var(--line); border-radius: 20px; font-size: 0.88em; }
+            .side-link:hover { background: var(--accent-soft); color: var(--accent); text-decoration: none; }
+        }
+        @media (max-width: 480px) {
+            .hero { flex-direction: column; align-items: flex-start; gap: 16px; }
+            .avatar { width: 76px; height: 76px; font-size: 2.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page">
+
+    <a href="../about.html" class="back-link">← About</a>
+
+    <div class="layout">
+
+        <main class="content">
+
+            <div class="hero">
+                <div class="avatar">&#127908;</div>
+                <div class="hero-info">
+                    <h1>Talks &amp; Reports</h1>
+                    <p class="subtitle">学术汇报与公开演讲的摘要页</p>
+                </div>
+            </div>
+
+            <p class="intro">这里收录我的学术汇报与公开演讲的<strong>摘要页</strong>（不含幻灯片全文）。点击任意条目可阅读对应摘要。</p>
+
+            <h2><span class="icon">🎤</span>汇报列表</h2>
+
+            <a class="talk-card" href="report-kitchen-waste.html">
+                <span class="talk-date">2026-10-10</span>
+                <span class="talk-type">课程汇报 · Course Talk</span>
+                <h3>当 Tuza 猜想遇见餐厨收运</h3>
+                <p class="talk-en">When Tuza&rsquo;s Conjecture Meets Kitchen-Waste Collection</p>
+                <p class="talk-desc">把平面图上的 Tuza 定理（&tau; &le; 2&nu;）应用于校园餐厨收运路线优化：以三角形建模收运闭环，用 &nu;（最多不冲突闭环数）与 &tau;（最少禁用路段数）刻画冲突，并说明其与平面图、VRP 的关系。</p>
+                <span class="talk-more">阅读摘要 &rarr;</span>
+            </a>
+
+            <!-- 以后新增汇报，在此复制一个 .talk-card 并修改链接即可 -->
+
+        </main>
+
+        <aside class="sidebar" aria-label="Page links">
+            <nav class="side-nav">
+                <div class="side-section">
+                    <div class="side-title">Explore</div>
+                    <a href="../about.html" class="side-link">About me</a>
+                    <a href="../myteachers.html" class="side-link">My respected teacher</a>
+                    <a href="../nownow/now.html" class="side-link">what I'm doing now</a>
+                    <a href="../research-log.html" class="side-link">Research diary &rarr;</a>
+                </div>
+                <div class="side-meta">Updated Oct 16, 2026</div>
+            </nav>
+        </aside>
+
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2026 ExtremalMath. Built with mathematics.</p>
+    </div>
+
+</div>
+
+</body>
+</html>
