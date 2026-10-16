@@ -5,7 +5,7 @@
 const siteUpdates = [
    {
         date: "2026-10-16",
-        text: "1) Added a Talks & Reports section (talks index + a 2026-10-10 course-talk summary on Tuza's theorem for campus kitchen-waste routing), linked from About.<br>2) Unified the materials pages (homework, course-essay, notes, books, academic-sites) to the About style — compact, click-to-open links, no inline previews.<br>3) Added Finite Fields materials: study notes (book/FiniteFields_FengLiao.pdf) and the full textbook (book/FiniteFields_Applications_FengLiao.pdf, Feng &amp; Liao); split homework into completed (Lovász) and in-progress (Finite Fields); renamed the Books heading to mark all books for academic sharing only.<br>4) Added a Statement page (student disclaimer) and /code/c_language/data_structure/ with four C++ data-structure programs (ticket system, tour map, 24-point, Huffman player names).<br>5) Reorganized the site by function: study/ (materials + 5 sub-pages), research/ (research-log); kept teaching.html, myteachers.html, and statement.html at the root; updated all changed pages with 'Last updated Oct 16, 2026'.<br>6) Cleanup: removed the blankk.html placeholder, two duplicate GTM 244 PDFs, and book/t.txt; moved PowerPiontPre.pdf into talks/."
+        text: "On 2026-10-16, the site update added a Talks & Reports section with a Tuza-theorem talk summary, unified materials pages into a compact click-to-open style, added Finite Fields notes and the Feng & Liao textbook with reorganized homework, added a student Statement page and a C++ data-structure code section, reorganized the site into study/ and research/ areas with refreshed update dates, and cleaned up obsolete, duplicate, and misplaced files."
     },
    { 
         date: "2026-09-25", 
