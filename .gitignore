@@ -1,0 +1,46 @@
+# ---- secrets & local config (never commit) ----
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+secrets.yml
+secrets.yaml
+credentials.json
+service-account*.json
+.netrc
+.npmrc
+.pypirc
+.htpasswd
+
+# ---- editors & OS ----
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+*.swp
+*~
+
+# ---- misc ----
+*.log
+
+# ---- Node ----
+node_modules/
+dist/
+build/
+out/
+.next/
+.nuxt/
+coverage/
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.turbo/
+.parcel-cache/
