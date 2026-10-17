@@ -5,7 +5,7 @@
 const siteUpdates = [
    {
         date: "2026-10-17",
-        text: "Added a Research Directions page, a published Style Guide, and picture rules with an aleph placeholder system. Rebuilt the Books page with a full catalog and a study-use notice, and added a bilingual CV generator that builds a printable PDF resume from the site's public pages."
+        text: "Added a Research Directions page, a published Style Guide, and picture rules with an aleph placeholder system. Rebuilt the Books page with a full catalog and a study-use notice, added a bilingual CV generator, and posted Finite Fields Chapter 1 exercise notes on the Homework page."
     },
    {
         date: "2026-10-16",
