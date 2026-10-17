@@ -198,3 +198,27 @@ node --check     所有根目录 JS 语法检查
               （不入库）。同批顺手将 troubleshooting.txt 中 token 存储路径脱敏
               为"本地维护配置文件"，避免公开站点暴露内部路径。
 
+2026-10-17  设计审查（design-review.txt）落地轮次，追加五条"无法直接修改/存在冲突"事项：
+            ①【M1 · 文案歧义，已删待定】study/materials.html 引言原句 "Almost all
+              the studies involve artificial intelligence." 语义歧义（易被读成"学习
+              内容几乎全是 AI"），且原意（AI 辅助写笔记？）无法核实。解法：删除该句，
+              引言仅保留 "Select a category to view resources."。若用户确认原意是
+              "笔记借助 AI 工具、再人工核对"，可改回准确表述（design-review 3.3 给了
+              现成例句）。
+            ②【N1 · 二选一已决策】nownow/now.html 曾是全站唯一显式 body 字号 17px。
+              审查要求二选一：去掉 17px 回归浏览器默认，或把 17px 写入 style-guide
+              成全站标准。决策：去掉 17px，浏览器默认 16px 为全站基准；style-guide
+              保持不写死正文字号。相关文件：nownow/now.html（若未来改主意，两个动作
+              二选一，切勿只改一半）。
+            ③【A5 · profile.png 仍不添加】about.html 头像继续用 ℵ 占位。原因：项目
+              共识规则"profile.png 暂不添加"。picture/private/profile.png 放入后
+              picture.js 自动替换，无需改页面；任何 agent 不得主动添加该文件。
+            ④【C1 · cv 目录边界】cv-pdf-generator/ 原属另一 agent 域。本轮按用户
+              明确指示执行 C1：cv.html 语言选择卡片已扁平化（去 box-shadow/圆角/
+              translateY 位移动效，改为 res-row 整行链接+悬停绛红）。cv-generator.js
+              逻辑与双语测试断言未触碰；另一 agent 若继续开发，注意其本地副本与本方
+              改动可能不同步，改前先比对远程版本。
+            ⑤【A3/G4 · 按审查暂不行动】Awards & Honors 仅 1 条，审查建议半年内仍
+              只有 1 条时并入 Education——本次保留现状；G4 中文专名（声明/简历按钮/
+              志愿者机构名）属既定口吻，保持页面骨架纯英文、专名中英并存，不扩散中文。
+

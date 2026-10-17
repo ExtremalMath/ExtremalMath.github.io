@@ -14,19 +14,22 @@
             --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
         body { font-family: var(--sans); color: var(--ink); background: #fff; line-height: 1.7; }
         .page { max-width: 720px; margin: 0 auto; padding: 40px 20px 60px; }
 
-        .page-head { border-bottom: 2px solid var(--accent); padding-bottom: 12px; margin-bottom: 28px; }
-        .page-head h1 { font-size: 1.8em; color: var(--ink); }
-        .page-head .subtitle { color: var(--muted); margin-top: 4px; }
+        .hero { text-align: center; margin: 12px 0 36px; }
+        .hero h1 { font-size: 2.6em; font-weight: 700; color: var(--ink); letter-spacing: 0.01em; }
+        .hero-rule { width: 72px; height: 2px; background: var(--accent); margin: 14px auto 10px; }
+        .hero .subtitle { color: var(--muted); font-size: 1em; }
+        @media (max-width: 480px) { .hero h1 { font-size: 2.2em; } }
 
         .intro { color: var(--ink); margin-bottom: 28px; }
 
         .entry-links { margin-bottom: 8px; }
         .entry-links a {
             display: block;
-            padding: 14px 0;
+            padding: 12px 0;
             border-bottom: 1px solid var(--line);
             text-decoration: none;
             color: var(--ink);
@@ -38,7 +41,7 @@
         h2 {
             font-size: 1.2em;
             color: var(--ink);
-            margin: 36px 0 14px;
+            margin: 32px 0 12px;
             padding-bottom: 6px;
             border-bottom: 1px solid var(--line);
         }
@@ -71,20 +74,25 @@
         }
         .footer p { margin: 0; }
         .footer .updated { margin-top: 6px; }
+
+        @media (prefers-reduced-motion: reduce) {
+            * { transition: none !important; }
+        }
     </style>
 </head>
 <body>
 
 <div class="page">
 
-    <div class="page-head">
+    <header class="hero">
         <h1>Extremal Math</h1>
-        <p class="subtitle">Undergraduate Mathematics Student</p>
-    </div>
+        <div class="hero-rule" aria-hidden="true"></div>
+        <p class="subtitle">Notes, books, and works in progress — an undergraduate's academic space.</p>
+    </header>
 
     <main>
         <p class="intro">
-            Welcome to my academic space. I am an undergraduate student exploring <strong>Extremal Combinatorics</strong> and <strong>Mathematical Analysis</strong>, with a particular interest in <strong>Extremal Graph Theory</strong>, <strong>Functional Analysis</strong>, and <strong>Partial Differential Equations (PDE)</strong>. This is a website used for sharing personal study materials.
+            Welcome to my academic space. I am an undergraduate exploring <strong>extremal graph theory</strong>, functional analysis, and PDEs — sharing notes, books, and works in progress along the way.
         </p>
 
         <div class="entry-links">
@@ -141,6 +149,15 @@
                 <span class="log-date">${formattedDate}</span>
             </li>`;
         }).join('');
+
+        // 访客计数：加载失败时静默隐藏，避免长期显示 "Loading"
+        setTimeout(() => {
+            const counter = document.getElementById('vercount_value_site_pv');
+            if (counter && counter.textContent.trim() === 'Loading') {
+                const holder = document.querySelector('.visit-counter');
+                if (holder) holder.style.display = 'none';
+            }
+        }, 6000);
     });
 </script>
 <script defer src="https://events.vercount.one/js"></script>
