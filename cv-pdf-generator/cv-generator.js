@@ -15,8 +15,8 @@
  *   源页面正文以英文为主，故英文版直接取源；中文版通过内置 ZH 词典翻译正文，
  *   未命中词典的新内容会回退为原文（英文），保证不丢失。
  *
- * 输出：黑框白底、简洁精炼的简历版式；默认横向（landscape）A4，经浏览器打印
- *       （另存为 PDF）输出；可选 downloadPDF() 一键下载（同样为横向）。
+ * 输出：黑框白底、简洁精炼的简历版式；默认纵向（portrait）A4，经浏览器打印
+ *       （另存为 PDF）输出；可选 downloadPDF() 一键下载（同样为纵向）。
  *
  * 内容安全：仅抓取公开页面；内置过滤规则明确排除课程作业
  *   （homework / 课程作业 / Core Coursework / Course Talk 等），
@@ -504,8 +504,8 @@
       '/* 简历正片：默认隐藏，预览/打印时才显示 */',
       '#cv-root{ display:none; }',
       '#cv-root .cv-sheet{',
-      '  max-width:820px; margin:0 auto; background:#fff; color:#1b1b1b;',
-      '  border:2px solid #000; padding:34px 40px;',
+      '  max-width:720px; margin:0 auto; background:#fff; color:#1b1b1b;',
+      '  border:2px solid #000; padding:30px 34px;',
       '  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,"PingFang SC","Microsoft YaHei",sans-serif;',
       '  font-size:13.5px; line-height:1.6;',
       '}',
@@ -529,7 +529,7 @@
       '#cv-root .cv-sub2{ font-weight:700; font-size:13px; margin:14px 0 3px; color:#8c2f39; break-inside:avoid; }',
       '#cv-root .cv-foot{ font-size:11px; color:#6d6a63; text-align:right; margin-top:16px; }',
       '@media print{',
-      '  @page{ size:A4 landscape; margin:12mm; }',
+      '  @page{ size:A4 portrait; margin:12mm; }',
       '  html,body{ background:#fff !important; }',
       '  .cv-no-print,.back-link,.page-head,.page-foot,#cv-status{ display:none !important; }',
       '  .page{ max-width:none !important; padding:0 !important; margin:0 !important; }',
@@ -619,7 +619,7 @@
     render(data, opts.showPreview !== undefined ? opts.showPreview : CONFIG.showPreview);
   }
 
-  /* ============================ 可选：直接下载 PDF（横向） ============================ */
+  /* ============================ 可选：直接下载 PDF（纵向） ============================ */
   function downloadPDF() {
     const el = document.querySelector('#cv-root .cv-sheet');
     if (!el) { alert('请先生成简历后再下载。'); return; }
@@ -635,7 +635,7 @@
         filename: CONFIG.docTitle + '_' + suffix + '.pdf',
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: { scale: 2 },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' }
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
       };
       global.html2pdf().set(opt).from(el).save();
     });
