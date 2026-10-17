@@ -78,7 +78,7 @@
   function L() { return LABELS[state.lang] || LABELS.en; }
 
   // 中文版简介（源站 bio 为英文，单独提供克制的中文摘要）
-  const BIO_ZH = '我是 Yuanbo Li（Bruce Lee），中国江苏人，江苏大学数学科学学院本科生。' +
+  const BIO_ZH = '我是李元博（Bruce Lee），中国江苏人，江苏大学数学科学学院本科生。' +
     '研究兴趣主要位于极值图论与偏微分方程泛函分析方法的交叉地带，目前仍在广泛探索阶段。';
 
   /* ============== 中文翻译词典（英文源 → 中文；未命中回退原文） ============== */
@@ -157,6 +157,9 @@
    * 规则：长词条优先替换（避免短词提前破坏长词）；大小写不敏感；替换为中文。
    * 新增术语只需在此追加 [英文, 中文] 一对，维护成本极低。 */
   const TERMS = [
+    // 姓名（覆盖「名+姓」与「姓+名」两种英文顺序；gi 不区分大小写）
+    ['Yuanbo Li', '李元博'],
+    ['Li Yuanbo', '李元博'],
     // 数学
     ['Extremal Graph Theory', '极值图论'],
     ['Graph Theory', '图论'],
@@ -293,7 +296,7 @@
 
   /* ============================ 内容抽取 ============================ */
   function extractBasic(doc) {
-    const name = text(doc.querySelector('.hero-info h1'));
+    const name = t(text(doc.querySelector('.hero-info h1')));
     const nameEn = text(doc.querySelector('.name-en'));
     const title = t(text(doc.querySelector('.subtitle')));
     let email = '';
