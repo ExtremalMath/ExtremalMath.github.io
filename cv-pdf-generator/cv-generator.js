@@ -107,7 +107,7 @@
     // 研究兴趣 / 作品
     'Extremal Graph Theory': '极值图论',
     'My primary research focus is on Extremal Graph Theory, with a specific emphasis on H-free graph problems. I am particularly interested in the structural properties of these graphs and the associated optimization problems, including Turán-type extremal problems and related enumeration questions.':
-      '我的主要研究方向为极值图论，尤其关注 H-自由图问题；对这类图的结构性质及相关优化问题（包括 Turán 型极值问题与相关计数问题）抱有浓厚兴趣。',
+      '我的主要研究方向为极值图论，尤其关注 免H图问题；对这类图的结构性质及相关优化问题（包括 Turán 型极值问题与相关计数问题）抱有浓厚兴趣。',
     '● Completed Notes': '● 已完成笔记',
     'Notes: Density Conditions for Triangles in Multipartite Graphs': '笔记：多部图中三角形的密度条件',
     'Completed a rigorous reading and detailed note set on Bondy, Shen, Thomasse, and Thomassen’s work. Explored edge density thresholds using convex hull theory (Carathéodory’s theorem) and minimal counterexample analysis. Key results highlighted include the golden ratio bound (τ ≈ 0.618) for tripartite graphs and the 1/2 threshold for infinite-partite graphs. See notes in the Materials->Course essays':
@@ -134,14 +134,14 @@
     'Guided visitors through the history and development of Jiangsu University.':
       '为访客讲解江苏大学的历史与发展。',
     'Volunteer Teacher': '志愿支教老师',
-    'Big Eyes Volunteer Team, Jiangsu University — Jianbi Primary School':
-      '江苏大学“大眼睛”志愿团队 — 谏壁中心小学',
+    'Bright Eyes Volunteer Team, Jiangsu University — Jianbi Primary School':
+      '江苏大学大眼睛公益团队 — 谏壁中心小学',
     '2024 – 2025': '2024–2025',
     'Delivered engaging club courses to children at Jianbi Primary School. Read the feature article ↗':
       '在谏壁中心小学为孩子们开设生动的兴趣课程。',
     'Volunteer': '志愿者',
     'Purple Grass Volunteer Team, Memorial Hall of the Victims in Nanjing Massacre by Japanese Invaders':
-      '“紫草”志愿团队，侵华日军南京大屠杀遇难同胞纪念馆',
+      '紫金草志愿者团队，侵华日军南京大屠杀遇难同胞纪念馆',
     'July 2025': '2025 年 7 月',
     'Guided crowds and assisted visitors in need at the memorial hall.':
       '在纪念馆内引导人流，协助有需要的访客。'
