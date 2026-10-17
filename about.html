@@ -560,40 +560,9 @@
                 <span class="tag">Real Analysis & Functional Analysis</span>
             </div>
 
-            <!-- 研究兴趣 -->
+            <!-- 研究兴趣（数据驱动：内容见 about-data.js） -->
             <h2><span class="icon">🔬</span> Research Interests</h2>
-            <div class="research-card">
-                <h3>Extremal Graph Theory</h3>
-                <p>
-                    My primary research focus is on <strong>Extremal Graph Theory</strong>, with a specific emphasis on
-                    <em>H</em>-free graph problems. I am particularly interested in the structural properties of these graphs
-                    and the associated optimization problems, including Turán-type extremal problems and related
-                    enumeration questions.
-                </p>
-            </div>
-
-            <div class="research-card" style="margin-top: 14px;">
-                <span class="status">● Completed Notes</span>
-                <h3>Notes: Density Conditions for Triangles in <em>Multipartite Graphs</em></h3>
-                <p>
-                    Completed a rigorous reading and detailed note set on Bondy, Shen, Thomasse, and Thomassen's work. 
-                    Explored edge density thresholds using convex hull theory (Carathéodory's theorem) and minimal counterexample analysis. 
-                    Key results highlighted include the golden ratio bound (&tau; &asymp; 0.618) for tripartite graphs 
-                    and the 1/2 threshold for infinite-partite graphs.
-                    See the Materials &rarr; Course Essays page for the full notes.
-                </p>
-            </div>
-            <div class="research-card" style="margin-top: 14px;">
-                <span class="status">● In Progress</span>
-                <h3>Studying: <em>Functional Analysis for PDEs</em></h3>
-                <p>
-                    Focusing on the intersection of functional analysis and partial differential equations.
-                    This area uses Banach and Hilbert space theory, weak topologies and duality, operator
-                    and spectral theory, convex analysis, and monotone operator methods to study Sobolev
-                    spaces, variational formulations, and the existence, uniqueness, and regularity of
-                    weak solutions to elliptic and evolution equations.
-                </p>
-            </div>
+            <div id="research-list"></div>
 
             <p class="research-note">
                 Note: My research direction is dynamic and may evolve to explore other areas of discrete mathematics
@@ -604,14 +573,9 @@
                 <a href="research/research-directions.html">Read more about my research directions &rarr;</a>
             </p>
 
-            <!-- 获奖与荣誉 -->
+            <!-- 获奖与荣誉（数据驱动：内容见 about-data.js） -->
             <h2><span class="icon">🏆</span> Awards & Honors</h2>
-            <ul class="award-list">
-                <li>
-                    <span class="award-year">2025</span>
-                    <span class="award-text">The 17th Chinese Mathematics Competitions (CMC), Category A — Provincial 3rd Prize, Jiangsu</span>
-                </li>
-            </ul>
+            <ul class="award-list" id="award-list"></ul>
 
             <!-- 技术技能 -->
             <h2><span class="icon">🛠️</span> Technical Skills</h2>
@@ -730,6 +694,47 @@
     el.href = 'mailto:' + email;
   });
 </script>
+<script src="about-data.js"></script>
 <script src="picture.js"></script>
+<script>
+  // About 页面数据驱动渲染：读取 aboutData，复刻原有的 .research-card / .award-list
+  // DOM 结构（类名与层级保持一致），以保证 CV 抓取与页面展示一致。
+  (function () {
+    "use strict";
+
+    function el(tag, cls, html) {
+      var n = document.createElement(tag);
+      if (cls) n.className = cls;
+      if (html != null) n.innerHTML = html;
+      return n;
+    }
+
+    if (typeof aboutData === "undefined") return;
+
+    // 研究兴趣 / 作品卡片
+    var list = document.getElementById("research-list");
+    if (list) {
+      aboutData.researchInterests.forEach(function (item, idx) {
+        var card = el("div", "research-card");
+        if (idx > 0) card.style.marginTop = "14px"; // 与原有卡片间距一致
+        if (item.status) card.appendChild(el("span", "status", item.status));
+        card.appendChild(el("h3", null, item.title));
+        card.appendChild(el("p", null, item.desc));
+        list.appendChild(card);
+      });
+    }
+
+    // 获奖列表
+    var awards = document.getElementById("award-list");
+    if (awards) {
+      aboutData.awards.forEach(function (a) {
+        var li = el("li");
+        li.appendChild(el("span", "award-year", a.year));
+        li.appendChild(el("span", "award-text", a.text));
+        awards.appendChild(li);
+      });
+    }
+  })();
+</script>
 </body>
 </html>

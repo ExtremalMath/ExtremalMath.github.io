@@ -5,6 +5,10 @@
 const siteUpdates = [
    {
         date: "2026-10-17",
+        text: "Refactored the About page Research Interests and Awards & Honors sections into a data-driven format. Content now lives in about-data.js (single source of truth) and is rendered by a small inline script on About; the CV generator (cv-generator.js) also reads about-data.js so the page and the CV stay in sync. Editing about-data.js updates both the page and the CV."
+    },
+   {
+        date: "2026-10-17",
         text: "Added a Research Directions page, a published Style Guide, and picture rules with an aleph placeholder system. Rebuilt the Books page with a full catalog and a study-use notice, added a bilingual CV generator, and posted Finite Fields Chapter 1 exercise notes on the Homework page. Applied the design review: centered the index hero with a short rule line, split Core Coursework into its own About section, flattened the CV chooser cards, and added focus-visible plus reduced-motion rules across every page."
     },
    {

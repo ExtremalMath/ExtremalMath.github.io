@@ -31,7 +31,9 @@
     // 默认抓取的公开源页面（相对站点根目录的上一级，因本脚本位于 cv-pdf-generator/ 子目录）
     sources: {
       about: '../about.html',
-      talks: '../talks/talks.html'
+      talks: '../talks/talks.html',
+      // About 页面 Research Interests / Awards 的唯一数据源（与 about.html 共用）
+      aboutData: '../about-data.js'
     },
     // 演讲 / 作品中若带有以下「类型标签」，则视为课程作业并排除（小写精确匹配）
     excludeTalkTypes: ['course talk', 'homework', 'coursework', '课程作业', '作业'],
@@ -283,6 +285,11 @@
     str = (str || '').toLowerCase();
     return CONFIG.excludeKeywords.some(function (k) { return str.indexOf(k) >= 0; });
   }
+  // 去掉数据字符串中的行内标签（<em>/<strong> 等），得到纯文本，
+  // 与 DOM 元素的 textContent 行为一致，确保翻译词典命中等逻辑不受影响。
+  function stripTags(s) {
+    return String(s == null ? '' : s).replace(/<[^>]*>/g, '');
+  }
 
   /* ============================ 内容抽取 ============================ */
   function extractBasic(doc) {
@@ -330,6 +337,24 @@
     }).filter(function (a) { return a.text; });
   }
 
+  // 数据驱动抽取：直接读取 about-data.js 的 aboutData（与 about.html 同源），
+  // 行为对齐 extractCards / extractAwards，但无需依赖 about.html 的静态 DOM。
+  function extractCardsData(data) {
+    const items = (data && data.researchInterests) || [];
+    return items.map(function (it) {
+      const status = t(stripTags(it.status || ''));
+      const title = t(stripTags(it.title || ''));
+      const desc = it.desc ? summarize(t(stripTags(it.desc)), 170) : '';
+      return { status: status, title: title, desc: desc };
+    }).filter(function (c) { return c.title && !matchesExclude(c.title + ' ' + c.desc); });
+  }
+  function extractAwardsData(data) {
+    const items = (data && data.awards) || [];
+    return items.map(function (a) {
+      return { year: t(stripTags(a.year || '')), text: t(stripTags(a.text || '')) };
+    }).filter(function (x) { return x.text; });
+  }
+
   function extractSkills(doc) {
     return Array.from(doc.querySelectorAll('.skills-grid .skill-item')).map(function (it) {
       return { name: t(text(it.querySelector('.skill-name'))), desc: t(text(it.querySelector('.skill-desc'))) };
@@ -362,8 +387,9 @@
     });
   }
 
-  function assemble(aboutDoc, talksDoc) {
-    const cards = extractCards(aboutDoc);
+  function assemble(aboutDoc, talksDoc, aboutData) {
+    // 优先使用 about-data.js 的单一数据源；缺失时回退到 about.html 的 DOM 抽取
+    const cards = aboutData ? extractCardsData(aboutData) : extractCards(aboutDoc);
     const interests = cards.filter(function (c) { return !c.status; })
       .map(function (c) { return { title: c.title, desc: c.desc }; });
     const notes = cards.filter(function (c) { return c.status; });
@@ -380,7 +406,7 @@
       basic: extractBasic(aboutDoc),
       education: extractEducation(aboutDoc),
       works: works,
-      awards: extractAwards(aboutDoc),
+      awards: aboutData ? extractAwardsData(aboutData) : extractAwards(aboutDoc),
       interests: interests,
       skills: extractSkills(aboutDoc),
       service: extractService(aboutDoc)
@@ -590,6 +616,20 @@
     }));
   }
 
+  // 抓取 about-data.js：取出其中的 aboutData 对象（本站可信数据文件，仅在本作用域内执行）。
+  // 失败则返回 null，由 assemble 回退到 about.html 的 DOM 抽取。
+  function fetchAboutData(url) {
+    return fetch(url, { cache: 'no-store' }).then(function (res) {
+      if (!res.ok) return null;
+      return res.text().then(function (js) {
+        try {
+          const fn = new Function(js + '\n; return (typeof aboutData !== "undefined") ? aboutData : null;');
+          return fn() || null;
+        } catch (e) { return null; }
+      });
+    }).catch(function () { return null; });
+  }
+
   /* ============================ 对外主函数 ============================ */
   function generateCV(opts) {
     opts = opts || {};
@@ -600,23 +640,30 @@
       // 直接读取当前已打开页面（about.html），始终与源同步，无跨域问题
       aboutDoc = document;
       talksDoc = null;
-    } else {
-      const pages = opts.fetchPages || [CONFIG.sources.about, CONFIG.sources.talks];
-      showStatus('正在抓取并生成简历…');
-      return fetchPages(pages).then(function (docs) {
-        aboutDoc = docs.filter(function (d) { return d.url.indexOf('talks') < 0; })[0].doc;
-        const tk = docs.filter(function (d) { return d.url.indexOf('talks') >= 0; })[0];
-        talksDoc = tk ? tk.doc : null;
-        const data = assemble(aboutDoc, talksDoc);
-        render(data, opts.showPreview !== undefined ? opts.showPreview : CONFIG.showPreview);
-      }).catch(function (err) {
-        showStatus('生成失败：' + err.message +
-          '。请确认通过 http(s)://（如 GitHub Pages 或本地服务器）访问本页，而非直接双击打开本地文件。');
-      });
+      // about.html 已加载 about-data.js，直接使用同源数据
+      const aboutData = (typeof global.aboutData !== 'undefined') ? global.aboutData : null;
+      const data = assemble(aboutDoc, talksDoc, aboutData);
+      render(data, opts.showPreview !== undefined ? opts.showPreview : CONFIG.showPreview);
+      return;
     }
 
-    const data = assemble(aboutDoc, talksDoc);
-    render(data, opts.showPreview !== undefined ? opts.showPreview : CONFIG.showPreview);
+    const pages = opts.fetchPages || [CONFIG.sources.about, CONFIG.sources.talks];
+    showStatus('正在抓取并生成简历…');
+    return Promise.all([
+      fetchPages(pages),
+      fetchAboutData(CONFIG.sources.aboutData)
+    ]).then(function (results) {
+      const docs = results[0];
+      const aboutData = results[1];
+      aboutDoc = docs.filter(function (d) { return d.url.indexOf('talks') < 0; })[0].doc;
+      const tk = docs.filter(function (d) { return d.url.indexOf('talks') >= 0; })[0];
+      talksDoc = tk ? tk.doc : null;
+      const data = assemble(aboutDoc, talksDoc, aboutData);
+      render(data, opts.showPreview !== undefined ? opts.showPreview : CONFIG.showPreview);
+    }).catch(function (err) {
+      showStatus('生成失败：' + err.message +
+        '。请确认通过 http(s)://（如 GitHub Pages 或本地服务器）访问本页，而非直接双击打开本地文件。');
+    });
   }
 
   /* ============================ 可选：直接下载 PDF（纵向） ============================ */
