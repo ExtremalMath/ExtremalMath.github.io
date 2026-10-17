@@ -20,6 +20,7 @@ PUSH RULES
    - book/       书籍 PDF
    - notes/      课程笔记、作业 PDF
    - picture/    全站图片；个人图片放 picture/private/ 子文件夹，占位与替换规则见 style-guide.txt「PICTURES」节
+   - cv-pdf-generator/  简历 PDF 生成器（cv.html 双语入口 + cv-zh.html/cv-en.html 双语简历页 + cv-generator.js 核心函数）。仅推送功能文件；PROMPT.md 等开发过程文档留本地，不入库。
 3. 文件命名：英文、小写、单词间用下划线（如 twenty_four_game.cpp、FiniteFields_Applications_FengLiao.pdf）。文件名一旦发布，不得改名——改名会制造死链。
 4. 新页面先本地写好并预览，经确认后再推送；不得先把链接推上线、页面后补（曾因此出现 404）。
 
@@ -27,6 +28,7 @@ PUSH RULES
 二、禁推文件
 
 - style-guide.html：任何情况下不得推送、不得修改。该文件仅保留在本地；网站上的 "Style guide" 链接指向 style-guide.txt（纯文本版）。
+-一般情况下，txt文件一般不进行推送，是
 - 其余文件按需推送。
 
 
@@ -42,7 +44,7 @@ PUSH RULES
 四、同步更新（与 style-guide.txt 维护规则一致）
 
 每轮改动必须在同一轮内完成三处同步：
-1. updates.js —— 改动写入顶部当日条目，同日多条合并为一条，分点序号连续，要求尽可能精简简练，只写删减页面、实现功能的大改动即可。
+1. updates.js —— 改动写入顶部当日条目，同日多条合并为一条；**每日条目总长度不超过 100 个英文单词**，只突出最重要的更新（新页面 / 新功能 / 删除），让人一眼看出项目仍在持续更新即可，不罗列琐碎改动。
 2. about.html —— 修正所有受影响的链接与文字。
 3. index.html —— 同上。
 每个被修改的页面，页脚 "Last updated" 日期改为当天（格式：Last updated Oct 17, 2026）。

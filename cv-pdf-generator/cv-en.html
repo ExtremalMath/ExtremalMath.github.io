@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic CV (English) · ExtremalMath</title>
+    <style>
+        :root {
+            --bg:         #fbfaf7;
+            --ink:        #1b1b1b;
+            --muted:      #6d6a63;
+            --line:       #e3ded4;
+            --accent:     #8c2f39;
+            --accent-deep:#6b2229;
+            --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: var(--sans);
+            background: #fff;
+            color: var(--ink);
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* 顶部工具栏（功能按钮，不打印） */
+        .bar {
+            position: sticky;
+            top: 0;
+            background: #fff;
+            border-bottom: 1px solid var(--line);
+            padding: 12px 20px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+            z-index: 10;
+        }
+        .bar .bar-label { font-size: 13px; font-weight: 700; color: var(--ink); margin-right: auto; }
+        .bar button {
+            font: inherit;
+            font-size: 13px;
+            padding: 8px 14px;
+            border: 1px solid var(--accent);
+            background: var(--accent);
+            color: #fff;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .bar button.ghost { background: #fff; color: var(--accent); }
+        .bar button:hover { background: var(--accent-deep); border-color: var(--accent-deep); color: #fff; }
+
+        /* 页面骨架：严格遵循站点 style-guide.txt */
+        .page { max-width: 860px; margin: 0 auto; padding: 40px 20px 60px; }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 24px;
+            color: var(--accent);
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .back-link:hover { color: var(--accent-deep); text-decoration: underline; }
+        .page-head { border-bottom: 2px solid var(--accent); padding-bottom: 14px; margin-bottom: 30px; }
+        .page-head h1 { font-size: 1.8em; margin: 0; font-weight: 700; line-height: 1.2; }
+        .page-head .page-sub { margin: 8px 0 0; color: var(--muted); font-size: 0.9em; }
+        .content { min-height: 200px; }
+        .page-foot {
+            border-top: 1px solid var(--line);
+            margin-top: 44px;
+            padding-top: 18px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.85em;
+            line-height: 1.6;
+        }
+
+        #cv-status { padding: 40px 0; text-align: center; color: var(--muted); font-size: 14px; }
+
+        /* 移动端：顶栏按钮整宽堆叠，便于单手操作 */
+        @media (max-width: 600px) {
+            .bar { flex-direction: column; align-items: stretch; gap: 8px; padding: 10px 14px; }
+            .bar .bar-label { margin-right: 0; text-align: center; }
+            .bar button { width: 100%; padding: 12px; font-size: 14px; }
+            .page { padding: 28px 16px 48px; }
+            .page-head h1 { font-size: 1.5em; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bar cv-no-print">
+        <span class="bar-label">Academic CV · English</span>
+        <button onclick="CVGenerator.generateCV({fetchPages:['../about.html','../talks/talks.html'],showPreview:true,lang:'en'})">🔄 Regenerate</button>
+        <button class="ghost" onclick="window.print()">🖨 Print / Save PDF</button>
+        <button class="ghost" onclick="CVGenerator.downloadPDF()">⬇ Download PDF</button>
+    </div>
+
+    <div class="page">
+        <a class="back-link" href="../about.html">← Back to About</a>
+        <header class="page-head">
+            <h1>Academic CV</h1>
+            <p class="page-sub">Auto-compiled from this site's public pages. Use the toolbar to regenerate, print, or download as PDF.</p>
+        </header>
+
+        <main class="content">
+            <div id="cv-status">Fetching and compiling CV…</div>
+            <!-- 生成的简历容器：位于主内容区内，打印时仅它显示 -->
+            <div id="cv-root"></div>
+        </main>
+
+        <footer class="page-foot">
+            <div>© 2026 ExtremalMath</div>
+            <div>Last updated October 2026</div>
+        </footer>
+    </div>
+
+    <script src="cv-generator.js"></script>
+    <script>
+        // 超链接指向本文件时，加载即触发生成（实时抓取源页面，英文版）
+        window.addEventListener('DOMContentLoaded', function () {
+            CVGenerator.generateCV({
+                fetchPages: ['../about.html', '../talks/talks.html'],
+                showPreview: true,
+                lang: 'en'
+            });
+        });
+    </script>
+</body>
+</html>

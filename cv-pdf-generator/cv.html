@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简历 / CV（PDF）· ExtremalMath</title>
+    <style>
+        :root {
+            --accent: #8c2f39;
+            --accent-deep: #6b2229;
+            --muted: #6d6a63;
+            --line: #e3ded4;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, sans-serif;
+            background: #fbfaf7;
+            color: #1b1b1b;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px 16px;
+        }
+        .hub { max-width: 720px; width: 100%; text-align: center; }
+        .back-link {
+            display: block;
+            text-align: left;
+            margin-bottom: 20px;
+            color: var(--accent);
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.95em;
+        }
+        .back-link:hover { color: var(--accent-deep); text-decoration: underline; }
+        .hub h1 { font-size: 1.7em; color: var(--accent-deep); }
+        .hub .sub { color: var(--muted); margin: 8px 0 28px; font-size: 0.95em; }
+        .cards {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .lang-card {
+            flex: 1 1 240px;
+            max-width: 320px;
+            display: block;
+            text-decoration: none;
+            background: #fff;
+            border: 2px solid var(--accent);
+            border-radius: 10px;
+            padding: 26px 20px;
+            color: var(--accent-deep);
+            font-weight: 700;
+            font-size: 1.15em;
+            transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+        }
+        .lang-card small {
+            display: block;
+            margin-top: 6px;
+            font-weight: 400;
+            font-size: 0.7em;
+            color: var(--muted);
+        }
+        .lang-card:hover {
+            transform: translateY(-2px);
+            background: var(--accent);
+            color: #fff;
+            box-shadow: 0 6px 18px rgba(140, 47, 57, 0.25);
+        }
+        .lang-card:hover small { color: rgba(255, 255, 255, 0.85); }
+        .note { margin-top: 30px; font-size: 0.82em; color: var(--muted); }
+
+        @media (max-width: 600px) {
+            .cards { flex-direction: column; align-items: stretch; }
+            .lang-card { max-width: none; font-size: 1.1em; padding: 22px 18px; }
+            .hub h1 { font-size: 1.45em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hub">
+        <a class="back-link" href="../about.html">← Back to About</a>
+        <h1>简历 / CV（PDF）</h1>
+        <p class="sub">选择语言版本，在独立页面中查看、打印或下载。每份均从本站公开页面实时抓取生成，已自动排除课程作业与非公开信息。</p>
+        <div class="cards">
+            <a class="lang-card" href="cv-zh.html">📄 中文版简历<small>Chinese version</small></a>
+            <a class="lang-card" href="cv-en.html">📄 English CV<small>英文版本</small></a>
+        </div>
+        <p class="note">输出为横向（landscape）A4，黑框白底、简洁精炼；可浏览器打印「另存为 PDF」，或在各语言页内一键下载。</p>
+    </div>
+</body>
+</html>
