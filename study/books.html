@@ -15,21 +15,43 @@
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: var(--sans); color: var(--ink); background: #fff; line-height: 1.7; }
-        .page { max-width: 720px; margin: 0 auto; padding: 40px 20px 60px; }
 
-        .back-link { display: inline-block; margin-bottom: 24px; text-decoration: none; color: var(--accent); font-weight: 600; }
+        /* 常驻声明条：滚动时始终置顶可见 */
+        .notice-bar {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: var(--accent);
+            color: #fff;
+            text-align: center;
+            font-size: 0.85em;
+            font-weight: 600;
+            padding: 10px 16px;
+        }
+
+        .page { max-width: 720px; margin: 0 auto; padding: 32px 20px 48px; }
+
+        .back-link { display: inline-block; margin-bottom: 16px; text-decoration: none; color: var(--accent); font-weight: 600; }
         .back-link:hover { color: var(--accent-deep); text-decoration: underline; }
 
-        .page-head { border-bottom: 2px solid var(--accent); padding-bottom: 12px; margin-bottom: 28px; }
+        .page-head { border-bottom: 2px solid var(--accent); padding-bottom: 10px; margin-bottom: 20px; }
         .page-head h1 { font-size: 1.8em; color: var(--ink); }
         .page-head .subtitle { color: var(--muted); margin-top: 4px; }
+
+        h2 {
+            font-size: 1.2em;
+            color: var(--ink);
+            margin: 22px 0 6px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--line);
+        }
 
         .res-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
             gap: 12px;
-            padding: 14px 0;
+            padding: 10px 0;
             border-bottom: 1px solid var(--line);
             text-decoration: none;
             color: var(--ink);
@@ -38,13 +60,22 @@
         .res-row:hover { color: var(--accent); }
         .res-row .left { display: flex; flex-direction: column; }
         .res-row .name { font-weight: 600; }
-        .res-row .sub { font-size: 0.86em; color: var(--muted); margin-top: 3px; }
+        .res-row .sub { font-size: 0.86em; color: var(--muted); margin-top: 2px; }
         .res-row .tag { flex-shrink: 0; font-size: 0.78em; color: var(--muted); }
 
-        .footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line); text-align: center; font-size: 0.85em; color: var(--muted); }
+        .footer { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--line); text-align: center; font-size: 0.85em; color: var(--muted); }
+
+        @media (max-width: 480px) {
+            .notice-bar { font-size: 0.8em; padding: 8px 12px; }
+            .res-row { padding: 9px 0; }
+            .res-row .sub { font-size: 0.84em; }
+        }
     </style>
 </head>
 <body>
+
+    <div class="notice-bar">For study use only — not for commercial use.</div>
+
     <div class="page">
 
         <a href="materials.html" class="back-link">← Back to Materials</a>
@@ -54,13 +85,51 @@
             <p class="subtitle">Books collected here are shared for academic study and exchange only — not for commercial use.</p>
         </div>
 
-        <a class="res-row" href="../book/GTM_244_Bondy_Murty_Graph_Theory.pdf.pdf" target="_blank" rel="noopener">
-            <span class="left"><span class="name">GTM 244 — Bondy &amp; Murty — Graph Theory</span></span>
+        <h2>Partial Differential Equations</h2>
+
+        <a class="res-row" href="../book/2_Evans_Partial%20Differential%20Equations_%E7%AC%AC%E4%BA%8C%E7%89%88.pdf" target="_blank" rel="noopener">
+            <span class="left">
+                <span class="name">Partial Differential Equations — Lawrence C. Evans</span>
+                <span class="sub">2nd ed. · American Mathematical Society, 2010 · 767 pages · 11.5 MB</span>
+            </span>
             <span class="tag">PDF</span>
         </a>
 
+        <a class="res-row" href="../book/Strass-partial-differential-equations-2007.pdf" target="_blank" rel="noopener">
+            <span class="left">
+                <span class="name">Partial Differential Equations: An Introduction — Walter A. Strauss</span>
+                <span class="sub">2nd ed. · Wiley, 2007 · 466 pages · 2.7 MB</span>
+            </span>
+            <span class="tag">PDF</span>
+        </a>
+
+        <h2>Real and Functional Analysis</h2>
+
+        <a class="res-row" href="../book/royden_real_analysis.pdf" target="_blank" rel="noopener">
+            <span class="left">
+                <span class="name">Real Analysis — H. L. Royden &amp; P. M. Fitzpatrick</span>
+                <span class="sub">5th ed. · Pearson, 2023 · 497 pages · 7.4 MB</span>
+            </span>
+            <span class="tag">PDF</span>
+        </a>
+
+        <h2>Graph Theory</h2>
+
+        <a class="res-row" href="../book/GTM_244_Bondy_Murty_Graph_Theory.pdf.pdf" target="_blank" rel="noopener">
+            <span class="left">
+                <span class="name">Graph Theory — J. A. Bondy &amp; U. S. R. Murty</span>
+                <span class="sub">Graduate Texts in Mathematics 244 · Springer, 2008 · 666 pages · 4.1 MB</span>
+            </span>
+            <span class="tag">PDF</span>
+        </a>
+
+        <h2>Finite Fields</h2>
+
         <a class="res-row" href="../book/FiniteFields_Applications_FengLiao.pdf" target="_blank" rel="noopener">
-            <span class="left"><span class="name">Finite Fields and Their Applications — Feng &amp; Liao</span></span>
+            <span class="left">
+                <span class="name">Finite Fields and Their Applications — Keqin Feng &amp; Qunying Liao</span>
+                <span class="sub">In Chinese · Dalian University of Technology Press, 2011 · 361 pages · 9.0 MB</span>
+            </span>
             <span class="tag">PDF</span>
         </a>
 
