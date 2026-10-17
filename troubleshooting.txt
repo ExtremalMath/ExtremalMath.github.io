@@ -178,3 +178,23 @@ node --check     所有根目录 JS 语法检查
             线上全量 200/206）与已解决问题整理：Evans PDF 改名同步、
             cv-generator.js 死链修复、CDN 缓存穿透法、Git Data API
             tree 字段教训、PDF 核验方法、aleph 占位符行为判别。
+
+2026-10-17  推送 CV 生成器时新增三条经验：
+            ①【新目录首次推送，线上先 404 后正常】cv-pdf-generator/ 为新路径，
+              推送到仓库后（API 确认 blob/树/提交均落地）线上仍 404，但
+              push-rules.txt 等同批文件却 200。根因：Pages 对新目录需重新构建，
+              且 CDN 边缘缓存对首次出现路径未命中；latest build 显示 status=built、
+              commit 正确、duration 45s 后，再等约 8 秒用缓存穿透访问即全部 200。
+              教训：新目录/新路径推送后先查 pages/builds/latest 确认 built，
+              再稍候重试，不要误判为推送失败。
+            ②【过程文档 vs 功能文件分离】cv-pdf-generator/ 内含 PROMPT.md、
+              cv-optimization-notes.md、cv-translation-review.md、cv-dev-notes.txt
+              四个开发过程文档，属内部维护资料，随功能文件一起推送会污染公开站点。
+              解法：只推 4 个功能文件（cv.html/cv-zh.html/cv-en.html/
+              cv-generator.js），过程文档留本地，并在 push-rules.txt 类别表中
+              明确"仅推送功能文件"。
+            ③【根目录过程产物归位】另一 agent 的自检产物 selfcheck-diff-record.txt
+              散落在根目录，违反 push-rules 根目录归属。解法：移入 .workbuddy/
+              （不入库）。同批顺手将 troubleshooting.txt 中 token 存储路径脱敏
+              为"本地维护配置文件"，避免公开站点暴露内部路径。
+
