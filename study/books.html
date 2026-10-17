@@ -14,6 +14,7 @@
             --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
         body { font-family: var(--sans); color: var(--ink); background: #fff; line-height: 1.7; }
 
         /* 常驻声明条：滚动时始终置顶可见 */
@@ -69,6 +70,10 @@
             .notice-bar { font-size: 0.8em; padding: 8px 12px; }
             .res-row { padding: 9px 0; }
             .res-row .sub { font-size: 0.84em; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * { transition: none !important; }
         }
     </style>
 </head>

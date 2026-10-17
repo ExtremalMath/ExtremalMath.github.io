@@ -14,6 +14,7 @@
             --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
         body { font-family: var(--sans); color: var(--ink); background: #fff; line-height: 1.7; }
         .page { max-width: 720px; margin: 0 auto; padding: 40px 20px 60px; }
 
@@ -24,7 +25,7 @@
         .page-head h1 { font-size: 1.8em; color: var(--ink); }
         .page-head .subtitle { color: var(--muted); margin-top: 4px; }
 
-        .section { margin-top: 36px; }
+        .section { margin-top: 32px; }
         .section h2 {
             font-size: 1.2em;
             color: var(--ink);
@@ -52,6 +53,10 @@
         .res-row .tag { flex-shrink: 0; font-size: 0.78em; color: var(--muted); }
 
         .footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line); text-align: center; font-size: 0.85em; color: var(--muted); }
+
+        @media (prefers-reduced-motion: reduce) {
+            * { transition: none !important; }
+        }
     </style>
 </head>
 <body>
