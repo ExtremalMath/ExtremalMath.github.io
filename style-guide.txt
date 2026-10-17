@@ -18,7 +18,7 @@ The site uses a small set of colors. Do not add new ones.
 - #e3ded4 light line — thin lines under rows and titles.
 - #8c2f39 dark red — the main color: links, title lines, key marks.
 - #6b2229 deep red — dark red for the moment the mouse is over a link.
-- #3a5a40 green — one place only: the round picture on the About page.
+- #3a5a40 green — one place only: the round aleph mark (the avatar) on the About page.
 
 
 TEXT
@@ -43,6 +43,17 @@ Every page has four parts, top to bottom:
 The About page also has a right column, 232px wide, with Now, Explore, and the update date. Other pages use one column only.
 
 
+THE FIVE CHECKS
+
+Every page passes five checks. A new page passes them before its first push. An old page passes them the day it is touched.
+
+1. Back link — sits at the very top, above the page head. Text: "← Back to <parent page>". Dark red, bold, no line under it (the line shows on hover only). It names the parent page ("Back to Materials"), never a bare "Home", unless the parent is Home.
+2. Page head — one h1 (1.8em, ink) with one short line of quiet text under it. A 2px dark-red line closes the head. On the About page the round aleph avatar sits at the left of the head.
+3. Footer — a 1px light line, then two quiet lines, centered, 0.85em, gray: "© 2026 ExtremalMath", then "Last updated <Month Day, Year>". Nothing else sits in the footer. On the About page the date sits in the right column instead, in the side-meta line.
+4. Date — short month, day, year: "Last updated Oct 17, 2026". Set the date on the day you change the page. Same-day changes keep the same date.
+5. Link check — run before every push. Every relative link opens a file that exists. No page points at a file that was never pushed. Page links open in the same tab; file links open in a new tab with rel="noopener". A file name, once published, stays the same.
+
+
 LINKS
 
 - Links are dark red, with no line. The line shows only when the mouse is over the link.
@@ -59,6 +70,34 @@ Pages that list files (books, notes, code, sites) use one row per file:
 - A thin light line sits under each row.
 - The whole row is one link. When the mouse is over it, the text turns dark red.
 - No boxes, no cards, no shadows, no arrows. Space and thin lines do the work.
+
+
+PICTURES
+
+One folder holds every picture: picture/. Personal pictures (the avatar, photos of me) go in picture/private/. Pages do not keep pictures next to themselves.
+
+- Names: English, lower case, _ between words, as with every other file. Extension .png or .jpg (.jpeg and .webp also load). Example: picture/private/profile.png.
+- Files under picture/private/ are public once pushed. Put there only what you agree to share.
+
+The aleph placeholder. When the real picture is not placed yet, the slot shows the aleph mark: the letter ℵ in a round frame. In code:
+
+<div class="aleph" data-pic="private/profile" role="img" aria-label="Profile picture">ℵ</div>
+
+- class="aleph" marks the placeholder. data-pic gives the path under picture/, without the extension (private/profile for the avatar, talks/report01 for a talk photo). aria-label becomes the alt text of the real picture.
+- The mark takes the color of its slot: dark red by default, green on the About avatar. The frame and the size come from the page; a plain slot gets a 96px round frame.
+- The About avatar is the first slot: it waits for picture/private/profile.png.
+
+Replacement, automatic. Put the real file at the path, for example picture/private/profile.png. The next time the page opens, picture.js finds the file and swaps the ℵ for the picture. No page edit is needed. The checker tries .png, then .jpg, then .jpeg, then .webp, and uses the first file that answers. When data-pic already ends in an extension, only that file is tried.
+
+Replacement, manual. Write the picture straight into the page and drop the placeholder:
+
+<img src="picture/private/profile.png" alt="Profile picture">
+
+Keep the frame of the slot (the round frame on the About page stays).
+
+The trigger, in one line: the swap happens when, and only when, a file answers at picture/<data-pic>.<ext>. Until then the ℵ stays, and the reader sees no error.
+
+A page with a picture slot loads <script src="picture.js"></script> before </body>. A page with no slot does not load it. Every picture gets alt text. Files stay small: the site loads fast and stays quiet.
 
 
 WRITING RULES
@@ -94,11 +133,9 @@ Format rules and design ideas this guide does not cover yet:
 - Dark mode for night reading.
 - A print style, so pages print well on paper.
 - Rules for tables, if a page ever needs one.
-- Rules for pictures: size, alt text, and where they may sit.
 - A short word list of math terms, for new readers.
 - Notes for small phone screens.
 - File naming rules: English names, lower case, _ between words (as in twenty_four_game.cpp).
-- A check list for new pages: back link, page head, footer, date, link check.
 
 
 © 2026 ExtremalMath

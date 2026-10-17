@@ -9,7 +9,7 @@ PUSH RULES
 
 一、推送前的目录归类（硬性要求）
 
-1. 文件必须先按类别归入相应文件夹，才允许推送，不得散落在根目录。根目录只放门户页面：index.html、about.html、statement.html、404.html、updates.js。
+1. 文件必须先按类别归入相应文件夹，才允许推送，不得散落在根目录。根目录只放门户页面与全站共用脚本：index.html、about.html、statement.html、404.html、updates.js、picture.js。
 2. 现有类别及归属：
    - study/      学习资料页（materials 入口 + homework、books、notes、course-essay、academic-sites）
    - research/   研究页（research-log、research-directions）
@@ -19,6 +19,7 @@ PUSH RULES
    - code/       程序代码，按语言分子文件夹（如 code/c_language/data_structure/）
    - book/       书籍 PDF
    - notes/      课程笔记、作业 PDF
+   - picture/    全站图片；个人图片放 picture/private/ 子文件夹，占位与替换规则见 style-guide.txt「PICTURES」节
 3. 文件命名：英文、小写、单词间用下划线（如 twenty_four_game.cpp、FiniteFields_Applications_FengLiao.pdf）。文件名一旦发布，不得改名——改名会制造死链。
 4. 新页面先本地写好并预览，经确认后再推送；不得先把链接推上线、页面后补（曾因此出现 404）。
 
@@ -35,6 +36,7 @@ PUSH RULES
 2. 链接检查：运行 .workbuddy/check_links.py，全站相对链接 0 失效；确认没有页面指向未推送的文件（如 style-guide.html）。
 3. 语法检查：JS 文件用 node --check 校验。
 4. 完整性检查：运行 .workbuddy/selfcheck.py（本地文件可读、非空、PDF 魔数、HTML 结构、本地与远端一致）。
+5. 图片检查：新增图片已归入 picture/（个人图片入 private/），文件名小写、下划线连接；使用 aleph 占位符时，data-pic 与目标文件路径（不含扩展名）一致。
 
 
 四、同步更新（与 style-guide.txt 维护规则一致）

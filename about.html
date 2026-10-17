@@ -125,7 +125,7 @@
             margin-bottom: 32px;
         }
 
-        /* 圆形头像框 — 松绿 */
+        /* 圆形头像框 — 松绿；aleph 占位，见图 picture.js */
         .avatar {
             flex-shrink: 0;
             width: 100px;
@@ -463,6 +463,28 @@
                 font-size: 2.5rem;
             }
         }
+        /* 简历生成按钮（cv-generator.js 提供 CVGenerator.generateCV） */
+        .cv-btn {
+            display: block;
+            width: 100%;
+            margin-top: 10px;
+            padding: 9px 12px;
+            font: inherit;
+            font-size: 0.9em;
+            font-weight: 600;
+            color: #fff;
+            background: var(--accent);
+            border: 1px solid var(--accent);
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .cv-btn:hover { background: var(--accent-deep); border-color: var(--accent-deep); }
+
+        /* 移动端：放大按钮触控区、适度字号，避免与侧栏其它元素拥挤 */
+        @media (max-width: 600px) {
+            .cv-btn { padding: 12px 14px; font-size: 15px; letter-spacing: .3px; }
+        }
+
     </style>
 </head>
 <body>
@@ -479,7 +501,8 @@
 
             <!-- 标题区 -->
             <div class="hero">
-                <div class="avatar">ℵ</div>
+                <!-- 头像占位：未放置 picture/private/profile.png 前显示 ℵ，放置后 picture.js 自动替换 -->
+                <div class="avatar aleph" data-pic="private/profile" role="img" aria-label="Yuanbo Li">ℵ</div>
                 <div class="hero-info">
                     <h1>Yuanbo Li</h1>
                     <p class="name-en">Bruce Lee</p>
@@ -693,6 +716,8 @@
                     <a href="nownow/now.html" class="side-link">what I'm doing now</a>
                     <a href="research/research-log.html" class="side-link">Research diary</a>
                     <a href="style-guide.txt" target="_blank" rel="noopener" class="side-link">Style guide</a>
+                    <a href="cv-pdf-generator/cv.html" class="side-link">📄 简历 / CV (PDF)</a>
+                    <button class="cv-btn" type="button" onclick="CVGenerator.generateCV({fromCurrentPage:true, lang:'en'})">⚙ 生成 / 打印 PDF 简历</button>
                 </div>
 
                 <div class="side-meta">Updated Oct 17, 2026</div>
@@ -716,5 +741,7 @@
     el.href = 'mailto:' + email;
   });
 </script>
+<script src="picture.js"></script>
+<script src="cv-pdf-generator/cv-generator.js"></script>
 </body>
 </html>
