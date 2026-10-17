@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Current Work</title>
+<title>ExtremalMath | Current Work</title>
 
 <style>
   :root {
@@ -12,8 +12,9 @@
     --muted:       #6d6a63;
     --line:        #e3ded4;
     --accent:      #8c2f39;
-    --accent-soft: #f4e9ea;
-    --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    --accent-soft: #fbfaf7;
+    --accent-deep: #6b2229;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   }
 
   * { box-sizing: border-box; }
@@ -21,18 +22,17 @@
 
   body {
     margin: 0;
-    background: var(--bg);
+    background: #fff;
     color: var(--ink);
-    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia,
-                 "Times New Roman", "Songti SC", serif;
+    font-family: var(--sans);
     font-size: 17px;
-    line-height: 1.62;
+    line-height: 1.7;
   }
 
   .page {
     max-width: 1080px;
     margin: 0 auto;
-    padding: 36px 28px 72px;
+    padding: 40px 20px 60px;
   }
 
   /* ---------- top bar ---------- */
@@ -53,8 +53,9 @@
     color: var(--accent);
     text-decoration: none;
     letter-spacing: 0.02em;
+    font-weight: 600;
   }
-  .back-link:hover { text-decoration: underline; }
+  .back-link:hover { color: var(--accent-deep); text-decoration: underline; }
 
   .topbar-right {
     font-family: var(--sans);
@@ -74,12 +75,7 @@
     align-items: start;
   }
 
-  #semester-content { animation: fade-in 0.26s ease-out; }
-
-  @keyframes fade-in {
-    from { opacity: 0; transform: translateY(5px); }
-    to   { opacity: 1; transform: none; }
-  }
+  #semester-content { }
 
   .eyebrow {
     margin: 0 0 10px;
@@ -93,10 +89,9 @@
 
   .semester-head h1 {
     margin: 0 0 14px;
-    font-size: 2.4rem;
+    font-size: 1.8em;
     font-weight: 600;
-    line-height: 1.14;
-    letter-spacing: -0.012em;
+    line-height: 1.7;
   }
 
   .lede {
@@ -109,25 +104,23 @@
 
   .block h2 {
     margin: 0 0 16px;
-    padding-bottom: 9px;
+    padding-bottom: 6px;
     border-bottom: 1px solid var(--line);
     font-family: var(--sans);
-    font-size: 0.76rem;
+    font-size: 1.2em;
     font-weight: 600;
-    letter-spacing: 0.17em;
-    text-transform: uppercase;
-    color: var(--muted);
+    color: var(--ink);
   }
 
   .item-list { margin: 0; padding: 0; list-style: none; }
 
   .item {
     padding: 11px 0;
-    border-bottom: 1px dashed var(--line);
+    border-bottom: 1px solid var(--line);
   }
   .item:last-child { border-bottom: none; }
 
-  .item-title { display: block; font-size: 1.05rem; line-height: 1.4; }
+  .item-title { display: block; font-size: 1.05rem; line-height: 1.7; }
 
   .item-sub {
     display: block;
@@ -184,7 +177,7 @@
     cursor: pointer;
     transition: background 0.15s, color 0.15s, border-color 0.15s;
   }
-  .semester-btn:hover { background: #f2ede4; color: var(--ink); }
+  .semester-btn:hover { background: #fbfaf7; color: var(--ink); }
   .semester-btn.is-active {
     border-left-color: var(--accent);
     background: var(--accent-soft);
@@ -210,7 +203,7 @@
     margin: 22px 0 0;
     font-family: var(--sans);
     font-size: 0.76rem;
-    line-height: 1.55;
+    line-height: 1.7;
     color: var(--muted);
   }
 
@@ -223,8 +216,10 @@
     font-family: var(--sans);
     font-size: 0.78rem;
     color: var(--muted);
+    text-align: center;
   }
   .site-footer p { margin: 0; }
+  .site-footer .updated { margin-top: 6px; }
 
   /* ---------- responsive ---------- */
 
@@ -268,7 +263,7 @@
   <div class="page">
 
     <header class="topbar">
-      <a href="../about.html" class="back-link">back to about me</a>
+      <a href="../about.html" class="back-link">&larr; Back to About Me</a>
       <span class="topbar-right">Current Work</span>
     </header>
 
@@ -278,7 +273,7 @@
       </main>
 
       <aside class="sidebar">
-        <h2 class="sidebar-title">Semesters</h2>
+        <div class="sidebar-title">Semesters</div>
         <nav id="semester-list" aria-label="Semester archive"></nav>
         <p class="sidebar-note">
           Past semesters are archived permanently. Select one to look back
@@ -288,7 +283,8 @@
     </div>
 
     <footer class="site-footer">
-      <p>Updated <span id="footer-year"></span> · Archive is cumulative and never pruned.</p>
+      <p>&copy; 2026 ExtremalMath</p>
+      <p class="updated">Last updated Oct 17, 2026</p>
     </footer>
 
   </div>

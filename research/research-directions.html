@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExtremalMath | Research Directions</title>
+    <style>
+        :root {
+            --ink:         #1b1b1b;
+            --muted:       #6d6a63;
+            --line:        #e3ded4;
+            --accent:      #8c2f39;
+            --accent-deep: #6b2229;
+            --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--sans); color: var(--ink); background: #fff; line-height: 1.7; }
+        .page { max-width: 720px; margin: 0 auto; padding: 40px 20px 60px; }
+
+        .back-link { display: inline-block; margin-bottom: 24px; text-decoration: none; color: var(--accent); font-weight: 600; }
+        .back-link:hover { color: var(--accent-deep); text-decoration: underline; }
+
+        .page-head { border-bottom: 2px solid var(--accent); padding-bottom: 12px; margin-bottom: 28px; }
+        .page-head h1 { font-size: 1.8em; color: var(--ink); }
+        .page-head .subtitle { color: var(--muted); margin-top: 4px; }
+
+        .intro { font-size: 0.96em; color: var(--muted); margin-bottom: 8px; }
+
+        .direction { margin-top: 32px; }
+        .direction h2 {
+            font-size: 1.2em;
+            color: var(--ink);
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--line);
+        }
+        .direction p { font-size: 0.98em; margin-bottom: 10px; }
+        .direction .refs { font-size: 0.86em; color: var(--muted); }
+        .direction .refs em { font-style: italic; }
+
+        .footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line); text-align: center; font-size: 0.85em; color: var(--muted); }
+    </style>
+</head>
+<body>
+    <div class="page">
+
+        <a href="../about.html" class="back-link">&larr; Back to About Me</a>
+
+        <div class="page-head">
+            <h1>Research Directions</h1>
+            <p class="subtitle">Short, textbook-grounded introductions to the areas I am currently studying.</p>
+        </div>
+
+        <p class="intro">
+            The three directions below are the focus of my current reading and study. Each summary is drawn from
+            standard graduate texts, with references listed at the end of every section.
+        </p>
+
+        <div class="direction">
+            <h2>Extremal Graph Theory</h2>
+            <p>
+                Extremal graph theory asks how large a graph &mdash; measured by edges, vertices, or another
+                parameter &mdash; can become before a prescribed property is forced to appear. Its central object
+                is the extremal function ex(<em>n</em>; <em>H</em>), the maximum number of edges in an
+                <em>n</em>-vertex graph containing no copy of a fixed graph <em>H</em>. Tur&aacute;n's theorem
+                gives the exact value when <em>H</em> is a complete graph, and the Erd&odblac;s&ndash;Stone
+                theorem determines the asymptotic answer for every non-bipartite <em>H</em>; it is often called
+                the fundamental theorem of the field. For bipartite forbidden graphs much remains open, the
+                Zarankiewicz problem being a famous example. The subject also studies structure rather than
+                size: Szemer&eacute;di's regularity lemma approximates every large graph by a bounded number of
+                pseudorandom pairs of parts, and the graph removal lemma shows that near-copies of <em>H</em>
+                can be made exact by deleting few edges. Current developments include the probabilistic method,
+                dependent random choice, hypergraph regularity, and graph limits, in which dense graph sequences
+                converge to limit objects called graphons. My own reading centers on <em>H</em>-free and
+                Tur&aacute;n-type problems for multipartite graphs.
+            </p>
+            <p class="refs">
+                References: B. Bollob&aacute;s, <em>Extremal Graph Theory</em> (Dover, 2004) and
+                <em>Modern Graph Theory</em> (Springer, 1998); J. A. Bondy and U. S. R. Murty,
+                <em>Graph Theory</em> (Springer, 2008); L. Lov&aacute;sz, <em>Large Networks and Graph Limits</em>
+                (AMS, 2012).
+            </p>
+        </div>
+
+        <div class="direction">
+            <h2>Functional Analysis</h2>
+            <p>
+                Functional analysis is the study of infinite-dimensional vector spaces &mdash; Banach and Hilbert
+                spaces &mdash; and of the linear operators acting on them; it supplies the common language of
+                modern analysis. Three results form its backbone: the Hahn&ndash;Banach theorem, which extends
+                linear functionals without increasing their norm; the Baire category consequences &mdash;
+                uniform boundedness, the open mapping, and the closed graph theorems; and duality, through which
+                a space is understood by its continuous linear functionals. Weak and weak-* topologies make this
+                duality flexible, while the Banach&ndash;Alaoglu theorem provides compactness of the dual unit
+                ball, and reflexivity brings that compactness back to the space itself. Compact operators then
+                lead to the Fredholm alternative and, for self-adjoint operators on Hilbert spaces, to the
+                spectral theorem. For partial differential equations these tools are decisive: they convert
+                questions about unknown functions into questions about operators between function spaces, where
+                existence and uniqueness can be attacked systematically. I am currently reading Brezis with
+                emphasis on the analytic machinery used for elliptic and evolution equations.
+            </p>
+            <p class="refs">
+                References: H. Brezis, <em>Functional Analysis, Sobolev Spaces and Partial Differential
+                Equations</em> (Springer, 2011); W. Rudin, <em>Functional Analysis</em> (McGraw-Hill, 2nd ed.,
+                1991); J. B. Conway, <em>A Course in Functional Analysis</em> (Springer).
+            </p>
+        </div>
+
+        <div class="direction">
+            <h2>Partial Differential Equations</h2>
+            <p>
+                A partial differential equation (PDE) is an equation relating an unknown function of several
+                variables to its partial derivatives. PDEs model most continuum phenomena in nature &mdash; heat
+                conduction, wave propagation, electrostatics, fluid flow &mdash; and the theory organizes
+                second-order linear equations into three classes: elliptic, such as the Laplace and Poisson
+                equations; parabolic, such as the heat equation; and hyperbolic, such as the wave equation. The
+                classical program, going back to Hadamard, asks whether a problem is well posed: existence,
+                uniqueness, and continuous dependence on data. Because classical smooth solutions often do not
+                exist, the modern theory is built on weak solutions, formulated in Sobolev spaces through
+                integration by parts. Weak formulations turn boundary-value problems into variational problems:
+                the Lax&ndash;Milgram lemma gives existence and uniqueness for coercive elliptic problems, energy
+                methods supply a priori estimates, and regularity theory recovers smoothness, with the maximum
+                principle providing further structure. I am currently studying weak solutions of elliptic and
+                evolution equations, with regularity questions as my main focus.
+            </p>
+            <p class="refs">
+                References: L. C. Evans, <em>Partial Differential Equations</em> (AMS, 2nd ed., 2010);
+                H. Brezis, <em>Functional Analysis, Sobolev Spaces and Partial Differential Equations</em>
+                (Springer, 2011); D. Gilbarg and N. S. Trudinger, <em>Elliptic Partial Differential Equations of
+                Second Order</em> (Springer, 1983).
+            </p>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2026 ExtremalMath</p>
+            <p style="margin-top:6px;">Last updated Oct 17, 2026</p>
+        </div>
+
+    </div>
+</body>
+</html>

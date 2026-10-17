@@ -4,6 +4,10 @@
 
 const siteUpdates = [
    {
+        date: "2026-10-17",
+        text: "1) Added a Research Directions page: short introductions to extremal graph theory, functional analysis, and PDEs, with textbook references.<br>2) Added a Style Guide that sets the format rules for every page (colors, text, page shape, links, file lists, writing rules); it is published as a plain-text file.<br>3) Brought every page in line with the guide: the same eight colors, one 720px column, quiet file-list rows, clean back links, and fresh update dates.<br>4) Added push-rules.txt, a short note on how to push changes safely: sort files into their folders first, run the checks, and never push style-guide.html."
+    },
+   {
         date: "2026-10-16",
         text: "Added Talks &amp; Reports with a Tuza-theorem talk summary, unified the materials pages into a compact click-to-open style, added Finite Fields notes and the Feng &amp; Liao textbook with reorganized homework, added a Statement page and a C++ data-structure code section, reorganized the site into study/ and research/, refreshed update dates, and removed obsolete, duplicate, and misplaced files."
     },

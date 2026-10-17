@@ -1,0 +1,66 @@
+PUSH RULES
+推送规范：向 GitHub 仓库 ExtremalMath/ExtremalMath.github.io 推送改动的流程约定。
+
+
+适用范围
+
+本规范约定所有向站点仓库（分支 main）推送改动的流程。任何推送，无论大小，都按本规范执行。规范与 style-guide.txt 同目录存放；两者不一致时，以 style-guide.txt 的维护规则为先。
+
+
+一、推送前的目录归类（硬性要求）
+
+1. 文件必须先按类别归入相应文件夹，才允许推送，不得散落在根目录。根目录只放门户页面：index.html、about.html、statement.html、404.html、updates.js。
+2. 现有类别及归属：
+   - study/      学习资料页（materials 入口 + homework、books、notes、course-essay、academic-sites）
+   - research/   研究页（research-log、research-directions）
+   - talks/      汇报与报告页（talks、report-kitchen-waste）及汇报用 PDF
+   - teaching/   教学内容（暂为根目录占位页，内容就绪后归入）
+   - nownow/     "Current Work" 页及其 data/ 数据
+   - code/       程序代码，按语言分子文件夹（如 code/c_language/data_structure/）
+   - book/       书籍 PDF
+   - notes/      课程笔记、作业 PDF
+3. 文件命名：英文、小写、单词间用下划线（如 twenty_four_game.cpp、FiniteFields_Applications_FengLiao.pdf）。文件名一旦发布，不得改名——改名会制造死链。
+4. 新页面先本地写好并预览，经确认后再推送；不得先把链接推上线、页面后补（曾因此出现 404）。
+
+
+二、禁推文件
+
+- style-guide.html：任何情况下不得推送、不得修改。该文件仅保留在本地；网站上的 "Style guide" 链接指向 style-guide.txt（纯文本版）。
+- 其余文件按需推送。
+
+
+三、推送前自检（全部通过才可推送）
+
+1. 变更检测：先经 GitHub API 拉取远程 HEAD 并与本地比对，确认没有遗漏用户在网页端的提交；只推差异文件。
+2. 链接检查：运行 .workbuddy/check_links.py，全站相对链接 0 失效；确认没有页面指向未推送的文件（如 style-guide.html）。
+3. 语法检查：JS 文件用 node --check 校验。
+4. 完整性检查：运行 .workbuddy/selfcheck.py（本地文件可读、非空、PDF 魔数、HTML 结构、本地与远端一致）。
+
+
+四、同步更新（与 style-guide.txt 维护规则一致）
+
+每轮改动必须在同一轮内完成三处同步：
+1. updates.js —— 改动写入顶部当日条目，同日多条合并为一条，分点序号连续。
+2. about.html —— 修正所有受影响的链接与文字。
+3. index.html —— 同上。
+每个被修改的页面，页脚 "Last updated" 日期改为当天（格式：Last updated Oct 17, 2026）。
+
+
+五、推送方式
+
+1. 目标远端：https://github.com/ExtremalMath/ExtremalMath.github.io，分支 main。
+2. 方式：Git Data API 增量推送（读取远程 tree → 生成/更新 blob → 提交 → PATCH refs/heads/main），force=False 保持 fast-forward；接口超时时自动重试。
+3. 不使用 git push（本机出口对 GitHub 大流量双向拦截，git 线协议不可用）。
+4. 大文件（PDF 等）用 base64 编码上传。
+
+
+六、推送后验证（全部通过才算完成）
+
+1. 树级 diff：确认本次改动集与预期完全一致（无多余增删）。
+2. 链接与页面：线上抓取关键页面确认 200；确认旧路径按预期 404。
+3. Pages 状态：确认构建成功（status=built）；CDN 有缓存（max-age=600），最长 10 分钟后线上刷新。
+4. 工作日志：将本轮改动记入 .workbuddy/memory/ 当日日志。
+
+
+© 2026 ExtremalMath
+Last updated Oct 17, 2026

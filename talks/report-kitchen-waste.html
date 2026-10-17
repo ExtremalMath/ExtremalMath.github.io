@@ -10,8 +10,8 @@
             --muted:  #6d6a63;
             --line:   #e3ded4;
             --accent: #8c2f39;
-            --accent-soft: #f4e9ea;
-            --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+            --accent-deep: #6b2229;
+            --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -19,46 +19,46 @@
         body {
             font-family: var(--sans);
             margin: 0;
-            padding: 48px 20px 64px;
-            line-height: 1.8;
+            padding: 0;
+            line-height: 1.7;
             color: var(--ink);
             background: #fff;
         }
 
-        .page { max-width: 720px; margin: 0 auto; }
+        .page { max-width: 720px; margin: 0 auto; padding: 40px 20px 60px; }
 
         .back-link {
             display: inline-block;
-            margin-bottom: 28px;
+            margin-bottom: 24px;
             text-decoration: none;
             color: var(--accent);
             font-weight: 600;
             font-size: 0.95em;
         }
-        .back-link:hover { text-decoration: underline; }
+        .back-link:hover { color: var(--accent-deep); text-decoration: underline; }
 
-        h1 {
-            font-size: 1.7em;
+        .page-head { border-bottom: 2px solid var(--accent); padding-bottom: 12px; margin-bottom: 28px; }
+        .page-head h1 {
+            font-size: 1.8em;
             line-height: 1.35;
             color: var(--ink);
             margin-bottom: 6px;
         }
-        .title-en { font-size: 1em; color: var(--muted); font-weight: 400; margin-bottom: 10px; }
-        .meta { font-size: 0.88em; color: var(--muted); margin-bottom: 24px; }
-
-        hr { border: 0; border-top: 1px solid var(--line); margin: 28px 0; }
+        .page-head .title-en { font-size: 1em; color: var(--muted); font-weight: 400; margin-bottom: 10px; }
+        .page-head .meta { font-size: 0.88em; color: var(--muted); margin-top: 10px; }
 
         h2 {
-            font-size: 1.25em;
+            font-size: 1.2em;
             color: var(--ink);
             margin: 30px 0 12px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--line);
         }
 
         .abstract {
             border-left: 3px solid var(--accent);
-            background: #faf7f5;
+            background: #fbfaf7;
             padding: 14px 18px;
-            border-radius: 4px;
             margin: 12px 0;
         }
         .abstract .label {
@@ -96,13 +96,13 @@
 
 <div class="page">
 
-    <a href="../about.html" class="back-link">&larr; About</a>
+    <a href="talks.html" class="back-link">&larr; Back to Talks &amp; Reports</a>
 
-    <h1>当 Tuza 猜想遇见餐厨收运</h1>
-    <p class="title-en">When Tuza&rsquo;s Conjecture Meets Kitchen-Waste Collection</p>
-    <p class="meta">汇报人：李元博（Bruce Lee）&nbsp;·&nbsp;数学科学学院 数据计算及应用 2401&nbsp;·&nbsp;2026-10-10</p>
-
-    <hr>
+    <div class="page-head">
+        <h1>当 Tuza 猜想遇见餐厨收运</h1>
+        <p class="title-en">When Tuza&rsquo;s Conjecture Meets Kitchen-Waste Collection</p>
+        <p class="meta">汇报人：李元博（Bruce Lee）&nbsp;·&nbsp;数学科学学院 数据计算及应用 2401&nbsp;·&nbsp;2026-10-10</p>
+    </div>
 
     <h2>摘要 / Abstract</h2>
 
@@ -127,8 +127,8 @@
     <p class="note">AI 使用说明：本汇报使用 AI 工具辅助文字润色，内容经作者审核，文责自负。</p>
 
     <footer>
-        &copy; 2026 ExtremalMath. A summary page of the talk &ldquo;When Tuza&rsquo;s Conjecture Meets Kitchen-Waste Collection&rdquo;.
-        <p style="margin-top:6px;">Last updated Oct 16, 2026</p>
+        &copy; 2026 ExtremalMath
+        <p style="margin-top:6px;">Last updated Oct 17, 2026</p>
     </footer>
 
 </div>

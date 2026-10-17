@@ -3,109 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Research Log - ExtremalMath</title>
+    <title>ExtremalMath | Research Log</title>
     <style>
-        * { box-sizing: border-box; }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-            max-width: 780px;
-            margin: 0 auto;
-            padding: 40px 20px 60px;
-            line-height: 1.7;
-            color: #24292e;
-            background: #fff;
+        :root {
+            --ink:         #1b1b1b;
+            --muted:       #6d6a63;
+            --line:        #e3ded4;
+            --accent:      #8c2f39;
+            --accent-deep: #6b2229;
+            --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
         }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--sans); color: var(--ink); background: #fff; line-height: 1.7; }
+        .page { max-width: 720px; margin: 0 auto; padding: 40px 20px 60px; }
 
         .back-link {
             display: inline-block;
             margin-bottom: 24px;
-            color: #0366d6;
+            color: var(--accent);
             text-decoration: none;
             font-weight: 600;
         }
+        .back-link:hover { color: var(--accent-deep); text-decoration: underline; }
 
-        .back-link:hover {
-            text-decoration: underline;
-        }
-
-        h1 {
-            font-size: 1.9em;
-            margin-bottom: 12px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid #0366d6;
-        }
-
-        .subtitle {
-            color: #586069;
-            margin-bottom: 36px;
-        }
+        .page-head { border-bottom: 2px solid var(--accent); padding-bottom: 12px; margin-bottom: 28px; }
+        .page-head h1 { font-size: 1.8em; margin-bottom: 4px; color: var(--ink); }
+        .page-head .subtitle { color: var(--muted); margin-top: 4px; }
 
         .entry {
             margin-bottom: 32px;
             padding-left: 18px;
-            border-left: 3px solid #0366d6;
+            border-left: 3px solid var(--accent);
         }
-
         .entry h2 {
-            font-size: 1.15em;
+            font-size: 1.2em;
             margin-bottom: 8px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--line);
+            color: var(--ink);
         }
+        .entry p { color: var(--ink); }
 
-        .entry p {
-            color: #444;
-        }
-
-        .footer {
-            margin-top: 48px;
-            padding-top: 20px;
-            border-top: 1px solid #e1e4e8;
-            text-align: center;
-            font-size: 0.85em;
-            color: #959da5;
-        }
+        .footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line); text-align: center; font-size: 0.85em; color: var(--muted); }
     </style>
 </head>
 <body>
-    <a href="../about.html" class="back-link">← Back to About Me</a>
+    <div class="page">
 
-    <h1>Research Log</h1>
-    <p class="subtitle">A concise record of seminars, reading, and independent study.</p>
+        <a href="../about.html" class="back-link">&larr; Back to About Me</a>
 
-    <div class="entry">
-        <h2>February 2026 — Graph Limits Seminar</h2>
-        <p>
-            I joined the Graph Limits seminar, which meets weekly. The seminar is devoted to
-            Lovász's <em>Large Networks and Graph Limits</em>, and I complete the
-            end-of-chapter exercises as assignments.
-        </p>
-    </div>
+        <div class="page-head">
+            <h1>Research Log</h1>
+            <p class="subtitle">A concise record of seminars, reading, and independent study.</p>
+        </div>
 
-    <div class="entry">
-        <h2>July 2026 — Literature Review and Seminar Report</h2>
-        <p>
-            The Graph Limits seminar concluded for the time being. I proceeded to a literature
-            study, prepared a written literature report, and discussed it in the seminar.
-        </p>
-    </div>
+        <div class="entry">
+            <h2>February 2026 — Graph Limits Seminar</h2>
+            <p>
+                I joined the Graph Limits seminar, which meets weekly. The seminar is devoted to
+                Lovász's <em>Large Networks and Graph Limits</em>, and I complete the
+                end-of-chapter exercises as assignments.
+            </p>
+        </div>
 
-    <div class="entry">
-        <h2>September 2026 — Functional Analysis and PDEs</h2>
-        <p>
-            I began work at the interface of functional analysis and partial differential
-            equations, and started writing study reports.
-        </p>
-    </div>
+        <div class="entry">
+            <h2>July 2026 — Literature Review and Seminar Report</h2>
+            <p>
+                The Graph Limits seminar concluded for the time being. I proceeded to a literature
+                study, prepared a written literature report, and discussed it in the seminar.
+            </p>
+        </div>
 
-    <div class="entry">
-        <h2>October 2026 — Graph Limits Seminar Resumed</h2>
-        <p>
-            I continued participating in the Graph Limits seminar.
-        </p>
-    </div>
+        <div class="entry">
+            <h2>September 2026 — Functional Analysis and PDEs</h2>
+            <p>
+                I began work at the interface of functional analysis and partial differential
+                equations, and started writing study reports.
+            </p>
+        </div>
 
-    <div class="footer">
-        <p>© 2026 ExtremalMath.</p>
+        <div class="entry">
+            <h2>October 2026 — Graph Limits Seminar Resumed</h2>
+            <p>
+                I continued participating in the Graph Limits seminar.
+            </p>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2026 ExtremalMath</p>
+            <p style="margin-top:6px;">Last updated Oct 17, 2026</p>
+        </div>
+
     </div>
 </body>
 </html>

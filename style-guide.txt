@@ -1,0 +1,105 @@
+STYLE GUIDE
+Format rules for every page on this site.
+
+
+PURPOSE
+
+This guide sets the format for every page on this site. New pages must follow it. Old pages move toward it, one page at a time. The goal is a site that is clean, quiet, and easy to read. The guide stays short on purpose: a long guide is not followed.
+
+
+COLORS
+
+The site uses a small set of colors. Do not add new ones.
+
+- #fff white — page background.
+- #fbfaf7 cream — side boxes and quiet areas.
+- #1b1b1b ink — main text.
+- #6d6a63 gray — quiet text: notes, dates, small lines.
+- #e3ded4 light line — thin lines under rows and titles.
+- #8c2f39 dark red — the main color: links, title lines, key marks.
+- #6b2229 deep red — dark red for the moment the mouse is over a link.
+- #3a5a40 green — one place only: the round picture on the About page.
+
+
+TEXT
+
+- Font: the font of the phone or computer itself. The site loads no web fonts. The list is -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif.
+- Line height: 1.7. Lines stay far enough apart.
+- Page title (h1): 1.8em. Section title (h2): 1.2em. The line under h1 is 2px dark red; the line under h2 is 1px light.
+- Quiet text (footer, dates, notes): 0.85–0.92em, gray.
+- Bold marks key words only: a few per page. Italic marks book names and math letters (H, n, t).
+- Main text is ink. Gray is for text that matters less, never for main text.
+
+
+PAGE SHAPE
+
+Every page has four parts, top to bottom:
+
+1. Back link — "← Back to <parent page>". Dark red, bold, no line under it. It sits above everything else.
+2. Page head — the page name (h1) and one short line of quiet text under it. A thick dark-red line closes the head.
+3. Main content — one column, 720px wide, centered, with 40px of space above and 60px below.
+4. Footer — "© 2026 ExtremalMath", then a second line: "Last updated <Month Day, Year>".
+
+The About page also has a right column, 232px wide, with Now, Explore, and the update date. Other pages use one column only.
+
+
+LINKS
+
+- Links are dark red, with no line. The line shows only when the mouse is over the link.
+- Page-to-page links open in the same tab.
+- File links (PDF, code files, and the like) open in a new tab: add target="_blank" and rel="noopener".
+- Every page offers a way back. The back link names the parent page ("Back to Materials"), never a bare "Home", unless the parent is Home.
+
+
+FILE LISTS
+
+Pages that list files (books, notes, code, sites) use one row per file:
+
+- The file name sits on the left; a small tag (PDF, CPP) sits on the right.
+- A thin light line sits under each row.
+- The whole row is one link. When the mouse is over it, the text turns dark red.
+- No boxes, no cards, no shadows, no arrows. Space and thin lines do the work.
+
+
+WRITING RULES
+
+- Write in English. Use short sentences and common words. If a small word can do the job, use it: use, not utilize; start, not commence; help, not facilitate.
+- Keep big words rare. CET4 words are the base. Math terms, people names, and book names stay as they are.
+- Cut words that add no meaning. One page, one job.
+- Keep pages short: a reader should finish one page in a few minutes. Long content moves to a sub-page.
+- Dates use the short month: "Last updated Oct 17, 2026". Set the date on the day you change the page.
+- The About page keeps its small icons in section titles. New pages add no icons.
+- No sound, no motion, no pop-ups. The site stays quiet.
+
+
+CARE OF THE SITE
+
+This guide is a living file. When a rule changes, update this page first, then do all three in the same round:
+
+1. updates.js — add the change to the top entry of that day. Same-day changes join one entry.
+2. about.html — fix every link or line of text that the change touches.
+3. index.html — the same.
+
+Rules for every change, guide or not:
+
+- Each page you touch gets a new "Last updated" date.
+- Check all links before every push. A file name, once published, stays the same: a rename breaks links.
+- Keep the local folder and the GitHub repo the same. Push only the files that changed.
+
+
+IDEAS FOR LATER
+
+Format rules and design ideas this guide does not cover yet:
+
+- Dark mode for night reading.
+- A print style, so pages print well on paper.
+- Rules for tables, if a page ever needs one.
+- Rules for pictures: size, alt text, and where they may sit.
+- A short word list of math terms, for new readers.
+- Notes for small phone screens.
+- File naming rules: English names, lower case, _ between words (as in twenty_four_game.cpp).
+- A check list for new pages: back link, page head, footer, date, link check.
+
+
+© 2026 ExtremalMath
+Last updated Oct 17, 2026

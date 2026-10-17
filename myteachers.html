@@ -1,197 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Instructors</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExtremalMath | My Instructors</title>
+    <style>
+        :root {
+            --ink:         #1b1b1b;
+            --muted:       #6d6a63;
+            --line:        #e3ded4;
+            --accent:      #8c2f39;
+            --accent-deep: #6b2229;
+            --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--sans); color: var(--ink); background: #fff; line-height: 1.7; }
+        .page { max-width: 720px; margin: 0 auto; padding: 40px 20px 60px; }
 
-    body {
-      font-family: system-ui, -apple-system, "Microsoft YaHei", "PingFang SC", sans-serif;
-      background: #f5f6f8;
-      color: #1a1a1a;
-      min-height: 100vh;
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      padding: 80px 20px;
-      line-height: 1.7;
-    }
+        .back-link { display: inline-block; margin-bottom: 24px; text-decoration: none; color: var(--accent); font-weight: 600; }
+        .back-link:hover { color: var(--accent-deep); text-decoration: underline; }
 
-    .card {
-      width: 100%;
-      max-width: 560px;
-      background: #ffffff;
-      border-radius: 16px;
-      padding: 48px 44px;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04),
-                  0 12px 32px rgba(0, 0, 0, 0.06);
-    }
+        .page-head { border-bottom: 2px solid var(--accent); padding-bottom: 12px; margin-bottom: 28px; }
+        .page-head h1 { font-size: 1.8em; color: var(--ink); }
+        .page-head .subtitle { color: var(--muted); margin-top: 4px; }
 
-    h1 {
-      font-size: 24px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      color: #111;
-    }
+        h2 {
+            font-size: 1.2em;
+            color: var(--ink);
+            margin: 36px 0 12px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--line);
+        }
 
-    .intro {
-      color: #888;
-      font-size: 14px;
-      font-style: italic;
-      margin-top: 10px;
-      margin-bottom: 36px;
-    }
+        .res-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 12px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--line);
+            color: var(--ink);
+        }
+        .res-row .name { font-weight: 600; }
+        .res-row .teacher { flex-shrink: 0; color: var(--muted); }
 
-    .year {
-      margin-bottom: 28px;
-    }
+        .note-block {
+            background: #fbfaf7;
+            border-left: 3px solid var(--accent);
+            padding: 16px 20px;
+            margin-top: 12px;
+        }
+        .note-block p { margin-bottom: 10px; }
+        .note-block p:last-child { margin-bottom: 0; }
 
-    .year:last-child {
-      margin-bottom: 0;
-    }
-
-    .year-title {
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: #999;
-      margin-bottom: 6px;
-    }
-
-    ul {
-      list-style: none;
-    }
-
-    li {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 14px 0;
-      border-bottom: 1px solid #f0f0f0;
-      transition: padding-left 0.25s ease;
-    }
-
-    li:last-child {
-      border-bottom: none;
-    }
-
-    li:hover {
-      padding-left: 6px;
-    }
-
-    .course {
-      color: #333;
-      font-size: 16px;
-      letter-spacing: 0.3px;
-    }
-
-    .teacher {
-      color: #1a1a1a;
-      font-size: 16px;
-      font-weight: 500;
-      white-space: nowrap;
-    }
-
-    
-        .mentorship {
-      margin-top: 8px;
-      padding: 20px 22px;
-      background: #f8f9fb;
-      border-left: 3px solid #c0392b;
-      border-radius: 8px;
-    }
-
-    .mentorship-title {
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: #c0392b;
-      margin-bottom: 12px;
-    }
-
-    .mentorship p {
-      font-size: 15px;
-      color: #444;
-      margin-bottom: 10px;
-      line-height: 1.65;
-    }
-
-    .mentorship p:last-child {
-      margin-bottom: 0;
-    }
-
-    .mentorship strong {
-      color: #1a1a1a;
-      font-weight: 600;
-    }
-
-    .mentorship em {
-      font-style: italic;
-      color: #333;
-    }
-
-    @media (max-width: 480px) {
-      body { padding: 40px 16px; }
-      .card { padding: 36px 26px; border-radius: 12px; }
-      h1 { font-size: 20px; }
-      li { font-size: 15px; }
-      .course, .teacher { font-size: 15px; }
-    }
-
-  </style>
+        .footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line); text-align: center; font-size: 0.85em; color: var(--muted); }
+    </style>
 </head>
 <body>
-  
-  <div class="card">
-     <a href="about.html" class="back-link">← Back to about me</a>
-    <h1>My Instructors</h1>
-    <p class="intro">"A teacher is like a candle—it consumes itself to light the way for others."</p>
+    <div class="page">
 
-    <div class="year">
-      <div class="year-title">Freshman Year</div>
-      <ul>
-        <li><span class="course">Mathematical Analysis</span><span class="teacher">张泽鑫</span></li>
-        <li><span class="course">Ordinary Differential Equations (ODE)</span><span class="teacher">蔡水明</span></li>
-      </ul>
-    </div>
+        <a href="about.html" class="back-link">&larr; Back to About Me</a>
 
-    <div class="year">
-      <div class="year-title">Sophomore Year</div>
-      <ul>
-        <li><span class="course">Mathematical Modeling &amp; Numerical Analysis</span><span class="teacher">王林君</span></li>
-        <li><span class="course">Data Structures and Algorithm Design</span><span class="teacher">朱峰</span></li>
-        <li><span class="course">Complex Analysis</span><span class="teacher">沈文强</span></li>
-      </ul>
-    </div>
+        <div class="page-head">
+            <h1>My Instructors</h1>
+            <p class="subtitle">"A teacher is like a candle—it consumes itself to light the way for others."</p>
+        </div>
 
-    <div class="year">
-      <div class="year-title">Junior Year</div>
-      <ul>
-        <li><span class="course">Real Analysis and Functional Analysis</span><span class="teacher">谈强</span></li>
-        <li><span class="course">Equations of Mathematical Physics (PDE)</span><span class="teacher">王俊</span></li>
-        <li><span class="course">Finite Fields and Their Applications</span><span class="teacher">王世鹏</span></li>
-      </ul>
+        <h2>Freshman Year</h2>
+        <div class="res-row"><span class="name">Mathematical Analysis</span><span class="teacher">张泽鑫</span></div>
+        <div class="res-row"><span class="name">Ordinary Differential Equations (ODE)</span><span class="teacher">蔡水明</span></div>
+
+        <h2>Sophomore Year</h2>
+        <div class="res-row"><span class="name">Mathematical Modeling &amp; Numerical Analysis</span><span class="teacher">王林君</span></div>
+        <div class="res-row"><span class="name">Data Structures and Algorithm Design</span><span class="teacher">朱峰</span></div>
+        <div class="res-row"><span class="name">Complex Analysis</span><span class="teacher">沈文强</span></div>
+
+        <h2>Junior Year</h2>
+        <div class="res-row"><span class="name">Real Analysis and Functional Analysis</span><span class="teacher">谈强</span></div>
+        <div class="res-row"><span class="name">Equations of Mathematical Physics (PDE)</span><span class="teacher">王俊</span></div>
+        <div class="res-row"><span class="name">Finite Fields and Their Applications</span><span class="teacher">王世鹏</span></div>
+
+        <h2>Mentorship</h2>
+        <div class="note-block">
+            <p>
+                <strong>王世鹏</strong> — Guided me in <em>Extremal Graph Theory</em> and helped organize the reading seminar.
+            </p>
+            <p>
+                <strong>张泽鑫</strong> — Supervised my exploration and presentations on the intersection of <em>Functional Analysis</em> and <em>Partial Differential Equations</em>.
+            </p>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2026 ExtremalMath</p>
+            <p style="margin-top:6px;">Last updated Oct 17, 2026</p>
+        </div>
+
     </div>
-        <div class="mentorship">
-      <div class="mentorship-title">Mentorship</div>
-      <p>
-        <strong>王世鹏</strong> — Guided me in <em>Extremal Graph Theory</em> and helped organize the reading seminar.
-      </p>
-      <p>
-        <strong>张泽鑫</strong> — Supervised my exploration and presentations on the intersection of <em>Functional Analysis</em> and <em>Partial Differential Equations</em>.
-      </p>
-    </div>
-    
-    </div>
-   
 </body>
 </html>
