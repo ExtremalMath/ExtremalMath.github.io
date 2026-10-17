@@ -1,6 +1,5 @@
 // picture.js
-// Aleph placeholders and the picture folder. The rules live in
-// style-guide.txt (section PICTURES); this file carries them out.
+// Aleph placeholders and the picture folder. This file carries them out.
 //
 // A slot waits for its picture like this:
 //

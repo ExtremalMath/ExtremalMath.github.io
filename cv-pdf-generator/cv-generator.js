@@ -531,10 +531,13 @@
       '@media print{',
       '  @page{ size:A4 landscape; margin:12mm; }',
       '  html,body{ background:#fff !important; }',
-      '  .cv-no-print,.back-link,.page-head,.page-foot{ display:none !important; }',
+      '  .cv-no-print,.back-link,.page-head,.page-foot,#cv-status{ display:none !important; }',
       '  .page{ max-width:none !important; padding:0 !important; margin:0 !important; }',
       '  #cv-root{ display:block !important; }',
       '  #cv-root .cv-sheet{ border:2px solid #000; max-width:none; width:100%; padding:28px 34px; }',
+      '  /* 黑白灰度：简历正文内唯一的彩色是 .cv-sub2 的绛红 #8c2f39，压为纯黑；其余已为黑白灰 */',
+      '  #cv-root .cv-sub2{ color:#1b1b1b !important; }',
+      '  #cv-root, #cv-root *{ background:#fff !important; border-color:#000 !important; box-shadow:none !important; text-shadow:none !important; }',
       '}'
     ].join('\n');
     const st = document.createElement('style');
