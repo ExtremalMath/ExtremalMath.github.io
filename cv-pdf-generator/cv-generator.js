@@ -21,6 +21,12 @@
  * 内容安全：仅抓取公开页面；内置过滤规则明确排除课程作业
  *   （homework / 课程作业 / Core Coursework / Course Talk 等），
  *   且不包含任何非公开信息（如 private/ 目录下的图片与资料）。
+ *
+ * 超链接约束（硬性规则，生成时自动遵守，无需每次手动修改）：
+ *   简历正文不得出现任何超链接——包括「文字形式」（如 "Read the feature
+ *   article ↗" / "阅读专题报道 ↗" 这类带 ↗ 外链图标的提示文字）与「URL 形式」
+ *   （http(s)://、www. 开头的链接字符串）。统一在翻译出口由 stripHyperlinks
+ *   剥离（删除 ↗ 提示短语与 URL 字符串），其余内容保持不变。
  * ----------------------------------------------------------------------------
  */
 (function (global) {
@@ -132,7 +138,7 @@
       '江苏大学“大眼睛”志愿团队 — 谏壁中心小学',
     '2024 – 2025': '2024–2025',
     'Delivered engaging club courses to children at Jianbi Primary School. Read the feature article ↗':
-      '在谏壁中心小学为孩子们开设生动的兴趣课程。阅读专题报道 ↗',
+      '在谏壁中心小学为孩子们开设生动的兴趣课程。',
     'Volunteer': '志愿者',
     'Purple Grass Volunteer Team, Memorial Hall of the Victims in Nanjing Massacre by Japanese Invaders':
       '“紫草”志愿团队，侵华日军南京大屠杀遇难同胞纪念馆',
@@ -262,8 +268,24 @@
     if (ZHN[k] !== undefined) return ZHN[k];   // 整句中译优先
     return applyTerms(s);                       // 否则术语级替换（前瞻覆盖）
   }
-  // 按当前语言翻译（英文版原样返回）
-  function t(s) { return state.lang === 'zh' ? zh(s) : s; }
+  /* 超链接约束：简历正文不得出现任何超链接（文字形式或 URL 形式）。
+   * 识别：① 源页外链用 ↗ 图标标注（如 "Read the feature article ↗" / "阅读专题报道 ↗"）；
+   *       ② 正文出现的 http(s):// 或 www. 开头的 URL 字符串。
+   * 隐去：删除 ↗ 结尾的提示短语、删除残留 ↗、删除 URL 字符串；其余内容不变。 */
+  function stripHyperlinks(s) {
+    if (s == null) return s;
+    s = String(s);
+    // 1) 删除「以 ↗ 结尾的提示短语」（连同其前导句末标点之间的提示文字）
+    s = s.replace(/(^|[。.！!？?])\s*[^。.！!？?]*↗\s*$/g, '$1');
+    // 2) 删除残留的 ↗
+    s = s.replace(/↗\s*/g, '');
+    // 3) 删除 URL（http(s):// 或 www. 开头，直到空白）
+    s = s.replace(/(?:https?:\/\/|www\.)\S+/gi, '');
+    // 清理多余空白
+    return s.replace(/\s{2,}/g, ' ').trim();
+  }
+  // 按当前语言翻译（英文版原样返回；翻译后统一剥离超链接）
+  function t(s) { return stripHyperlinks(state.lang === 'zh' ? zh(s) : s); }
 
   /* ============================ 工具函数 ============================ */
   function text(node) {
