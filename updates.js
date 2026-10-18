@@ -4,6 +4,10 @@
 
 const siteUpdates = [
    {
+        date: "2026-10-18",
+        text: "Reorganized the file structure and renamed eleven published PDFs to lowercase-with-underscores, updating every page reference in the same pass; source code moved to code/c/ and code/cpp/, superseded note versions were archived under notes/archive/, a misspelled talk filename was corrected, and CV generator process documents moved out of the published tree. Added a Competitions page (2026 CUMCM Problem A, modeling lead, anonymized, shared with team consent). Old URLs are logged with 301 redirect rules prepared, pending host-level configuration."
+    },
+   {
         date: "2026-10-17",
         text: "Refactored the About page Research Interests and Awards & Honors sections into a data-driven format. Content now lives in about-data.js (single source of truth) and is rendered by a small inline script on About; the CV generator (cv-generator.js) also reads about-data.js so the page and the CV stay in sync. Editing about-data.js updates both the page and the CV."
     },

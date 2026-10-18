@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExtremalMath | Competitions</title>
+    <style>
+        :root {
+            --ink:         #1b1b1b;
+            --muted:       #6d6a63;
+            --line:        #e3ded4;
+            --accent:      #8c2f39;
+            --accent-deep: #6b2229;
+            --bg:          #fbfaf7;
+            --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+        body {
+            font-family: var(--sans);
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+            color: var(--ink);
+            background: #fff;
+        }
+
+        .page { max-width: 720px; margin: 0 auto; padding: 40px 20px 60px; }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 24px;
+            text-decoration: none;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+        .back-link:hover { color: var(--accent-deep); text-decoration: underline; }
+
+        .page-head {
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 12px;
+            margin-bottom: 28px;
+        }
+        .page-head h1 { font-size: 1.8em; color: var(--ink); }
+        .page-head .subtitle { color: var(--muted); margin-top: 4px; }
+
+        /* 比赛卡片 */
+        .comp-card {
+            border: 1px solid var(--line);
+            border-left: 4px solid var(--accent);
+            border-radius: 6px;
+            padding: 22px 24px;
+            margin-bottom: 20px;
+        }
+        .comp-card h2 {
+            font-size: 1.18em;
+            color: var(--ink);
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+        .comp-meta {
+            font-size: 0.86em;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .comp-role {
+            display: inline-block;
+            background: var(--bg);
+            color: var(--accent);
+            border: 1px solid var(--line);
+            padding: 3px 12px;
+            border-radius: 12px;
+            font-size: 0.82em;
+            font-weight: 600;
+            margin-bottom: 14px;
+        }
+        .comp-card p {
+            font-size: 0.96em;
+            color: var(--muted);
+        }
+        .comp-card a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .comp-card a:hover { color: var(--accent-deep); text-decoration: underline; }
+
+        .comp-note {
+            margin-top: 12px;
+            font-size: 0.84em;
+            font-style: italic;
+            color: var(--muted);
+        }
+
+        .comp-auth {
+            margin-top: 12px;
+            font-size: 0.84em;
+            color: var(--muted);
+        }
+
+        .footer {
+            margin-top: 48px;
+            padding-top: 20px;
+            border-top: 1px solid var(--line);
+            text-align: center;
+            font-size: 0.85em;
+            color: var(--muted);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * { transition: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page">
+
+    <a href="materials.html" class="back-link">&larr; Back to Materials</a>
+
+    <div class="page-head">
+        <h1>Competitions</h1>
+        <p class="subtitle">My role and contributions in academic competitions.</p>
+    </div>
+
+    <article class="comp-card">
+        <h2>China Undergraduate Mathematical Modeling Competition — Problem A</h2>
+        <div class="comp-meta">Sep 2026 · 高教社杯全国大学生数学建模竞赛 A题：药材烘干过程的热质传递建模及应用</div>
+        <span class="comp-role">Modeling Lead (建模手)</span>
+        <p>
+            In this competition (Problem A: heat and mass transfer in medicinal-material drying),
+            I served as modeling lead. With AI assistance, I derived and verified the
+            one-dimensional radial heat-conduction and moisture-diffusion equations, coupled
+            them into a heat&ndash;mass transfer system, and validated the numerical scheme&mdash;Crank&ndash;Nicolson
+            finite differences, the Thomas algorithm for tridiagonal systems, and Picard
+            iteration. The programming member handled the coding and part of the Problem&nbsp;3
+            modeling; the writing member managed typesetting, the method list, and the results
+            cleared for public release. Held in September 2026, the contest has concluded and
+            the paper received no award; it is shared here as a personal learning record.
+        </p>
+        <p class="comp-auth">
+            Published with the team&rsquo;s consent; the linked PDF is an anonymized version
+            (school name, member names, and advisor removed).
+        </p>
+        <p class="comp-note">
+            Reference:
+            <a href="../notes/modeling_and_application_of_heat_and_mass_transfer_in_medicinal_material_drying3.pdf" target="_blank" rel="noopener">Modeling and Application of Heat and Mass Transfer in Medicinal Material Drying (PDF) &#8599;</a>
+        </p>
+    </article>
+
+    <div class="footer">
+        &copy; 2026 ExtremalMath
+        <p style="margin-top:6px;">Last updated Oct 2026</p>
+    </div>
+
+</div>
+
+</body>
+</html>
