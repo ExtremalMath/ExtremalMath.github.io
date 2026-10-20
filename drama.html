@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExtremalMath | Theatre</title>
+    <style>
+        :root {
+            --bg:          #fff;
+            --cream:       #fbfaf7;
+            --ink:         #1b1b1b;
+            --muted:       #6d6a63;
+            --line:        #e3ded4;
+            --accent:      #8c2f39;
+            --accent-dark: #6b2229;
+            --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+        body {
+            font-family: var(--sans);
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+            color: var(--ink);
+            background: var(--bg);
+        }
+
+        .page {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 40px 20px 60px;
+        }
+
+        /* ---------- back link ---------- */
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 32px;
+            text-decoration: none;
+            color: var(--accent);
+            font-weight: 600;
+            transition: color 0.15s;
+        }
+        .back-link:hover { color: var(--accent-dark); text-decoration: underline; }
+
+        /* ---------- page head ---------- */
+
+        .page-head {
+            margin-bottom: 32px;
+        }
+        .page-head h1 {
+            font-size: 1.8em;
+            font-weight: 600;
+            margin-bottom: 8px;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 8px;
+        }
+        .page-head .lede {
+            font-size: 1em;
+            color: var(--muted);
+        }
+
+        /* ---------- show list ---------- */
+
+        .show-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .show-item {
+            padding: 16px 0;
+            border-bottom: 1px solid var(--line);
+        }
+        .show-item:last-child { border-bottom: none; }
+
+        .show-title {
+            display: block;
+            font-size: 1.05em;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.7;
+        }
+        .show-title .zh {
+            color: var(--muted);
+            font-weight: 400;
+        }
+        .show-title a {
+            color: inherit;
+            text-decoration: none;
+        }
+        .show-title a:hover { color: var(--accent); text-decoration: underline; }
+
+        .show-meta {
+            display: block;
+            margin-top: 4px;
+            font-size: 0.88em;
+            color: var(--muted);
+        }
+        .show-meta .date {
+            font-weight: 600;
+            color: var(--ink);
+        }
+        .show-meta .venue {
+            margin-left: 8px;
+        }
+
+        .show-note {
+            display: block;
+            margin-top: 6px;
+            font-size: 0.88em;
+            color: var(--muted);
+            font-style: italic;
+        }
+
+        /* ---------- empty state ---------- */
+
+        .empty {
+            font-size: 0.92em;
+            color: var(--muted);
+        }
+
+        /* ---------- footer ---------- */
+
+        .footer {
+            margin-top: 48px;
+            padding-top: 20px;
+            border-top: 1px solid var(--line);
+            text-align: center;
+            font-size: 0.85em;
+            color: var(--muted);
+        }
+
+        /* ---------- responsive ---------- */
+
+        @media (max-width: 600px) {
+            .page { padding: 28px 20px 56px; }
+            .page-head h1 { font-size: 1.6em; }
+            .show-meta { font-size: 0.84em; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * { transition: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page">
+
+    <a href="about.html" class="back-link">← Back to About Me</a>
+
+    <header class="page-head">
+        <h1>Theatre</h1>
+        <p class="lede">Plays and musicals I have watched, listed by performance date.</p>
+    </header>
+
+    <main id="show-container" aria-live="polite">
+        <p class="empty">Loading…</p>
+    </main>
+
+    <footer class="footer">
+        <p>© 2026 ExtremalMath</p>
+        <p>Last updated Oct 20, 2026</p>
+    </footer>
+
+</div>
+
+<script src="drama-data.js"></script>
+<script>
+(function () {
+    "use strict";
+
+    var container = document.getElementById("show-container");
+
+    var shows = typeof dramaData !== "undefined" ? dramaData : [];
+
+    if (!Array.isArray(shows) || shows.length === 0) {
+        container.innerHTML = '<p class="empty">No shows recorded yet.</p>';
+        return;
+    }
+
+    // 按演出时间从早到晚排列
+    shows.sort(function (a, b) {
+        return new Date(a.date).getTime() - new Date(b.date).getTime();
+    });
+
+    function escapeHTML(value) {
+        return String(value == null ? "" : value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#39;");
+    }
+
+    var html = shows.map(function (show) {
+        var titleZh = show.titleZh || "";
+        var titleEn = show.titleEn || "";
+        var meta = "";
+        if (show.dateZh && show.dateEn) {
+            meta = '<span class="date">' + escapeHTML(show.dateZh) + "</span> · " +
+                   escapeHTML(show.dateEn);
+        }
+        if (show.venueZh || show.venueEn) {
+            meta += '<span class="venue">— ' +
+                escapeHTML(show.venueZh || "") +
+                (show.venueZh && show.venueEn ? " · " : "") +
+                escapeHTML(show.venueEn || "") + "</span>";
+        }
+        var note = show.note ? '<span class="show-note">' + escapeHTML(show.note) + "</span>" : "";
+
+        return (
+            '<li class="show-item">' +
+                '<span class="show-title">' +
+                (titleEn ? escapeHTML(titleEn) : "") +
+                (titleEn && titleZh ? " · " : "") +
+                (titleZh ? '<span class="zh">' + escapeHTML(titleZh) + "</span>" : "") +
+                "</span>" +
+                (meta ? '<span class="show-meta">' + meta + "</span>" : "") +
+                (note ? note : "") +
+            "</li>"
+        );
+    }).join("");
+
+    container.innerHTML = '<ul class="show-list">' + html + "</ul>";
+})();
+</script>
+</body>
+</html>

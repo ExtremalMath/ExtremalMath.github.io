@@ -4,6 +4,11 @@
 
 const siteUpdates = [
    {
+        date: "2026-10-20",
+        text: "Added a Theatre page (drama.html) listing plays and musicals I have watched, with a Theatre link in the About page's Beyond Mathematics section.",
+    },
+
+   {
         date: "2026-10-18",
         text: "Refreshed the site: renamed 11 published PDFs to lowercase-with-underscores and synced every page link; reorganized code into code/c and code/cpp, archived superseded notes, fixed a misspelled talk file, and moved CV process docs out of the published tree. Added a Competitions page (2026 CUMCM Problem A, anonymized, team-approved). Launched a data-driven File Migration Log (migrations.html) mapping old→new paths that auto-updates from migrations-data.js, linked from the 404 page and site nav. Old URLs now 404 and point visitors to the log."
     },

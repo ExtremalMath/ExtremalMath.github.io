@@ -344,6 +344,17 @@
             font-size: 0.92em;
             color: var(--ink);
         }
+        /* 课外活动里的链接标签：保留胶囊外观，但给出链接色 */
+        .hobby-list a.hobby-item {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.15s, background 0.15s;
+        }
+        .hobby-list a.hobby-item:hover {
+            color: var(--accent-deep);
+            background: var(--bg);
+            text-decoration: underline;
+        }
 
         /* 子章节标题 */
         .sub-heading {
@@ -611,6 +622,7 @@
                 <span class="hobby-item">🏀 Basketball</span>
                 <span class="hobby-item">🏓 Table Tennis</span>
                 <span class="hobby-item">🏹 Archery</span>
+                <a href="drama.html" class="hobby-item">🎭 Theatre</a>
             </div>
 
            <h3 class="sub-heading">Department Experience</h3>
@@ -673,7 +685,7 @@
                     <a href="cv-pdf-generator/cv.html" class="side-link">📄 简历 / CV (PDF)</a>
                 </div>
 
-                <div class="side-meta">Updated Oct 17, 2026</div>
+                <div class="side-meta">Updated Oct 20, 2026</div>
             </nav>
         </aside>
 
