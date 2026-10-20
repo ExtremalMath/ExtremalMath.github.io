@@ -63,6 +63,19 @@
             color: var(--muted);
         }
 
+        /* 评论页链接，置于 page head 与列表之间 */
+        .report-link {
+            font-size: 0.92em;
+            color: var(--muted);
+            margin-bottom: 24px;
+        }
+        .report-link a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .report-link a:hover { color: var(--accent-dark); text-decoration: underline; }
+
         /* ---------- show list ---------- */
 
         .show-list {
@@ -156,6 +169,9 @@
         <h1>Theatre</h1>
         <p class="lede">Plays and musicals I have watched, listed by performance date.</p>
     </header>
+
+    <p class="report-link">My thoughts on these shows are collected on the
+        <a href="drama_repo.html">Theatre Reviews</a> page.</p>
 
     <main id="show-container" aria-live="polite">
         <p class="empty">Loading…</p>

@@ -5,7 +5,7 @@
 const siteUpdates = [
    {
         date: "2026-10-20",
-        text: "Added a Theatre page (drama.html) listing plays and musicals I have watched, with a Theatre link in the About page's Beyond Mathematics section.",
+        text: "Added a Theatre page (drama.html) listing plays and musicals I have watched, with a Theatre link in the About page's Beyond Mathematics section. Also added a Theatre Reviews page (drama_repo.html) as a placeholder for future thoughts.",
     },
 
    {
