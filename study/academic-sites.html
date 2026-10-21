@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Curated academic sites: literature download platforms, AI work platforms, math tools, and math Q&A forums.">
     <title>ExtremalMath | Academic Sites</title>
     <link rel="icon" type="image/x-icon" href="../picture/favicon.ico">
     <link rel="icon" type="image/svg+xml" href="../picture/favicon.svg">
@@ -47,6 +48,27 @@
         .res-row .name { font-weight: 600; color: var(--ink); }
         .res-row .sub { font-size: 0.86em; color: var(--muted); }
 
+        .category {
+            margin-top: 32px;
+            font-size: 0.82em;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--muted);
+            border-bottom: 1px solid var(--line);
+            padding-bottom: 6px;
+            margin-bottom: 8px;
+        }
+        .category:first-of-type { margin-top: 0; }
+
+        .alert {
+            font-size: 0.78em;
+            color: #b33;
+            white-space: normal;
+            flex-shrink: 0;
+            max-width: 45%;
+        }
+
         .footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line); text-align: center; font-size: 0.85em; color: var(--muted); }
 
         @media (prefers-reduced-motion: reduce) {
@@ -64,20 +86,9 @@
             <p class="subtitle">Curated resources for books, papers, and mathematical research.</p>
         </div>
 
-        <a href="https://link.springer.com/" target="_blank" rel="noopener noreferrer" class="res-row">
-            <span class="name">Springer</span>
-            <span class="sub">Books and journals in mathematics and sciences</span>
-        </a>
-
-        <a href="https://arxiv.org/" target="_blank" rel="noopener noreferrer" class="res-row">
-            <span class="name">arXiv</span>
-            <span class="sub">Open-access preprints for mathematics and physics</span>
-        </a>
-
-        <a href="https://mathworld.net.cn/" target="_blank" rel="noopener noreferrer" class="res-row">
-            <span class="name">MathWorld 中文版</span>
-            <span class="sub">中文数学概念查询平台</span>
-        </a>
+        <div id="sites-container" aria-live="polite">
+            <!-- Rendered by sites.js -->
+        </div>
 
         <div class="footer">
             <p>© 2026 ExtremalMath</p>
@@ -85,5 +96,7 @@
         </div>
 
     </div>
+
+<script src="sites.js"></script>
 </body>
 </html>
