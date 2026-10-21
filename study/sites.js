@@ -72,7 +72,7 @@ const SITES = [
     name: "MathOverflow",
     url: "https://mathoverflow.net/",
     desc: "Research-level mathematics Q&A community",
-    note: "Unreachable in this sandbox (HTTP 403 — egress restriction on the Stack Exchange network; the site itself is reachable)."
+    note: ""
   }
 ];
 
@@ -124,15 +124,15 @@ function renderSites(containerId) {
 
   var html = "";
   order.forEach(function (cat) {
-    html += '<div class="category">' + esc(cat) + '</div>';
+    html += '<div class="category"><span class="text-hover">' + esc(cat) + '</span></div>';
     groups[cat].forEach(function (s) {
       var note = s.note
         ? '<span class="alert" title="' + esc(s.note) + '">' + esc(s.note) + '</span>'
         : '';
       html += '<a href="' + esc(s.url) + '" target="_blank" rel="noopener noreferrer" class="res-row">' +
-        '<span class="name">' + esc(s.name) + '</span>' +
-        '<span class="sub">' + esc(s.desc) + '</span>' +
-        note + '</a>';
+        '<span class="name"><span class="text-hover">' + esc(s.name) + '</span></span>' +
+        '<span class="sub"><span class="text-hover">' + esc(s.desc) + '</span></span>' +
+        (note ? '<span class="alert-wrap"><span class="text-hover">' + note + '</span></span>' : '') + '</a>';
     });
   });
 
