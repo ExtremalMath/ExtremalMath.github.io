@@ -129,6 +129,12 @@ def main():
             print("   -", x)
         return
 
+    # Nothing to change — the remote is already current. Building an empty
+    # tree would hit "Invalid tree info", so stop here instead.
+    if not adds and not mods and not dels:
+        print("  No changes; remote is already up to date.")
+        return
+
     entries = []
     created = 0
     for rel in sorted(adds + mods):

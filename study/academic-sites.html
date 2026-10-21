@@ -27,11 +27,18 @@
         .page { max-width: 720px; margin: 0 auto; padding: 40px 20px 60px; }
 
         .back-link { display: inline-block; margin-bottom: 24px; text-decoration: none; color: var(--accent); font-weight: 600; }
-        .back-link:hover { color: var(--accent-deep); text-decoration: underline; }
+        .back-link:hover { color: #8B0000; text-decoration: underline; transform: skewX(-10deg); }
 
         .page-head { border-bottom: 2px solid var(--accent); padding-bottom: 12px; margin-bottom: 28px; }
         .page-head h1 { font-size: 1.8em; color: var(--ink); }
         .page-head .subtitle { color: var(--muted); margin-top: 4px; }
+
+        .page-head h1 .text-hover:hover,
+        .page-head .subtitle .text-hover:hover,
+        .footer .text-hover:hover {
+            color: #8B0000;
+            transform: skewX(-10deg);
+        }
 
         .res-row {
             display: flex;
@@ -42,11 +49,26 @@
             border-bottom: 1px solid var(--line);
             text-decoration: none;
             color: var(--ink);
-            transition: color 0.15s;
+            transition: color 0.2s ease;
         }
-        .res-row:hover { color: var(--accent); }
+        .res-row:hover { color: #8B0000; }
+        .res-row:focus-within { outline: 2px solid #8B0000; outline-offset: 2px; }
         .res-row .name { font-weight: 600; color: var(--ink); }
         .res-row .sub { font-size: 0.86em; color: var(--muted); }
+
+        /* Text hover effect: tilt + deep red. Every piece of text rendered by
+           sites.js is wrapped in .text-hover so names, descriptions and notes
+           all respond the same way. Skew is applied to the inline wrapper,
+           not the flex row, so the row layout never shifts. */
+        .text-hover {
+            display: inline;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+        .text-hover:hover {
+            color: #8B0000;
+            transform: skewX(-10deg);
+            display: inline-block;
+        }
 
         .category {
             margin-top: 32px;
@@ -68,6 +90,9 @@
             flex-shrink: 0;
             max-width: 45%;
         }
+        /* Keeps the alert span in the same flex slot it had before the
+           .text-hover wrapper was added, so row layout is unchanged. */
+        .alert-wrap { flex-shrink: 0; max-width: 45%; }
 
         .footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line); text-align: center; font-size: 0.85em; color: var(--muted); }
 
@@ -82,8 +107,8 @@
         <a href="materials.html" class="back-link">← Back to Materials</a>
 
         <div class="page-head">
-            <h1>Academic Sites</h1>
-            <p class="subtitle">Curated resources for books, papers, and mathematical research.</p>
+            <h1><span class="text-hover">Academic Sites</span></h1>
+            <p class="subtitle"><span class="text-hover">Curated resources for books, papers, and mathematical research.</span></p>
         </div>
 
         <div id="sites-container" aria-live="polite">
@@ -91,8 +116,8 @@
         </div>
 
         <div class="footer">
-            <p>© 2026 ExtremalMath</p>
-            <p style="margin-top:6px;">Last updated Oct 21, 2026</p>
+            <p><span class="text-hover">© 2026 ExtremalMath</span></p>
+            <p style="margin-top:6px;"><span class="text-hover">Last updated Oct 21, 2026</span></p>
         </div>
 
     </div>
