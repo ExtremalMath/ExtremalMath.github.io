@@ -4,6 +4,10 @@
 
 const siteUpdates = [
    {
+        date: "2026-10-21",
+        text: "Added a site-wide Aleph (א) favicon set — ICO, SVG, and PNG at 16/32/192/512 plus the 180×180 Apple touch icon — stored in picture/ and linked from every page. Transparent and cream-background variants are both available.",
+    },
+   {
         date: "2026-10-20",
         text: "Added a Theatre page (drama.html) listing plays and musicals I have watched, with a Theatre link in the About page's Beyond Mathematics section. Also added a Theatre Reviews page (drama_repo.html) as a placeholder for future thoughts.",
     },
