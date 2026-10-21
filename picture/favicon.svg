@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Aleph letter icon">
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 16 16" role="img" aria-label="Aleph letter icon">
   
-  <text x="50%" y="58%" text-anchor="middle"
-        font-family="Arial,Helvetica,sans-serif" font-size="380"
-        font-weight="700" fill="#8c2f39" paint-order="stroke"
-        stroke="#8c2f39" stroke-width="6">א</text>
+  <path fill="#8c2f39" d="M6.5 1 L3 14 L5.5 14 L8 5.5 L10.5 14 L13 14 L9.5 1 Z
+    M6 8.5 L10 8.5 L10 10.5 L6 10.5 Z"/>
 </svg>
