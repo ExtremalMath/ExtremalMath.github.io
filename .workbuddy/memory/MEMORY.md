@@ -19,20 +19,27 @@
 - 推送前自检（push-rules.txt）：目录归类 → check_links.py → node --check 全部 JS → selfcheck.py；推送后树 diff + 线上穿透 200 + Pages built。CDN `max-age=600`，验证须 `?cb=` 穿透；新目录首推先 404 后正常，查 pages/builds/latest=built 再稍候。
 - trouble.txt 维护规则（方案 A，2026-10-17 定案并修订）：每条记录带「首次记录日期」；按「静默日」独立计时——连续一整天未触发 +1、触发归零重计；满 300 日进退役候选，agent 会话开头评估、生成待办经用户确认后删，删前清全站引用；「长期约定」类入豁免清单；规则本身不自删。详见 trouble.txt 头部七条款。
 
-## 站点功能与内容现状（截至 2026-10-18）
-- **2026-10-18 文件组织整改 + 已上线 PDF 改名轮（全部仅本地、未推送）**：用户批准全面改名并建迁移项目 `.workbuddy/pdf-rename-migration/`（README / inventory / mapping / redirects / scripts / backup / reports 九项齐全）。
-  - 第一阶段（无引用文件，已完成）：`cv-pdf-generator/` 4 个过程文档 → `.workbuddy/cv-process-docs/`；`notes/1.c`→`code/c/hello_world.c`、`notes/essay/keep.cpp`→`code/cpp/keep.cpp`、`notes/GraphTheoryHomework/2.c`→`code/cpp/graph_theory_homework.cpp`；`code/c_language/`→`code/cpp/`；`notes/archive/`（新建，随站推）收 3 个 Density 笔记历史版 + Modeling 旧版 + `version_1d_to_c3.pdf`；`talks/PowerPiontPre.pdf`→`talks/powerpoint_pre.pdf`。
-  - 第二阶段（11 个页面引用的 PDF，本地改名完成）：rename-map.csv 为唯一事实源；backup/ 11 个原文件 sha256 与改后一致；5 个页面（books/notes/homework/course-essay/competition）11 处 href 已同步；check_old_refs 0 残留。新名如 `book/gtm_244_bondy_murty_graph_theory.pdf`、`book/finite_fields_applications_feng_liao.pdf`、`notes/graph_theory_homework/exercise_0526.pdf` 等（全小写+下划线，禁双扩展名）。
-  - **⚠️ 本地/远端名称分歧（关键）**：23 个新路径仅本地存在、23 个旧路径仅远端存在。未来任何推送必须携带完整变更集（含 backup 之外的改名），否则线上旧 URL 与新引用错位。rename-map.csv 与 reports/old-link-record.md 是唯一权威映射，**不得删除**。
-  - **推送阻塞**：GitHub Pages 无服务端 301（jekyll-redirect-from 仅 meta-refresh 200 页、对 .pdf 不可用）；用户规范第 10 条——平台无法配 301 则停止上线、旧 URL 不得直接 404。redirects/redirects.conf 已备 Netlify 语法。解除选项：A 迁 Netlify/Cloudflare Pages（Git 连接免费）B 自定义域名 + Cloudflare Redirect Rules。用户决策后先验证 301 再走推送确认。
-- CV 生成器 `cv-pdf-generator/`：4 功能文件已推（cv.html / cv-zh.html / cv-en.html / cv-generator.js）；过程文档已移 `.workbuddy/cv-process-docs/`（本地）。特性：中英双语、数据驱动、纵向 A4、灰度打印、正文禁超链接、姓名统一译「李元博」、术语统一（免H图 / 紫金草志愿者团队 / Bright Eyes / 大眼睛公益团队）；页脚「年+月」为 **CV 局部例外**（方案 A，不影响全站短月份格式）。
-- about 数据驱动：`about-data.js` 为研究兴趣 + 获奖的单一数据源，about.html 与 CV 共用（已推）。
-- Books 页 `study/books.html`：5 本书编目 + sticky "For study use only" 常驻声明；Evans PDF 已改名 `evans_pde_2nd_ed.pdf`（纯 ASCII，已推）。
-- 习题笔记：`notes/FiniteFields_Exercise1_T7_T10_notes.pdf` 已入 homework 页（用户 10-17 另行提供并批准、已推）——与下方「Book 移除」是两回事，勿混淆。
-- Competition 栏目 `study/competition.html`（10-18 新建并定稿，**未推**）：2026 高教社杯 A题「药材烘干过程的热质传递建模及应用」，角色 Modeling Lead。年份口径已确认为 2026（官方三源核实竞赛时间 2026-09-10 18 时–09-13 20 时）；已含授权说明（团队同意发布 + 匿名化 PDF）；页脚为年月制例外（"Last updated Oct 2026"，style-guide 第五节已登记）；链匿名化 PDF `notes/modeling_and_application_of_heat_and_mass_transfer_in_medicinal_material_drying3.pdf`。随 301 阻塞解除后与改名变更集一并推送。
-- 文件组织规则 `.workbuddy/file-organization-rules.md`（R1–R8，本地规划稿，v2）。
-- 改名/命名操作级规范 `.workbuddy/rename-rules.md`（九节：格式基线、分类前缀/后缀、匹配模式、8 步改名流程、引用同步、已知偏差、反模式、检查清单）+ 一键校验 `.workbuddy/validate_filenames.py`（扫 book/notes/talks/code/picture，0 违规即合规）。新增/改名文件先依其定名；style-guide.txt §13 已加指针。
-- 文件迁移公告页 `migrations.html`（根，已推）+ 数据源 `.workbuddy/migrations.json`（canonical）+ 自动生成 `migrations-data.js`（根，勿手改）+ 维护脚本 `.workbuddy/update_migrations.py`（`add/list/remove/gen`，`add` 同名 filename 整体覆盖=仅留最新迁移）。页面数据驱动、按 filename 去重仅显示最新一次迁移，含按文件名筛选框；站点 `404.html` 已加链接指向该页，旧 URL 404 的访客可查新路径。新增/修改迁移记录只改 JSON → 重跑脚本即可，页面无需改。
+## 站点功能与内容现状
+- **文件组织整改 + 已上线 PDF 改名（2026-10-18，已推送 commit 5e7d58c1）**：
+  11 个已上线 PDF 改小写下划线名，5 个页面 11 处 href 同步；代码归 code/c、code/cpp；
+  旧版笔记归 notes/archive；talks/ 拼写修正；CV 过程文档移 .workbuddy/cv-process-docs/。
+  映射文件 `.workbuddy/pdf-rename-migration/rename-map.csv` 与 `reports/old-link-record.md`
+  为唯一权威，**不得删除**。
+  301 阻塞已解除（用户接受旧 URL 直接 404）；push-rules 一.3 / style-guide 第七/十三/十四节
+  改为「改名只需引用同步+迁移留档，不再强制 301」。
+- CV 生成器 `cv-pdf-generator/`：4 功能文件已推；过程文档本地。特性：中英双语、数据驱动、
+  纵向 A4、灰度打印、正文禁超链接、姓名统一译「李元博」、术语统一（免H图 / 紫金草志愿者团队 /
+  Bright Eyes / 大眼睛公益团队）；页脚「年+月」为 **CV 局部例外**。
+- about 数据驱动：`about-data.js` 为研究兴趣 + 获奖的单一数据源，about.html 与 CV 共用。
+- Books 页 `study/books.html`：5 本书编目 + sticky "For study use only" 声明；
+  Evans PDF `evans_pde_2nd_ed.pdf`。
+- 习题笔记 `notes/FiniteFields_Exercise1_T7_T10_notes.pdf` 已入 homework 页（10-17 新增，
+  属正常内容、不得删除）——与 book/ 已删除的 2 页 FiniteFields_FengLiao.pdf 是两回事。
+- Competition 页 `study/competition.html`：2026 高教社杯 A 题，年份口径 2026（已核实），
+  授权说明 + 匿名化 PDF + 页脚年月制例外就位。
+- 迁移公告 `migrations.html`（根，已推）+ `.workbuddy/migrations.json`（canonical）+
+  `migrations-data.js`（自动生成，勿手改）+ `.workbuddy/update_migrations.py`。
+  404.html 已加指向该页的链接。新增/修改记录只改 JSON → 重跑脚本即可。
 
 ## 跨智能体协作规则（共识，所有智能体遵循）
 - **确认类问题统一规范（固化规则）**：凡对外发布（push/上线）、删除文件、重命名或任何不可逆/有副作用改动，先按统一格式（①做什么/影响范围/是否可逆 ②确认/取消选项）获用户明确同意；决策入规则即长期约定，不再重问。
@@ -60,3 +67,26 @@
 - `migrations.html`：`.page` max-width 860→960px；表格改为
   `table-layout: fixed`（22%/30%/30%/18%）+ `overflow-wrap: anywhere`，
   因最长路径 90 字符会撑破 860px 容器。
+
+## 2026-10-21 新增：academic-sites 数据驱动与悬停交互
+- `study/sites.js` 为 `study/academic-sites.html` 的单一数据源：`SITES` 数组
+ （category / name / url / desc / note 五字段）+ `renderSites(containerId)` +
+  `SITE_CATEGORY_ORDER` + `esc()`。新增条目只改数据，HTML 不动。
+- 中文站点 name/desc 保留中文（PubScholar 公益学术、书生·浦语 AI 工作台、
+  书生·浦语 Discovery、MathWorld 中文版）；分类标签与页面结构全英文。
+- 文字悬停交互：`.text-hover` 包裹所有渲染文字与静态标题/页脚，
+  hover 时 `skewX(-10deg)` + `#8B0000`，0.2s ease；skew 作用于 inline 包裹层
+  而非 flex 行，故布局不变。补充 `.res-row:focus-within` 深红 outline。
+  保留 `prefers-reduced-motion` 禁用过渡。
+- 长异常文本：`.alert` white-space nowrap→normal + max-width 45%。
+
+## 推送机制现状（2026-10-21）
+- 两条推送通道并存（需统一，见 trouble 11.7）：
+  ① `.workbuddy/push_site.py`（Git Data API 增量，已验证可用；
+    2026-10-21 加空变更守卫防 422 "Invalid tree info"）；
+  ② `github-auto-upload` 技能（`auto_upload.py sync`，能 commit 但推送失败——
+    git 线协议被代理拦截，API fallback 因本地/远端历史分歧未成功）。
+- 本地 git 仓库为 push_site.py 自建的单提交历史（49b8143 + 81779be），
+  与远端主线不同步；**线上状态以 selfcheck.py 的本地/远端 sha 比对为准**，
+  勿用 git status 推断。
+- 代理绕行：小请求用 `env -u http_proxy ...` 直连；大流量走 Git Data API。

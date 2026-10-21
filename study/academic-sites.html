@@ -33,13 +33,6 @@
         .page-head h1 { font-size: 1.8em; color: var(--ink); }
         .page-head .subtitle { color: var(--muted); margin-top: 4px; }
 
-        .page-head h1 .text-hover:hover,
-        .page-head .subtitle .text-hover:hover,
-        .footer .text-hover:hover {
-            color: #8B0000;
-            transform: skewX(-10deg);
-        }
-
         .res-row {
             display: flex;
             justify-content: space-between;
@@ -56,10 +49,10 @@
         .res-row .name { font-weight: 600; color: var(--ink); }
         .res-row .sub { font-size: 0.86em; color: var(--muted); }
 
-        /* Text hover effect: tilt + deep red. Every piece of text rendered by
-           sites.js is wrapped in .text-hover so names, descriptions and notes
-           all respond the same way. Skew is applied to the inline wrapper,
-           not the flex row, so the row layout never shifts. */
+        /* Link hover: tilt + deep red. The skew is applied to the inline text
+           wrapper inside each link (added by sites.js), not to the flex row,
+           so the row layout never shifts. Plain text outside links is
+           unaffected. */
         .text-hover {
             display: inline;
             transition: color 0.2s ease, transform 0.2s ease;
@@ -90,8 +83,9 @@
             flex-shrink: 0;
             max-width: 45%;
         }
-        /* Keeps the alert span in the same flex slot it had before the
-           .text-hover wrapper was added, so row layout is unchanged. */
+        /* The alert sits inside .alert-wrap, a sibling of .name and .sub inside
+           the flex row. The wrapper — not the inner .alert — carries the flex
+           constraints so the row layout is unchanged. */
         .alert-wrap { flex-shrink: 0; max-width: 45%; }
 
         .footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line); text-align: center; font-size: 0.85em; color: var(--muted); }
@@ -107,8 +101,8 @@
         <a href="materials.html" class="back-link">← Back to Materials</a>
 
         <div class="page-head">
-            <h1><span class="text-hover">Academic Sites</span></h1>
-            <p class="subtitle"><span class="text-hover">Curated resources for books, papers, and mathematical research.</span></p>
+            <h1>Academic Sites</h1>
+            <p class="subtitle">Curated resources for books, papers, and mathematical research.</p>
         </div>
 
         <div id="sites-container" aria-live="polite">
@@ -116,8 +110,8 @@
         </div>
 
         <div class="footer">
-            <p><span class="text-hover">© 2026 ExtremalMath</span></p>
-            <p style="margin-top:6px;"><span class="text-hover">Last updated Oct 21, 2026</span></p>
+            <p>© 2026 ExtremalMath</p>
+            <p style="margin-top:6px;">Last updated Oct 21, 2026</p>
         </div>
 
     </div>

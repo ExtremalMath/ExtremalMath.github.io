@@ -144,13 +144,16 @@
           ② 大流量一律走 GitHub REST/Git Data API，只传差异文件。
 
 3.2 Git Data API 422 "Invalid tree info"
-    首次记录日期：2026-10-17
-    症状：POST /git/trees 返回 422 Invalid tree info（与 base_tree 有无、
-          条目数量无关，单条目也失败）。
-    原因：请求体字段名用错——必须是 "tree"，不是 "entries"。
+    首次记录日期：2026-10-17（2026-10-21 补充第二种根因）
+    症状：POST /git/trees 返回 422 Invalid tree info。
+    两种独立根因（均会报同一 422，需分别排查）：
+      a) 请求体字段名用错——必须是 "tree"，不是 "entries"（2026-10-17 踩坑）。
+      b) tree 数组为空——无变更时仍提交空 entries，GitHub 要求至少一条有效条目
+         （2026-10-21 踩坑，见 11.8）。
     解法：POST https://api.github.com/repos/{owner}/{repo}/git/trees
           body = {"tree": [ {...}, ... ], "base_tree": "..." }
-    教训：此错误已踩过一次，写推送脚本时先核对字段名。
+          且构造 entries 前先判空，无变更直接返回（push_site.py 已加守卫）。
+    教训：此错误已踩过两次、根因不同；写推送脚本时先核对字段名，再判空。
 
 3.3 大文件上传（PDF 动辄 10MB+）
     首次记录日期：2026-10-17
@@ -585,3 +588,192 @@ node --check     所有根目录 JS 语法检查
   均验证通过。最值得固化的两点提效：① 404.html 链接强制根绝对（写入规范防返工）；
   ② push_site.py 收尾自动轮询 Pages built + 穿透验证。其余改进（检查器根绝对解析）
   已就地修复并留档。
+
+================================================================================
+十一、2026-10-21 问题清单与复盘
+================================================================================
+
+11.1 png-to-ico 库与 sharp 输出的 PNG 格式不兼容
+    首次记录日期：2026-10-21
+    症状：调用 png-to-ico 的 imagesToIco 处理 sharp 生成的 PNG 时抛
+          "Cannot read properties of undefined (reading 'length')"，无法生成 ICO。
+    根因：该库对 PNG 的 IHDR/chunk 布局有隐性假设，与 sharp 输出不完全一致；
+          属于库自身对输入格式过于挑剔，非调用方错误。
+    当前处理：放弃第三方库，手写 PNG-in-ICO 编码器——ICONDIR（6 字节）+
+          6 条 ICONDIRENTRY（每条 16 字节）+ 数据偏移，256px 尺寸按规范编码为 0。
+    反思与改进建议：
+      ① 优先选成熟、输入宽容的库（如 icotool 命令行或 node-ico），并对输入做
+        PNG 规范化（sharp 重编码一次）再喂给编码器，而不是手写二进制协议。
+        手写编码器虽可控，但每多一种尺寸/色深就要补一条分支，长期维护成本高。
+      ② 若必须手写，应写单元测试覆盖 ICONDIR/ICONDIRENTRY/偏移三处，
+        并用 ico 解析库反向读回校验，而非只靠浏览器能显示。
+      ③ 记录到本手册前应先确认该库是否已被替代——避免后来人重踩。
+
+11.2 16px favicon 可读性（4 轮设计迭代才定稿）
+    首次记录日期：2026-10-21
+    症状：第 1 版 Arial 文本 glyph 16px 下笔画糊成一团；第 2 版几何描边因
+          sub-pixel 抗锯齿仍模糊；第 3 版填充 A + 中横镂空，16px 下镂空塌陷成 blob；
+          仅第 4 版（16×16 网格、实心无镂空、原生栅格化不缩放）可辨。
+    根因：浏览器标签栏图标实际渲染尺寸只有 16×16 像素，任何小于 2px 的描边、
+          镂空或负空间都会因抗锯齿被吞掉；以"大屏清晰"为设计目标会直接导致
+          favicon 不可用。
+    当前处理：定稿为实心无镂空 Aleph，每个尺寸都从同一矢量定义独立栅格化，
+          不做缩放；颜色用全站 accent #8c2f39。
+    反思与改进建议：
+      ① favicon 的设计约束应从 16px 出发逆向推导，而非从大图缩小——这是
+        本类问题的通用原则：先画 16px 位图，再反推矢量，而不是反过来。
+      ② 迭代过程应保留各版截图（按尺寸归档），否则下次换图形时又要重走 4 轮。
+        建议把 icon_assets_try/ 下的各版截图作为设计资产保留（本地、不推送）。
+      ③ 若日后换图形，应先在 16px 下验证可辨性，再谈美学。
+
+11.3 插入脚本的根目录路径前缀 bug
+    首次记录日期：2026-10-21
+    症状：给根目录 HTML 插入 favicon 链接时生成 "../picture/favicon.ico"，
+          check_links.py 报失效链接。
+    根因：用 os.path.dirname(relpath) 计算前缀，对根目录文件（relpath="index.html"）
+          返回空字符串 ""，拼接后变成 "../picture/…"。空字符串在路径拼接中
+          不会被当作"当前目录"。
+    当前处理：修正为根目录直写 "picture/…"，子目录用 "../picture/…"，
+          两层用 "../../picture/…"；复跑 check_links.py 0 失效。
+    反思与改进建议：
+      ① 路径前缀计算应统一用 pathlib 或 os.path.relpath(target, dir) 的
+        正向推导，而非 dirname 的反向推导——后者天然有根目录边界缺陷。
+      ② 此类"边界值"（根目录、单层、多层）应作为插入脚本的必测用例，
+        在脚本内自测三个层级，而不是靠 check_links 事后抓。
+
+11.4 页脚日期格式被误判为例外
+    首次记录日期：2026-10-21
+    症状：research/log 页的 "Last updated Oct 17, 2026" 被日期统一脚本跳过，
+          未改为 "Oct 21, 2026"。
+    根因：脚本把正文里的 "October 2026" 标题误识别为"日期格式例外"的标记，
+          导致整页豁免。
+    当前处理：对该页单独修正。
+    反思与改进建议：
+      ① 例外判定应基于显式白名单（页面路径列表），而非正文内容推断——
+        内容推断容易被正常文案误触发，且不可审计。
+      ② 建议把"哪些页面用哪种日期格式"写成一张表（如 about-data.js 风格的数据源），
+        渲染时按表取格式，既避免误判，又让 CV 的 month-only、competition 的
+        year-only 这类真例外有据可查。
+
+11.5 migrations.html 桌面端表格溢出
+    首次记录日期：2026-10-21
+    症状：桌面端长路径把表格撑出容器，出现横向滚动条或截断。
+    根因：最长路径 90 字符（notes/Modeling_and_Application_of_Heat_and_Mass_
+          Transfer_in_Medicinal_Material_Drying3.pdf），0.92em 下约 8.8px/字符，
+          90 字符 ≈ 792px + 4 列 padding ≈ 112px = 904px > 容器 max-width 860px。
+    当前处理：① .page max-width 860 → 960px；② 表格 table-layout: fixed，
+          四列 22%/30%/30%/18%（写在 thead th）；③ td 加 overflow-wrap: anywhere
+          让长路径断行；表头 white-space: nowrap 保留。
+    反思与改进建议：
+      ① 表格列宽不应依赖内容自适应——凡内容长度不可控（路径、标题、摘要）的
+        表格，应一律用 table-layout: fixed + 显式列宽，这是默认选择而非事后补救。
+      ② 应测量数据最大长度后再定 max-width，而不是凭感觉设值。
+        建议把"最长条目长度"作为 migrations-data.js 的校验项写入 validate 脚本。
+      ③ 960px 仍是硬编码；更稳健的做法是 max-width: min(960px, 100vw - 40px)，
+        让超窄视口自动收缩。
+
+11.6 沙箱出口封锁导致站点可达性误判（MathOverflow 红色报错）
+    首次记录日期：2026-10-21
+    症状：本沙箱内 HEAD/GET mathoverflow.net 均返回 HTTP 403，
+          stackexchange.com / math.stackexchange.com / stackoverflow.com 同理，
+          故标注红色"Unreachable"异常；但用户反馈 MathOverflow 实际可访问。
+    根因：沙箱对 Stack Exchange 网络有出口封锁（403），与站点本身状态无关。
+          我把"沙箱内探测失败"等价于"站点不可达"，属于环境混淆。
+    当前处理：按用户要求清空 note 字段，不再渲染红色 alert；并在 note 原文中
+          保留了 "the site itself is reachable" 的说明（后随 note 一并移除）。
+    反思与改进建议：
+      ① 可达性验证的结果必须标注探测来源——"本沙箱内 403"与"站点宕机"是两件
+        事。更健壮的做法：note 字段存两段（probe: 沙箱结果 / verdict: 判定），
+        渲染时只在 verdict 为"确认站点故障"时才标红，沙箱限制改为灰色注释。
+      ② 当沙箱探测与用户实际体验冲突时，应以用户为准、以沙箱为参考，
+        并在条目旁标注"沙箱内无法验证"而非断言故障——避免误导访客。
+      ③ 建议建立一个白名单域名列表，对已知被沙箱封锁的域名跳过探测或
+        直接标记"未验证"，减少往返。
+
+11.7 本地 git 历史与远端主线分歧，GAU 推送失败
+    首次记录日期：2026-10-21
+    症状：auto_upload.py sync 能 commit（本地新增 81779be）但 push 失败——
+          git 线协议被代理拦截（Failed to connect to github.com:443 over proxy
+          127.0.0.1），Git Data API fallback 也未成功。
+    根因：本地 git 仓库是 10-18 push_site.py 自建的单提交历史（49b8143，
+          仅 1 个 commit、无远端分支引用），而 push_site.py 走 Git Data API
+          直接更新远端 ref，两者从未同步——本地 HEAD 与远端 HEAD 是两条独立历史。
+          API fallback 要求本地历史能基于远端 tip 重写，因分歧而拒绝。
+    当前处理：页面本身已由 push_site.py 推送上线（commit eee4c0fe，Pages built），
+          不受影响；本地未推送的 commit 含 push_site.py 的空变更守卫修复。
+    反思与改进建议：
+      ① 根本解法：让 push_site.py 也走 git 线协议（或反之），统一单一真相源。
+        当前两套机制并存是最大的结构性风险——同一文件可能被两个渠道各写一次。
+      ② 若保留双通道，应在每次推送后同步本地 git（git fetch origin &&
+        git reset --hard origin/main），使本地 HEAD 始终对齐远端，
+        这样 GAU 的 fallback 才能工作。
+      ③ 更彻底的方案：废弃 push_site.py，全面改用 GAU（其 doctor 已确认
+        api.github.com 可达、push_mode=auto），只在 git 线协议可用时走 git。
+        这样不存在两套历史，且 GAU 有 secret scan 等安全机制。
+      ④ 当前不影响线上页面，但本地 git 的 "chore: update 3 files" commit
+        若后续用 git push 会覆盖远端——须先 rebase 或 reset 对齐。
+
+11.8 push_site.py 缺少空变更守卫，触发 422 "Invalid tree info"
+    首次记录日期：2026-10-21
+    症状：当 ADD/MODIFY/DELETE 均为 0 时，POST /git/trees 返回
+          422 {"message":"Invalid tree info"}。
+    根因：无变更时仍向 GitHub 提交空的 tree 数组；GitHub 要求 tree 至少含
+          一条有效条目（或至少 base_tree 合法且 entries 非空）。
+          注意此 422 与 3.2 的字段名错误（"entries" vs "tree"）是两种不同根因。
+    当前处理：在 entries 构造前加守卫——无变更时直接打印 "No changes" 返回。
+    反思与改进建议：
+      ① 此守卫应放在 dry-run 阶段之前，让 dry-run 也能给出 "No changes" 而非
+        空列表，减少误操作空间。
+      ② 更完整的设计：push 脚本应区分"无变更"、"仅排除文件变更"、"有真实变更"
+        三种状态并给出不同提示，而不是把空 tree 交给 GitHub 去拒绝。
+      ③ 该 422 已在 3.2 记录过一次字段名误用，建议 3.2 标题细化为
+        "3.2 Git Data API 422（字段名误用 / 空 tree）"，把两种根因并列，
+        避免后来人只记一种。
+
+11.9 .text-hover 的 skewX 作用域选型（布局破坏风险）
+    首次记录日期：2026-10-21
+    风险：若把 skewX(-10deg) 直接加到 .res-row（flex 容器）上，整行倾斜会
+          改变 flex 布局的占位盒，导致相邻行错位、border 线偏移；
+          若加到 display: block 的元素上，skew 会撑大元素盒模型。
+    当前处理：skew 只作用于 .text-hover（display: inline → hover 时
+          display: inline-block），包裹在 name/sub/alert 内部；flex 行本身
+          只变颜色，不变形。同时保留 prefers-reduced-motion 禁用过渡。
+    反思与改进建议：
+      ① 此选型正确，但应写成注释固化（已做），否则下次改样式容易误把
+        transform 提升到父级。
+      ② 更安全的写法是给 .text-hover 加 will-change: transform, color，
+        让浏览器提前合成层，避免 hover 时重排闪烁（当前 0.2s 下不明显，
+        但条目多时可能出现）。
+      ③ skewX(-10deg) 在长文本上会让末端偏移约 17% 行高，若某行描述特别长
+        可能与右侧 alert 重叠；当前 max-width: 45% 的 alert-wrap 留出了余量，
+        但应作为已知边界记录——若将来描述长度不设上限，需改用 font-style: italic
+        的降级方案。
+
+================================================================================
+十二、更新记录（2026-10-21）
+================================================================================
+
+2026-10-21  favicon 全站集成 + migrations 位置与宽度 + academic-sites 重构
+            与悬停交互（四轮工作）：
+            ①【favicon】生成 7 个 Aleph 图标文件（ICO 6 entry / SVG /
+              PNG 16/32/192/512 / Apple 180）存入 picture/，24 个 HTML 页面
+              各插入 7 个 <link>；路径按深度自动计算，顺序 ICO→SVG→PNG。
+              设计经 4 轮迭代定稿（见 11.2）；踩坑：png-to-ico 不兼容（11.1）、
+              根目录前缀 bug（11.3）、页脚日期误判（11.4）。
+              两批推送（ffd2c61c ADD=7 MODIFY=24；efaa8e1 MODIFY=7），
+              线上 7 文件全部 200、MIME 正确。
+            ②【migrations】materials.html 的 File Migration Log 链接从 res-list
+              移到页脚前 meta-link 行；migrations.html max-width 860→960px +
+              table-layout: fixed + overflow-wrap: anywhere（见 11.5）。
+              推送 commit 400a091。
+            ③【academic-sites】新增 5 个站点、4 类英文分类，数据与渲染抽离到
+              study/sites.js（renderSites + SITE_CATEGORY_ORDER + esc）；
+              逐一验证可达性，MathOverflow 因沙箱 403 先标红后按用户要求移除
+              （见 11.6）；新增 meta description。推送 commit 8dea1abb。
+            ④【悬停交互】新增 .text-hover（skewX(-10deg) + #8B0000，0.2s ease），
+              包裹所有渲染文字与静态标题/页脚；补充 .res-row:focus-within outline；
+              保留 prefers-reduced-motion。推送 commit eee4c0fe。
+            ⑤【工具修复】push_site.py 加空变更守卫（见 11.8）；
+              更新 trouble 3.2 以并列两种 422 根因。
+            ⑥【遗留风险】本地 git 历史与远端主线分歧，GAU sync 能 commit 但
+              推送失败（见 11.7）；线上页面已同步，不受影响。

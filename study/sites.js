@@ -124,7 +124,7 @@ function renderSites(containerId) {
 
   var html = "";
   order.forEach(function (cat) {
-    html += '<div class="category"><span class="text-hover">' + esc(cat) + '</span></div>';
+    html += '<div class="category">' + esc(cat) + '</div>';
     groups[cat].forEach(function (s) {
       var note = s.note
         ? '<span class="alert" title="' + esc(s.note) + '">' + esc(s.note) + '</span>'
@@ -132,7 +132,7 @@ function renderSites(containerId) {
       html += '<a href="' + esc(s.url) + '" target="_blank" rel="noopener noreferrer" class="res-row">' +
         '<span class="name"><span class="text-hover">' + esc(s.name) + '</span></span>' +
         '<span class="sub"><span class="text-hover">' + esc(s.desc) + '</span></span>' +
-        (note ? '<span class="alert-wrap"><span class="text-hover">' + note + '</span></span>' : '') + '</a>';
+        (note ? '<span class="alert-wrap">' + note + '</span>' : '') + '</a>';
     });
   });
 
