@@ -1,0 +1,587 @@
+================================================================================
+站点故障排查手册（trouble.txt）
+================================================================================
+用途：记录 extremalmath.github.io 维护过程中常见故障的症状、原因与解法，
+      供后续维护快速查阅。
+更新方法：遇新故障并解决后，于文末「更新记录」追加一条（日期 + 现象 + 解法），
+      保持本手册持续累积。
+维护规则（记录生命周期）
+--------------------------------------------------------------------------------
+一、适用范围
+  本规则适用于本手册中除「长期约定」类记录（见第七款豁免清单）以外的全部故障记录。
+  本维护规则本身不受退役条件约束，永久保留。
+
+二、记录字段
+  每条故障记录须标注「首次记录日期」（格式 YYYY-MM-DD），作为计时与溯源基准。
+  既有记录统一按 2026-10-17 补录该字段。
+
+三、术语定义
+  1. 调用（触发）：指在每个自然日复盘时，依据既有记录判定同类故障是否再次出现；
+     若同类故障再次出现，则该记录视为「已调用 / 已触发」。
+  2. 静默日：指一个完整的自然日内该记录未被触发（即无同类故障再现）。
+  3. 退役：指将某条故障记录从本手册中删除，并于「更新记录」留痕
+     「已退役 <编号> <标题>（静默天数）」。
+
+四、计时规则
+  1. 每条记录独立计时，互不影响。
+  2. 记录的「静默天数」初始为 0，自其首次记录日期起算；每次触发后归零，
+     并自触发当日起重新累计（计时基准前移至最近一次触发日）。
+  3. 每当一个完整的自然日结束时，若该记录当日未被触发，则静默天数 +1；
+     若该记录当日被触发，则静默天数归零，并自触发当日起重新累计。
+  4. 计时以运行本手册维护任务的设备本地自然日为准。
+
+五、退役条件与流程
+  1. 当某条记录的静默天数达到 300 日，即进入退役候选。
+  2. 退役评估于每次维护会话开始时由 agent 执行。
+  3. 候选记录的退役须先生成待办事项，经用户确认后方可执行；未经确认不得删除。
+  4. 执行退役前，须检索并清理本手册各节及全站引用页面中对该记录的全部引用，
+     消除断链后方可删除。
+  5. 退役时于「更新记录」留痕「已退役 <编号> <标题>（静默天数）」。
+
+六、评估与确认
+  本规则为长期约定。退役评估依第五款自动执行，但单次退役动作仍须按第五款第 3 项
+  取得用户确认，不视为「逐次重复授权」。
+
+七、豁免清单
+  下列「长期约定」类记录不纳入退役计划，永久保留（清单可依实际情况增补）：
+  - 二、3　发布后改名禁忌（依据 style-guide.txt 规定）
+相关文件：style-guide.txt（样式与设计规范；design-review 已并入）、
+          push-rules.txt（推送规范，仅本地）、
+          .workbuddy/check_links.py（链接检查）、.workbuddy/selfcheck.py（完整自检）
+说明：本文件原名 troubleshooting.txt，2026-10-17 起统一命名为 trouble.txt；
+      除 README 外的 txt 文档仅本地保留、不入远端。
+
+================================================================================
+一、链接类故障
+================================================================================
+
+1.1 死链：href/src 指向不存在的文件
+    首次记录日期：2026-10-17
+    症状：页面打开后点击链接 404；check_links.py 报 BROKEN LINKS。
+    原因：文件未推送/被删/移动/改名，或相对路径写错（如 ../ 层数不对）。
+    解决：① 运行 .workbuddy/check_links.py 定位；② 确认目标文件在本地存在；
+          ③ 若文件在本地但不在远端（selfcheck.py 的 local-only 列表），
+             与引用它的页面同批推送（push-rules 明禁链接先于文件上线）。
+
+1.2 改名断链：文件已改名，页面仍引用旧名
+    首次记录日期：2026-10-17
+    症状：改名后原链接 404；本地 check_links 报错。
+    原因：改名与改引用未同轮完成（今日实例：Evans PDF 改名后 books.html
+          一度不同步，靠全站 grep + check_links 抓到）。
+    解决：改名后立即全站搜索旧名（Grep 工具或 grep -rn "旧名" --include="*.html"），
+          把所有引用改到新名，再跑 check_links.py 确认 0 失效。
+    预防：改名前后各跑一次链接检查；改名只改未被推送过的文件（见 2.3）。
+
+1.3 中文/空格文件名的编码死链
+    首次记录日期：2026-10-17
+    症状：链接在本地正常、线上 404；或反过来。
+    原因：URL 中空格须编码为 %20、中文须编码为 %E4%B8%AD 形式；浏览器地址栏
+          与 href 属性行为不一致；不同服务器/工具对未编码字符处理不同。
+    解决（优先）：把文件改名为纯 ASCII 小写下划线名（如 evans_pde_2nd_ed.pdf），
+          页面引用同步改——这是今日实际采用方案，彻底消除编码风险。
+    解决（必须保留中文名时）：href 用百分号编码；check_links.py 已内置
+          urllib.parse.unquote 解码，可正确识别。
+    教训：新文件入库时直接按 ASCII 命名，不要留到推送前才处理。
+
+1.4 推送顺序造成的线上死链
+    首次记录日期：2026-10-17
+    症状：页面推送后线上点击 404，过段时间又正常（文件后补）；
+          或窗口期内用户遇到死链。
+    解决：引用文件的页面与文件本身放同一批推送；PDF 等大文件先传 blob 占位，
+          再与页面同批 commit。
+
+1.5 根绝对路径被误判为死链（check_links.py 误报）
+    首次记录日期：2026-10-18
+    症状：404.html 改用站点根绝对路径（href="/migrations.html"、
+          href="/index.html"、href="/nownow/now.html"）后，check_links.py
+          报 BROKEN LINKS（resolves to: ..\..\migrations.html 等）。
+    原因：检查器把以 "/" 开头的网站根绝对路径当成相对路径解析；Windows 下
+          os.path.join(ROOT, "/x") 返回 "D:/x"（保留盘符、丢弃目录），
+          指向站点根之外，故判为失效。实为 GitHub Pages 根 "/" 部署下的正确写法，
+          线上访问返回 200。
+    解决：check_links.py 增加 pathpart.startswith('/') 分支——去掉前导斜杠后
+          以 ROOT 为基准解析（os.path.join(ROOT, pathpart.lstrip('/'))），
+          再判断 exists。改后 404.html 的 3 个根绝对链接正确通过"0 失效"校验。
+    教训：根 404.html 会被返回给任意深度 URL，其链接必须用站点根绝对路径（/ 开头）；
+          此写法会让朴素相对链接检查器误报，检查器需显式支持根绝对路径解析。
+
+================================================================================
+二、文件名类故障
+================================================================================
+
+2.1 双扩展名（如 GTM_244_Bondy_Murty_Graph_Theory.pdf.pdf）
+    首次记录日期：2026-10-17
+    影响：功能正常，但不专业、易误判为重复文件。
+    处理原则：已上线的文件不改名（见 2.3），记录备查即可；未上线的新文件
+          入库时发现双扩展名应直接改单扩展名。
+
+2.2 大小写混淆
+    首次记录日期：2026-10-17
+    风险：Windows 本地不区分大小写，GitHub Pages（Linux）区分。
+          本地 LinkChecker 通过、线上 404 的典型原因之一。
+    预防：全站文件名一律小写（现有 evans_pde_2nd_ed.pdf 等即此风格）；
+          检查时以 check_links.py 在本地的大小写敏感解析为准。
+
+2.3 发布后改名禁忌（style-guide.txt 规定）
+    首次记录日期：2026-10-17
+    原则：文件名一旦发布到线上就不再改名——旧 URL 会 404，外链/收藏全断。
+    变通：确需改名时，保留旧文件或做跳转页；本次 Evans 改名发生在推送前，
+          属于安全窗口，改名后已全站同步。
+
+================================================================================
+三、推送类故障（Git Data API）
+================================================================================
+
+3.1 代理/出口拦截
+    首次记录日期：2026-10-17
+    症状：git push / git fetch 稍大传输即被 reset 或 unpack-objects 超时；
+          "unpack-objects failed"。
+    原因：本机 git 全局配置 http.proxy=127.0.0.1:7890（用户代理常未运行）；
+          WorkBuddy 沙箱内部代理对 GitHub 无效。
+    解法：① 小请求（API/ls-remote）用环境变量绕行直连：
+          env -u http_proxy -u https_proxy -u HTTP_PROXY -u HTTPS_PROXY \
+              -u all_proxy -u no_proxy <命令>
+          ② 大流量一律走 GitHub REST/Git Data API，只传差异文件。
+
+3.2 Git Data API 422 "Invalid tree info"
+    首次记录日期：2026-10-17
+    症状：POST /git/trees 返回 422 Invalid tree info（与 base_tree 有无、
+          条目数量无关，单条目也失败）。
+    原因：请求体字段名用错——必须是 "tree"，不是 "entries"。
+    解法：POST https://api.github.com/repos/{owner}/{repo}/git/trees
+          body = {"tree": [ {...}, ... ], "base_tree": "..." }
+    教训：此错误已踩过一次，写推送脚本时先核对字段名。
+
+3.3 大文件上传（PDF 动辄 10MB+）
+    首次记录日期：2026-10-17
+    流程：POST /git/blobs（base64 内容）→ POST /git/trees → POST /git/commits
+          → PATCH /git/refs/heads/main（force=False，只允许 fast-forward）。
+    要点：① 一个文件一个 blob，失败只重传该文件；② 每步检查返回码与 sha；
+          ③ 21.6MB 级批次（如三本 PDF）已验证可成，仍建议分批+逐步验证；
+          ④ 推送后跑 selfcheck.py 对比本地/远端 sha，确认落地。
+
+3.4 token 权限
+    首次记录日期：2026-10-17
+    教训：fine-grained token 对仓库 API 报 403；用 classic token（ghp_ 开头，
+          repo+workflow 权限）。token 存于本地维护配置文件（不入库、不公开）。
+    注意：token 不写进任何会推送的文件；.workbuddy/ 与配置文件不推送。
+
+================================================================================
+四、缓存类故障
+================================================================================
+
+4.1 推送后线上看不到变化
+    首次记录日期：2026-10-17
+    症状：页面内容陈旧，过几分钟又正常。
+    原因：Pages CDN max-age=600（10 分钟）。
+    解法：验证时用缓存穿透——curl "https://extremalmath.github.io/xxx?cb=<随机数>"；
+          浏览器侧 Ctrl+F5 强刷。不要因为初查未更新就重复推送。
+
+================================================================================
+五、PDF 内容核验
+================================================================================
+
+5.1 Read 工具读不了 PDF
+    首次记录日期：2026-10-17
+    症状：Read PDF 返回二进制/压缩流乱码。
+    解法：用 pypdf（隔离 venv：C:/Users/video/.workbuddy/binaries/python/
+          envs/default/Scripts/python.exe，已装 pypdf 6.20.1）。
+          现有脚本：.workbuddy/scan_books.py（元数据+首页）、
+          copyright_scan.py（版权页年份）、deep_scan.py（散页文本层探测）。
+
+5.2 扫描件无文本层
+    首次记录日期：2026-10-17
+    症状：pypdf 提取文本为空。
+    解法：WebSearch 检索书名+作者+出版社补书目信息（页数与扫描页数互证）。
+
+5.3 识别"假书籍"
+    首次记录日期：2026-10-17
+    教训：book/ 里的文件不一定是书——FiniteFields_FengLiao.pdf 实为 2 页
+          中文习题笔记。扫描时以首页文本为准，不以文件名想当然。
+
+================================================================================
+六、页面行为类
+================================================================================
+
+6.1 aleph 占位符（ℵ）不变成图片
+    首次记录日期：2026-10-17
+    先判别：picture/<data-pic>.png|jpg|jpeg|webp 都不存在时保持 ℵ 是设计行为，
+          不是故障。放入图片后下次打开自动替换，无需改页面。
+    真故障排查：① 浏览器 Console 看 picture.js 是否加载（200？）；
+          ② data-pic 路径是否与文件位置一致（注意 private/ 层级）；
+          ③ 页面是否漏写 <script src="picture.js">。
+
+6.2 JS 错误导致页面空白/不渲染
+    首次记录日期：2026-10-17
+    工具：node --check <file> 过语法；浏览器 Console 看运行时错误。
+    高发点：updates.js 条目字符串内嵌双引号须转义 \"；
+          now.html 等页面对已删除 DOM 的引用要有 null 判断。
+
+6.3 本地正常、线上异常
+    首次记录日期：2026-10-17
+    顺序排查：① 文件是否真的推送了（selfcheck.py 的 local-only 列表）；
+          ② 是否 CDN 缓存（见 4.1）；③ 文件名大小写（见 2.2）。
+
+6.4 CV 三页页脚「更新日期」不一致
+    首次记录日期：2026-10-17
+    错误所在网页：cv-pdf-generator/cv.html、cv-pdf-generator/cv-zh.html、cv-pdf-generator/cv-en.html
+    错误描述：cv-en.html 显示「Last updated October 2026」；cv-zh.html 与 cv.html
+              无任何更新日期/页脚，三页不一致；且「October 2026」格式与站点标准
+              「Last updated Oct 17, 2026」（短月份 + 日）不符。
+    严重程度：低
+    解决方案：统一三页页脚——cv-en.html 改为 "Last updated Oct 17, 2026"；
+              cv-zh.html 补 "Last updated Oct 17, 2026"；cv.html 补
+              "© 2026 ExtremalMath · Last updated Oct 17, 2026"（或维持精简并注明
+              有意省略）。改后跑 check_links.py 确认无影响。
+
+6.5 CV 中文版姓名未中译（Yuanbo Li → 李元博）
+    首次记录日期：2026-10-17
+    症状：中文简历页眉与简介仍显示英文名 "Yuanbo Li"，与中文版整体语言不符（语言混乱）。
+    原因：extractBasic 抽取 .hero-info h1 后未走 t() 翻译，姓名恒定英文；
+          词典（TERMS）缺 "Yuanbo Li → 李元博"；BIO_ZH 硬编码英文名。
+    解决：① TERMS 加 ['Yuanbo Li', '李元博'] 与 ['Li Yuanbo', '李元博']（gi 不区分
+          大小写，覆盖「名+姓」「姓+名」及大小写变体，统一译为「李元博」）；
+          ② extractBasic 姓名改走 t()；③ BIO_ZH 改「我是李元博（Bruce Lee）…」。
+          已 node --check + test_cv_e2e 验证（zh 输出含「李元博」且不再出现 Yuanbo）。
+
+================================================================================
+七、日常检查工具速查
+================================================================================
+
+check_links.py   全站相对链接检查（已支持 URL 百分号解码）
+                 用法：python .workbuddy/check_links.py
+selfcheck.py     完整自检：本地完整性 + 本地/远端差异 + 配置 + 错误扫描
+                 用法：env -u http_proxy ... python .workbuddy/selfcheck.py
+                 （需访问 GitHub API，必须绕行代理）
+node --check     所有根目录 JS 语法检查
+本地起服务       python -m http.server <端口> --bind 127.0.0.1
+                 然后 curl 逐页验证状态码
+线上缓存穿透     curl "https://extremalmath.github.io/<路径>?cb=$RANDOM$RANDOM"
+
+================================================================================
+八、推送前检查清单（速查）
+================================================================================
+□ 1. 文件已按类别归入文件夹（根目录只放门户页+维护文档）
+□ 2. check_links.py 全站 0 失效（cv 等在建文件死链须先修或确认）
+□ 3. node --check 全部 JS 通过
+□ 4. selfcheck.py 完整通过；确认无"链接先于文件"情况
+□ 5. updates.js 当日条目已同步；涉及规范改动时 about/index 同轮联动
+□ 6. style-guide.html 不在推送清单（永久禁推）
+□ 7. 推送后：树 diff + 线上缓存穿透验证 + Pages built + 写日志
+
+================================================================================
+九、更新记录
+================================================================================
+2026-10-17  初版。基于今日全站检查（21 页 59 链接 0 失效、63 文件完整、
+            线上全量 200/206）与已解决问题整理：Evans PDF 改名同步、
+            cv-generator.js 死链修复、CDN 缓存穿透法、Git Data API
+            tree 字段教训、PDF 核验方法、aleph 占位符行为判别。
+
+2026-10-17  推送 CV 生成器时新增三条经验：
+            ①【新目录首次推送，线上先 404 后正常】cv-pdf-generator/ 为新路径，
+              推送到仓库后（API 确认 blob/树/提交均落地）线上仍 404，但
+              push-rules.txt 等同批文件却 200。根因：Pages 对新目录需重新构建，
+              且 CDN 边缘缓存对首次出现路径未命中；latest build 显示 status=built、
+              commit 正确、duration 45s 后，再等约 8 秒用缓存穿透访问即全部 200。
+              教训：新目录/新路径推送后先查 pages/builds/latest 确认 built，
+              再稍候重试，不要误判为推送失败。
+            ②【过程文档 vs 功能文件分离】cv-pdf-generator/ 内含 PROMPT.md、
+              cv-optimization-notes.md、cv-translation-review.md、cv-dev-notes.txt
+              四个开发过程文档，属内部维护资料，随功能文件一起推送会污染公开站点。
+              解法：只推 4 个功能文件（cv.html/cv-zh.html/cv-en.html/
+              cv-generator.js），过程文档留本地，并在 push-rules.txt 类别表中
+              明确"仅推送功能文件"。
+            ③【根目录过程产物归位】另一 agent 的自检产物 selfcheck-diff-record.txt
+              散落在根目录，违反 push-rules 根目录归属。解法：移入 .workbuddy/
+              （不入库）。同批顺手将 troubleshooting.txt 中 token 存储路径脱敏
+              为"本地维护配置文件"，避免公开站点暴露内部路径。
+
+2026-10-17  设计审查（design-review.txt）落地轮次，追加五条"无法直接修改/存在冲突"事项：
+            ①【M1 · 文案歧义，已删待定】study/materials.html 引言原句 "Almost all
+              the studies involve artificial intelligence." 语义歧义（易被读成"学习
+              内容几乎全是 AI"），且原意（AI 辅助写笔记？）无法核实。解法：删除该句，
+              引言仅保留 "Select a category to view resources."。若用户确认原意是
+              "笔记借助 AI 工具、再人工核对"，可改回准确表述（design-review 3.3 给了
+              现成例句）。
+            ②【N1 · 二选一已决策】nownow/now.html 曾是全站唯一显式 body 字号 17px。
+              审查要求二选一：去掉 17px 回归浏览器默认，或把 17px 写入 style-guide
+              成全站标准。决策：去掉 17px，浏览器默认 16px 为全站基准；style-guide
+              保持不写死正文字号。相关文件：nownow/now.html（若未来改主意，两个动作
+              二选一，切勿只改一半）。
+            ③【A5 · profile.png 仍不添加】about.html 头像继续用 ℵ 占位。原因：项目
+              共识规则"profile.png 暂不添加"。picture/private/profile.png 放入后
+              picture.js 自动替换，无需改页面；任何 agent 不得主动添加该文件。
+            ④【C1 · cv 目录边界】cv-pdf-generator/ 原属另一 agent 域。本轮按用户
+              明确指示执行 C1：cv.html 语言选择卡片已扁平化（去 box-shadow/圆角/
+              translateY 位移动效，改为 res-row 整行链接+悬停绛红）。cv-generator.js
+              逻辑与双语测试断言未触碰；另一 agent 若继续开发，注意其本地副本与本方
+              改动可能不同步，改前先比对远程版本。
+            ⑤【A3/G4 · 按审查暂不行动】Awards & Honors 仅 1 条，审查建议半年内仍
+              只有 1 条时并入 Education——本次保留现状；G4 中文专名（声明/简历按钮/
+              志愿者机构名）属既定口吻，保持页面骨架纯英文、专名中英并存，不扩散中文。
+
+2026-10-17  文档体系整理轮次（无故障，属决策记录）：
+            ①【改名】本文件由 troubleshooting.txt 更名为 trouble.txt，与用户全局
+              指令中的 "trouble.txt" 对齐。
+            ②【txt 推送政策定案】除 README（根目录 README.md、picture/README.txt、
+              picture/private/README.txt）外，一切 txt 文档仅本地保留、不推送。
+              远端已删除 push-rules.txt 与 troubleshooting.txt（本文件），
+              style-guide.txt 已由并行轮次先行下线；线上缓存穿透实测三者均 404，
+              picture/README.txt 保持 200。删除方式：Git Data API 重建不含目标
+              路径的 tree → commit → PATCH refs/heads/main（force=False）。
+            ③【规范合并】style-guide.txt 与 design-review.txt 已合并为新的
+              style-guide.txt（样式与设计规范，含间距刻度、可访问性、首页 hero
+              专章等设计审查结论），design-review.txt 本地已删。
+              相关引用（本文档相关文件行、push-rules.txt）已同步更新。
+
+2026-10-17  复盘改进建议（更优方案，待实施；评估维度=更快/更好/更有效）：
+            ①【推送脚本复用】临时 push_*.py 用完即删、每次重写。更优：固化
+              .workbuddy/push.py（参数=文件清单+commit 信息+可选 base），内部
+              自动绕代理、blob→tree→commit→PATCH、逐步校验、失败重试；token 从
+              config.json 读、不硬编码。→ 更快更稳、少手误。
+            ②【代理绕过封装】env -u 长前缀手打易错。更优：selfcheck.py/push.py
+              内统一 os.environ 清理，或 .workbuddy/gh_direct.sh helper。→ 更快。
+            ③【JS 语法检查扩为全项目】selfcheck 仅查根目录 JS，子目录
+              （cv-pdf-generator/、nownow/data/）需手动。更优：递归 **/*.js，
+              显式排除 .workbuddy 测试脚本。→ 无遗漏。
+            ④【回归测试固化】jsdom 断言脚本用完即删、每次重写。更优：把
+              test_picture.js/test_cv_e2e.js 固化为 .workbuddy/ 正式回归套件，
+              改动后一键重跑。→ 防回归。
+            ⑤【推送后自动核验】缓存穿透 ?cb= 与新目录 404 等待现为手工。更优：
+              push.py 末尾自动轮询 pages/builds/latest 至 built + 关键页自动穿透
+              200，把"初查 MISS 勿误判"自动化。→ 更快更稳。
+            ⑥【CV 中译词典改双语数据（可选·跨域）】ZH/TERMS 词典对抓取后的英文
+              做事后翻译，维护成本高、易漏译。更优：about-data.js 等数据源直接
+              内嵌 zh/en 字段，CV 读双语数据而非翻译。改动触及 cv 域，需与另一
+              agent 协同后再动。
+
+2026-10-17  维护规则修订（记录生命周期）：依用户确认的十项要点重写本规则。
+            要点落实：① 采用方案 A，记录按「静默日」独立计时；② 明确定义
+            「调用（触发）」= 每日复盘判定同类故障是否再现，再现即视为已触发；
+            ③ 退役评估于每次维护会话开头由 agent 执行；④ 每条记录独立计时，
+            仅当连续一整天未触发时静默天数 +1，触发则归零重计；⑤ 静默天数
+            达到 300 日方可退役；⑥ 退役须生成待办并经用户确认后执行；⑦ 既有
+            记录统一补录「首次记录日期」；⑧ 退役前先检索并清理全站对该条引用；
+            ⑨ 设豁免清单，「长期约定」类记录（如二、3 发布后改名禁忌）不纳入
+            退役计划；⑩ 相关表述统一为「design-review 已并入 style-guide.txt」。
+            术语统一：记录删除改称「退役」，引入「静默日」概念。
+
+
+2026-10-18  文件组织整改（依 .workbuddy/file-organization-rules.md 建议 #1/#2/#3/#7 执行）：
+            ①【cv 过程文档彻底移出推送目录】PROMPT.md、cv-optimization-notes.md、
+              cv-translation-review.md、cv-dev-notes.txt 四个开发过程文档从
+              cv-pdf-generator/ 移入 .workbuddy/cv-process-docs/（纯本地、不入库），
+              推送目录只留 4 个功能文件，彻底落实 10-17 记录②的分离要求。
+            ②【源代码归位 code/】notes/1.c、notes/essay/keep.cpp、
+              notes/GraphTheoryHomework/2.c 移入 code/（分别为 code/c/hello_world.c、
+              code/cpp/keep.cpp、code/cpp/graph_theory_homework.cpp；2.c 内容实为
+              C++（include<stdc++.h>），扩展名随内容更正为 .cpp）；code/c_language/
+              更名 code/cpp/（原目录仅含 .cpp 文件，原名名实不符）。
+            ③【版本单一化】Notes_on_Density 笔记 V3/V5、Modeling Drying 旧版、
+              Version1DtoC3.pdf（经 PDF 内容核验为 Density 笔记早期版本，2026-06-29）
+              移入 notes/archive/，主目录只留页面引用的 V6 与 Drying3。
+            ④【拼写修正】talks/PowerPiontPre.pdf → talks/powerpoint_pre.pdf。
+            以上文件均无任何页面引用，移动/改名不影响站内任何链接；页面引用的
+            已上线 PDF（GTM_244 双扩展名等 10 个）是否按 R5 改名统一，与现行
+            「已上线文件一律不改名」规则冲突，待用户确认后另轮处理（见 2.1/2.3）。
+
+2026-10-18  已上线 PDF 全面改名迁移（依用户当日决议，项目留档于
+            .workbuddy/pdf-rename-migration/）：
+            ①【范围】GTM_244 双扩展名（建议#5）+ 9 个命名不统一 PDF（建议#6）
+              + GraphTheoryHomework 目录改名牵连的 property0532.pdf，共 11 个；
+              旧 URL 全部纳入映射（redirects/redirects.conf 11 条 301）。
+            ②【执行】备份（backup/ sha256 逐字节一致 11/11）→ 原地改名 11/11 →
+              五页面 11 处 href 同步更新 → 全站 27 个 HTML/JS 扫描 0 残留 →
+              check_links/selfcheck/node --check 全过；四页面页脚改 10-18。
+            ③【规则修订】style-guide「文件名一旦发布永不改名」与「GTM 记录备查、
+              不改」条款废止，改为：已上线文件改名须经用户批准 + 引用同步 +
+              托管层 301 + 迁移留档；push-rules 一、3 同步。
+            ④【阻塞】GitHub Pages 不支持服务端 301（无 _redirects/.htaccess/
+              反向代理/路由规则；jekyll-redirect-from 仅 meta-refresh 200 页且
+              对 .pdf 路径不可用）。按项目规范第 10 条已停止上线：改名仅在本地，
+              线上旧 URL 仍 200 未 404。待用户决策托管方案（Netlify/Cloudflare
+              Pages 可用 redirects.conf；或自定义域名 + Cloudflare Redirect
+              Rules），301 生效并重跑 verify_redirects.py 至 11/11 后方可推送。
+            ⑤【影响记录】2.1 双扩展名与 2.3 发布后改名禁忌两条记录的处理原则
+              已由本条更新记录迭代；记录本体作为历史存档保留，退役流程不受影响。
+
+2026-10-18  推送前自检与阻塞复核（用户指令：排查 trouble → 内部解法优先 → 备选 →
+            按 push-rules 推送）：
+            ①【自检全过】push-rules 三 全项复跑：check_links.py 21 页 61 链接 0 失效
+              （「待删文件引用」blankk.html / 旧 GTM 名 / book/t.txt 均 0 引用）；
+              node --check 6 个线上 JS 全过；validate_filenames.py 0 违规；
+              check_old_refs.py 27 文件 0 残留；selfcheck.py 60 文件本地完整 NONE、
+              远端 HEAD 8cd1c2a6 未变（无网页端新提交）、Pages status=built。
+            ②【变更集确认】local-only 27（23 个新站点路径：book 3 / code 8 / notes 11 /
+              talks 1；+ competition.html；+ 3 个本地 txt）；remote-only 23（旧路径）；
+              sha-mismatch 6（books/notes/homework/course-essay/materials 五页 +
+              updates.js，含 materials.html 的 Competition 入口改动）。与 2026-10-18
+              迁移条目预期一致。
+            ③【阻塞判定】推送即删除 23 个旧路径→旧 URL 404，违反 push-rules 一.3
+              与项目规范第 10 条。内部解法逐一验证均不可行：2.3 变通「保留旧文件」
+              可保旧 URL 200 但不满足用户 301 硬性要求且留重复文件；「HTML 跳转页
+              替代」被用户规范明禁；redirects.conf（Netlify 语法）GitHub Pages
+              无法消费；jekyll-redirect-from 仅 meta-refresh 200 页且对 .pdf
+              路径受 Content-Type 限制不可用。
+            ④【备选方案（需用户决策，agent 无法单方执行）】A 迁移 Netlify /
+              Cloudflare Pages（Git 连接免费，redirects.conf → _redirects 直接
+              可用）；B 保留 GitHub Pages + 自定义域名 + Cloudflare Redirect
+              Rules。
+            ⑤【规范冲突记录】push-rules 六.2「确认旧路径按预期 404」为通用删除
+              语义，与本次迁移「旧路径须 301、不得 404」冲突；本次以迁移要求
+              为准，301 落地前不上线。已停止上线、标记阻塞（详见
+              .workbuddy/pdf-rename-migration/reports/validation-report.md 第六节）。
+              另：style-guide.txt / push-rules.txt / trouble.txt 及 .workbuddy/
+              按 txt 政策本就不在推送范围，与本次阻塞无关。
+
+2026-10-18  选项 A 落地准备（用户指令"A"=迁移 Netlify/Cloudflare Pages）：
+            ①【已就位】仓库根新增 `_redirects`（11 条 301 规则，与 redirects.conf
+              逐条一致、已剥离注释）+ `netlify.toml`（publish="."，无构建）；两文件
+              GitHub Pages 自动忽略，无副作用，已入待推送变更集。
+            ②【已改造】scripts/verify_redirects.py 新增 --host 参数，可将
+              rename-map.csv 中 extremalmath.github.io 替换为 Netlify 域名后验证 301。
+            ③【剩余外部依赖】需在 Netlify/Cloudflare Pages 用 Git 连接本仓库
+              ExtremalMath/ExtremalMath.github.io（免费、自动识别静态站点）——
+              此操作用户账户完成，agent 无法单方执行。
+            ④【推送策略】保留推送至 Netlify 已连接且可服务之后，确保旧 URL 在
+              任何线上主机均不 404（守规范第 10 条）。连接后流程：Netlify 先部署
+              当前 commit（旧文件）→ 用户确认 → agent 推送完整变更集 → Netlify
+              重部署 → 旧 URL 301→新 URL 200 → verify_redirects.py --host 11/11 PASS。
+            ⑤ 文档同步：README 状态行 + 五（决议 A）+ 新增七（部署步骤）；
+              reports/validation-report.md 新增七（选项 A 落地准备）；本 trouble 条目。
+
+2026-10-18  决策反转（用户指令"不要了，重新做吧！文件名失效就失效吧！"）：
+            ①【撤销 301 迁移】放弃 Netlify/Cloudflare Pages 301 方案；仓库根
+              `_redirects` / `netlify.toml` 已删除；verify_redirects.py 的 --host
+              改造保留（无害，位于 .workbuddy/ 不推送）。
+            ②【接受 404】用户明确接受已上线 PDF 改名后旧 URL 直接 404，撤销此前
+              "旧 URL 不得 404 / 必须 301" 硬性约束 → 推送阻塞解除。
+            ③【规范同步】push-rules.txt 一.3、style-guide.txt 第七/十三/十四节改为
+              "改名只需引用同步 + 迁移留档，不再强制 301"；pdf-rename-migration/README
+              状态与第五节标注作废。
+            ④【执行】按 push-rules 五（Git Data API 增量推送）直接推送完整变更集
+              （11 改名 + 结构移动 12 项 + competition.html + 5 页面 + updates.js）；
+              六 推送后验证（树 diff / 线上 200 / Pages built / 旧路径 404 为预期）。
+            ⑤ 旧链接记录（old-link-record.md / rename-map.csv）保留备查，但不再
+              追求线上 301；backup/ 仍可用于回滚。
+
+2026-10-18  推送完成（接上条决策反转）：commit 5e7d58c1；线上新路径 200、旧路径
+            404（预期）、Pages built。competition.html 首查 404 系 CDN 缓存构建前
+            404，?cb= 穿透后 200。PDF 改名 + 结构整改（第一阶段 12 项 + 第二阶段 11
+            改名 + competition.html + 5 页面 + updates.js）正式上线。
+
+2026-10-18  404.html 链接修复推送（接前序 404 修复 + updates 精简）：
+            ①【失效诊断】404.html 内 File Migration Log 等链接原为相对路径
+              （href="migrations.html"）。GitHub Pages 的自定义 404.html 会被返回给
+              任意未命中 URL，浏览器地址栏停留在深层路径（如 /notes/old.pdf），相对
+              链接被解析成 /notes/migrations.html 而二次 404。目标文件本身均存在。
+            ②【修复】将 404.html 三处链接 + 内联提示改为站点根绝对路径
+              （/index.html、/migrations.html、/nownow/now.html），页脚改 Oct 18；
+              updates.js 合并 10-18 两条为一条精简条目（≤100 词）。
+            ③【自检修正】check_links.py 误将上述根绝对路径判为死链，已修复使之支持
+              根绝对路径解析（见 1.5）；复跑 0 失效。node --check 全过。
+            ④【推送】Git Data API 增量推送 commit eac17936295a0068d6a18a3106cce9e74ce08b07；
+              变更集 2 改 / 0 增 / 0 删（404.html、updates.js）。Pages 构建先 building
+              后 built；线上 404.html 穿透验证已含根绝对链接、旧 PDF 路径 404（预期）。
+            ⑤ 本 trouble 新增 1.5 条记录根绝对路径误报问题及解法。
+
+================================================================================
+十、今日工作总结（2026-10-18）
+================================================================================
+（按用户要求的结构化总结，独立于上面「更新记录」的流水条目，便于复盘）
+
+一、今日工作概述
+--------------------------------------------------------------------------------
+1. 站点内容收尾：study/competition.html 定稿（授权说明、年份口径 2026、
+   "年+月"时间格式、页脚仅保留 CV 年月制、文案润色不改原意）。
+2. 规范文档：新增 .workbuddy/rename-rules.md（文件名格式/前缀后缀/匹配模式/
+   8 步改名流程/引用同步）与 .workbuddy/validate_filenames.py（基线正则 +
+   7 类违规检测，实测 0 违规）。
+3. 结构整改与改名迁移落地：代码归入 code/c、code/cpp，旧版笔记归档 notes/archive，
+   修正 talks/ 拼写，CV 过程文档移出发布树；11 个已上线 PDF 改小写下划线名并
+   同步五页面引用；新增 Competitions 页。经 Git Data API 推送 commit 5e7d58c1。
+4. 文件迁移公告：新增根 migrations.html（数据驱动、按文件名去重仅显最新、筛选框），
+   数据源 .workbuddy/migrations.json → 自动生成 migrations-data.js；公告接入
+   index/materials/404 与 updates.js（commit c12ab0d3、3e2aeee5）。
+5. 公告精简：updates.js 的 2026-10-18 两条合并为一条 ≤100 词摘要。
+6. 404 链接修复：诊断并修复 404.html 的 File Migration Log 等链接在 GitHub Pages
+   深度 404 场景下失效的问题（改根绝对路径），修复 check_links.py 误报，二次推送
+   commit eac1793。
+
+二、遇到的问题、改进方法与实际效果
+--------------------------------------------------------------------------------
+【问题 1】404.html 内 File Migration Log / Back to Home / now 链接失效。
+  现象：访客从旧 PDF 链接（如 /notes/old.pdf）进入自定义 404 后，点击链接二次 404。
+  根因：GitHub Pages 的自定义 404.html 会被返回给任意未命中 URL，浏览器地址栏
+        仍停留在该深层路径；404.html 使用相对链接（href="migrations.html"）被解析
+        成 /notes/migrations.html，文件不存在。目标文件本身均存在。
+  改进：将 404.html 全部链接改为站点根绝对路径（/index.html、/migrations.html、
+        /nownow/now.html），页脚日期同步 Oct 18。
+  效果：线上穿透验证 404.html HTTP 200 且含根绝对链接，点击可从任意深度正确跳转；
+        旧 PDF 路径仍按预期 404 并引导至迁移日志。
+
+【问题 2】check_links.py 将根绝对路径误判为死链。
+  现象：改完 404.html 后自检报 4 处 BROKEN LINKS（resolves to: ..\..\...）。
+  根因：检查器把以 "/" 开头的网站根绝对路径当相对路径解析；Windows 下
+        os.path.join(ROOT, "/x") 返回 "D:/x"（保留盘符、丢弃目录），指向站点根外。
+  改进：check_links.py 增加 pathpart.startswith('/') 分支，去掉前导斜杠后以 ROOT
+        为基准解析再判断 exists。
+  效果：复跑 0 失效，自检重新可用；该坑已固化为 trouble 1.5 防复发。
+
+【问题 3】已上线 PDF 改名后旧 URL 必须 301（前期阻塞）。
+  现象：改名即删旧路径→旧 URL 404，违反当时的"旧 URL 不得 404 / 须 301"约束，
+        推送被阻塞。
+  根因：经 WebSearch 多源核实，GitHub Pages 无服务端 301 能力（无 _redirects/
+        .htaccess/反代；jekyll-redirect-from 仅 meta-refresh 200 页且对 .pdf 受限）。
+  改进：先备 Netlify 方案（A，仓库根加 _redirects/netlify.toml）供决策；用户最终
+        反转决策，放弃 301、接受旧 URL 直接 404，撤销相关硬编码约束。
+  效果：阻塞解除，改名+结构整改完整变更集成功上线（commit 5e7d58c1）。
+
+【问题 4】updates.js 条目冗余。
+  现象：2026-10-18 两条公告合计超 100 词且含已被否决的"301 待配置"陈旧表述。
+  改进：合并为一条 ≤100 词核心摘要，并删除过时 301 措辞。
+  效果：公告简洁、口径与线上状态一致。
+
+三、关键问题复盘：更优 / 更高效方案对比
+--------------------------------------------------------------------------------
+【复盘 A】404 页链接失效的预防
+  已用方案：事后发现失效 → 改为根绝对路径（最快止血）。
+  备选 1：在 404.html 加 <base href="/">，使页面内所有相对链接自动基于根解析。
+          优：改动极小、一次性解决所有相对引用；缺：base 会影响全页相对引用（本页
+          无其他相对资源，安全），且可读性略降、易与个别需相对解析的链接冲突。
+  备选 2：把"404 页禁用相对链接、强制根绝对"写入 push-rules/style-guide 作为前置
+          检查规则，提交前即拦截。
+          优：预防性强、杜绝返工；缺：需额外流程/工具支撑。
+  对比结论：根绝对路径直接改是当前最优（稳健且零新增依赖）；若能早一步把该约束
+          写入规范，可省去本次返工与二次推送。建议在 push-rules 一.4 或四 增补一条
+          "404.html 链接须为根绝对路径"。
+
+【复盘 B】链接检查器对根绝对路径的误报
+  已用方案：发现误报 → 特判 "/" 开头（本次已落地，效果 0 失效）。
+  更优：让检查器默认以站点根为基准解析 "/" 开头路径（本次即此做法），并可扩展支持
+        自定义 <base>。优：一次修复长期受益、无显著劣势；缺：需维护解析逻辑。
+  对比结论：本次修复即最优解，已记入 trouble 1.5，无需再投资。
+
+【复盘 C】301 阻塞的决策效率
+  已用方案：先备 Netlify 方案（A）呈现选项 → 用户反转接受 404。
+  更优：在投入 Netlify 准备（建 _redirects/netlify.toml 后又删除）之前，先一步用
+        WebSearch 确认"GitHub Pages 是否支持服务端 301"。
+          优：早核实可省去 A 方案的创建/删除往返，提效明显；
+          缺：用户决策本身需要选项呈现，准备 A 也帮助用户直观评估"迁平台成本"，
+              不完全是浪费。
+  对比结论：把"平台能力可行性"列为改名/迁移类任务的第一步核查，写入标准流程可提效；
+          但保留"选项呈现"仍有沟通价值。
+
+【复盘 D】整体推送与验证流程
+  已用方案：Git Data API 增量（push_site.py）+ 手动 dry-run + 线上 ?cb= 穿透验证。
+  更优（历史建议⑤）：push_site.py 末尾自动轮询 pages/builds/latest 至 built +
+        关键页自动穿透 200，把"初查 MISS 勿误判"自动化。
+          优：省手工等待、防误判、可重复；缺：需写脚本（约 20 行）。
+  对比结论：当前手工流程已可行且可靠；建议将自动轮询+穿透固化为 push_site.py 收尾
+          步骤，作为长期提效项（非紧急）。
+
+【总体结论】
+  今日主线（改名迁移上线 + 公告 + 404 修复）已闭环，两次推送（5e7d58c1、eac1793）
+  均验证通过。最值得固化的两点提效：① 404.html 链接强制根绝对（写入规范防返工）；
+  ② push_site.py 收尾自动轮询 Pages built + 穿透验证。其余改进（检查器根绝对解析）
+  已就地修复并留档。

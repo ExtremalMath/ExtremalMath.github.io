@@ -4,10 +4,6 @@
 
 const siteUpdates = [
    {
-        date: "2026-10-22",
-        text: "Added a Code page (code/index.html) listing all uploaded source files in code/cpp/data_structure (C++ only now, after removing hello_world.c, keep.cpp and graph_theory_homework.cpp), rendered from code-data.js; each row opens a local syntax-highlighted viewer (code/viewer.html) decoded as UTF-8 instead of rendering raw source. Added its entry to the Study Materials list and the home page entry links. Updated the Now page footer to today and refreshed the 2026 Autumn semester summary. Now page now renders a five-module card section (Study, Tools, Thoughts, Events, Status) with the data driven by the same data/2026autumn.js. Style: unified the hover style of all hyperlinks on every page (deep red #8B0000 with a skewX(-10deg) tilt, 0.2s ease), keeping navigation 'Back to ...' links with their original style. Registered this as a site-wide exception in style-guide.txt.",
-    },
-   {
         date: "2026-10-21",
         text: "Added a site-wide Aleph (א) favicon set — ICO, SVG, and PNG at 16/32/192/512 plus the 180×180 Apple touch icon — stored in picture/ and linked from every page. Also moved the File Migration Log link out of the Materials list to the bottom of the page, widened the log page to 960px with a fixed-layout table so long paths wrap, and rebuilt the Academic Sites page as a data-driven list (study/sites.js) with five new entries grouped by category.",
     },

@@ -27,7 +27,7 @@
         .page { max-width: 720px; margin: 0 auto; padding: 40px 20px 60px; }
 
         .back-link { display: inline-block; margin-bottom: 24px; text-decoration: none; color: var(--accent); font-weight: 600; }
-        .back-link:hover { color: #8B0000; text-decoration: underline; transform: skewX(-10deg); }
+        .back-link:hover { color: var(--accent-deep); text-decoration: underline; }
 
         .page-head { border-bottom: 2px solid var(--accent); padding-bottom: 12px; margin-bottom: 28px; }
         .page-head h1 { font-size: 1.8em; color: var(--ink); }
@@ -42,26 +42,11 @@
             border-bottom: 1px solid var(--line);
             text-decoration: none;
             color: var(--ink);
-            transition: color 0.2s ease;
+            transition: color 0.15s;
         }
-        .res-row:hover { color: #8B0000; }
-        .res-row:focus-within { outline: 2px solid #8B0000; outline-offset: 2px; }
+        .res-row:hover { color: var(--accent); }
         .res-row .name { font-weight: 600; color: var(--ink); }
         .res-row .sub { font-size: 0.86em; color: var(--muted); }
-
-        /* Link hover: tilt + deep red. The skew is applied to the inline text
-           wrapper inside each link (added by sites.js), not to the flex row,
-           so the row layout never shifts. Plain text outside links is
-           unaffected. */
-        .text-hover {
-            display: inline;
-            transition: color 0.2s ease, transform 0.2s ease;
-        }
-        .text-hover:hover {
-            color: #8B0000;
-            transform: skewX(-10deg);
-            display: inline-block;
-        }
 
         .category {
             margin-top: 32px;
@@ -83,26 +68,13 @@
             flex-shrink: 0;
             max-width: 45%;
         }
-        /* The alert sits inside .alert-wrap, a sibling of .name and .sub inside
-           the flex row. The wrapper — not the inner .alert — carries the flex
-           constraints so the row layout is unchanged. */
-        .alert-wrap { flex-shrink: 0; max-width: 45%; }
 
         .footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line); text-align: center; font-size: 0.85em; color: var(--muted); }
 
         @media (prefers-reduced-motion: reduce) {
             * { transition: none !important; }
         }
-    
-/* All hyperlinks: hover makes the text deep red and tilted.
-   Navigation "Back to ..." links (class .back-link or .btn) keep their original style. */
-a:not(.back-link):not(.btn):hover {
-  color: #8B0000;
-  transform: skewX(-10deg);
-  transform-origin: left center;
-  transition: color 0.2s ease, transform 0.2s ease;
-}
-</style>
+    </style>
 </head>
 <body>
     <div class="page">

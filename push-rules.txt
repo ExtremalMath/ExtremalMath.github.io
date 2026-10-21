@@ -1,0 +1,76 @@
+PUSH RULES
+推送规范：向 GitHub 仓库 ExtremalMath/ExtremalMath.github.io 推送改动的流程约定。
+
+
+适用范围
+
+本规范约定所有向站点仓库（分支 main）推送改动的流程。任何推送，无论大小，都按本规范执行。规范与 style-guide.txt 同目录存放；两者不一致时，以 style-guide.txt 的维护规则为先（style-guide.txt 以最新合并版为准，并在文内标注合并日期）。
+
+
+一、推送前的目录归类（硬性要求）
+
+1. 文件必须先按类别归入相应文件夹，才允许推送，不得散落在根目录。根目录只放门户页面与全站共用脚本，白名单如下：
+   门户页面：index.html、about.html、statement.html、404.html、myteachers.html、teaching.html；
+   全站共用脚本：updates.js、picture.js、about-data.js；
+   站点基础文件：README.md、LICENSE；
+   本地维护文档（例外，仅本地保留、不推送）：push-rules.txt、style-guide.txt、trouble.txt。
+   myteachers.html 是「我的老师」页面；teaching.html 是「我教授他人的材料」页面，二者用途不同、不可混为一谈。
+2. 现有类别及归属：
+   - study/      学习资料页（materials 入口 + homework、books、notes、course-essay、academic-sites）
+   - research/   研究页（research-log、research-directions）
+   - talks/      汇报与报告页（talks、report-kitchen-waste）及汇报用 PDF
+   - teaching/   教学内容（暂为根目录占位页，内容就绪后归入）
+   - nownow/     "Current Work" 页及其 data/ 数据
+   - code/       程序代码，按语言分子文件夹（C 入 code/c/，C++ 入 code/cpp/，如 code/cpp/data_structure/）
+   - book/       书籍 PDF
+   - notes/      课程笔记、作业 PDF；同一成果主目录只留当前版本，历史版本入 notes/archive/（随站点推送）
+   - picture/    全站图片；个人图片放 picture/private/ 子文件夹，占位与替换规则见 style-guide.txt「图片（PICTURES）」节
+   - cv-pdf-generator/  简历 PDF 生成器（cv.html 双语入口 + cv-zh.html/cv-en.html 双语简历页 + cv-generator.js 核心函数）。仅推送功能文件；开发过程文档（PROMPT.md、cv-dev-notes.txt、cv-optimization-notes.md、cv-translation-review.md）已移入 .workbuddy/cv-process-docs/，留本地、不入库。
+3. 文件命名：英文、小写、单词间用下划线（如 twenty_four_game.cpp、gtm_244_bondy_murty_graph_theory.pdf）。已上线文件改名须经用户明确批准，并满足：全站引用同步更新、迁移留档（.workbuddy/pdf-rename-migration/）。2026-10-18 用户末次裁决放弃托管层 301 要求，旧 URL 允许直接 404，改名即可上线（GitHub Pages 无服务端 301 能力，但用户已接受此后果，见 trouble.txt 更新记录末条）。本地未发布的文件可自由改名（改名前先全站 grep 引用并同步更新）。
+4. 新页面先本地写好并预览，经确认后再推送；不得先把链接推上线、页面后补（曾因此出现 404）。
+
+
+二、禁推文件
+
+- style-guide.html：任何情况下不得推送、不得修改。该文件已从本地删除，条款仅作历史约束；网站 "Style guide" 链接已移除，不再指向任何规范文件。
+- txt 文档推送政策（2026-10-17 定案）：除 README（根目录 README.md、picture/README.txt、picture/private/README.txt）外，一切 txt 文档仅本地保留、一律不推送。此前误推的 style-guide.txt、push-rules.txt、troubleshooting.txt 已从远端删除，本地保留（删除方式见五、第 5 条）。
+- 其余文件按需推送。
+
+
+三、推送前自检（全部通过才可推送）
+
+1. 变更检测：先经 GitHub API 拉取远程 HEAD 并与本地比对，确认没有遗漏用户在网页端的提交；只推差异文件。
+2. 链接检查：运行 .workbuddy/check_links.py，全站相对链接 0 失效；确认没有页面指向未推送的文件（txt 文档仅 README 可推送，见二、）。
+3. 语法检查：JS 文件用 node --check 校验。
+4. 完整性检查：运行 .workbuddy/selfcheck.py（本地文件可读、非空、PDF 魔数、HTML 结构、本地与远端一致）。
+5. 图片检查：新增图片已归入 picture/（个人图片入 private/），文件名小写、下划线连接；使用 aleph 占位符时，data-pic 与目标文件路径（不含扩展名）一致。
+
+
+四、同步更新（与 style-guide.txt 维护规则一致）
+
+每轮改动必须在同一轮内完成三处同步：
+1. updates.js —— 改动写入顶部当日条目，同日多条合并为一条；**每日条目总长度不超过 100 个英文单词**，只突出最重要的更新（新页面 / 新功能 / 删除），让人一眼看出项目仍在持续更新即可，不罗列琐碎改动。
+2. about.html —— 修正所有受影响的链接与文字。
+3. index.html —— 同上。
+每个被修改的页面，页脚 "Last updated" 日期改为当天（格式：Last updated Oct 17, 2026）。
+
+
+五、推送方式
+
+1. 目标远端：https://github.com/ExtremalMath/ExtremalMath.github.io，分支 main。
+2. 方式：Git Data API 增量推送（读取远程 tree → 生成/更新 blob → 提交 → PATCH refs/heads/main），force=False 保持 fast-forward；接口超时时自动重试。
+3. 不使用 git push（本机出口对 GitHub 大流量双向拦截，git 线协议不可用）。
+4. 大文件（PDF 等）用 base64 编码上传。
+5. 删除远端文件（本地保留不动）：读取远端 tree → 重建不含目标路径的完整 tree 列表 → 提交 → PATCH refs/heads/main（force=False）。字段名必须为 "tree"（见 trouble.txt 3.2）。
+
+
+六、推送后验证（全部通过才算完成）
+
+1. 树级 diff：确认本次改动集与预期完全一致（无多余增删）。
+2. 链接与页面：线上抓取关键页面确认 200；确认旧路径按预期 404。
+3. Pages 状态：确认构建成功（status=built）；CDN 有缓存（max-age=600），最长 10 分钟后线上刷新。
+4. 工作日志：将本轮改动记入 .workbuddy/memory/ 当日日志。
+
+
+© 2026 ExtremalMath
+Last updated Oct 18, 2026

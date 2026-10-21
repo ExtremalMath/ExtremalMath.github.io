@@ -176,7 +176,7 @@
         }
         h2 .icon { margin-right: 6px; }
 
-        /* 章节引导句（如课程、技能等小节下的说明链接） */
+        /* 章节引导句（如 My Teachers 下的说明链接） */
         .section-note { font-size: 0.92em; color: var(--muted); margin-bottom: 4px; }
         .section-note a { color: var(--accent); text-decoration: none; }
         .section-note a:hover { color: var(--accent-deep); text-decoration: underline; }
@@ -491,16 +491,7 @@
             * { transition: none !important; }
         }
 
-    
-/* All hyperlinks: hover makes the text deep red and tilted.
-   Navigation "Back to ..." links (class .back-link or .btn) keep their original style. */
-a:not(.back-link):not(.btn):hover {
-  color: #8B0000;
-  transform: skewX(-10deg);
-  transform-origin: left center;
-  transition: color 0.2s ease, transform 0.2s ease;
-}
-</style>
+    </style>
 </head>
 <body>
 
@@ -570,6 +561,11 @@ a:not(.back-link):not(.btn):hover {
                     <div class="period">– 2024</div>
                 </div>
             </div>
+
+            <!-- 老师 -->
+            <h2><span class="icon">👨‍🏫</span> My Teachers</h2>
+            <p class="section-note">The instructors behind these courses are listed on the
+                <a href="myteachers.html">My Instructors</a> page.</p>
 
             <!-- 核心课程 -->
             <h2><span class="icon">📖</span> Core Coursework</h2>

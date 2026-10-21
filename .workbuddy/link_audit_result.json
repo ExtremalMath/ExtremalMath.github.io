@@ -1,0 +1,653 @@
+{
+  "total": 79,
+  "by_category": {
+    "relative": 70,
+    "anchor": 1,
+    "external": 7,
+    "mailto": 1
+  },
+  "dead": [],
+  "external_error": [],
+  "external_unverified": [
+    {
+      "file": "cv-pdf-generator/cv-generator.js",
+      "link": "https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js",
+      "kind": "js-http",
+      "category": "external",
+      "status": "UNVERIFIED",
+      "http": "<urlopen error Tunnel connection failed: 502 Bad Gateway>"
+    }
+  ],
+  "records": [
+    {
+      "file": "404.html",
+      "link": "/index.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "index.html"
+    },
+    {
+      "file": "404.html",
+      "link": "/migrations.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "migrations.html"
+    },
+    {
+      "file": "404.html",
+      "link": "/nownow/now.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "nownow/now.html"
+    },
+    {
+      "file": "about.html",
+      "link": "#",
+      "kind": "html-attr",
+      "category": "anchor",
+      "status": "NON-HTTP"
+    },
+    {
+      "file": "about.html",
+      "link": "about-data.js",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "about-data.js"
+    },
+    {
+      "file": "about.html",
+      "link": "cv-pdf-generator/cv.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "cv-pdf-generator/cv.html"
+    },
+    {
+      "file": "about.html",
+      "link": "drama.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "drama.html"
+    },
+    {
+      "file": "about.html",
+      "link": "https://mp.weixin.qq.com/s/X09H5X7RnB3puzs0S2R43w",
+      "kind": "html-attr",
+      "category": "external",
+      "status": "OK",
+      "http": 200
+    },
+    {
+      "file": "about.html",
+      "link": "https://orcid.org/0009-0007-8831-9591",
+      "kind": "html-attr",
+      "category": "external",
+      "status": "OK",
+      "http": 200
+    },
+    {
+      "file": "about.html",
+      "link": "index.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "index.html"
+    },
+    {
+      "file": "about.html",
+      "link": "mailto:",
+      "kind": "html-attr",
+      "category": "mailto",
+      "status": "NON-HTTP"
+    },
+    {
+      "file": "about.html",
+      "link": "myteachers.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "myteachers.html"
+    },
+    {
+      "file": "about.html",
+      "link": "nownow/now.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "nownow/now.html"
+    },
+    {
+      "file": "about.html",
+      "link": "picture.js",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "picture.js"
+    },
+    {
+      "file": "about.html",
+      "link": "research/research-directions.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "research/research-directions.html"
+    },
+    {
+      "file": "about.html",
+      "link": "research/research-log.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "research/research-log.html"
+    },
+    {
+      "file": "about.html",
+      "link": "talks/talks.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "talks/talks.html"
+    },
+    {
+      "file": "cv-pdf-generator/cv-en.html",
+      "link": "../about.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "about.html"
+    },
+    {
+      "file": "cv-pdf-generator/cv-en.html",
+      "link": "cv-generator.js",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "cv-pdf-generator/cv-generator.js"
+    },
+    {
+      "file": "cv-pdf-generator/cv-generator.js",
+      "link": "https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js",
+      "kind": "js-http",
+      "category": "external",
+      "status": "UNVERIFIED",
+      "http": "<urlopen error Tunnel connection failed: 502 Bad Gateway>"
+    },
+    {
+      "file": "cv-pdf-generator/cv-zh.html",
+      "link": "../about.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "about.html"
+    },
+    {
+      "file": "cv-pdf-generator/cv-zh.html",
+      "link": "cv-generator.js",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "cv-pdf-generator/cv-generator.js"
+    },
+    {
+      "file": "cv-pdf-generator/cv.html",
+      "link": "../about.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "about.html"
+    },
+    {
+      "file": "cv-pdf-generator/cv.html",
+      "link": "cv-en.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "cv-pdf-generator/cv-en.html"
+    },
+    {
+      "file": "cv-pdf-generator/cv.html",
+      "link": "cv-zh.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "cv-pdf-generator/cv-zh.html"
+    },
+    {
+      "file": "drama.html",
+      "link": "about.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "about.html"
+    },
+    {
+      "file": "drama.html",
+      "link": "drama-data.js",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "drama-data.js"
+    },
+    {
+      "file": "drama.html",
+      "link": "drama_repo.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "drama_repo.html"
+    },
+    {
+      "file": "drama_repo.html",
+      "link": "drama.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "drama.html"
+    },
+    {
+      "file": "index.html",
+      "link": "about.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "about.html"
+    },
+    {
+      "file": "index.html",
+      "link": "https://events.vercount.one/js",
+      "kind": "html-attr",
+      "category": "external",
+      "status": "OK",
+      "http": 200
+    },
+    {
+      "file": "index.html",
+      "link": "migrations.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "migrations.html"
+    },
+    {
+      "file": "index.html",
+      "link": "statement.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "statement.html"
+    },
+    {
+      "file": "index.html",
+      "link": "study/materials.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "study/materials.html"
+    },
+    {
+      "file": "index.html",
+      "link": "updates.js",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "updates.js"
+    },
+    {
+      "file": "migrations.html",
+      "link": "index.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "index.html"
+    },
+    {
+      "file": "migrations.html",
+      "link": "migrations-data.js",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "migrations-data.js"
+    },
+    {
+      "file": "myteachers.html",
+      "link": "about.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "about.html"
+    },
+    {
+      "file": "nownow/now.html",
+      "link": "../about.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "about.html"
+    },
+    {
+      "file": "nownow/now.html",
+      "link": "data/",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "nownow/data"
+    },
+    {
+      "file": "nownow/now.html",
+      "link": "data/semesters.js",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "nownow/data/semesters.js"
+    },
+    {
+      "file": "research/research-directions.html",
+      "link": "../about.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "about.html"
+    },
+    {
+      "file": "research/research-log.html",
+      "link": "../about.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "about.html"
+    },
+    {
+      "file": "statement.html",
+      "link": "index.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "index.html"
+    },
+    {
+      "file": "study/academic-sites.html",
+      "link": "https://arxiv.org/",
+      "kind": "html-attr",
+      "category": "external",
+      "status": "OK",
+      "http": 200
+    },
+    {
+      "file": "study/academic-sites.html",
+      "link": "https://link.springer.com/",
+      "kind": "html-attr",
+      "category": "external",
+      "status": "OK",
+      "http": 200
+    },
+    {
+      "file": "study/academic-sites.html",
+      "link": "https://mathworld.net.cn/",
+      "kind": "html-attr",
+      "category": "external",
+      "status": "OK",
+      "http": 200
+    },
+    {
+      "file": "study/academic-sites.html",
+      "link": "materials.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "study/materials.html"
+    },
+    {
+      "file": "study/books.html",
+      "link": "../book/evans_pde_2nd_ed.pdf",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "book/evans_pde_2nd_ed.pdf"
+    },
+    {
+      "file": "study/books.html",
+      "link": "../book/finite_fields_applications_feng_liao.pdf",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "book/finite_fields_applications_feng_liao.pdf"
+    },
+    {
+      "file": "study/books.html",
+      "link": "../book/gtm_244_bondy_murty_graph_theory.pdf",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "book/gtm_244_bondy_murty_graph_theory.pdf"
+    },
+    {
+      "file": "study/books.html",
+      "link": "../book/royden_real_analysis.pdf",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "book/royden_real_analysis.pdf"
+    },
+    {
+      "file": "study/books.html",
+      "link": "../book/strass_partial_differential_equations_2007.pdf",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "book/strass_partial_differential_equations_2007.pdf"
+    },
+    {
+      "file": "study/books.html",
+      "link": "materials.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "study/materials.html"
+    },
+    {
+      "file": "study/competition.html",
+      "link": "../notes/modeling_and_application_of_heat_and_mass_transfer_in_medicinal_material_drying3.pdf",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "notes/modeling_and_application_of_heat_and_mass_transfer_in_medicinal_material_drying3.pdf"
+    },
+    {
+      "file": "study/competition.html",
+      "link": "materials.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "study/materials.html"
+    },
+    {
+      "file": "study/course-essay.html",
+      "link": "../notes/essay/8th_edition.pdf",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "notes/essay/8th_edition.pdf"
+    },
+    {
+      "file": "study/course-essay.html",
+      "link": "../notes/essay/final_report_2.pdf",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "notes/essay/final_report_2.pdf"
+    },
+    {
+      "file": "study/course-essay.html",
+      "link": "../notes/modeling_and_application_of_heat_and_mass_transfer_in_medicinal_material_drying3.pdf",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "notes/modeling_and_application_of_heat_and_mass_transfer_in_medicinal_material_drying3.pdf"
+    },
+    {
+      "file": "study/course-essay.html",
+      "link": "materials.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "study/materials.html"
+    },
+    {
+      "file": "study/homework.html",
+      "link": "../notes/finite_fields_exercise1_t7_t10_notes.pdf",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "notes/finite_fields_exercise1_t7_t10_notes.pdf"
+    },
+    {
+      "file": "study/homework.html",
+      "link": "../notes/graph_theory_homework/exercise_0526.pdf",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "notes/graph_theory_homework/exercise_0526.pdf"
+    },
+    {
+      "file": "study/homework.html",
+      "link": "../notes/graph_theory_homework/proof_of_inequation_0521.pdf",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "notes/graph_theory_homework/proof_of_inequation_0521.pdf"
+    },
+    {
+      "file": "study/homework.html",
+      "link": "materials.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "study/materials.html"
+    },
+    {
+      "file": "study/materials.html",
+      "link": "../index.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "index.html"
+    },
+    {
+      "file": "study/materials.html",
+      "link": "../migrations.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "migrations.html"
+    },
+    {
+      "file": "study/materials.html",
+      "link": "../teaching.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "teaching.html"
+    },
+    {
+      "file": "study/materials.html",
+      "link": "academic-sites.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "study/academic-sites.html"
+    },
+    {
+      "file": "study/materials.html",
+      "link": "books.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "study/books.html"
+    },
+    {
+      "file": "study/materials.html",
+      "link": "competition.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "study/competition.html"
+    },
+    {
+      "file": "study/materials.html",
+      "link": "course-essay.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "study/course-essay.html"
+    },
+    {
+      "file": "study/materials.html",
+      "link": "homework.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "study/homework.html"
+    },
+    {
+      "file": "study/materials.html",
+      "link": "notes.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "study/notes.html"
+    },
+    {
+      "file": "study/notes.html",
+      "link": "../notes/notes_on_density_conditions_for_triangles_in_multipartite_graph_v6.pdf",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "notes/notes_on_density_conditions_for_triangles_in_multipartite_graph_v6.pdf"
+    },
+    {
+      "file": "study/notes.html",
+      "link": "materials.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "study/materials.html"
+    },
+    {
+      "file": "talks/report-kitchen-waste.html",
+      "link": "talks.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "talks/talks.html"
+    },
+    {
+      "file": "talks/talks.html",
+      "link": "../about.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "about.html"
+    },
+    {
+      "file": "talks/talks.html",
+      "link": "report-kitchen-waste.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "talks/report-kitchen-waste.html"
+    },
+    {
+      "file": "teaching.html",
+      "link": "study/materials.html",
+      "kind": "html-attr",
+      "category": "relative",
+      "status": "OK",
+      "resolves": "study/materials.html"
+    }
+  ]
+}
