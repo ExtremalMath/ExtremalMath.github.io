@@ -5,7 +5,7 @@
 const siteUpdates = [
    {
         date: "2026-10-21",
-        text: "Added a site-wide Aleph (א) favicon set — ICO, SVG, and PNG at 16/32/192/512 plus the 180×180 Apple touch icon — stored in picture/ and linked from every page. Transparent and cream-background variants are both available.",
+        text: "Added a site-wide Aleph (א) favicon set — ICO, SVG, and PNG at 16/32/192/512 plus the 180×180 Apple touch icon — stored in picture/ and linked from every page. Also moved the File Migration Log link out of the Materials list to the bottom of the page, and widened the log page to 960px with a fixed-layout table so long paths wrap instead of overflowing.",
     },
    {
         date: "2026-10-20",
