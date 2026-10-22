@@ -5,7 +5,7 @@
 const siteUpdates = [
    {
         date: "2026-10-22",
-        text: "Added a Code page (code/index.html) listing all uploaded source files in code/cpp/data_structure (C++ only now, after removing hello_world.c, keep.cpp and graph_theory_homework.cpp), rendered from code-data.js; each row opens a local syntax-highlighted viewer (code/viewer.html) decoded as UTF-8 instead of rendering raw source. Added its entry to the Study Materials list and the home page entry links. Updated the Now page footer to today and refreshed the 2026 Autumn semester summary. Now page now renders a five-module card section (Study, Tools, Thoughts, Events, Status) with the data driven by the same data/2026autumn.js. Style: unified the hover style of all hyperlinks on every page (deep red #8B0000 with a skewX(-10deg) tilt, 0.2s ease), keeping navigation 'Back to ...' links with their original style. Registered this as a site-wide exception in style-guide.txt.",
+        text: "Added a Code page (code/index.html) listing source files, rendered via code-data.js with a local UTF-8 syntax-highlighted viewer; linked from Study Materials and home page. Now page renders a five-module card (Study, Tools, Thoughts, Events, Status) driven by data/2026autumn.js. Switched data registration from unsafe window.SEMESTER_DATA[id] = data to a guarded SemesterRegistry: validated ids, frozen read-only data, no prototype pollution, clear() cleanup. Updated all pages' hyperlink hover style (deep red #8B0000 with skewX(-10deg) tilt, 0.2s ease), keeping 'Back to ...' links intact; registered in style-guide.txt.",
     },
    {
         date: "2026-10-21",
@@ -18,19 +18,19 @@ const siteUpdates = [
 
    {
         date: "2026-10-18",
-        text: "Refreshed the site: renamed 11 published PDFs to lowercase-with-underscores and synced every page link; reorganized code into code/c and code/cpp, archived superseded notes, fixed a misspelled talk file, and moved CV process docs out of the published tree. Added a Competitions page (2026 CUMCM Problem A, anonymized, team-approved). Launched a data-driven File Migration Log (migrations.html) mapping old→new paths that auto-updates from migrations-data.js, linked from the 404 page and site nav. Old URLs now 404 and point visitors to the log."
+        text: "Refreshed the site: renamed 11 published PDFs to lowercase-with-underscores and synced every page link; reorganized code into code/c and code/cpp, archived superseded notes, fixed a misspelled talk file, and moved CV process docs out of the published tree. Added a Competitions page (2026 CUMCM Problem A, anonymized, team-approved). Launched a data-driven File Migration Log (migrations.html) mapping old→new paths that auto-updates from migrations-data.js, linked from the 404 page and site nav. Old URLs now 404 and point visitors to the log.",
     },
    {
         date: "2026-10-17",
-        text: "Refactored the About page Research Interests and Awards & Honors sections into a data-driven format. Content now lives in about-data.js (single source of truth) and is rendered by a small inline script on About; the CV generator (cv-generator.js) also reads about-data.js so the page and the CV stay in sync. Editing about-data.js updates both the page and the CV."
+        text: "Refactored the About page Research Interests and Awards & Honors sections into a data-driven format. Content now lives in about-data.js (single source of truth) and is rendered by a small inline script on About; the CV generator (cv-generator.js) also reads about-data.js so the page and the CV stay in sync. Editing about-data.js updates both the page and the CV.",
     },
    {
         date: "2026-10-17",
-        text: "Added a Research Directions page, a published Style Guide, and picture rules with an aleph placeholder system. Rebuilt the Books page with a full catalog and a study-use notice, added a bilingual CV generator, and posted Finite Fields Chapter 1 exercise notes on the Homework page. Applied the design review: centered the index hero with a short rule line, split Core Coursework into its own About section, flattened the CV chooser cards, and added focus-visible plus reduced-motion rules across every page."
+        text: "Added a Research Directions page, a published Style Guide, and picture rules with an aleph placeholder system. Rebuilt the Books page with a full catalog and a study-use notice, added a bilingual CV generator, and posted Finite Fields Chapter 1 exercise notes on the Homework page. Applied the design review: centered the index hero with a short rule line, split Core Coursework into its own About section, flattened the CV chooser cards, and added focus-visible plus reduced-motion rules across every page.",
     },
    {
         date: "2026-10-16",
-        text: "Added Talks &amp; Reports with a Tuza-theorem talk summary, unified the materials pages into a compact click-to-open style, added Finite Fields notes and the Feng &amp; Liao textbook with reorganized homework, added a Statement page and a C++ data-structure code section, reorganized the site into study/ and research/, refreshed update dates, and removed obsolete, duplicate, and misplaced files."
+        text: "Added Talks &amp; Reports with a Tuza-theorem talk summary, unified the materials pages into a compact click-to-open style, added Finite Fields notes and the Feng &amp; Liao textbook with reorganized homework, added a Statement page and a C++ data-structure code section, reorganized the site into study/ and research/, refreshed update dates, and removed obsolete, duplicate, and misplaced files.",
     },
    { 
         date: "2026-09-25", 
