@@ -216,6 +216,106 @@
 
   /* ---------- footer ---------- */
 
+  /* ---------- Now cards ---------- */
+
+  .now-block {
+    margin-top: 52px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+  }
+
+  .now-title {
+    margin: 0 0 20px;
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .now-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .now-card {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: 6px;
+    padding: 16px 20px;
+    transition: border-left-color 0.15s, background 0.15s;
+  }
+  .now-card:hover {
+    background: var(--accent-soft);
+    border-left-color: var(--accent-deep);
+  }
+
+  .now-card-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .now-card-icon {
+    font-size: 1.1em;
+    line-height: 1;
+  }
+
+  .now-card-title {
+    font-family: var(--sans);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .now-card-body {
+    font-family: var(--sans);
+    font-size: 0.94rem;
+    line-height: 1.8;
+    color: var(--muted);
+  }
+  .now-card-body p { margin: 0; }
+  .now-card-body a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .now-card-body a:hover { color: var(--accent-deep); text-decoration: underline; }
+
+  .now-item {
+    margin-bottom: 14px;
+  }
+  .now-item:last-child { margin-bottom: 0; }
+
+  .now-note {
+    margin-top: 10px;
+    font-size: 0.82em;
+    font-style: italic;
+    color: var(--muted);
+  }
+
+  .now-link {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 6px 16px;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 20px;
+    font-family: var(--sans);
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+  .now-link:hover {
+    background: var(--accent-deep);
+    text-decoration: none;
+  }
+
   .site-footer {
     margin-top: 48px;
     padding-top: 18px;
@@ -295,7 +395,7 @@
 
     <footer class="site-footer">
       <p>&copy; 2026 ExtremalMath</p>
-      <p class="updated">Last updated Oct 22, 2026</p>
+      <p class="updated">Last updated Oct 2026</p>
     </footer>
 
   </div>
@@ -395,6 +495,61 @@
       return '<div class="footnote">' + body + "</div>";
     }
 
+    /* ---------- Now section (5 modules) ---------- */
+
+    function renderNow(now) {
+      if (!now || !Array.isArray(now.modules) || now.modules.length === 0) return "";
+
+      var rows = now.modules.map(function (m) {
+        var head = (function () {
+          return (
+            '<div class="now-card-head">' +
+              '<span class="now-card-icon">' + escapeHTML(m.icon || "") + '</span>' +
+              '<span class="now-card-title">' + escapeHTML(m.title || "") + "</span>" +
+            '</div>'
+          );
+        })();
+
+        var body = (function () {
+          if (!m.content) return "";
+          var html = "";
+          var p = m.content.replace(/\n+/g, "\n").split(/\n/);
+          p.forEach(function (line) {
+            line = line.trim();
+            if (line === "") return;
+            html += '<p>' + escapeHTML(line) + "</p>";
+          });
+          return '<div class="now-card-body">' + html + "</div>";
+        })();
+
+        var link = (function () {
+          var href = typeof m.link === "string" && m.link.length > 0 ? m.link : null;
+          var text = typeof m.linkText === "string" && m.linkText.length > 0 ? m.linkText : null;
+          if (!href || !text) return "";
+          return (
+            '<a class="now-link" href="' + escapeHTML(href) + '" target="_blank" rel="noopener">' +
+              escapeHTML(text) + "</a>"
+          );
+        })();
+
+        return (
+          '<div class="now-card">' +
+            head +
+            body +
+            (m.note ? '<p class="now-note">' + escapeHTML(m.note) + "</p>" : "") +
+            (link ? '<div class="now-item">' + link + "</div>" : "") +
+          "</div>"
+        );
+      }).join("");
+
+      return (
+        '<section class="now-block">' +
+          '<h2 class="now-title">Now</h2>' +
+          '<div class="now-grid">' + rows + "</div>" +
+        '</section>'
+      );
+    }
+
     function renderSemester(semester, isCurrent) {
       var parts = [];
 
@@ -417,6 +572,7 @@
           renderItems(semester.reading) + "</section>");
       }
       parts.push(renderNotes(semester.notes));
+      parts.push(renderNow(semester.now));
 
       contentEl.innerHTML = parts.join("");
       document.title = (semester.title || semester.id) + " — Current Work";
