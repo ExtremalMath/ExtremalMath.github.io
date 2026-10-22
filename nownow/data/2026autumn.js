@@ -66,7 +66,7 @@ window.SEMESTER_DATA["2026autumn"] = {
         icon: "📍",
         title: "Recent Events",
         content:
-          "On Oct 10, 2026, I gave a report on the topic above. See the Talk section for the details.",
+          "On Oct 10, 2026, I gave a report on the idea above. See the Talk section for the details.",
         link: "../talks/talks.html",
         linkText: "Report & Talk"
       },
