@@ -14,16 +14,30 @@
     <style>
         :root {
             --ink:         #1b1b1b;
+            --ink-soft:    #4a4740;
             --muted:       #6d6a63;
+            --subtle:      #9d9a92;
             --line:        #e3ded4;
+            --bg:          #fbfaf7;
             --accent:      #8c2f39;
             --accent-deep: #6b2229;
+            --accent-soft: rgba(140, 47, 57, 0.08);
             --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
         body { font-family: var(--sans); color: var(--ink); background: #fff; line-height: 1.7; }
-        .page { max-width: 720px; margin: 0 auto; padding: 40px 20px 60px; }
+        /* Flexbox 页面布局：容器纵向弹性，内容始终撑满视口高度 */
+        .page {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        /* 主体内容自动增长，把底部区块推至页面下方 */
+        .main { flex: 1 0 auto; }
 
         .hero { text-align: center; margin: 12px 0 36px; }
         .hero h1 { font-size: 2.6em; font-weight: 700; color: var(--ink); letter-spacing: 0.01em; }
@@ -41,9 +55,22 @@
             text-decoration: none;
             color: var(--ink);
             font-weight: 600;
-            transition: color 0.15s;
+            transition: color 0.15s, background-color 0.15s;
         }
         .entry-links a:hover { color: var(--accent); }
+        /* 悬停淡入效果：参考发现平台交互语言 */
+        .entry-links a::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; right: 0; bottom: 0;
+            background: var(--accent-soft);
+            border-radius: 6px;
+            opacity: 0;
+            transition: opacity 0.15s;
+            pointer-events: none;
+        }
+        .entry-links a:hover::before { opacity: 1; }
+        .entry-links a { position: relative; }
 
         h2 {
             font-size: 1.2em;
@@ -71,16 +98,36 @@
 
         .visit-counter { margin-top: 10px; font-size: 0.85em; color: var(--muted); }
 
-        .footer {
-            margin-top: 48px;
-            padding-top: 20px;
+        /* 页面底部区块：Flexbox 水平 + 垂直居中，约占整页高度 */
+        .page-bottom {
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;   /* 水平居中 */
+            justify-content: center; /* 垂直居中 */
+            gap: 10px;           /* 项目间距 */
+            padding: 24px 0 20px;
             border-top: 1px solid var(--line);
             text-align: center;
             font-size: 0.85em;
             color: var(--muted);
         }
-        .footer p { margin: 0; }
-        .footer .updated { margin-top: 6px; }
+        .page-bottom .meta-link { margin: 0; }
+        .page-bottom .meta-link a { color: var(--accent); text-decoration: none; }
+        .page-bottom .meta-link a:hover { color: var(--accent-deep); text-decoration: underline; }
+        .page-bottom .visit-counter {
+            margin: 0;
+            font-size: 0.85em;
+            color: var(--muted);
+        }
+
+        .page-footer {
+            flex-shrink: 0;
+            padding-bottom: 20px;
+            text-align: center;
+            font-size: 0.85em;
+            color: var(--muted);
+        }
 
         @media (prefers-reduced-motion: reduce) {
             * { transition: none !important; }
@@ -97,7 +144,7 @@
         <p class="subtitle">Notes, books, and works in progress — an undergraduate's academic space.</p>
     </header>
 
-    <main>
+    <main class="main">
         <p class="intro">
             Welcome to my academic space. I am an undergraduate exploring <strong>extremal graph theory</strong>, functional analysis, and PDEs — sharing notes, books, and works in progress along the way.
         </p>
@@ -105,7 +152,6 @@
         <div class="entry-links">
             <a href="about.html">View Profile &amp; Research</a>
             <a href="study/materials.html">Browse Study Materials</a>
-            <a href="code/index.html">Browse Code</a>
         </div>
 
         <section id="changelog-section">
@@ -114,15 +160,18 @@
                 <!-- 这里的内容将由 updates.js 自动生成 -->
             </ul>
         </section>
+    </main>
 
+    <!-- 页面底部区块：Flexbox 水平 + 垂直居中 -->
+    <div class="page-bottom">
         <p class="meta-link"><a href="statement.html">声明 / Statement</a></p>
         <p class="meta-link"><a href="migrations.html">File Migration Log</a></p>
         <p class="visit-counter">visitors <span id="vercount_value_site_pv">Loading</span></p>
-    </main>
+    </div>
 
-    <div class="footer">
+    <div class="page-footer">
         <p>© 2026 ExtremalMath</p>
-        <p class="updated">Last updated Oct 21, 2026</p>
+        <p class="updated">Last updated Oct 22, 2026</p>
     </div>
 
 </div>

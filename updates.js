@@ -5,7 +5,7 @@
 const siteUpdates = [
    {
         date: "2026-10-22",
-        text: "Added a Code page (code/index.html) listing all uploaded source files in code/c and code/cpp, rendered from code-data.js. Added its entry to the Study Materials list and the home page entry links. Updated the Now page footer to today and refreshed the 2026 Autumn semester summary."
+        text: "Added a Code page (code/index.html) listing all uploaded source files in code/cpp/data_structure (C++ only now, after removing hello_world.c, keep.cpp and graph_theory_homework.cpp), rendered from code-data.js; each row opens a local syntax-highlighted viewer (code/viewer.html) decoded as UTF-8 instead of rendering raw source. Added its entry to the Study Materials list and the home page entry links. Updated the Now page footer to today and refreshed the 2026 Autumn semester summary."
     },
    {
         date: "2026-10-21",

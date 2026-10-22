@@ -38,6 +38,17 @@
         .page-head { border-bottom: 2px solid var(--accent); padding-bottom: 12px; margin-bottom: 28px; }
         .page-head h1 { font-size: 1.8em; color: var(--ink); }
         .page-head .subtitle { color: var(--muted); margin-top: 4px; }
+        .page-head .subtitle .more {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.92em;
+        }
+        .page-head .subtitle .more a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .page-head .subtitle .more a:hover { color: var(--accent-deep); text-decoration: underline; }
 
         .res-row {
             display: flex;
@@ -53,8 +64,15 @@
         .res-row:hover { color: var(--accent); }
         .res-row .left { display: flex; flex-direction: column; }
         .res-row .name { font-weight: 600; }
-        .res-row .sub { font-size: 0.86em; color: var(--muted); margin-top: 3px; }
-        .res-row .tag { flex-shrink: 0; font-size: 0.78em; color: var(--muted); }
+
+        .res-row .view-icon {
+            opacity: 0;
+            font-size: 0.82em;
+            color: var(--accent);
+            margin-left: 8px;
+            transition: opacity 0.15s;
+        }
+        .res-row:hover .view-icon { opacity: 1; }
 
         .footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line); text-align: center; font-size: 0.85em; color: var(--muted); }
 
@@ -70,7 +88,15 @@
 
         <div class="page-head">
             <h1>Code</h1>
-            <p class="subtitle">Projects, coursework and small exercises, grouped by language.</p>
+            <p class="subtitle">
+                C++ exercises from coursework and personal study, grouped by language.
+                Each entry links to a local syntax-highlighted preview page (UTF-8 decoded).
+                More code is available on the upstream repository.
+            </p>
+            <p class="more">
+                <span>更多代码，由此获取</span>
+                <a href="https://github.com/ExtremalMath/eopenaccess" target="_blank" rel="noopener">github.com/ExtremalMath/eopenaccess ↗</a>
+            </p>
         </div>
 
         <div id="code-container" aria-live="polite">
@@ -106,10 +132,13 @@
                 var topLeft = [];
                 Object.keys(groups).sort().forEach(function (lang) {
                     var rows = groups[lang].map(function (item) {
-                        return '<a class="res-row" href="' + esc(item.path) + '" target="_blank" rel="noopener">' +
+                        // point each row to the local viewer page
+                        var dir = item.path.split("/").slice(0, item.path.split("/").length - 1).join("/");
+                        var view = "viewer.html?file=" + esc(item.name) + "&dir=" + esc(dir).replace(/%2F/g, "%2F") + "&lang=C%2B%2B";
+                        return '<a class="res-row" href="' + view + '" rel="noopener">' +
                             '<span class="left"><span class="name">' + esc(item.name) + '</span>' +
                             '<span class="sub">' + esc(item.note) + '</span></span>' +
-                            '<span class="tag">' + esc(item.lang) + '</span>' +
+                            '<span class="tag">' + esc(item.lang) + '</span><span class="view-icon">preview ↗</span>' +
                             '</a>';
                     }).join("");
                     topLeft.push('<h2 class="lang-group">' + esc(lang) + '</h2>' + rows);

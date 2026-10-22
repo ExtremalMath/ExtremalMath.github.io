@@ -7,24 +7,6 @@
 
 const codeData = [
     {
-        name: "hello_world.c",
-        path: "c/hello_world.c",
-        lang: "C",
-        note: "First program in C."
-    },
-    {
-        name: "keep.cpp",
-        path: "cpp/keep.cpp",
-        lang: "C++",
-        note: "A C++ program kept for the assignment submission."
-    },
-    {
-        name: "graph_theory_homework.cpp",
-        path: "cpp/graph_theory_homework.cpp",
-        lang: "C++",
-        note: "Graph theory homework: adjacency-list graph with traversal algorithms."
-    },
-    {
         name: "ticket_system.cpp",
         path: "cpp/data_structure/ticket_system.cpp",
         lang: "C++ / Data Structure",
