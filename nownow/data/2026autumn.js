@@ -11,8 +11,9 @@ window.SEMESTER_DATA["2026autumn"] = {
   id: "2026autumn",
   title: "2026 Autumn",
   summary:
-    "Real analysis and functional analysis, partial differential equations, " +
-    "finite fields, optimization, and numerical methods — with two books close at hand.",
+    "Autumn 2026 — Exploring the terrain before committing: " +
+    "real and functional analysis, PDEs, finite fields, and graph theory. " +
+    "Working through Brezis, Lovász, and one small code exercise at a time.",
 
   courses: [
     { title: "实变函数与泛函分析", sub: "Real Analysis and Functional Analysis" },
