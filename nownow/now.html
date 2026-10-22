@@ -316,6 +316,7 @@
 
   </div>
 
+  <script src="data/registry.js"></script>
   <script src="data/semesters.js"></script>
   <script>
   (function () {
@@ -363,14 +364,15 @@
       if (loadCache[id]) return loadCache[id];
 
       loadCache[id] = new Promise(function (resolve, reject) {
-        if (window.SEMESTER_DATA && window.SEMESTER_DATA[id]) {
-          resolve(window.SEMESTER_DATA[id]);
+        var data = SemesterRegistry.get(id);
+        if (data) {
+          resolve(data);
           return;
         }
         var script = document.createElement("script");
         script.src = "data/" + id + ".js";
         script.onload = function () {
-          var data = window.SEMESTER_DATA && window.SEMESTER_DATA[id];
+          var data = SemesterRegistry.get(id);
           if (data) resolve(data);
           else reject(new Error("Script loaded but no data for " + id));
         };
@@ -529,7 +531,7 @@
         window.scrollTo({ top: top, behavior: "smooth" });
       }
 
-      if (!loadCache[id] || !(window.SEMESTER_DATA && window.SEMESTER_DATA[id])) {
+      if (!loadCache[id] || !(SemesterRegistry.get(id))) {
         contentEl.innerHTML = '<p class="loading">Loading ' +
           escapeHTML(labelFromFileName(id + ".js")) + "…</p>";
       }

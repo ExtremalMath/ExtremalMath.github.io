@@ -2,7 +2,8 @@
    data/2026autumn.js
    ------------------------------------------------------------
    Semester: 2026 Autumn (current)
-   写法 A：注册到 window.SEMESTER_DATA[id]
+   写法 B：注册到 SemesterRegistry.register("2026autumn", { ... })
+   （见 data/registry.js）
    ------------------------------------------------------------
    Now 模块（近况）说明：
    本文件是「Now」页面的唯一数据源。
@@ -10,9 +11,7 @@
    修改近况时只需改这个 JS 文件，HTML 不需要动。
    ============================================================ */
 
-window.SEMESTER_DATA = window.SEMESTER_DATA || {};
-
-window.SEMESTER_DATA["2026autumn"] = {
+SemesterRegistry.register("2026autumn", {
   id: "2026autumn",
   title: "2026 Autumn",
   summary:
@@ -78,4 +77,4 @@ window.SEMESTER_DATA["2026autumn"] = {
       }
     ]
   }
-};
+});
