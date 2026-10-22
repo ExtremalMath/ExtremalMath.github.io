@@ -64,12 +64,12 @@ int IsEdgeExists(const ALGraph* G, int i, int j) {
 
 void AddEdge(ALGraph* G, int i, int j, double weight, int* edgeCount) {
     if (i == -1 || j == -1) {
-        printf("´íÎó: ÎŞĞ§µÄ¶¥µãË÷Òı\n");
+        printf("é”™è¯¯: æ— æ•ˆçš„é¡¶ç‚¹ç´¢å¼•\n");
         return;
     }
     
     if (i == j) {
-        printf("¾¯¸æ: ³¢ÊÔÌí¼Ó×Ô»·±ß£¬ÒÑÌø¹ı\n");
+        printf("è­¦å‘Š: å°è¯•æ·»åŠ è‡ªç¯è¾¹ï¼Œå·²è·³è¿‡\n");
         return;
     }
     
@@ -94,18 +94,18 @@ void AddEdge(ALGraph* G, int i, int j, double weight, int* edgeCount) {
 
 Status CreateUDG(ALGraph* G) {
 	int i,k;
-    printf("\nÇëÊäÈë¶¥µã¸öÊı: ");
+    printf("\nè¯·è¾“å…¥é¡¶ç‚¹ä¸ªæ•°: ");
     scanf("%d", &G->vexnum);
-    printf("ÇëÊäÈë±ßµÄ¸öÊı: ");
+    printf("è¯·è¾“å…¥è¾¹çš„ä¸ªæ•°: ");
     scanf("%d", &G->arcnum);
 
-    printf("ÇëÒÀ´ÎÊäÈëÃ¿¸ö¶¥µãµÄ *Ãû³Æ* *±àºÅ* *ÊôĞÔ(h/e/b)*£¬ÒÔ¿Õ¸ñ·Ö¸ô£º\n");
+    printf("è¯·ä¾æ¬¡è¾“å…¥æ¯ä¸ªé¡¶ç‚¹çš„ *åç§°* *ç¼–å·* *å±æ€§(h/e/b)*ï¼Œä»¥ç©ºæ ¼åˆ†éš”ï¼š\n");
     for ( i = 0; i < G->vexnum; ++i) {
         scanf("%s %d %c", G->vertices[i].data, &G->vertices[i].id, &G->vertices[i].type);
         G->vertices[i].firstarc = NULL;
     }
 
-    printf("ÇëÊäÈë%dÌõ±ßËùÁ¬½ÓµÄÁ½¸ö¶¥µãµÄÃû³ÆºÍÈ¨ÖØ£¬ÒÔ¿Õ¸ñ·Ö¸ô£º\n", G->arcnum);
+    printf("è¯·è¾“å…¥%dæ¡è¾¹æ‰€è¿æ¥çš„ä¸¤ä¸ªé¡¶ç‚¹çš„åç§°å’Œæƒé‡ï¼Œä»¥ç©ºæ ¼åˆ†éš”ï¼š\n", G->arcnum);
     int edgeCount = 0;
     for (k = 0; k < G->arcnum; ++k) {
         char v1[50], v2[50];
@@ -115,7 +115,7 @@ Status CreateUDG(ALGraph* G) {
         int j = LocateVexALG(G, v2);
 
         if (i == -1 || j == -1) {
-            printf("ÊäÈëÁË²»´æÔÚµÄ¶¥µã£¬Çë¼ì²é¡£\n");
+            printf("è¾“å…¥äº†ä¸å­˜åœ¨çš„é¡¶ç‚¹ï¼Œè¯·æ£€æŸ¥ã€‚\n");
             continue;
         }
 
@@ -128,12 +128,12 @@ Status CreateUDG(ALGraph* G) {
 
 void PrintGraph(const ALGraph* G) {
 	int i;
-    printf("\n========== Í¼½á¹¹ĞÅÏ¢ (ÁÚ½Ó±í) ==========\n");
-    printf("¶¥µãÊıÁ¿: %d, ±ßÊıÁ¿: %d\n", G->vexnum, G->arcnum);
+    printf("\n========== å›¾ç»“æ„ä¿¡æ¯ (é‚»æ¥è¡¨) ==========\n");
+    printf("é¡¶ç‚¹æ•°é‡: %d, è¾¹æ•°é‡: %d\n", G->vexnum, G->arcnum);
     printf("-----------------------------------------\n");
     for ( i = 0; i < G->vexnum; ++i) {
-        printf("Ãû³Æ:\"%s\"", G->vertices[i].data);
-        printf(" -> ÁÚ½Óµã[Ãû³Æ,È¨ÖØ]: ");
+        printf("åç§°:\"%s\"", G->vertices[i].data);
+        printf(" -> é‚»æ¥ç‚¹[åç§°,æƒé‡]: ");
 
         ArcNode* p = G->vertices[i].firstarc;
         int degree = 0;
@@ -147,7 +147,7 @@ void PrintGraph(const ALGraph* G) {
             first = 0;
         }
         if (degree == 0) {
-            printf("ÎŞÁÚ½Óµã");
+            printf("æ— é‚»æ¥ç‚¹");
         }
         printf("\n");
     }
@@ -156,11 +156,11 @@ void PrintGraph(const ALGraph* G) {
 
 void PrintGraphSimple(const ALGraph* G) {
 	int i;
-    printf("\n========== ¼ò½àÍ¼½á¹¹ĞÅÏ¢ (ÁÚ½Ó±í) ==========\n");
-    printf("¶¥µãÊıÁ¿: %d, ±ßÊıÁ¿: %d\n", G->vexnum, G->arcnum);
+    printf("\n========== ç®€æ´å›¾ç»“æ„ä¿¡æ¯ (é‚»æ¥è¡¨) ==========\n");
+    printf("é¡¶ç‚¹æ•°é‡: %d, è¾¹æ•°é‡: %d\n", G->vexnum, G->arcnum);
     printf("-----------------------------------------\n");
     for (i = 0; i < G->vexnum; ++i) {
-        printf("%s -> ÁÚ½Óµã: ", G->vertices[i].data);
+        printf("%s -> é‚»æ¥ç‚¹: ", G->vertices[i].data);
 
         ArcNode* p = G->vertices[i].firstarc;
         int first = 1;
@@ -181,23 +181,23 @@ void PrintByType(const ALGraph* G, char type) {
 	int i;
     const char* typeName;  
     switch(type) {
-        case 'h': typeName = "ÈËÎÄÀà¾°µã"; break;
-        case 'e': typeName = "×ÔÈ»Àà¾°µã"; break;
-        case 'b': typeName = "Ë«ÊôĞÔ¾°µã"; break;
-        default: typeName = "Î´ÖªÀàĞÍ¾°µã"; break;
+        case 'h': typeName = "äººæ–‡ç±»æ™¯ç‚¹"; break;
+        case 'e': typeName = "è‡ªç„¶ç±»æ™¯ç‚¹"; break;
+        case 'b': typeName = "åŒå±æ€§æ™¯ç‚¹"; break;
+        default: typeName = "æœªçŸ¥ç±»å‹æ™¯ç‚¹"; break;
     }
     
-    printf("\n=== %s (¹²%d¸ö¾°µã) ===\n", typeName, G->vexnum);
+    printf("\n=== %s (å…±%dä¸ªæ™¯ç‚¹) ===\n", typeName, G->vexnum);
     int count = 0;
     for (i = 0; i < G->vexnum; ++i) {
         if (G->vertices[i].type == type) {
-            printf("%d. %s (±àºÅ:%d, Ë÷Òı:%d)\n", ++count, G->vertices[i].data, G->vertices[i].id, i);
+            printf("%d. %s (ç¼–å·:%d, ç´¢å¼•:%d)\n", ++count, G->vertices[i].data, G->vertices[i].id, i);
         }
     }
     if (count == 0) {
-        printf("Î´ÕÒµ½%s\n", typeName);
+        printf("æœªæ‰¾åˆ°%s\n", typeName);
     } else {
-        printf("×Ü¼Æ: %d ¸ö%s\n", count, typeName);
+        printf("æ€»è®¡: %d ä¸ª%s\n", count, typeName);
     }
 }
 
@@ -214,7 +214,7 @@ void DestroyGraph(ALGraph* G) {
     }
     G->vexnum = 0;
     G->arcnum = 0;
-    printf("Í¼ÄÚ´æÒÑÊÍ·Å\n");
+    printf("å›¾å†…å­˜å·²é‡Šæ”¾\n");
 }
 
 void DFS(const ALGraph* G, int v, int* visited, int* component, int* compSize) {
@@ -253,38 +253,38 @@ int** GetConnectedComponents(const ALGraph* G, int* componentCount, int* compSiz
 
 void CreateZhenjiangWeightedGraph(ALGraph* G) {
 	int i,k;
-    printf("\n=== ´´½¨´øÈ¨ÖØµÄÕò½­¾°µãÍ¼===\n");
+    printf("\n=== åˆ›å»ºå¸¦æƒé‡çš„é•‡æ±Ÿæ™¯ç‚¹å›¾===\n");
     
     G->vexnum = 26;
     G->arcnum = 0;
     
     VNode vertices[] = {
-        {"³ÇÉÏ´åÒÅÖ·", 1, 'h', NULL},
-        {"Õò½­´×ÎÄ»¯²©Îï¹İ", 2, 'h', NULL},
-        {"ÓÀ°²ÁêÊ¯¿Ì", 3, 'h', NULL},
-        {"ĞŞ°²ÁêÊ¯¿Ì", 4, 'h', NULL},
-        {"·ÃÏÉÕò", 5, 'h', NULL},
-        {"ÂÀ³ÇÕò", 6, 'h', NULL},
-        {"½ğÉ½ËÂ", 7, 'h', NULL},
-        {"±±¹ÌÂ¥", 8, 'h', NULL},
-        {"Î÷½ò¶É¹Å½Ö", 9, 'h', NULL},
-        {"½¹É½¶¨»ÛËÂ", 10, 'h', NULL},
-        {"¸ÊÂ¶ËÂÌúËş", 11, 'h', NULL},
-        {"Õò½­ÌìÖ÷½ÌÌÃ", 12, 'h', NULL},
-        {"ÌúÎÍ³ÇÒÅÖ·", 13, 'h', NULL},
-        {"Õò½­ÌåÓı»áÕ¹ÖĞĞÄ", 14, 'h', NULL},
-        {"Õò½­Õ¾ÄÏ¹ã³¡", 15, 'h', NULL},
-        {"¾äÈİÓàÀ¤¿ªÔª´ó¾Æµê", 16, 'h', NULL},
-        {"ËÕÄş¹ã³¡", 17, 'h', NULL},
-        {"½­ËÕ´óÑ§", 18, 'h', NULL},
-        {"Õò½­»ğ³µÕ¾", 19, 'h', NULL},
-        {"Õò½­ÊĞÕş¸®", 20, 'h', NULL},
-        {"½­ËÕ²è²©Ô°", 21, 'e', NULL},
-        {"ÄÏÉ½É­ÁÖ¹«Ô°", 22, 'b', NULL},
-        {"±¦»ªÉ½É­ÁÖ¹«Ô°", 23, 'b', NULL},
-        {"¸ğÏÉ¹Û", 24, 'b', NULL},
-        {"Ã©É½¾°Çø", 25, 'b', NULL},
-        {"ë·´Í¾ÅÏöÍò¸£¹¬", 26, 'b', NULL}
+        {"åŸä¸Šæ‘é—å€", 1, 'h', NULL},
+        {"é•‡æ±Ÿé†‹æ–‡åŒ–åšç‰©é¦†", 2, 'h', NULL},
+        {"æ°¸å®‰é™µçŸ³åˆ»", 3, 'h', NULL},
+        {"ä¿®å®‰é™µçŸ³åˆ»", 4, 'h', NULL},
+        {"è®¿ä»™é•‡", 5, 'h', NULL},
+        {"å•åŸé•‡", 6, 'h', NULL},
+        {"é‡‘å±±å¯º", 7, 'h', NULL},
+        {"åŒ—å›ºæ¥¼", 8, 'h', NULL},
+        {"è¥¿æ´¥æ¸¡å¤è¡—", 9, 'h', NULL},
+        {"ç„¦å±±å®šæ…§å¯º", 10, 'h', NULL},
+        {"ç”˜éœ²å¯ºé“å¡”", 11, 'h', NULL},
+        {"é•‡æ±Ÿå¤©ä¸»æ•™å ‚", 12, 'h', NULL},
+        {"é“ç“®åŸé—å€", 13, 'h', NULL},
+        {"é•‡æ±Ÿä½“è‚²ä¼šå±•ä¸­å¿ƒ", 14, 'h', NULL},
+        {"é•‡æ±Ÿç«™å—å¹¿åœº", 15, 'h', NULL},
+        {"å¥å®¹ä½™å¤å¼€å…ƒå¤§é…’åº—", 16, 'h', NULL},
+        {"è‹å®å¹¿åœº", 17, 'h', NULL},
+        {"æ±Ÿè‹å¤§å­¦", 18, 'h', NULL},
+        {"é•‡æ±Ÿç«è½¦ç«™", 19, 'h', NULL},
+        {"é•‡æ±Ÿå¸‚æ”¿åºœ", 20, 'h', NULL},
+        {"æ±Ÿè‹èŒ¶åšå›­", 21, 'e', NULL},
+        {"å—å±±æ£®æ—å…¬å›­", 22, 'b', NULL},
+        {"å®åå±±æ£®æ—å…¬å›­", 23, 'b', NULL},
+        {"è‘›ä»™è§‚", 24, 'b', NULL},
+        {"èŒ…å±±æ™¯åŒº", 25, 'b', NULL},
+        {"æ••èµä¹éœ„ä¸‡ç¦å®«", 26, 'b', NULL}
     };
     
     for ( i = 0; i < G->vexnum; ++i) {
@@ -294,51 +294,51 @@ void CreateZhenjiangWeightedGraph(ALGraph* G) {
     const int edgeCount = 37;
     EdgeInfo edgeArray[37];
     
-    strcpy(edgeArray[0].v1, "ËÕÄş¹ã³¡"); strcpy(edgeArray[0].v2, "Õò½­ÊĞÕş¸®"); edgeArray[0].weight = 1.2;
-    strcpy(edgeArray[1].v1, "Õò½­ÊĞÕş¸®"); strcpy(edgeArray[1].v2, "Õò½­Õ¾ÄÏ¹ã³¡"); edgeArray[1].weight = 5.8;
-    strcpy(edgeArray[2].v1, "Õò½­Õ¾ÄÏ¹ã³¡"); strcpy(edgeArray[2].v2, "Õò½­ÌåÓı»áÕ¹ÖĞĞÄ"); edgeArray[2].weight = 2.3;
-    strcpy(edgeArray[3].v1, "Õò½­ÌåÓı»áÕ¹ÖĞĞÄ"); strcpy(edgeArray[3].v2, "ÄÏÉ½É­ÁÖ¹«Ô°"); edgeArray[3].weight = 3.1;
-    strcpy(edgeArray[4].v1, "ËÕÄş¹ã³¡"); strcpy(edgeArray[4].v2, "Õò½­Õ¾ÄÏ¹ã³¡"); edgeArray[4].weight = 4.5;
-    strcpy(edgeArray[5].v1, "Õò½­ÊĞÕş¸®"); strcpy(edgeArray[5].v2, "½­ËÕ´óÑ§"); edgeArray[5].weight = 6.7;
-    strcpy(edgeArray[6].v1, "Õò½­Õ¾ÄÏ¹ã³¡"); strcpy(edgeArray[6].v2, "½­ËÕ´óÑ§"); edgeArray[6].weight = 8.9;
+    strcpy(edgeArray[0].v1, "è‹å®å¹¿åœº"); strcpy(edgeArray[0].v2, "é•‡æ±Ÿå¸‚æ”¿åºœ"); edgeArray[0].weight = 1.2;
+    strcpy(edgeArray[1].v1, "é•‡æ±Ÿå¸‚æ”¿åºœ"); strcpy(edgeArray[1].v2, "é•‡æ±Ÿç«™å—å¹¿åœº"); edgeArray[1].weight = 5.8;
+    strcpy(edgeArray[2].v1, "é•‡æ±Ÿç«™å—å¹¿åœº"); strcpy(edgeArray[2].v2, "é•‡æ±Ÿä½“è‚²ä¼šå±•ä¸­å¿ƒ"); edgeArray[2].weight = 2.3;
+    strcpy(edgeArray[3].v1, "é•‡æ±Ÿä½“è‚²ä¼šå±•ä¸­å¿ƒ"); strcpy(edgeArray[3].v2, "å—å±±æ£®æ—å…¬å›­"); edgeArray[3].weight = 3.1;
+    strcpy(edgeArray[4].v1, "è‹å®å¹¿åœº"); strcpy(edgeArray[4].v2, "é•‡æ±Ÿç«™å—å¹¿åœº"); edgeArray[4].weight = 4.5;
+    strcpy(edgeArray[5].v1, "é•‡æ±Ÿå¸‚æ”¿åºœ"); strcpy(edgeArray[5].v2, "æ±Ÿè‹å¤§å­¦"); edgeArray[5].weight = 6.7;
+    strcpy(edgeArray[6].v1, "é•‡æ±Ÿç«™å—å¹¿åœº"); strcpy(edgeArray[6].v2, "æ±Ÿè‹å¤§å­¦"); edgeArray[6].weight = 8.9;
     
-    strcpy(edgeArray[7].v1, "½ğÉ½ËÂ"); strcpy(edgeArray[7].v2, "Î÷½ò¶É¹Å½Ö"); edgeArray[7].weight = 0.8;
-    strcpy(edgeArray[8].v1, "Î÷½ò¶É¹Å½Ö"); strcpy(edgeArray[8].v2, "±±¹ÌÂ¥"); edgeArray[8].weight = 2.1;
-    strcpy(edgeArray[9].v1, "±±¹ÌÂ¥"); strcpy(edgeArray[9].v2, "½¹É½¶¨»ÛËÂ"); edgeArray[9].weight = 3.6;
-    strcpy(edgeArray[10].v1, "Î÷½ò¶É¹Å½Ö"); strcpy(edgeArray[10].v2, "¸ÊÂ¶ËÂÌúËş"); edgeArray[10].weight = 0.6;
-    strcpy(edgeArray[11].v1, "Î÷½ò¶É¹Å½Ö"); strcpy(edgeArray[11].v2, "Õò½­ÌìÖ÷½ÌÌÃ"); edgeArray[11].weight = 0.5;
-    strcpy(edgeArray[12].v1, "±±¹ÌÂ¥"); strcpy(edgeArray[12].v2, "ÌúÎÍ³ÇÒÅÖ·"); edgeArray[12].weight = 1.9;
-    strcpy(edgeArray[13].v1, "½ğÉ½ËÂ"); strcpy(edgeArray[13].v2, "ÌúÎÍ³ÇÒÅÖ·"); edgeArray[13].weight = 3.2;
+    strcpy(edgeArray[7].v1, "é‡‘å±±å¯º"); strcpy(edgeArray[7].v2, "è¥¿æ´¥æ¸¡å¤è¡—"); edgeArray[7].weight = 0.8;
+    strcpy(edgeArray[8].v1, "è¥¿æ´¥æ¸¡å¤è¡—"); strcpy(edgeArray[8].v2, "åŒ—å›ºæ¥¼"); edgeArray[8].weight = 2.1;
+    strcpy(edgeArray[9].v1, "åŒ—å›ºæ¥¼"); strcpy(edgeArray[9].v2, "ç„¦å±±å®šæ…§å¯º"); edgeArray[9].weight = 3.6;
+    strcpy(edgeArray[10].v1, "è¥¿æ´¥æ¸¡å¤è¡—"); strcpy(edgeArray[10].v2, "ç”˜éœ²å¯ºé“å¡”"); edgeArray[10].weight = 0.6;
+    strcpy(edgeArray[11].v1, "è¥¿æ´¥æ¸¡å¤è¡—"); strcpy(edgeArray[11].v2, "é•‡æ±Ÿå¤©ä¸»æ•™å ‚"); edgeArray[11].weight = 0.5;
+    strcpy(edgeArray[12].v1, "åŒ—å›ºæ¥¼"); strcpy(edgeArray[12].v2, "é“ç“®åŸé—å€"); edgeArray[12].weight = 1.9;
+    strcpy(edgeArray[13].v1, "é‡‘å±±å¯º"); strcpy(edgeArray[13].v2, "é“ç“®åŸé—å€"); edgeArray[13].weight = 3.2;
     
-    strcpy(edgeArray[14].v1, "ÄÏÉ½É­ÁÖ¹«Ô°"); strcpy(edgeArray[14].v2, "Õò½­´×ÎÄ»¯²©Îï¹İ"); edgeArray[14].weight = 7.4;
-    strcpy(edgeArray[15].v1, "ÄÏÉ½É­ÁÖ¹«Ô°"); strcpy(edgeArray[15].v2, "Î÷½ò¶É¹Å½Ö"); edgeArray[15].weight = 5.3;
-    strcpy(edgeArray[16].v1, "Õò½­´×ÎÄ»¯²©Îï¹İ"); strcpy(edgeArray[16].v2, "Õò½­Õ¾ÄÏ¹ã³¡"); edgeArray[16].weight = 4.9;
+    strcpy(edgeArray[14].v1, "å—å±±æ£®æ—å…¬å›­"); strcpy(edgeArray[14].v2, "é•‡æ±Ÿé†‹æ–‡åŒ–åšç‰©é¦†"); edgeArray[14].weight = 7.4;
+    strcpy(edgeArray[15].v1, "å—å±±æ£®æ—å…¬å›­"); strcpy(edgeArray[15].v2, "è¥¿æ´¥æ¸¡å¤è¡—"); edgeArray[15].weight = 5.3;
+    strcpy(edgeArray[16].v1, "é•‡æ±Ÿé†‹æ–‡åŒ–åšç‰©é¦†"); strcpy(edgeArray[16].v2, "é•‡æ±Ÿç«™å—å¹¿åœº"); edgeArray[16].weight = 4.9;
     
-    strcpy(edgeArray[17].v1, "½­ËÕ´óÑ§"); strcpy(edgeArray[17].v2, "±±¹ÌÂ¥"); edgeArray[17].weight = 3.8;
-    strcpy(edgeArray[18].v1, "½­ËÕ´óÑ§"); strcpy(edgeArray[18].v2, "½¹É½¶¨»ÛËÂ"); edgeArray[18].weight = 4.2;
-    strcpy(edgeArray[19].v1, "Õò½­Õ¾ÄÏ¹ã³¡"); strcpy(edgeArray[19].v2, "½ğÉ½ËÂ"); edgeArray[19].weight = 3.4;
+    strcpy(edgeArray[17].v1, "æ±Ÿè‹å¤§å­¦"); strcpy(edgeArray[17].v2, "åŒ—å›ºæ¥¼"); edgeArray[17].weight = 3.8;
+    strcpy(edgeArray[18].v1, "æ±Ÿè‹å¤§å­¦"); strcpy(edgeArray[18].v2, "ç„¦å±±å®šæ…§å¯º"); edgeArray[18].weight = 4.2;
+    strcpy(edgeArray[19].v1, "é•‡æ±Ÿç«™å—å¹¿åœº"); strcpy(edgeArray[19].v2, "é‡‘å±±å¯º"); edgeArray[19].weight = 3.4;
     
-    strcpy(edgeArray[20].v1, "Ã©É½¾°Çø"); strcpy(edgeArray[20].v2, "ë·´Í¾ÅÏöÍò¸£¹¬"); edgeArray[20].weight = 2.5;
-    strcpy(edgeArray[21].v1, "ë·´Í¾ÅÏöÍò¸£¹¬"); strcpy(edgeArray[21].v2, "¸ğÏÉ¹Û"); edgeArray[21].weight = 3.7;
-    strcpy(edgeArray[22].v1, "Ã©É½¾°Çø"); strcpy(edgeArray[22].v2, "¸ğÏÉ¹Û"); edgeArray[22].weight = 4.1;
+    strcpy(edgeArray[20].v1, "èŒ…å±±æ™¯åŒº"); strcpy(edgeArray[20].v2, "æ••èµä¹éœ„ä¸‡ç¦å®«"); edgeArray[20].weight = 2.5;
+    strcpy(edgeArray[21].v1, "æ••èµä¹éœ„ä¸‡ç¦å®«"); strcpy(edgeArray[21].v2, "è‘›ä»™è§‚"); edgeArray[21].weight = 3.7;
+    strcpy(edgeArray[22].v1, "èŒ…å±±æ™¯åŒº"); strcpy(edgeArray[22].v2, "è‘›ä»™è§‚"); edgeArray[22].weight = 4.1;
     
-    strcpy(edgeArray[23].v1, "½­ËÕ²è²©Ô°"); strcpy(edgeArray[23].v2, "Ã©É½¾°Çø"); edgeArray[23].weight = 8.2;
-    strcpy(edgeArray[24].v1, "¾äÈİÓàÀ¤¿ªÔª´ó¾Æµê"); strcpy(edgeArray[24].v2, "½­ËÕ²è²©Ô°"); edgeArray[24].weight = 9.7;
-    strcpy(edgeArray[25].v1, "¾äÈİÓàÀ¤¿ªÔª´ó¾Æµê"); strcpy(edgeArray[25].v2, "Ã©É½¾°Çø"); edgeArray[25].weight = 17.9;
+    strcpy(edgeArray[23].v1, "æ±Ÿè‹èŒ¶åšå›­"); strcpy(edgeArray[23].v2, "èŒ…å±±æ™¯åŒº"); edgeArray[23].weight = 8.2;
+    strcpy(edgeArray[24].v1, "å¥å®¹ä½™å¤å¼€å…ƒå¤§é…’åº—"); strcpy(edgeArray[24].v2, "æ±Ÿè‹èŒ¶åšå›­"); edgeArray[24].weight = 9.7;
+    strcpy(edgeArray[25].v1, "å¥å®¹ä½™å¤å¼€å…ƒå¤§é…’åº—"); strcpy(edgeArray[25].v2, "èŒ…å±±æ™¯åŒº"); edgeArray[25].weight = 17.9;
     
-    strcpy(edgeArray[26].v1, "³ÇÉÏ´åÒÅÖ·"); strcpy(edgeArray[26].v2, "ÓÀ°²ÁêÊ¯¿Ì"); edgeArray[26].weight = 4.8;
-    strcpy(edgeArray[27].v1, "ÓÀ°²ÁêÊ¯¿Ì"); strcpy(edgeArray[27].v2, "ĞŞ°²ÁêÊ¯¿Ì"); edgeArray[27].weight = 1.1;
-    strcpy(edgeArray[28].v1, "ĞŞ°²ÁêÊ¯¿Ì"); strcpy(edgeArray[28].v2, "·ÃÏÉÕò"); edgeArray[28].weight = 6.3;
+    strcpy(edgeArray[26].v1, "åŸä¸Šæ‘é—å€"); strcpy(edgeArray[26].v2, "æ°¸å®‰é™µçŸ³åˆ»"); edgeArray[26].weight = 4.8;
+    strcpy(edgeArray[27].v1, "æ°¸å®‰é™µçŸ³åˆ»"); strcpy(edgeArray[27].v2, "ä¿®å®‰é™µçŸ³åˆ»"); edgeArray[27].weight = 1.1;
+    strcpy(edgeArray[28].v1, "ä¿®å®‰é™µçŸ³åˆ»"); strcpy(edgeArray[28].v2, "è®¿ä»™é•‡"); edgeArray[28].weight = 6.3;
     
-    strcpy(edgeArray[29].v1, "·ÃÏÉÕò"); strcpy(edgeArray[29].v2, "ÂÀ³ÇÕò"); edgeArray[29].weight = 6.0;
-    strcpy(edgeArray[30].v1, "³ÇÉÏ´åÒÅÖ·"); strcpy(edgeArray[30].v2, "·ÃÏÉÕò"); edgeArray[30].weight = 10.9;
+    strcpy(edgeArray[29].v1, "è®¿ä»™é•‡"); strcpy(edgeArray[29].v2, "å•åŸé•‡"); edgeArray[29].weight = 6.0;
+    strcpy(edgeArray[30].v1, "åŸä¸Šæ‘é—å€"); strcpy(edgeArray[30].v2, "è®¿ä»™é•‡"); edgeArray[30].weight = 10.9;
     
-    strcpy(edgeArray[31].v1, "ÄÏÉ½É­ÁÖ¹«Ô°"); strcpy(edgeArray[31].v2, "±¦»ªÉ½É­ÁÖ¹«Ô°"); edgeArray[31].weight = 15.0;
-    strcpy(edgeArray[32].v1, "±¦»ªÉ½É­ÁÖ¹«Ô°"); strcpy(edgeArray[32].v2, "Ã©É½¾°Çø"); edgeArray[32].weight = 12.0;
-    strcpy(edgeArray[33].v1, "½­ËÕ²è²©Ô°"); strcpy(edgeArray[33].v2, "±¦»ªÉ½É­ÁÖ¹«Ô°"); edgeArray[33].weight = 8.5;
-    strcpy(edgeArray[34].v1, "Î÷½ò¶É¹Å½Ö"); strcpy(edgeArray[34].v2, "Õò½­´×ÎÄ»¯²©Îï¹İ"); edgeArray[34].weight = 5.5;
-    strcpy(edgeArray[35].v1, "½­ËÕ´óÑ§"); strcpy(edgeArray[35].v2, "Õò½­»ğ³µÕ¾"); edgeArray[35].weight = 3.0;
-    strcpy(edgeArray[36].v1, "Õò½­»ğ³µÕ¾"); strcpy(edgeArray[36].v2, "Õò½­Õ¾ÄÏ¹ã³¡"); edgeArray[36].weight = 1.5;
+    strcpy(edgeArray[31].v1, "å—å±±æ£®æ—å…¬å›­"); strcpy(edgeArray[31].v2, "å®åå±±æ£®æ—å…¬å›­"); edgeArray[31].weight = 15.0;
+    strcpy(edgeArray[32].v1, "å®åå±±æ£®æ—å…¬å›­"); strcpy(edgeArray[32].v2, "èŒ…å±±æ™¯åŒº"); edgeArray[32].weight = 12.0;
+    strcpy(edgeArray[33].v1, "æ±Ÿè‹èŒ¶åšå›­"); strcpy(edgeArray[33].v2, "å®åå±±æ£®æ—å…¬å›­"); edgeArray[33].weight = 8.5;
+    strcpy(edgeArray[34].v1, "è¥¿æ´¥æ¸¡å¤è¡—"); strcpy(edgeArray[34].v2, "é•‡æ±Ÿé†‹æ–‡åŒ–åšç‰©é¦†"); edgeArray[34].weight = 5.5;
+    strcpy(edgeArray[35].v1, "æ±Ÿè‹å¤§å­¦"); strcpy(edgeArray[35].v2, "é•‡æ±Ÿç«è½¦ç«™"); edgeArray[35].weight = 3.0;
+    strcpy(edgeArray[36].v1, "é•‡æ±Ÿç«è½¦ç«™"); strcpy(edgeArray[36].v2, "é•‡æ±Ÿç«™å—å¹¿åœº"); edgeArray[36].weight = 1.5;
     
     int addedEdgeCount = 0;
     for ( k = 0; k < edgeCount; ++k) {
@@ -349,14 +349,14 @@ void CreateZhenjiangWeightedGraph(ALGraph* G) {
         if (i != -1 && j != -1) {
             AddEdge(G, i, j, weight, &addedEdgeCount);
         } else {
-            printf("¾¯¸æ: ±ßÁ¬½Ó %s - %s ÖĞ°üº¬ÎŞĞ§¶¥µã£¬ÒÑÌø¹ı´Ë±ß\n", edgeArray[k].v1, edgeArray[k].v2);
+            printf("è­¦å‘Š: è¾¹è¿æ¥ %s - %s ä¸­åŒ…å«æ— æ•ˆé¡¶ç‚¹ï¼Œå·²è·³è¿‡æ­¤è¾¹\n", edgeArray[k].v1, edgeArray[k].v2);
         }
     }
     
     G->arcnum = addedEdgeCount / 2;
     
-    printf("´øÈ¨ÖØµÄÕò½­¾°µãÍ¼´´½¨Íê³É£¡\n");
-    printf("°üº¬ %d ¸ö¶¥µãºÍ %d Ìõ±ß\n", G->vexnum, G->arcnum);
+    printf("å¸¦æƒé‡çš„é•‡æ±Ÿæ™¯ç‚¹å›¾åˆ›å»ºå®Œæˆï¼\n");
+    printf("åŒ…å« %d ä¸ªé¡¶ç‚¹å’Œ %d æ¡è¾¹\n", G->vexnum, G->arcnum);
 }
 
 void CreateConnectedZhenjiangGraph(ALGraph* G) {
@@ -368,30 +368,30 @@ void CreateConnectedZhenjiangGraph(ALGraph* G) {
     int** components = GetConnectedComponents(G, &componentCount, compSizes);
     
     if (componentCount > 1) {
-        printf("\n¼ì²âµ½ %d ¸öÁ¬Í¨·ÖÁ¿£¬ÕıÔÚÌí¼ÓÁ¬½Ó±ß...\n", componentCount);
+        printf("\næ£€æµ‹åˆ° %d ä¸ªè¿é€šåˆ†é‡ï¼Œæ­£åœ¨æ·»åŠ è¿æ¥è¾¹...\n", componentCount);
         
         int edgeCount = G->arcnum * 2;
         
-        int zhenjiangIdx = LocateVexALG(G, "ËÕÄş¹ã³¡");
-        int jurongIdx = LocateVexALG(G, "Ã©É½¾°Çø");
-        int danyangIdx = LocateVexALG(G, "³ÇÉÏ´åÒÅÖ·");
+        int zhenjiangIdx = LocateVexALG(G, "è‹å®å¹¿åœº");
+        int jurongIdx = LocateVexALG(G, "èŒ…å±±æ™¯åŒº");
+        int danyangIdx = LocateVexALG(G, "åŸä¸Šæ‘é—å€");
         
         if (zhenjiangIdx != -1 && jurongIdx != -1 && danyangIdx != -1) {
-            printf("Ìí¼ÓÁ¬½Ó±ß: ËÕÄş¹ã³¡ <-> Ã©É½¾°Çø (È¨ÖØ: 20.0km)\n");
+            printf("æ·»åŠ è¿æ¥è¾¹: è‹å®å¹¿åœº <-> èŒ…å±±æ™¯åŒº (æƒé‡: 20.0km)\n");
             AddEdge(G, zhenjiangIdx, jurongIdx, 20.0, &edgeCount);
             
-            printf("Ìí¼ÓÁ¬½Ó±ß: Ã©É½¾°Çø <-> ³ÇÉÏ´åÒÅÖ· (È¨ÖØ: 20.0km)\n");
+            printf("æ·»åŠ è¿æ¥è¾¹: èŒ…å±±æ™¯åŒº <-> åŸä¸Šæ‘é—å€ (æƒé‡: 20.0km)\n");
             AddEdge(G, jurongIdx, danyangIdx, 20.0, &edgeCount);
             
             G->arcnum = edgeCount / 2;
             
-            printf("\nÁ¬Í¨Í¼´´½¨Íê³É£¡\n");
-            printf("Ìí¼ÓÁË2ÌõÁ¬½Ó±ß£¬Ê¹Õû¸öÍ¼Á¬Í¨¡£\n");
+            printf("\nè¿é€šå›¾åˆ›å»ºå®Œæˆï¼\n");
+            printf("æ·»åŠ äº†2æ¡è¿æ¥è¾¹ï¼Œä½¿æ•´ä¸ªå›¾è¿é€šã€‚\n");
         } else {
-            printf("´íÎó: ÕÒ²»µ½ÇøÓò´ú±í¾°µã\n");
+            printf("é”™è¯¯: æ‰¾ä¸åˆ°åŒºåŸŸä»£è¡¨æ™¯ç‚¹\n");
         }
     } else {
-        printf("Í¼ÒÑ¾­ÊÇÁ¬Í¨Í¼£¬ÎŞĞèÌí¼ÓÁ¬½Ó±ß¡£\n");
+        printf("å›¾å·²ç»æ˜¯è¿é€šå›¾ï¼Œæ— éœ€æ·»åŠ è¿æ¥è¾¹ã€‚\n");
     }
     
     for (i = 0; i < componentCount; ++i) {
@@ -404,11 +404,11 @@ void CreateConnectedZhenjiangGraph(ALGraph* G) {
     compSizes = (int*)malloc(sizeof(int) * G->vexnum);
     components = GetConnectedComponents(G, &componentCount, compSizes);
     
-    printf("×îÖÕÁ¬Í¨·ÖÁ¿ÊıÁ¿: %d\n", componentCount);
+    printf("æœ€ç»ˆè¿é€šåˆ†é‡æ•°é‡: %d\n", componentCount);
     if (componentCount == 1) {
-        printf("¡Ì Í¼ÊÇÁ¬Í¨Í¼\n");
+        printf("âˆš å›¾æ˜¯è¿é€šå›¾\n");
     } else {
-        printf("¡Á Í¼²»ÊÇÁ¬Í¨Í¼\n");
+        printf("Ã— å›¾ä¸æ˜¯è¿é€šå›¾\n");
     }
     
     for (i = 0; i < componentCount; ++i) {
@@ -461,10 +461,10 @@ void Dijkstra(const ALGraph* G, int start, double* dist, int* prev) {
 
 void BuildSameAttributeSubgraph(ALGraph* G) {
 	int i,g,j,count,v;
-    printf("\n=== ¹¹½¨Í¬ÊôĞÔ¾°µã×ÓÍ¼ ===\n");
+    printf("\n=== æ„å»ºåŒå±æ€§æ™¯ç‚¹å­å›¾ ===\n");
     
     if (G->vexnum == 0) {
-        printf("ÇëÏÈ´´½¨Í¼£¡\n");
+        printf("è¯·å…ˆåˆ›å»ºå›¾ï¼\n");
         return;
     }
     
@@ -491,11 +491,11 @@ void BuildSameAttributeSubgraph(ALGraph* G) {
         }
         
         const char* typeName;  
-        if (g == 0) typeName = "ÈËÎÄÀà¾°µã";
-        else if (g == 1) typeName = "×ÔÈ»Àà¾°µã";
-        else typeName = "Ë«ÊôĞÔ¾°µã";
+        if (g == 0) typeName = "äººæ–‡ç±»æ™¯ç‚¹";
+        else if (g == 1) typeName = "è‡ªç„¶ç±»æ™¯ç‚¹";
+        else typeName = "åŒå±æ€§æ™¯ç‚¹";
         
-        printf("\n%s×ÓÍ¼ (°üº¬%d¸ö¾°µã):\n", typeName, groupSizes[g]);
+        printf("\n%så­å›¾ (åŒ…å«%dä¸ªæ™¯ç‚¹):\n", typeName, groupSizes[g]);
         
         int groupSize = groupSizes[g];
         double** distanceMatrix = (double**)malloc(sizeof(double*) * groupSize);
@@ -521,14 +521,14 @@ void BuildSameAttributeSubgraph(ALGraph* G) {
             free(prev);
         }
         
-        printf("¾°µãÁĞ±í: ");
+        printf("æ™¯ç‚¹åˆ—è¡¨: ");
         for ( i = 0; i < groupSize; ++i) {
             printf("%s", G->vertices[groups[g][i]].data);
             if (i < groupSize - 1) printf(", ");
         }
         printf("\n");
         
-        printf("×î¶ÌÂ·¾¶¾àÀë¾ØÕó:\n");
+        printf("æœ€çŸ­è·¯å¾„è·ç¦»çŸ©é˜µ:\n");
         printf("%20s", " ");
         for ( j = 0; j < groupSize; ++j) {
             printf("%10.8s", G->vertices[groups[g][j]].data);
@@ -547,7 +547,7 @@ void BuildSameAttributeSubgraph(ALGraph* G) {
             printf("\n");
         }
         
-        printf("\n½¨ÒéµÄÍ¬ÊôĞÔ¾°µãÓÎÀÀÂ·Ïß (»ùÓÚ×î¶ÌÂ·¾¶Á¬½Ó):\n");
+        printf("\nå»ºè®®çš„åŒå±æ€§æ™¯ç‚¹æ¸¸è§ˆè·¯çº¿ (åŸºäºæœ€çŸ­è·¯å¾„è¿æ¥):\n");
         int* inTree = (int*)calloc(groupSize, sizeof(int));
         int* parent = (int*)malloc(sizeof(int) * groupSize);
         double* minDist = (double*)malloc(sizeof(double) * groupSize);
@@ -580,7 +580,7 @@ void BuildSameAttributeSubgraph(ALGraph* G) {
             }
         }
         
-        printf("Á¬½Ó±ß (Æğµã -> ÖÕµã [¾àÀë]):\n");
+        printf("è¿æ¥è¾¹ (èµ·ç‚¹ -> ç»ˆç‚¹ [è·ç¦»]):\n");
         for ( i = 1; i < groupSize; ++i) {
             if (parent[i] != -1) {
                 printf("  %s -> %s [%.1lfkm]\n", 
@@ -612,19 +612,19 @@ const char* GetScenicIntroduction(const char* spotName) {
         char name[50];
         char description[500];
     } introMap[] = {
-        {"½­ËÕ´óÑ§", "Ñ§Ğ£¼á³ÖÒÔ¹±Ï×Ä±·¢Õ¹£¬²»¶ÏÌáÉı¿Æ¼¼´´ĞÂÓë·şÎñÉç»áÄÜÁ¦¡£"},
-        {"½ğÉ½ËÂ", "½ğÉ½ËÂÊ¼½¨ÓÚ¶«½ú£¬ÊÇÖĞ¹ú·ğ½Ììø×ÚÃûËÂ£¬Ãñ¼ä´«Ëµ¡¶°×Éß´«¡·ÖĞµÄ½ğÉ½ËÂ¼´Ö¸´Ë¡£"},
-        {"½¹É½¶¨»ÛËÂ", "½¹É½¶¨»ÛËÂÊ¼½¨ÓÚ¶«ººĞËÆ½Äê¼ä£¬ÊÇ½­ÄÏ·ğ½ÌÊ¥µØÖ®Ò»¡£ËÂÄÚ¹ÅÊ÷²ÎÌì£¬µîÓîÎ¡¶ë£¬±®¿ÌÁÖÁ¢¡£"},
-        {"±±¹ÌÂ¥", "±±¹ÌÂ¥Î»ÓÚÕò½­ÊĞ±±¹ÌÉ½ÉÏ£¬ÓëÔÀÑôÂ¥¡¢»Æº×Â¥²¢³Æ³¤½­Èı´óÃûÂ¥¡£"},
-        {"Î÷½ò¶É¹Å½Ö", "Î÷½ò¶É¹Å½ÖÊÇÕò½­ÎÄÎï¹Å¼£±£´æ×î¶à¡¢×î¼¯ÖĞ¡¢×îÍêºÃµÄµØÇø¡£"},
-        {"ÄÏÉ½É­ÁÖ¹«Ô°", "ÄÏÉ½É­ÁÖ¹«Ô°ÊÇÊ¡¼¶É­ÁÖ¹«Ô°£¬×ÜÃæ»ıÔ¼1500¹«Çê¡£"},
-        {"Õò½­´×ÎÄ»¯²©Îï¹İ", "Õò½­´×ÎÄ»¯²©Îï¹İÊÇ¹úÄÚÊ×¸ö×¨ÒµĞÔ´×ÎÄ»¯Ö÷Ìâ²©Îï¹İ¡£"},
-        {"Ã©É½¾°Çø", "Ã©É½ÊÇÖĞ¹úµÀ½ÌÃûÉ½£¬µÀ½ÌÉÏÇåÅÉµÄ·¢Ô´µØ¡£"},
-        {"½­ËÕ²è²©Ô°", "½­ËÕ²è²©Ô°ÊÇ¼¯²èÒ¶Éú²ú¡¢¿Æ¼¼Ê¾·¶¡¢ÎÄ»¯Õ¹Ê¾¡¢ÂÃÓÎ¹Û¹âÓÚÒ»ÌåµÄ×ÛºÏĞÔÔ°Çø¡£"},
-        {"³ÇÉÏ´åÒÅÖ·", "³ÇÉÏ´åÒÅÖ·ÊÇĞÂÊ¯Æ÷Ê±´úÖÁÎ÷ÖÜÊ±ÆÚµÄ¹ÅÎÄ»¯ÒÅÖ·¡£"}
+        {"æ±Ÿè‹å¤§å­¦", "å­¦æ ¡åšæŒä»¥è´¡çŒ®è°‹å‘å±•ï¼Œä¸æ–­æå‡ç§‘æŠ€åˆ›æ–°ä¸æœåŠ¡ç¤¾ä¼šèƒ½åŠ›ã€‚"},
+        {"é‡‘å±±å¯º", "é‡‘å±±å¯ºå§‹å»ºäºä¸œæ™‹ï¼Œæ˜¯ä¸­å›½ä½›æ•™ç¦…å®—åå¯ºï¼Œæ°‘é—´ä¼ è¯´ã€Šç™½è›‡ä¼ ã€‹ä¸­çš„é‡‘å±±å¯ºå³æŒ‡æ­¤ã€‚"},
+        {"ç„¦å±±å®šæ…§å¯º", "ç„¦å±±å®šæ…§å¯ºå§‹å»ºäºä¸œæ±‰å…´å¹³å¹´é—´ï¼Œæ˜¯æ±Ÿå—ä½›æ•™åœ£åœ°ä¹‹ä¸€ã€‚å¯ºå†…å¤æ ‘å‚å¤©ï¼Œæ®¿å®‡å·å³¨ï¼Œç¢‘åˆ»æ—ç«‹ã€‚"},
+        {"åŒ—å›ºæ¥¼", "åŒ—å›ºæ¥¼ä½äºé•‡æ±Ÿå¸‚åŒ—å›ºå±±ä¸Šï¼Œä¸å²³é˜³æ¥¼ã€é»„é¹¤æ¥¼å¹¶ç§°é•¿æ±Ÿä¸‰å¤§åæ¥¼ã€‚"},
+        {"è¥¿æ´¥æ¸¡å¤è¡—", "è¥¿æ´¥æ¸¡å¤è¡—æ˜¯é•‡æ±Ÿæ–‡ç‰©å¤è¿¹ä¿å­˜æœ€å¤šã€æœ€é›†ä¸­ã€æœ€å®Œå¥½çš„åœ°åŒºã€‚"},
+        {"å—å±±æ£®æ—å…¬å›­", "å—å±±æ£®æ—å…¬å›­æ˜¯çœçº§æ£®æ—å…¬å›­ï¼Œæ€»é¢ç§¯çº¦1500å…¬é¡·ã€‚"},
+        {"é•‡æ±Ÿé†‹æ–‡åŒ–åšç‰©é¦†", "é•‡æ±Ÿé†‹æ–‡åŒ–åšç‰©é¦†æ˜¯å›½å†…é¦–ä¸ªä¸“ä¸šæ€§é†‹æ–‡åŒ–ä¸»é¢˜åšç‰©é¦†ã€‚"},
+        {"èŒ…å±±æ™¯åŒº", "èŒ…å±±æ˜¯ä¸­å›½é“æ•™åå±±ï¼Œé“æ•™ä¸Šæ¸…æ´¾çš„å‘æºåœ°ã€‚"},
+        {"æ±Ÿè‹èŒ¶åšå›­", "æ±Ÿè‹èŒ¶åšå›­æ˜¯é›†èŒ¶å¶ç”Ÿäº§ã€ç§‘æŠ€ç¤ºèŒƒã€æ–‡åŒ–å±•ç¤ºã€æ—…æ¸¸è§‚å…‰äºä¸€ä½“çš„ç»¼åˆæ€§å›­åŒºã€‚"},
+        {"åŸä¸Šæ‘é—å€", "åŸä¸Šæ‘é—å€æ˜¯æ–°çŸ³å™¨æ—¶ä»£è‡³è¥¿å‘¨æ—¶æœŸçš„å¤æ–‡åŒ–é—å€ã€‚"}
     };
     
-    static char defaultIntro[] = "¸Ã¾°µãÊÇÕò½­ÖøÃûµÄÂÃÓÎ¾°µã£¬¾ßÓĞ·á¸»µÄÀúÊ·ÎÄ»¯ÄÚº­ºÍÓÅÃÀµÄ×ÔÈ»·ç¹â¡£";
+    static char defaultIntro[] = "è¯¥æ™¯ç‚¹æ˜¯é•‡æ±Ÿè‘—åçš„æ—…æ¸¸æ™¯ç‚¹ï¼Œå…·æœ‰ä¸°å¯Œçš„å†å²æ–‡åŒ–å†…æ¶µå’Œä¼˜ç¾çš„è‡ªç„¶é£å…‰ã€‚";
     int mapSize = sizeof(introMap) / sizeof(introMap[0]);
     
     for ( i = 0; i < mapSize; ++i) {
@@ -637,15 +637,15 @@ const char* GetScenicIntroduction(const char* spotName) {
 }
 
 void FindScenicSpot(ALGraph* G) {
-    printf("\n=== ¾°µã²éÕÒÓëÂ·¾¶¹æ»® ===\n");
+    printf("\n=== æ™¯ç‚¹æŸ¥æ‰¾ä¸è·¯å¾„è§„åˆ’ ===\n");
     
     if (G->vexnum == 0) {
-        printf("ÇëÏÈ´´½¨Í¼£¡\n");
+        printf("è¯·å…ˆåˆ›å»ºå›¾ï¼\n");
         return;
     }
     
     char spotName[50];
-    printf("ÇëÊäÈëÒª²éÕÒµÄ¾°µãÃû³Æ: ");
+    printf("è¯·è¾“å…¥è¦æŸ¥æ‰¾çš„æ™¯ç‚¹åç§°: ");
     getchar();
     fgets(spotName, sizeof(spotName), stdin);
     spotName[strcspn(spotName, "\n")] = '\0';
@@ -653,25 +653,25 @@ void FindScenicSpot(ALGraph* G) {
     int spotIndex = LocateVexALG(G, spotName);
     
     if (spotIndex == -1) {
-        printf("¡Á ¾°µã \"%s\" ²»´æÔÚÓÚÍ¼ÖĞ£¡\n", spotName);
+        printf("Ã— æ™¯ç‚¹ \"%s\" ä¸å­˜åœ¨äºå›¾ä¸­ï¼\n", spotName);
         return;
     }
     
-    printf("\n¡Ì ¾°µã \"%s\" ´æÔÚ£¡\n", spotName);
-    printf("  ±àºÅ: %d\n", G->vertices[spotIndex].id);
-    printf("  ÀàĞÍ: ");
+    printf("\nâˆš æ™¯ç‚¹ \"%s\" å­˜åœ¨ï¼\n", spotName);
+    printf("  ç¼–å·: %d\n", G->vertices[spotIndex].id);
+    printf("  ç±»å‹: ");
     switch(G->vertices[spotIndex].type) {
-        case 'h': printf("ÈËÎÄÀà¾°µã"); break;
-        case 'e': printf("×ÔÈ»Àà¾°µã"); break;
-        case 'b': printf("Ë«ÊôĞÔ¾°µã"); break;
-        default: printf("Î´ÖªÀàĞÍ"); break;
+        case 'h': printf("äººæ–‡ç±»æ™¯ç‚¹"); break;
+        case 'e': printf("è‡ªç„¶ç±»æ™¯ç‚¹"); break;
+        case 'b': printf("åŒå±æ€§æ™¯ç‚¹"); break;
+        default: printf("æœªçŸ¥ç±»å‹"); break;
     }
     printf("\n");
     
-    int jiangsuUnivIndex = LocateVexALG(G, "½­ËÕ´óÑ§");
+    int jiangsuUnivIndex = LocateVexALG(G, "æ±Ÿè‹å¤§å­¦");
     
     if (jiangsuUnivIndex == -1) {
-        printf("¡Á Í¼ÖĞÃ»ÓĞÕÒµ½½­ËÕ´óÑ§£¬ÎŞ·¨¼ÆËãÂ·¾¶¡£\n");
+        printf("Ã— å›¾ä¸­æ²¡æœ‰æ‰¾åˆ°æ±Ÿè‹å¤§å­¦ï¼Œæ— æ³•è®¡ç®—è·¯å¾„ã€‚\n");
         return;
     }
     
@@ -680,13 +680,13 @@ void FindScenicSpot(ALGraph* G) {
     Dijkstra(G, jiangsuUnivIndex, dist, prev);
     
     if (dist[spotIndex] >= INF) {
-        printf("  ´Ó½­ËÕ´óÑ§µ½%sÎŞ¿É´ïÂ·¾¶£¡\n", spotName);
+        printf("  ä»æ±Ÿè‹å¤§å­¦åˆ°%sæ— å¯è¾¾è·¯å¾„ï¼\n", spotName);
         free(dist);
         free(prev);
         return;
     }
     
-    printf("\n ´Ó½­ËÕ´óÑ§µ½%sµÄ×î¶ÌÂ·¾¶¹æ»®£º\n", spotName);
+    printf("\n ä»æ±Ÿè‹å¤§å­¦åˆ°%sçš„æœ€çŸ­è·¯å¾„è§„åˆ’ï¼š\n", spotName);
     
     int* pathStack = (int*)malloc(sizeof(int) * G->vexnum);
     int stackTop = -1;
@@ -696,7 +696,7 @@ void FindScenicSpot(ALGraph* G) {
         current = prev[current];
     }
     
-    printf("  Â·¾¶: ");
+    printf("  è·¯å¾„: ");
     int first = 1;
     double totalDistance = dist[spotIndex];
     
@@ -707,12 +707,12 @@ void FindScenicSpot(ALGraph* G) {
         first = 0;
     }
     
-    printf("\n  ×Ü¾àÀë: %.1lf km\n", totalDistance);
+    printf("\n  æ€»è·ç¦»: %.1lf km\n", totalDistance);
     
     double estimatedTime = totalDistance / 30.0 * 60.0;
-    printf("  Ô¤¼ÆÊ±¼ä: %.0lf ·ÖÖÓ\n", estimatedTime);
+    printf("  é¢„è®¡æ—¶é—´: %.0lf åˆ†é’Ÿ\n", estimatedTime);
     
-    printf("\n ¾°µã½éÉÜ£º\n");
+    printf("\n æ™¯ç‚¹ä»‹ç»ï¼š\n");
     printf("  %s\n", GetScenicIntroduction(spotName));
     
     free(dist);
@@ -726,14 +726,14 @@ int main() {
     int graphCreated = 0;
     
     do {
-        printf("\n=== Õò½­¾°µãÍ¼¹ÜÀíÏµÍ³ ===\n");
-        printf("1. ´´½¨Á¬Í¨Õò½­¾°µãÍ¼\n");
-        printf("2. ÏÔÊ¾¼ò½àÍ¼½á¹¹\n");
-        printf("3. ¹¹½¨Í¬ÊôĞÔ¾°µã×ÓÍ¼\n");
-        printf("4. ²éÕÒ¾°µã¡¢ÏÔÊ¾ĞÅÏ¢²¢¹æ»®Â·¾¶\n");
-        printf("5. ÍË³ö\n");
-        printf("µ±Ç°×´Ì¬: %s\n", graphCreated ? "ÒÑ´´½¨Í¼" : "Î´´´½¨Í¼");
-        printf("ÇëÑ¡Ôñ²Ù×÷: ");
+        printf("\n=== é•‡æ±Ÿæ™¯ç‚¹å›¾ç®¡ç†ç³»ç»Ÿ ===\n");
+        printf("1. åˆ›å»ºè¿é€šé•‡æ±Ÿæ™¯ç‚¹å›¾\n");
+        printf("2. æ˜¾ç¤ºç®€æ´å›¾ç»“æ„\n");
+        printf("3. æ„å»ºåŒå±æ€§æ™¯ç‚¹å­å›¾\n");
+        printf("4. æŸ¥æ‰¾æ™¯ç‚¹ã€æ˜¾ç¤ºä¿¡æ¯å¹¶è§„åˆ’è·¯å¾„\n");
+        printf("5. é€€å‡º\n");
+        printf("å½“å‰çŠ¶æ€: %s\n", graphCreated ? "å·²åˆ›å»ºå›¾" : "æœªåˆ›å»ºå›¾");
+        printf("è¯·é€‰æ‹©æ“ä½œ: ");
         scanf("%d", &choice);
         
         switch(choice) {
@@ -747,7 +747,7 @@ int main() {
             
             case 2: {
                 if (!graphCreated) {
-                    printf("ÇëÏÈ´´½¨Í¼£¡\n");
+                    printf("è¯·å…ˆåˆ›å»ºå›¾ï¼\n");
                     break;
                 }
                 PrintGraphSimple(&G);
@@ -755,11 +755,11 @@ int main() {
             }
             case 3: {
                 if (!graphCreated) {
-                    printf("ÇëÏÈ´´½¨Í¼£¡\n");
+                    printf("è¯·å…ˆåˆ›å»ºå›¾ï¼\n");
                     break;
                 }              
                 char type;
-                printf("ÇëÊäÈë¾°µãÀàĞÍ(h:ÈËÎÄ, e:×ÔÈ», b:Ë«ÊôĞÔ): ");
+                printf("è¯·è¾“å…¥æ™¯ç‚¹ç±»å‹(h:äººæ–‡, e:è‡ªç„¶, b:åŒå±æ€§): ");
                 getchar();
                 scanf("%c", &type);
                 PrintByType(&G, type);
@@ -768,24 +768,24 @@ int main() {
             }
             case 4: {
                 if (!graphCreated) {
-                    printf("ÇëÏÈ´´½¨Í¼£¡\n");
+                    printf("è¯·å…ˆåˆ›å»ºå›¾ï¼\n");
                     break;
                 }
                 FindScenicSpot(&G);
                 break;
             }
             case 5: {
-                printf("³ÌĞòÍË³ö¡£\n");
+                printf("ç¨‹åºé€€å‡ºã€‚\n");
                 break;
             }
             default: {
-                printf("ÎŞĞ§Ñ¡Ôñ£¬ÇëÖØĞÂÑ¡Ôñ¡£\n");
+                printf("æ— æ•ˆé€‰æ‹©ï¼Œè¯·é‡æ–°é€‰æ‹©ã€‚\n");
                 break;
             }
         }
         
         if (choice != 5) {
-            printf("\n²Ù×÷Íê³É£¬°´»Ø³µ¼ü¼ÌĞø...");
+            printf("\næ“ä½œå®Œæˆï¼ŒæŒ‰å›è½¦é”®ç»§ç»­...");
             getchar();
             getchar();
         }

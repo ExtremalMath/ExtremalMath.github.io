@@ -152,59 +152,59 @@ void SelectionSort(admin arr[], int size) {
 int FindAdminByCode(admin admins[], int n, const char *targetCode) {
     for (int i = 0; i < n; i++) {
         if (strcmp(admins[i].id, targetCode) == 0) {
-            printf("ÕÒµ½¸öÈËÐÅÏ¢£º\n");
-            printf("ÐòºÅ: %d\n", i+1);
-            printf("ÐÕÃû: %s\n", admins[i].name);
-            printf("ÆµÂÊ: %d\n", admins[i].frequency);
-            printf("±àÂë: %s\n", admins[i].id);
+            printf("æ‰¾åˆ°ä¸ªäººä¿¡æ¯ï¼š\n");
+            printf("åºå·: %d\n", i+1);
+            printf("å§“å: %s\n", admins[i].name);
+            printf("é¢‘çŽ‡: %d\n", admins[i].frequency);
+            printf("ç¼–ç : %s\n", admins[i].id);
             return i; 
         }
     }
-    printf("Î´ÕÒµ½Æ¥ÅäµÄ±àÂë£º%s\n", targetCode);
+    printf("æœªæ‰¾åˆ°åŒ¹é…çš„ç¼–ç ï¼š%s\n", targetCode);
     return -1; 
 }
 
 int SearchCodeByName(admin admins[], int n, char *name) {
     for (int i = 0; i < n; i++) {
         if (strcmp(admins[i].name, name) == 0) {
-            printf("ÐÕÃû£º%s£¬ÆµÂÊ£º%d£¬±àÂë£º%s\n", admins[i].name, admins[i].frequency, admins[i].id);
+            printf("å§“åï¼š%sï¼Œé¢‘çŽ‡ï¼š%dï¼Œç¼–ç ï¼š%s\n", admins[i].name, admins[i].frequency, admins[i].id);
             return i;
         }
     }
-    printf("Î´ÕÒµ½ÐÕÃû£º%s\n", name);
+    printf("æœªæ‰¾åˆ°å§“åï¼š%s\n", name);
     return -1;
 }
 
 void PrintCodeLengths(admin admins[], int n) {
-    printf("±àÂë³¤¶ÈÍ³¼Æ£º\n");
+    printf("ç¼–ç é•¿åº¦ç»Ÿè®¡ï¼š\n");
     for (int i = 0; i < n; i++) {
-        printf("%s£º±àÂë³¤¶È %d\n", admins[i].name, strlen(admins[i].id));
+        printf("%sï¼šç¼–ç é•¿åº¦ %d\n", admins[i].name, strlen(admins[i].id));
     }
 }
 
 void DisplayAllAdmins(admin admins[], int n) {
-    printf("ËùÓÐ¸öÈËÐÅÏ¢£º\n");
-    printf("ÐòºÅ\tÐÕÃû\tÆµÂÊ\t±àÂë\n");
+    printf("æ‰€æœ‰ä¸ªäººä¿¡æ¯ï¼š\n");
+    printf("åºå·\tå§“å\té¢‘çŽ‡\tç¼–ç \n");
     for (int i = 0; i < n; i++) {
         printf("%d\t%s\t%d\t%s\n", i+1, admins[i].name, admins[i].frequency, admins[i].id);
     }
 }
 
 int main() {
-    admin admins[28] = {{16, "ÕÔ", ""},{15, "Ç®", ""},{14, "Ëï", ""},{13, "Öì", ""},{12, "Àî", ""},{11, "ÖÜ", ""},{10, "Îâ", ""},{9, "Íõ", ""},{25, "³Â", ""},{23, "ÁÖ", ""},{21, "Ðì", ""},{19, "¹ù", ""},{17, "ºÎ", ""},{16, "¸ß", ""},{25, "É£", ""},{14, "Âí", ""},{12, "ºú", ""},{11, "Ðí", ""},{10, "µË", ""},{9, "Ïô", ""},{8, "³Ì", ""},{7, "²Ü", ""},{6, "Ô¬", ""},{5, "µË", ""},{4, "¸µ", ""},{3, "¶¡", ""},{2, "ÂÀ", ""},{1, "Ê©", ""}};
+    admin admins[28] = {{16, "èµµ", ""},{15, "é’±", ""},{14, "å­™", ""},{13, "æœ±", ""},{12, "æŽ", ""},{11, "å‘¨", ""},{10, "å´", ""},{9, "çŽ‹", ""},{25, "é™ˆ", ""},{23, "æž—", ""},{21, "å¾", ""},{19, "éƒ­", ""},{17, "ä½•", ""},{16, "é«˜", ""},{25, "æ¡‘", ""},{14, "é©¬", ""},{12, "èƒ¡", ""},{11, "è®¸", ""},{10, "é‚“", ""},{9, "è§", ""},{8, "ç¨‹", ""},{7, "æ›¹", ""},{6, "è¢", ""},{5, "é‚“", ""},{4, "å‚…", ""},{3, "ä¸", ""},{2, "å•", ""},{1, "æ–½", ""}};
     int n = 28;
     HuffmanTreeCode(admins, n);
     int choice;
     char searchName[MAX_NAME_LEN];
     do {
-        printf("\n=== ¹þ·òÂü±àÂë¹ÜÀíÏµÍ³ ===\n");
-        printf("1. ÏÔÊ¾ËùÓÐ±àÂë\n");
-        printf("2. °´ÆµÂÊÅÅÐòÏÔÊ¾\n");
-        printf("3. °´ÐÕÃû²éÕÒ±àÂë\n");
-        printf("4. ÏÔÊ¾±àÂë³¤¶È\n");
-        printf("5. ¸ù¾Ý±àÂë²éÕÒ¸öÈËÐÅÏ¢\n");
-        printf("0. ÍË³ö\n");
-        printf("ÇëÑ¡Ôñ²Ù×÷£º");
+        printf("\n=== å“ˆå¤«æ›¼ç¼–ç ç®¡ç†ç³»ç»Ÿ ===\n");
+        printf("1. æ˜¾ç¤ºæ‰€æœ‰ç¼–ç \n");
+        printf("2. æŒ‰é¢‘çŽ‡æŽ’åºæ˜¾ç¤º\n");
+        printf("3. æŒ‰å§“åæŸ¥æ‰¾ç¼–ç \n");
+        printf("4. æ˜¾ç¤ºç¼–ç é•¿åº¦\n");
+        printf("5. æ ¹æ®ç¼–ç æŸ¥æ‰¾ä¸ªäººä¿¡æ¯\n");
+        printf("0. é€€å‡º\n");
+        printf("è¯·é€‰æ‹©æ“ä½œï¼š");
         scanf("%d", &choice);
         switch(choice) {
             case 1:
@@ -214,11 +214,11 @@ int main() {
                 admin sortedAdmins[8];
                 memcpy(sortedAdmins, admins, sizeof(admin) * n);
                 SelectionSort(sortedAdmins, n);
-                printf("°´ÆµÂÊÅÅÐò½á¹û£º\n");
+                printf("æŒ‰é¢‘çŽ‡æŽ’åºç»“æžœï¼š\n");
                 DisplayAllAdmins(sortedAdmins, n);
                 break;}
             case 3:
-                printf("ÇëÊäÈëÒª²éÕÒµÄÐÕÃû£º");
+                printf("è¯·è¾“å…¥è¦æŸ¥æ‰¾çš„å§“åï¼š");
                 scanf("%s", searchName);
                 SearchCodeByName(admins, n, searchName);
                 break;
@@ -226,16 +226,16 @@ int main() {
                 PrintCodeLengths(admins, n);
                 break;
             case 5: {
-    			printf("ÇëÊäÈëÒª²éÕÒµÄ¹þ·òÂü±àÂë£º");
+    			printf("è¯·è¾“å…¥è¦æŸ¥æ‰¾çš„å“ˆå¤«æ›¼ç¼–ç ï¼š");
     			char searchCode[MAX_ID_LEN];
     			scanf("%s", searchCode);
     			FindAdminByCode(admins, n, searchCode);
     			break;}
             case 0:
-                printf("¸ÐÐ»Ê¹ÓÃ\n");
+                printf("æ„Ÿè°¢ä½¿ç”¨\n");
                 break;
             default:
-                printf("ÎÞÐ§Ñ¡Ôñ£¬ÇëÖØÐÂÊäÈë¡£\n");
+                printf("æ— æ•ˆé€‰æ‹©ï¼Œè¯·é‡æ–°è¾“å…¥ã€‚\n");
         }
     } while(choice != 0);
     return 0;

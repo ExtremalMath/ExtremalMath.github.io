@@ -7,9 +7,9 @@
 
 #define MAX_SIZE 100
 #define MAX_NAME_LEN 50
-#define MAX_PLAYER_NUM 3 //ÓÎÏ·ÈËÊı 
+#define MAX_PLAYER_NUM 3 //æ¸¸æˆäººæ•° 
 #define MAX_TIME 180
-#define TOTAL_QUESTIONS 2  //×ÜÎÊÌâÊı 
+#define TOTAL_QUESTIONS 2  //æ€»é—®é¢˜æ•° 
 #define NUM_OPS 4
 #define NUM_STRUCTURES 5
 #define EPS 1e-6
@@ -421,34 +421,34 @@ int Play24Game() {
     
     while (question_num < TOTAL_QUESTIONS) {
         question_num++;
-        printf("\n=== µÚ%dÌâ ======½ø¶È%d/%d====\n", question_num,question_num,TOTAL_QUESTIONS);
+        printf("\n=== ç¬¬%dé¢˜ ======è¿›åº¦%d/%d====\n", question_num,question_num,TOTAL_QUESTIONS);
         int nums[4];
         GenerateRandomNumbers(nums);
-        printf("Êı×Ö£º%d %d %d %d\n", nums[0], nums[1], nums[2], nums[3]);
+        printf("æ•°å­—ï¼š%d %d %d %d\n", nums[0], nums[1], nums[2], nums[3]);
         time_t start_time = time(NULL);
         int attempts = 0;
         int answered = 0;
         while (!answered) {
             double elapsed = difftime(time(NULL), start_time);
             if (elapsed >= MAX_TIME) {
-                printf("? Ê±¼äµ½£¡±¾ÌâÎ´Íê³É\n");
-                printf("³¬Ê±%dÃë£¬±¾ÌâµÃ·Ö£º0\n", (int)elapsed);
+                printf("? æ—¶é—´åˆ°ï¼æœ¬é¢˜æœªå®Œæˆ\n");
+                printf("è¶…æ—¶%dç§’ï¼Œæœ¬é¢˜å¾—åˆ†ï¼š0\n", (int)elapsed);
                 answered = 1;
                 break;
             }
             
-            printf("\nÊ£ÓàÊ±¼ä£º%dÃë | ³¢ÊÔ´ÎÊı£º%d\n", 
+            printf("\nå‰©ä½™æ—¶é—´ï¼š%dç§’ | å°è¯•æ¬¡æ•°ï¼š%d\n", 
                    MAX_TIME - (int)elapsed, attempts);
-            printf("ÇëÊäÈë±í´ïÊ½£¨Ö±½ÓÊäÈë±í´ïÊ½¼´¿É£©£º");
+            printf("è¯·è¾“å…¥è¡¨è¾¾å¼ï¼ˆç›´æ¥è¾“å…¥è¡¨è¾¾å¼å³å¯ï¼‰ï¼š");
             char exp[MAX_SIZE];
             if (scanf("%99s", exp) != 1) {
-                printf("ÊäÈë´íÎó£¬ÇëÖØÊÔ£¡\n");
+                printf("è¾“å…¥é”™è¯¯ï¼Œè¯·é‡è¯•ï¼\n");
                 ClearInputBuffer();
                 continue;
             }
 
             else if (strcmp(exp, "=") == 0) {
-                printf("·ÅÆúµ±Ç°ÌâÄ¿£¬½øÈëÏÂÒ»Ìâ\n");
+                printf("æ”¾å¼ƒå½“å‰é¢˜ç›®ï¼Œè¿›å…¥ä¸‹ä¸€é¢˜\n");
                 answered = 1;
                 break;
             }
@@ -461,7 +461,7 @@ int Play24Game() {
             BiTree root = CreateExpTree(exp, &error, nums);
             
             if (error) {
-                printf("±í´ïÊ½´íÎó£¬Çë¼ì²é¸ñÊ½£¡\n");
+                printf("è¡¨è¾¾å¼é”™è¯¯ï¼Œè¯·æ£€æŸ¥æ ¼å¼ï¼\n");
                 if (root != NULL) {
                     FreeExpressionTree(root);
                 }
@@ -469,7 +469,7 @@ int Play24Game() {
             }
             int valid_nums = ValidateNumbersUsed(root, nums);
             if (!valid_nums) {
-                printf(" ±ØĞëÊ¹ÓÃÈ«²¿¸ø¶¨µÄ4¸öÊı×Ö£¬Ã¿¸öÊı×ÖÖ»ÄÜÊ¹ÓÃÒ»´Î£¡\n");
+                printf(" å¿…é¡»ä½¿ç”¨å…¨éƒ¨ç»™å®šçš„4ä¸ªæ•°å­—ï¼Œæ¯ä¸ªæ•°å­—åªèƒ½ä½¿ç”¨ä¸€æ¬¡ï¼\n");
                 FreeExpressionTree(root);
                 continue;
             }
@@ -479,41 +479,41 @@ int Play24Game() {
                 int score = (int)(100 * (MAX_TIME - elapsed) / MAX_TIME);
                 score = score < 0 ? 0 : score;
                 
-                printf(" ÕıÈ·£¡½á¹û = 24\n");
-                printf("ÓÃÊ±£º%.1fÃë | ³¢ÊÔ´ÎÊı£º%d\n", elapsed, attempts);
+                printf(" æ­£ç¡®ï¼ç»“æœ = 24\n");
+                printf("ç”¨æ—¶ï¼š%.1fç§’ | å°è¯•æ¬¡æ•°ï¼š%d\n", elapsed, attempts);
                 score += 180 - (int)elapsed;
-                printf("±¾ÌâµÃ·Ö£º%d·Ö\n", score);
+                printf("æœ¬é¢˜å¾—åˆ†ï¼š%dåˆ†\n", score);
                 
                 total_score += score;
                 FreeExpressionTree(root);
                 answered = 1;
             } else {
-                printf(" ½á¹û´íÎó£¡¼ÆËã½á¹û = %d£¨²»ÊÇ24£©\n", result);
+                printf(" ç»“æœé”™è¯¯ï¼è®¡ç®—ç»“æœ = %dï¼ˆä¸æ˜¯24ï¼‰\n", result);
                 FreeExpressionTree(root);
             }
         }
         
-        printf("µ±Ç°×Ü·Ö£º%d\n", total_score);
+        printf("å½“å‰æ€»åˆ†ï¼š%d\n", total_score);
     }
     
-    printf("\n====== ÓÎÏ·½áÊø ======\n");
-    printf("Íê³ÉÌâÄ¿£º%dµÀ\n", TOTAL_QUESTIONS);
-    printf("×îÖÕµÃ·Ö£º%d·Ö\n", total_score);
-    printf("Æ½¾ùÃ¿ÌâµÃ·Ö£º%.1f·Ö\n", (float)total_score / TOTAL_QUESTIONS);
+    printf("\n====== æ¸¸æˆç»“æŸ ======\n");
+    printf("å®Œæˆé¢˜ç›®ï¼š%dé“\n", TOTAL_QUESTIONS);
+    printf("æœ€ç»ˆå¾—åˆ†ï¼š%dåˆ†\n", total_score);
+    printf("å¹³å‡æ¯é¢˜å¾—åˆ†ï¼š%.1fåˆ†\n", (float)total_score / TOTAL_QUESTIONS);
     return total_score;
 }
 
 int OneTry() {
     int m;
-    printf("====== 24µãÓÎÏ· ======\n");
-    printf("==ÓÎÏ·°æ±¾£ºÒ»¹²%dµÀ==\n",TOTAL_QUESTIONS);
-    printf("¹æÔò£º\n");
-    printf("1. ÏµÍ³»áËæ»ú¸ø³ö4¸ö1-10µÄÊı×Ö\n");
-    printf("2. ÄãĞèÒªÓÃ+¡¢-¡¢*¡¢/ºÍÀ¨ºÅ×é³É±í´ïÊ½£¬Ê¹½á¹ûµÈÓÚ24\n");
-    printf("3. Ã¿µÀÌâÏŞÊ±%dÃë£¬³¬¹ıÊ±¼ä×Ô¶¯½øÈëÏÂÒ»Ìâ\n", MAX_TIME);
-    printf("4. ¹²ÓĞ%dµÀÌâ£¬Ã¿µÀÌâ¸ù¾İÓÃÊ±¼Æ·Ö\n", TOTAL_QUESTIONS);
-    printf("5. ÊäÈë'='½áÊøµ±Ç°ÌâÄ¿\n\n");
-    printf("ÌØ±ğÌáĞÑ£º/ÎªÕû³ı£¬Èô·ÅÆúÕâÒ»Ìâ£¬ÔòÖ±½ÓÊäÈë'=';ÕâÀïµÄÀ¨ºÅÎªÓ¢ÎÄµÄÀ¨ºÅ£¡;\nÊäÈë'?'»ñÈ¡±¾Ìâ½âµÄËùÓĞ´ğ°¸"); 
+    printf("====== 24ç‚¹æ¸¸æˆ ======\n");
+    printf("==æ¸¸æˆç‰ˆæœ¬ï¼šä¸€å…±%dé“==\n",TOTAL_QUESTIONS);
+    printf("è§„åˆ™ï¼š\n");
+    printf("1. ç³»ç»Ÿä¼šéšæœºç»™å‡º4ä¸ª1-10çš„æ•°å­—\n");
+    printf("2. ä½ éœ€è¦ç”¨+ã€-ã€*ã€/å’Œæ‹¬å·ç»„æˆè¡¨è¾¾å¼ï¼Œä½¿ç»“æœç­‰äº24\n");
+    printf("3. æ¯é“é¢˜é™æ—¶%dç§’ï¼Œè¶…è¿‡æ—¶é—´è‡ªåŠ¨è¿›å…¥ä¸‹ä¸€é¢˜\n", MAX_TIME);
+    printf("4. å…±æœ‰%dé“é¢˜ï¼Œæ¯é“é¢˜æ ¹æ®ç”¨æ—¶è®¡åˆ†\n", TOTAL_QUESTIONS);
+    printf("5. è¾“å…¥'='ç»“æŸå½“å‰é¢˜ç›®\n\n");
+    printf("ç‰¹åˆ«æé†’ï¼š/ä¸ºæ•´é™¤ï¼Œè‹¥æ”¾å¼ƒè¿™ä¸€é¢˜ï¼Œåˆ™ç›´æ¥è¾“å…¥'=';è¿™é‡Œçš„æ‹¬å·ä¸ºè‹±æ–‡çš„æ‹¬å·ï¼;\nè¾“å…¥'?'è·å–æœ¬é¢˜è§£çš„æ‰€æœ‰ç­”æ¡ˆ"); 
     m = Play24Game();
     return m;
 }
@@ -548,10 +548,10 @@ void SelectionSort(Player arr[], int size) {
 
 void printRank(Player arr[], int n) {
     int i;
-    printf("=====ÓÎÏ·½áËãÅÅÃû=====\n");
+    printf("=====æ¸¸æˆç»“ç®—æ’å=====\n");
     for(i = 0; i < n; i++) {
         if(arr[i].score == -1) continue;
-        printf("µÚ%dÃû£º%s\tµÃ·Ö:%d\n", i+1, arr[i].name, arr[i].score);
+        printf("ç¬¬%dåï¼š%s\tå¾—åˆ†:%d\n", i+1, arr[i].name, arr[i].score);
     }
 }
 
@@ -563,25 +563,25 @@ int main() {
         team[i].score = -1;
     }
     
-    printf("ÇëÊäÈë±¾¾ÖÍæ¼ÒÊıÁ¿: ");
+    printf("è¯·è¾“å…¥æœ¬å±€ç©å®¶æ•°é‡: ");
     scanf("%d", &playernum);
     if(playernum>MAX_PLAYER_NUM)
-	{printf("×î´óÈËÊı²»ÄÜ³¬¹ı%dÈË£¡",MAX_PLAYER_NUM);
-    printf("ÇëÖØĞÂÊäÈë±¾¾ÖÍæ¼ÒÊıÁ¿: ");
+	{printf("æœ€å¤§äººæ•°ä¸èƒ½è¶…è¿‡%däººï¼",MAX_PLAYER_NUM);
+    printf("è¯·é‡æ–°è¾“å…¥æœ¬å±€ç©å®¶æ•°é‡: ");
     scanf("%d", &playernum);}  
     ClearInputBuffer();
     
     for(i = 0; i < playernum; i++) {
-        printf("ÇëÊäÈëµ±Ç°Íæ¼ÒêÇ³Æ: ");
+        printf("è¯·è¾“å…¥å½“å‰ç©å®¶æ˜µç§°: ");
         fgets(team[i].name, MAX_NAME_LEN, stdin);
         team[i].name[strcspn(team[i].name, "\n")] = '\0';
         team[i].score = OneTry();
-        printf("±¾¾ÖÍæ¼Ò½áÊø£¬°´ÈÎÒâ¼ü½øĞĞÏÂÒ»ÂÖ");
+        printf("æœ¬å±€ç©å®¶ç»“æŸï¼ŒæŒ‰ä»»æ„é”®è¿›è¡Œä¸‹ä¸€è½®");
         getchar();getchar();
     }
     SelectionSort(team, playernum);
     printRank(team, playernum);
-    printf("\nÓÎÏ·½áÊø£¡¸ĞĞ»²ÎÓë£¡\n");
+    printf("\næ¸¸æˆç»“æŸï¼æ„Ÿè°¢å‚ä¸ï¼\n");
     return 0;
 }
 

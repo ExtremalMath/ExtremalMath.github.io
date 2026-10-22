@@ -83,7 +83,7 @@ int EnRightQueueAttribute(LinkQueue *QA,LinkQueue *QE,LinkQueue *QN,Guest g){
             EnQueue(QN,g);
             break;
         default:
-            printf("Î´ÖªÉí·İ\n");
+            printf("æœªçŸ¥èº«ä»½\n");
             return 0;
     }
     return 1;
@@ -101,7 +101,7 @@ int EnRightQueueImportance(LinkQueue *QS,LinkQueue *QV,LinkQueue *QY,Guest g){
             EnQueue(QS,g);
             break;
         default:
-            printf("Î´ÖªÉí·İ\n");
+            printf("æœªçŸ¥èº«ä»½\n");
             return 0;
     }
     return 1;
@@ -258,16 +258,16 @@ void generate_attribute(Guest *g) {
 void print_attribute(const Guest *g) {
     switch (g->attribute) {
         case 'a':
-            printf("Ö°ÒµÉí·İÊÇ£º¾üÈË\n");
+            printf("èŒä¸šèº«ä»½æ˜¯ï¼šå†›äºº\n");
             break;
         case 'e':
-            printf("Ö°ÒµÉí·İÊÇ£º½ÌÊ¦\n");
+            printf("èŒä¸šèº«ä»½æ˜¯ï¼šæ•™å¸ˆ\n");
             break;
         case 'n':
-            printf("Ö°ÒµÉí·İÊÇ£ºÈºÖÚ\n");
+            printf("èŒä¸šèº«ä»½æ˜¯ï¼šç¾¤ä¼—\n");
             break;
         default:
-            printf("Î´ÖªÖ°ÒµÉí·İ\n");
+            printf("æœªçŸ¥èŒä¸šèº«ä»½\n");
     }
 }
 
@@ -284,26 +284,26 @@ void determine_vip(Guest *g) {
 void print_vip(const Guest *g) {
     switch (g->importance) {
         case 's':
-            printf("Éí·İÊÇ£º³¬¼¶»áÔ±\n");
+            printf("èº«ä»½æ˜¯ï¼šè¶…çº§ä¼šå‘˜\n");
             break;
         case 'v':
-            printf("Éí·İÊÇ£º»áÔ±\n");
+            printf("èº«ä»½æ˜¯ï¼šä¼šå‘˜\n");
             break;
         case 'y':
-            printf("Éí·İÊÇ£ºÆÕÍ¨¹ÛÖÚ\n");
+            printf("èº«ä»½æ˜¯ï¼šæ™®é€šè§‚ä¼—\n");
             break;
         default:
-            printf("Î´Öª»áÔ±µÈ¼¶\n");
+            printf("æœªçŸ¥ä¼šå‘˜ç­‰çº§\n");
     }
 }
 
 void inputGuest(Guest *g) {
-    printf("ÇëÊäÈëÄãµÄĞÕÃû: ");
+    printf("è¯·è¾“å…¥ä½ çš„å§“å: ");
 	getchar();
     scanf("%[^\n]", g->name);
-    printf("ÇëÊäÈëÄãµÄÖ¤¼şºÅ: ");
+    printf("è¯·è¾“å…¥ä½ çš„è¯ä»¶å·: ");
     scanf("%d", &(g->id));
-    printf("ÇëÊäÈëÄãµÄ´¢Ğî½ğ¶î: ");
+    printf("è¯·è¾“å…¥ä½ çš„å‚¨è“„é‡‘é¢: ");
     scanf("%d", &(g->savingmoney));
     //getchar();
     generate_attribute(g);
@@ -315,16 +315,16 @@ void inputGuest(Guest *g) {
 }
 
 void printGuest(Guest *g) {
-    printf("=========Éí·İ¼ì²é=========\n");
-    printf("ĞÕÃû: %s\n", g->name);
-    printf("Ö¤¼şºÅ: %d\n", g->id);
-    printf("ÄãµÄ");
+    printf("=========èº«ä»½æ£€æŸ¥=========\n");
+    printf("å§“å: %s\n", g->name);
+    printf("è¯ä»¶å·: %d\n", g->id);
+    printf("ä½ çš„");
     print_vip(g);
-    printf("ÄãµÄ");
+    printf("ä½ çš„");
     print_attribute(g);
-    printf("Ô¤Ô¼×´Ì¬: %s\n", g->ticket ? "ÒÑÔ¤Ô¼" : "Î´Ô¤Ô¼");
+    printf("é¢„çº¦çŠ¶æ€: %s\n", g->ticket ? "å·²é¢„çº¦" : "æœªé¢„çº¦");
     if (g->ticket) {
-        printf("×ùÎ»ºÅ: %d\n", g->seat_number);
+        printf("åº§ä½å·: %d\n", g->seat_number);
     }
     printf("==========================\n");
 }
@@ -333,25 +333,25 @@ int login(LinkQueue *Q) {
     Guest g;
     int confirm;
     
-    printf("\n=== ¹ÛÖÚµÇÂ¼ ===\n");
+    printf("\n=== è§‚ä¼—ç™»å½• ===\n");
     inputGuest(&g);
-    printf("\nÇë¼ì²éÄãµÄ¸öÈËĞÅÏ¢ÊÇ·ñÍêÕû:\n");
+    printf("\nè¯·æ£€æŸ¥ä½ çš„ä¸ªäººä¿¡æ¯æ˜¯å¦å®Œæ•´:\n");
     printGuest(&g);
     
-    printf("\nÇëÈ·ÈÏ¸öÈËĞÅÏ¢ÊÇ·ñÕıÈ·£¨ÕıÈ·ÊäÈë1£¬ÖØĞÂÊäÈëÊäÈë0£©: ");
+    printf("\nè¯·ç¡®è®¤ä¸ªäººä¿¡æ¯æ˜¯å¦æ­£ç¡®ï¼ˆæ­£ç¡®è¾“å…¥1ï¼Œé‡æ–°è¾“å…¥è¾“å…¥0ï¼‰: ");
     scanf("%d", &confirm);
     //getchar();
     
     if (confirm == 1) {
         if (EnQueue(Q, g)) {
-            printf("\n¹ÛÖÚ %s ÒÑ³É¹¦¼ÓÈë¶ÓÁĞ\n", g.name);
+            printf("\nè§‚ä¼— %s å·²æˆåŠŸåŠ å…¥é˜Ÿåˆ—\n", g.name);
             return 1;
         } else {
-            printf("\nÈë¶ÓÊ§°Ü\n");
+            printf("\nå…¥é˜Ÿå¤±è´¥\n");
             return 0;
         }
     } else {
-        printf("\nÒÑÈ¡ÏûµÇÂ¼\n");
+        printf("\nå·²å–æ¶ˆç™»å½•\n");
         return 0;
     }
 }
@@ -507,7 +507,7 @@ void TestFunData(Hashtable *Ht, LinkQueue *Q){
     sortBySeatNumber(Q);
     printf("\nQueue contents after sorting:\n");
     myprint(Q);*/
-    printf("²åÈë²âÊÔÊı¾İÍê³É£¡\n");
+    printf("æ’å…¥æµ‹è¯•æ•°æ®å®Œæˆï¼\n");
 }
 
 
@@ -522,18 +522,18 @@ int main() {
     //printf("Running comprehensive test...\n");
     printf("\n");
     while(conti){
-	printf("===ÇëÊäÈëĞèÒª°ìÀíµÄÒµÎñ£º===\n");
-	printf("1.µÇÂ½²¢ÇÒ¶©Æ±(µÚ¶ş¸öÈËÔÚµÇÂ½Ê±ĞÕÃûÇ°ĞèÒª¼ÓÉÏ¿Õ¸ñ)\n");
-	printf("2.Éú³É²âÊÔÊı¾İ\n");
-	printf("3.¿ªÊ¼Ä£ÄâÅÅ¶Ó¶©Æ±+½øÈë\n");
-	printf("0.ÍË³öÏµÍ³\n");
-	printf("ÇëÊäÈë±àºÅ£º");
+	printf("===è¯·è¾“å…¥éœ€è¦åŠç†çš„ä¸šåŠ¡ï¼š===\n");
+	printf("1.ç™»é™†å¹¶ä¸”è®¢ç¥¨(ç¬¬äºŒä¸ªäººåœ¨ç™»é™†æ—¶å§“åå‰éœ€è¦åŠ ä¸Šç©ºæ ¼)\n");
+	printf("2.ç”Ÿæˆæµ‹è¯•æ•°æ®\n");
+	printf("3.å¼€å§‹æ¨¡æ‹Ÿæ’é˜Ÿè®¢ç¥¨+è¿›å…¥\n");
+	printf("0.é€€å‡ºç³»ç»Ÿ\n");
+	printf("è¯·è¾“å…¥ç¼–å·ï¼š");
 	scanf("%d",&flag);
 	printf("\n");
 	switch(flag){
 		case 1:{login(&Q);break;}
 		case 2:TestFunData(ht, &Q);break;
-		case 3:sortedBySeatnumber(&Q,ht);printf("×ùÎ»¹şÏ£±íÈçÍ¼ËùÊ¾£º\n");PrintHashTable(ht);break;
+		case 3:sortedBySeatnumber(&Q,ht);printf("åº§ä½å“ˆå¸Œè¡¨å¦‚å›¾æ‰€ç¤ºï¼š\n");PrintHashTable(ht);break;
 		case 0:conti=0;
 	}
     //sortBySeatNumber(&Q);
