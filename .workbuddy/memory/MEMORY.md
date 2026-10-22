@@ -52,7 +52,10 @@
 - CV P2 遗留：英文兴趣描述 170 字符截断、日期三种风格并存、用词打磨。
 - 放置 `picture/private/profile.png` 后 about 头像自动由 ℵ 替换（用户动作，无需改页面）。
 
-## 图标（2026-10-21）
+## 交错悬停规则（2026-10-22，已注册到 style-guide.txt）
+- 全站 26 个页面的 `<style>` 末尾都插入了 `a:not(.back-link):not(.btn):hover`，效果：文字深酒红 #8B0000 + 左倾 skewX(-10deg) + 过渡 0.2s ease。
+- 被排除的类：`.back-link`（页面导航 "← Back to X"）和 `.btn`（404 页面 "Back to Home" 按钮），保持原绛红+下划线悬停。
+- 格式规范唯一权威 `style-guide.txt` 第十四节已登记该例外（任何智能体修改时必须保留该选择器）。
 - 全站 favicon：`picture/` 下 `favicon.ico`（6 个 entry）、`favicon.svg`、
   `favicon-16/32/192/512.png`、`apple-touch-icon.png`（180×180）。
   24 个 HTML 页面各插入 7 个 `<link>`，路径按目录深度自动计算。

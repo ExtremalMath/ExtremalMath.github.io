@@ -159,11 +159,13 @@ def main():
         print("  TREE FAIL", st3, new_tree)
         sys.exit(1)
     new_tree_sha = new_tree["sha"]
-    msg = ("fix: repair 404.html links and trim updates.js\n\n"
-           "- 404.html: use site-root-absolute paths (/index.html, /migrations.html,\n"
-           "  /nownow/now.html) so the File Migration Log and other links resolve\n"
-           "  correctly from any missing-URL depth on GitHub Pages; bump footer to Oct 18, 2026\n"
-           "- updates.js: consolidate the 2026-10-18 entries into one concise summary (\u2264100 words)")
+    msg = ("fix: add Now page content modules and refresh updates.js\n\n"
+           "- nownow/data/2026autumn.js: add the now object with 5 content modules\n"
+           "  (Study & Grind, Tinkering with Tools, Random Thoughts, Recent Events,\n"
+           "  Current Status) plus the lastUpdated timestamp\n"
+           "- nownow/now.html: render the modules with a data-driven card section\n"
+           "  (Now title, icons, cards, link buttons) and set the footer updated text\n"
+           "- updates.js: record the Now-page modules update")
     st4, new_commit = http("POST", f"{API}/git/commits", token,
                            json.dumps({"message": msg, "tree": new_tree_sha,
                                        "parents": [commit_sha]}).encode())

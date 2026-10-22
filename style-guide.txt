@@ -235,6 +235,8 @@ STYLE GUIDE
 - 规范变更流程：先改本文件 → 同轮同步 updates.js 顶部当日条目
   （≤100 英文单词，同日合并）+ about.html + index.html → 被改页面
   页脚日期改为当天。
+- 悬停样式统一例外（2026-10-22 用户指示）：全站所有 <code>a</code> 链接悬停时，文字变深酒红 #8B0000 并左倾 <code>skewX(-10deg)</code>（<code>transform-origin: left center</code>，过渡 0.2s ease）；但标记为 "Back to …" 的页面导航链例外——它们用 <code>.back-link</code> 或 <code>.btn</code> 类，保持原样式（绛红 + 下划线）。规则代码：
+  <code>a:not(.back-link):not(.btn):hover { color: #8B0000; transform: skewX(-10deg); transform-origin: left center; transition: color 0.2s ease, transform 0.2s ease; }</code>
 - 任何对规范的偏离必须在本规范第五节登记，否则视为违规。
 - 本地与远端保持一致；只推差异文件（详见 push-rules.txt）。
 

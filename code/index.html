@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Code written during coursework and personal study. Rendered from code-data.js.">
+    <title>ExtremalMath | Code</title>
+    <link rel="icon" type="image/x-icon" href="../picture/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="../picture/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="../picture/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../picture/favicon-16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../picture/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../picture/favicon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="../picture/favicon-512.png">
+    <style>
+        :root {
+            --ink:         #1b1b1b;
+            --muted:       #6d6a63;
+            --line:        #e3ded4;
+            --accent:      #8c2f39;
+            --accent-deep: #6b2229;
+            --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+        body { font-family: var(--sans); color: var(--ink); background: #fff; line-height: 1.7; }
+        .page { max-width: 720px; margin: 0 auto; padding: 40px 20px 60px; }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 24px;
+            text-decoration: none;
+            color: var(--accent);
+            font-weight: 600;
+        }
+        .back-link:hover { color: var(--accent-deep); text-decoration: underline; }
+
+        .page-head { border-bottom: 2px solid var(--accent); padding-bottom: 12px; margin-bottom: 28px; }
+        .page-head h1 { font-size: 1.8em; color: var(--ink); }
+        .page-head .subtitle { color: var(--muted); margin-top: 4px; }
+        .page-head .subtitle .more {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.92em;
+        }
+        .page-head .subtitle .more a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .page-head .subtitle .more a:hover { color: var(--accent-deep); text-decoration: underline; }
+
+        .res-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--line);
+            text-decoration: none;
+            color: var(--ink);
+            transition: color 0.15s;
+        }
+        .res-row:hover { color: var(--accent); }
+        .res-row .left { display: flex; flex-direction: column; }
+        .res-row .name { font-weight: 600; }
+
+        .res-row .view-icon {
+            opacity: 0;
+            font-size: 0.82em;
+            color: var(--accent);
+            margin-left: 8px;
+            transition: opacity 0.15s;
+        }
+        .res-row:hover .view-icon { opacity: 1; }
+
+        .footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line); text-align: center; font-size: 0.85em; color: var(--muted); }
+
+        @media (prefers-reduced-motion: reduce) {
+            * { transition: none !important; }
+        }
+    
+/* All hyperlinks: hover makes the text deep red and tilted.
+   Navigation "Back to ..." links (class .back-link or .btn) keep their original style. */
+a:not(.back-link):not(.btn):hover {
+  color: #8B0000;
+  transform: skewX(-10deg);
+  transform-origin: left center;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+</style>
+</head>
+<body>
+    <div class="page">
+
+        <a href="../index.html" class="back-link">← Back to Home</a>
+
+        <div class="page-head">
+            <h1>Code</h1>
+            <p class="subtitle">
+                C++ exercises from coursework and personal study, grouped by language.
+                Each entry links to a local syntax-highlighted preview page (UTF-8 decoded).
+                More code is available on the upstream repository.
+            </p>
+            <p class="more">
+                <span>更多代码，由此获取</span>
+                <a href="https://github.com/ExtremalMath/eopenaccess" target="_blank" rel="noopener">github.com/ExtremalMath/eopenaccess ↗</a>
+            </p>
+        </div>
+
+        <div id="code-container" aria-live="polite">
+            <!-- Rendered by code-data.js -->
+        </div>
+
+        <div class="footer">
+            <p>© 2026 ExtremalMath</p>
+            <p style="margin-top:6px;">Last updated Oct 22, 2026</p>
+        </div>
+
+    </div>
+
+    <script src="code-data.js"></script>
+    <script>
+        (function () {
+            function esc(s) {
+                return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+            }
+            var container = document.getElementById("code-container");
+            if (container) {
+                if (typeof codeData === "undefined" || !codeData.length) {
+                    container.innerHTML = '<p class="placeholder" style="padding:16px 0;color:var(--muted);font-style:italic;">No code uploaded yet.</p>';
+                    return;
+                }
+                // group by language
+                var groups = {};
+                codeData.forEach(function (item) {
+                    groups[item.lang] = groups[item.lang] || [];
+                    groups[item.lang].push(item);
+                });
+                var topLeft = [];
+                Object.keys(groups).sort().forEach(function (lang) {
+                    var rows = groups[lang].map(function (item) {
+                        // point each row to the local viewer page
+                        var dir = item.path.split("/").slice(0, item.path.split("/").length - 1).join("/");
+                        var view = "viewer.html?file=" + esc(item.name) + "&dir=" + esc(dir).replace(/%2F/g, "%2F") + "&lang=C%2B%2B";
+                        return '<a class="res-row" href="' + view + '" rel="noopener">' +
+                            '<span class="left"><span class="name">' + esc(item.name) + '</span>' +
+                            '<span class="sub">' + esc(item.note) + '</span></span>' +
+                            '<span class="tag">' + esc(item.lang) + '</span><span class="view-icon">preview ↗</span>' +
+                            '</a>';
+                    }).join("");
+                    topLeft.push('<h2 class="lang-group">' + esc(lang) + '</h2>' + rows);
+                });
+                container.innerHTML = topLeft.join("");
+            }
+        })();
+    </script>
+</body>
+</html>
