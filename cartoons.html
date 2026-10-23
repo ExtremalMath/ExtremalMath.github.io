@@ -312,27 +312,11 @@
                     <p class="play-hint">Click the button to play the theme song.</p>
                 </div>
 
-                <div class="online-player">
-                    <iframe
-                        frameborder="no"
-                        border="0"
-                        marginwidth="0"
-                        marginheight="0"
-                        width="330"
-                        height="86"
-                        src="//music.163.com/outchain/player?type=2&id=22651822&height=66"
-                        allow="autoplay; encrypted-media"
-                        allowfullscreen
-                        loading="lazy">
-                    </iframe>
-                </div>
-
                 <p class="credit-note">
                     Original: <strong>機動戦士ガンダムSEED</strong> (by Sunrise).
                     Theme song "Meteor" (流星) is a song by
                     <strong>T.M.Revolution</strong> (西川贵教),
                     words by <strong>井上秋緒</strong>, music by <strong>浅仓大介</strong>.
-                    It was used as the insert song of the anime series.
                 </p>
             </section>
 
@@ -377,18 +361,26 @@
         });
     }
 
-    // 外链音乐手动加载 (機動戰士高達SEED)
-    var onlinePlayerBtn = document.querySelector('.cartoon-entry:nth-child(2) .play-btn');
-    var onlinePlayer = document.querySelector('.cartoon-entry:nth-child(2) .online-player');
-    if (onlinePlayerBtn && onlinePlayer) {
-        onlinePlayerBtn.addEventListener('click', function () {
-            if (onlinePlayer.style.display === 'none' || onlinePlayer.style.display === '') {
-                onlinePlayer.style.display = 'flex';
-                onlinePlayerBtn.textContent = '⏸ Close';
+    // 本地音乐手动播放 (机动战士高达SEED)
+    var gundamAudio = new Audio('music/cartoon/Gandam_Meteor.mp3');
+    var gundamBtn = document.querySelector('.cartoon-entry:nth-child(2) .play-btn');
+    if (gundamBtn) {
+        gundamBtn.addEventListener('click', function () {
+            if (gundamAudio.paused) {
+                gundamAudio.play().then(function () {
+                    gundamBtn.textContent = '⏸ Pause';
+                }).catch(function (e) {
+                    console.log('Unable to play audio: ', e);
+                    alert('Audio playback failed. Please contact me.');
+                });
             } else {
-                onlinePlayer.style.display = 'none';
-                onlinePlayerBtn.textContent = '▶ Play';
+                gundamAudio.pause();
+                gundamBtn.textContent = '▶ Play';
             }
+        });
+
+        gundamAudio.addEventListener('ended', function () {
+            gundamBtn.textContent = '▶ Play';
         });
     }
 
