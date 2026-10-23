@@ -134,14 +134,6 @@
             color: var(--muted);
             margin-bottom: 14px;
         }
-        .play-note a {
-            color: var(--accent);
-            text-decoration: none;
-        }
-        .play-note a:hover {
-            color: var(--accent-dark);
-            text-decoration: underline;
-        }
 
         /* 版权与来源注脚 */
         .credit-note {
@@ -182,6 +174,17 @@
             font-size: 0.85em;
             color: var(--muted);
             margin-top: 10px;
+        }
+
+        /* 外链 iframe 播放器 */
+        .online-player {
+            display: none;
+            justify-content: center;
+            margin: 18px 0 24px;
+        }
+        .online-player iframe {
+            max-width: 100%;
+            border: none;
         }
 
         /* ---------- small source text ---------- */
@@ -242,6 +245,7 @@
 
     <main>
 
+        <!-- ===== 1. 元气星魂 ===== -->
         <section class="cartoon-entry">
 
             <h2>元气星魂之神龙拯救队 (Star Guardian)</h2>
@@ -259,18 +263,14 @@
 
             <section class="music-section">
                 <h2>Theme Song: Meteora</h2>
+                <p class="play-note">Only playback is provided (potential copyright considerations). If the player fails to load, please contact me.</p>
 
-            <p class="play-note">
-                Indicator: Only playback is provided (potential copyright considerations).
-                If the player fails to load, please contact me.
-            </p>
-
-            <div class="music-player">
-                <button class="play-btn" aria-label="Play music">
-                    ▶ Play
-                </button>
-                <p class="play-hint">Click the button to play the theme song.</p>
-            </div>
+                <div class="music-player">
+                    <button class="play-btn" aria-label="Play music">
+                        ▶ Play
+                    </button>
+                    <p class="play-hint">Click the button to play the theme song.</p>
+                </div>
 
                 <p class="credit-note">
                     <strong>米迪拉 (Meteora)</strong>（Italian for "meteor"）is a work released by
@@ -278,6 +278,61 @@
                     music by <strong>冯宣元</strong>. It was later adapted as
                     <strong>《流星》</strong> and used as the theme song for
                     the new anime production <strong>《神龙拯救队之元气星魂》</strong>.
+                </p>
+            </section>
+
+            <p class="source-text">Sources: Baidu</p>
+
+        </section>
+
+        <!-- ===== 2. 机动战士高达SEED ===== -->
+        <section class="cartoon-entry">
+
+            <h2>機動戦士ガンダムSEED (Mobile Suit Gundam SEED)</h2>
+
+            <p class="synopsis">
+                Kira Yamato is a university student who loves peace. His good friend Athrun goes home. One day, while Kira and his friends are at school, ZAFT soldiers come to the school to take the Robot. Kira gets inside the robot and starts to fight. He must face his good friend Athrun in battle. Kira must decide between protecting his friends or following orders. He uses the power of the Seed, the ability to change the future. This is a story about war, friendship, and becoming a better person.
+            </p>
+
+            <figure class="cartoon-image">
+                <img data-src="picture/seed_cartoon.png" alt="Mobile Suit Gundam SEED" class="lazy-image">
+                <figcaption>Mobile Suit Gundam SEED (2002)</figcaption>
+            </figure>
+
+            <hr class="section-line">
+
+            <section class="music-section">
+                <h2>Theme Song: Meteor</h2>
+                <p class="play-note">Only playback is provided (potential copyright considerations). If the player fails to load, please contact me.</p>
+
+                <div class="music-player">
+                    <button class="play-btn" aria-label="Play music">
+                        ▶ Play
+                    </button>
+                    <p class="play-hint">Click the button to play the theme song.</p>
+                </div>
+
+                <div class="online-player">
+                    <iframe
+                        frameborder="no"
+                        border="0"
+                        marginwidth="0"
+                        marginheight="0"
+                        width="330"
+                        height="86"
+                        src="//music.163.com/outchain/player?type=2&id=22651822&height=66"
+                        allow="autoplay; encrypted-media"
+                        allowfullscreen
+                        loading="lazy">
+                    </iframe>
+                </div>
+
+                <p class="credit-note">
+                    Original: <strong>機動戦士ガンダムSEED</strong> (by Sunrise).
+                    Theme song "Meteor" (流星) is a song by
+                    <strong>T.M.Revolution</strong> (西川贵教),
+                    words by <strong>井上秋緒</strong>, music by <strong>浅仓大介</strong>.
+                    It was used as the insert song of the anime series.
                 </p>
             </section>
 
@@ -299,26 +354,41 @@
 (function () {
     'use strict';
 
-    // 音乐播放器：仅在用户点击时播放，避免自动播放
-    var audio = new Audio('music/cartoon/yuanqi_Meteora.mp3');
-    var btn = document.querySelector('.play-btn');
-    if (btn) {
-        btn.addEventListener('click', function () {
-            if (audio.paused) {
-                audio.play().then(function () {
-                    btn.textContent = '⏸ Pause';
+    // 本地音乐手动播放 (元氣星魂)
+    var localAudio = new Audio('music/cartoon/yuanqi_Meteora.mp3');
+    var localBtn = document.querySelector('.cartoon-entry:nth-child(1) .play-btn');
+    if (localBtn) {
+        localBtn.addEventListener('click', function () {
+            if (localAudio.paused) {
+                localAudio.play().then(function () {
+                    localBtn.textContent = '⏸ Pause';
                 }).catch(function (e) {
                     console.log('Unable to play audio: ', e);
                     alert('Audio playback failed. Please contact me.');
                 });
             } else {
-                audio.pause();
-                btn.textContent = '▶ Play';
+                localAudio.pause();
+                localBtn.textContent = '▶ Play';
             }
         });
 
-        audio.addEventListener('ended', function () {
-            btn.textContent = '▶ Play';
+        localAudio.addEventListener('ended', function () {
+            localBtn.textContent = '▶ Play';
+        });
+    }
+
+    // 外链音乐手动加载 (機動戰士高達SEED)
+    var onlinePlayerBtn = document.querySelector('.cartoon-entry:nth-child(2) .play-btn');
+    var onlinePlayer = document.querySelector('.cartoon-entry:nth-child(2) .online-player');
+    if (onlinePlayerBtn && onlinePlayer) {
+        onlinePlayerBtn.addEventListener('click', function () {
+            if (onlinePlayer.style.display === 'none' || onlinePlayer.style.display === '') {
+                onlinePlayer.style.display = 'flex';
+                onlinePlayerBtn.textContent = '⏸ Close';
+            } else {
+                onlinePlayer.style.display = 'none';
+                onlinePlayerBtn.textContent = '▶ Play';
+            }
         });
     }
 
