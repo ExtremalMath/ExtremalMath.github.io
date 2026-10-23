@@ -100,6 +100,11 @@
             max-width: 100%;
             height: auto;
             display: block;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .cartoon-image img.loaded {
+            opacity: 1;
         }
         .cartoon-image figcaption {
             text-align: center;
@@ -122,22 +127,6 @@
             border-radius: 8px;
             padding: 24px 28px;
             border: 1px solid var(--line);
-        }
-        .music-section h2 {
-            font-size: 1.2em;
-            font-weight: 600;
-            color: var(--ink);
-            margin-bottom: 10px;
-        }
-        .music-player {
-            display: flex;
-            justify-content: center;
-            margin: 18px 0 24px;
-        }
-
-        /* 播放框限制 */
-        .music-player iframe {
-            max-width: 100%;
         }
 
         .play-note {
@@ -163,6 +152,36 @@
         .credit-note strong {
             color: var(--ink);
             font-weight: 600;
+        }
+
+        /* 播放按钮样式 */
+        .music-player {
+            margin: 18px 0 24px;
+            text-align: center;
+        }
+        .play-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: var(--accent);
+            color: var(--bg);
+            border: none;
+            border-radius: 4px;
+            font-size: 0.95em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        .play-btn:hover {
+            background: var(--accent-dark);
+        }
+        .play-btn:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+        .play-hint {
+            font-size: 0.85em;
+            color: var(--muted);
+            margin-top: 10px;
         }
 
         /* ---------- small source text ---------- */
@@ -232,7 +251,7 @@
             </p>
 
             <figure class="cartoon-image">
-                <img src="picture/yuanqi_cartoon.png" alt="Star Guardian">
+                <img data-src="picture/yuanqi_cartoon.png" alt="Star Guardian" class="lazy-image">
                 <figcaption>Star Guardian (2012)</figcaption>
             </figure>
 
@@ -241,25 +260,17 @@
             <section class="music-section">
                 <h2>Theme Song: Meteora</h2>
 
-                <div class="music-player">
-                    <iframe
-                        frameborder="no"
-                        border="0"
-                        marginwidth="0"
-                        marginheight="0"
-                        width="330"
-                        height="86"
-                        src="//music.163.com/outchain/player?type=2&id=27928146&auto=1&height=66"
-                        allow="autoplay; encrypted-media"
-                        allowfullscreen
-                        loading="lazy">
-                    </iframe>
-                </div>
+            <p class="play-note">
+                Indicator: Only playback is provided (potential copyright considerations).
+                If the player fails to load, please contact me.
+            </p>
 
-                <p class="play-note">
-                    Indicator: Only playback is provided (potential copyright considerations).
-                    If the player fails to load, please contact me.
-                </p>
+            <div class="music-player">
+                <button class="play-btn" aria-label="Play music">
+                    ▶ Play
+                </button>
+                <p class="play-hint">Click the button to play the theme song.</p>
+            </div>
 
                 <p class="credit-note">
                     <strong>米迪拉 (Meteora)</strong>（Italian for "meteor"）is a work released by
@@ -283,5 +294,66 @@
 
 </div>
 
+<!-- 音乐播放器：仅在用户点击时播放，避免自动播放 -->
+<script>
+(function () {
+    'use strict';
+
+    // 音乐播放器：仅在用户点击时播放，避免自动播放
+    var audio = new Audio('music/cartoon/yuanqi_Meteora.mp3');
+    var btn = document.querySelector('.play-btn');
+    if (btn) {
+        btn.addEventListener('click', function () {
+            if (audio.paused) {
+                audio.play().then(function () {
+                    btn.textContent = '⏸ Pause';
+                }).catch(function (e) {
+                    console.log('Unable to play audio: ', e);
+                    alert('Audio playback failed. Please contact me.');
+                });
+            } else {
+                audio.pause();
+                btn.textContent = '▶ Play';
+            }
+        });
+
+        audio.addEventListener('ended', function () {
+            btn.textContent = '▶ Play';
+        });
+    }
+
+    // 图片懒加载：延迟加载大图片，减轻页面初始负担
+    var lazyImages = document.querySelectorAll('.lazy-image');
+    if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    var img = entry.target;
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                        delete img.dataset.src;
+                    }
+                    img.addEventListener('load', function () {
+                        img.classList.add('loaded');
+                        observer.unobserve(img);
+                    });
+                }
+            });
+        });
+        lazyImages.forEach(function (img) {
+            observer.observe(img);
+        });
+    } else {
+        // 旧浏览器降级方案：立即加载所有图片
+        lazyImages.forEach(function (img) {
+            if (img.dataset.src) {
+                img.src = img.dataset.src;
+                delete img.dataset.src;
+            }
+            img.classList.add('loaded');
+        });
+    }
+})();
+</script>
 </body>
 </html>
