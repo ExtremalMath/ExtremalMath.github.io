@@ -4,6 +4,10 @@
 
 const siteUpdates = [
    {
+        date: "2026-10-23",
+        text: "Added a Cartoons page (cartoons.html), a light-hearted 'Beyond Mathematics' slot on the About page, featuring the anime Yuanqi Star Soul: The Divine Dragon Rescue Team, its theme song Meteora (with a 163.com player and a local .mp3 backup), and credits for the Yaoyuetu (耀乐团) trio. A Cartoons link is added to the About page's Beyond Mathematics section. Updated dates across the site.",
+    },
+   {
         date: "2026-10-22",
         text: "Added a Code page (code/index.html) listing source files, rendered via code-data.js with a local UTF-8 syntax-highlighted viewer; linked from Study Materials and home page. Now page renders a five-module card (Study, Tools, Thoughts, Events, Status) driven by data/2026autumn.js. Switched data registration from unsafe window.SEMESTER_DATA[id] = data to a guarded SemesterRegistry: validated ids, frozen read-only data, no prototype pollution, clear() cleanup. Updated all pages' hyperlink hover style (deep red #8B0000 with skewX(-10deg) tilt, 0.2s ease), keeping 'Back to ...' links intact; registered in style-guide.txt.",
     },

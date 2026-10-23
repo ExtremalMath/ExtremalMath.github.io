@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExtremalMath | Cartoons</title>
+    <link rel="icon" type="image/x-icon" href="picture/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="picture/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="picture/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="picture/favicon-16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="picture/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="picture/favicon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="picture/favicon-512.png">
+    <style>
+        :root {
+            --bg:          #fff;
+            --cream:       #fbfaf7;
+            --ink:         #1b1b1b;
+            --muted:       #6d6a63;
+            --line:        #e3ded4;
+            --accent:      #8c2f39;
+            --accent-dark: #6b2229;
+            --accent-soft: #fbfaf7;
+            --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+        body {
+            font-family: var(--sans);
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+            color: var(--ink);
+            background: var(--bg);
+        }
+
+        .page {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 40px 20px 60px;
+        }
+
+        /* ---------- back link ---------- */
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 32px;
+            text-decoration: none;
+            color: var(--accent);
+            font-weight: 600;
+            transition: color 0.15s;
+        }
+        .back-link:hover { color: var(--accent-dark); text-decoration: underline; }
+
+        /* ---------- page head ---------- */
+
+        .page-head {
+            margin-bottom: 32px;
+        }
+        .page-head h1 {
+            font-size: 1.8em;
+            font-weight: 600;
+            margin-bottom: 8px;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 8px;
+        }
+        .page-head .lede {
+            font-size: 1em;
+            color: var(--muted);
+        }
+
+        /* ---------- cartoon section ---------- */
+
+        .cartoon-entry {
+            margin-bottom: 32px;
+        }
+        .cartoon-entry h2 {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 12px;
+        }
+
+        /* 画面占位 — 将图片本身作为广告/window，不加边框与背景块 */
+        .cartoon-image {
+            display: block;
+            margin-bottom: 24px;
+        }
+        .cartoon-image img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        .cartoon-image figcaption {
+            text-align: center;
+            font-size: 0.95em;
+            color: var(--muted);
+            margin-top: 8px;
+        }
+
+        /* 分割线：弹出的浅线，厚一点，肌肉更轻 */
+        .section-line {
+            border: none;
+            border-top: 1px solid var(--line);
+            margin: 28px 0;
+        }
+
+        /* ---------- music player ---------- */
+
+        .music-section {
+            background: var(--cream);
+            border-radius: 8px;
+            padding: 24px 28px;
+            border: 1px solid var(--line);
+        }
+        .music-section h2 {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 10px;
+        }
+        .music-player {
+            display: flex;
+            justify-content: center;
+            margin: 18px 0 24px;
+        }
+
+        /* 播放框限制 */
+        .music-player iframe {
+            max-width: 100%;
+        }
+
+        .play-note {
+            font-size: 0.85em;
+            color: var(--muted);
+            margin-bottom: 14px;
+        }
+        .play-note a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        .play-note a:hover {
+            color: var(--accent-dark);
+            text-decoration: underline;
+        }
+
+        /* 版权与来源注脚 */
+        .credit-note {
+            font-size: 0.88em;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+        .credit-note strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+
+        /* ---------- small source text ---------- */
+
+        .source-text {
+            text-align: center;
+            font-size: 0.75em;
+            color: var(--muted);
+            margin-top: 32px;
+            padding-top: 16px;
+            border-top: 1px solid var(--line);
+        }
+
+        /* ---------- footer ---------- */
+
+        .footer {
+            margin-top: 48px;
+            padding-top: 20px;
+            border-top: 1px solid var(--line);
+            text-align: center;
+            font-size: 0.85em;
+            color: var(--muted);
+        }
+
+        /* ---------- responsive ---------- */
+
+        @media (max-width: 600px) {
+            .page { padding: 28px 20px 56px; }
+            .page-head h1 { font-size: 1.6em; }
+            .music-section { padding: 18px 20px; }
+            .credit-note { font-size: 0.84em; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * { transition: none !important; }
+        }
+
+    /* All hyperlinks: hover makes the text deep red and tilted.
+       Navigation "Back to ..." links (class .back-link or .btn) keep their original style. */
+    a:not(.back-link):not(.btn):hover {
+      color: #8B0000;
+      transform: skewX(-10deg);
+      transform-origin: left center;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+    </style>
+</head>
+<body>
+
+<div class="page">
+
+    <a href="about.html" class="back-link">← Back to About Me</a>
+
+    <header class="page-head">
+        <h1>Cartoons</h1>
+        <p class="lede">My hobbies outside mathematics — animation, theme songs, and a little bit of nostalgia.</p>
+    </header>
+
+    <main>
+
+        <section class="cartoon-entry">
+
+            <h2>元气星魂之神龙拯救队</h2>
+
+            <figure class="cartoon-image">
+                <img src="picture/yuanqi_cartoon.png" alt="Yuanqi Star Soul - Divine Dragon Rescue Team">
+                <figcaption>Yuanqi Star Soul: The Superhero Squad (2024)</figcaption>
+            </figure>
+
+            <hr class="section-line">
+
+            <section class="music-section">
+                <h2>Theme Song: Meteora</h2>
+
+                <div class="music-player">
+                    <iframe
+                        frameborder="no"
+                        border="0"
+                        marginwidth="0"
+                        marginheight="0"
+                        width="330"
+                        height="86"
+                        src="//music.163.com/outchain/player?type=2&id=27928146&auto=1&height=66"
+                        allow="autoplay; encrypted-media"
+                        allowfullscreen
+                        loading="lazy">
+                    </iframe>
+                </div>
+
+                <p class="play-note">
+                    Indicator: Only playback is provided (potential copyright considerations).
+                    If the player fails to load, you can download the music directly:
+                    <a href="music/cartoon/yuanqi_Meteora.mp3">yuanqi_Meteora.mp3</a>.
+                </p>
+
+                <p class="credit-note">
+                    <strong>米迪拉 (Meteora)</strong>（Italian for "meteor"）is a work released by
+                    <strong>耀乐团 (Yaoyuetu)</strong>, with lyrics by <strong>张敬豪</strong> and
+                    music by <strong>冯宣元</strong>. It was later adapted as
+                    <strong>《流星》</strong> and used as the theme song for
+                    the new anime production <strong>《神龙拯救队之元气星魂》</strong>.
+                </p>
+            </section>
+
+            <p class="source-text">Sources: Baidu</p>
+
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <p>© 2026 ExtremalMath</p>
+        <p>Last updated Oct 23, 2026</p>
+    </footer>
+
+</div>
+
+</body>
+</html>
