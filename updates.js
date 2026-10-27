@@ -4,6 +4,10 @@
 
 const siteUpdates = [
    {
+        date: "2026-10-27",
+        text: "Added a Stock Photo Sites section (Pexels, Unsplash) to the Academic Sites page, both free high-quality photo resources, sourcing from Topbook-知乎. Updated the Academic Sites footer date.",
+    },
+   {
         date: "2026-10-23",
         text: "Added a Cartoons page (cartoons.html), a light-hearted 'Beyond Mathematics' slot on the About page, featuring the anime Yuanqi Star Soul: The Divine Dragon Rescue Team, its theme song Meteora (with a 163.com player and a local .mp3 backup), and credits for the Yaoyuetu (耀乐团) trio. A Cartoons link is added to the About page's Beyond Mathematics section. Updated dates across the site.",
     },

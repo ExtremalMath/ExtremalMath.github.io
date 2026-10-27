@@ -67,6 +67,21 @@ const SITES = [
   },
 
   // ── Math Q&A Forum ──────────────────────────────────────────────────────
+  // ── Stock Photo Sites ───────────────────────────────────────────────────
+  {
+    category: "Stock Photo Sites",
+    name: "Pexels",
+    url: "https://www.pexels.com/zh-cn/",
+    desc: "Free high-quality stock photos, open for commercial use",
+    note: "Source: Topbook-知乎"
+  },
+  {
+    category: "Stock Photo Sites",
+    name: "Unsplash",
+    url: "https://unsplash.com/",
+    desc: "Free high-resolution photos contributed by a global community",
+    note: "Source: Topbook-知乎"
+  },
   {
     category: "Math Q&A Forum",
     name: "MathOverflow",
@@ -82,7 +97,8 @@ var SITE_CATEGORY_ORDER = [
   "Literature Download Platform",
   "AI Work Platform",
   "Math Tools Site",
-  "Math Q&A Forum"
+  "Math Q&A Forum",
+  "Stock Photo Sites"
 ];
 
 // Escapes the five HTML metacharacters so names, descriptions and notes can
