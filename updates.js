@@ -5,7 +5,7 @@
 const siteUpdates = [
    {
         date: "2026-10-29",
-        text: "Added a Partial Differential Equations course page (study/pde_course.html) for the 2026 autumn term, covering heat, wave and Laplace equations and methods; the course-notes PDF (notes/pde_course_note_example.pdf) is in place and linked from the About Core Coursework tag list. Moved the AI Output section into a new page (study/ai_output.html) linked from the Materials res-list as AI Output; intro in CET4 English and a 1.7 MB SVM essay PDF. Updated dates on both pages to Oct 29, 2026.",
+        text: "Added a Competition page (study/competition.html, 2026 CUMCM Problem A) linked from Study Materials, and a Now page with five CET4 modules (Study, Tools, Thoughts, Events, Status) rendered from nownow/data/2026autumn.js. Added a Code row to Materials and a Partial Differential Equations course page (study/pde_course.html) linked from the About Core Coursework tag list. Added a 'Book a guided tour' link to the About Docent entry and unlinked the SVM essay from the Course Essays page. Fixed a garbled-code preview by re-encoding four GBK C++ files to UTF-8 and adding an encoding gate to the push script. Updated the File Migration Log to record PDF files only.",
     },
    {
         date: "2026-10-27",
