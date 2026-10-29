@@ -9,7 +9,7 @@ const siteUpdates = [
     },
    {
         date: "2026-10-29",
-        text: "Added 'Output from AI' section to Study Materials page. Added a Machine Learning SVM Essay to the Course Essays page.",
+        text: "Moved the AI Output section off Study Materials into a new standalone page (study/ai_output.html) linked from the Materials res-list as 'AI Output'. The page carries an intro in CET4 English and a PDF link to notes/essay/svm_essay.pdf (SVM essay, 1.7 MB). All footer dates on the two pages set to Oct 29, 2026.",
     },
    {
         date: "2026-10-27",
