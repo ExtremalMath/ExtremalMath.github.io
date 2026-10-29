@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExtremalMath | Partial Differential Equations</title>
+    <link rel="icon" type="image/x-icon" href="picture/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="picture/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="picture/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="picture/favicon-16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="picture/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="picture/favicon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="picture/favicon-512.png">
+<style>
+        :root {
+            --ink:         #1b1b1b;
+            --muted:       #6d6a63;
+            --line:        #e3ded4;
+            --accent:      #8c2f39;
+            --accent-deep: #6b2229;
+            --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+        body {
+            font-family: var(--sans);
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+            color: var(--ink);
+            background: #fff;
+        }
+
+        .page { max-width: 720px; margin: 0 auto; padding: 40px 20px 60px; }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 24px;
+            text-decoration: none;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+        .back-link:hover { color: var(--accent-deep); text-decoration: underline; }
+
+        h1 {
+            font-size: 1.8em;
+            color: var(--ink);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+        .meta { color: var(--muted); font-size: 0.88em; margin-bottom: 22px; }
+
+        .block { margin-bottom: 28px; }
+        .block h2 { font-size: 1.2em; color: var(--ink); margin-bottom: 10px; }
+        .block p { color: var(--ink); }
+        .block .note { color: var(--muted); font-style: italic; }
+
+        .item-list { list-style: none; }
+        .item {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--line);
+        }
+        .item:last-child { border-bottom: none; }
+        .item-title {
+            display: block;
+            font-weight: 600;
+            font-size: 1.02em;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+        .item-sub {
+            display: block;
+            font-size: 0.92em;
+            color: var(--muted);
+        }
+        .item-sub a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        .item-sub a:hover { color: var(--accent-deep); text-decoration: underline; }
+
+        .footer {
+            margin-top: 48px;
+            padding-top: 18px;
+            border-top: 1px solid var(--line);
+            text-align: center;
+            font-size: 0.85em;
+            color: var(--muted);
+        }
+
+        @media (max-width: 480px) {
+            .page { padding: 30px 12px 50px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            * { transition: none !important; }
+        }
+
+/* All hyperlinks: hover makes the text deep red and tilted.
+   Navigation "Back to ..." links (class .back-link or .btn) keep their original style. */
+a:not(.back-link):not(.btn):hover {
+  color: #8B0000;
+  transform: skewX(-10deg);
+  transform-origin: left center;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+    <a href="about.html" class="back-link">&larr; Back to About</a>
+
+    <h1>Partial Differential Equations</h1>
+    <p class="meta">2026 Autumn &middot; Course page</p>
+
+    <div class="block">
+        <h2>About the Course</h2>
+        <p>
+            Partial Differential Equations (PDE) is a core mathematics course I took in the autumn
+            term of 2026. It covers the classical theory of second-order linear equations — the
+            heat equation, the wave equation, and the Laplace equation — together with the methods
+            used to solve them: separation of variables, Fourier series, Green's functions, and the
+            energy method.
+        </p>
+        <p class="note">
+            The course built directly on my earlier study of real analysis and functional analysis,
+            and gave me the analytic language I now use when reading extremal graph theory papers
+            that rely on variational or spectral arguments.
+        </p>
+    </div>
+
+    <div class="block">
+        <h2>Course Notes</h2>
+        <ul class="item-list">
+            <li class="item">
+                <span class="item-title">Sample Note</span>
+                <span class="item-sub">
+                    A worked example on solving the one-dimensional heat equation by separation of
+                    variables.
+                    <a href="notes/pde_course_note_example.pdf"
+                       target="_blank" rel="noopener">Open PDF ↗</a>
+                </span>
+            </li>
+        </ul>
+        <p class="note" style="margin-top:8px;">
+            The file is not yet in place — the link is reserved and will be filled in once the PDF
+            is dropped into <code>notes/</code>.
+        </p>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2026 ExtremalMath</p>
+        <p style="margin-top:6px;">Last updated Oct 29, 2026</p>
+    </div>
+
+</div>
+
+</body>
+</html>
