@@ -5,11 +5,7 @@
 const siteUpdates = [
    {
         date: "2026-10-29",
-        text: "Added a Partial Differential Equations course page (study/pde_course.html) for the 2026 autumn term, covering the heat, wave, and Laplace equations plus solution methods; linked it from the Core Coursework tag list on the About page. The course-notes sample PDF (notes/pde_course_note_example.pdf) is now in place and the placeholder note was replaced with a real description.",
-    },
-   {
-        date: "2026-10-29",
-        text: "Moved the AI Output section off Study Materials into a new standalone page (study/ai_output.html) linked from the Materials res-list as 'AI Output'. The page carries an intro in CET4 English and a PDF link to notes/essay/svm_essay.pdf (SVM essay, 1.7 MB). All footer dates on the two pages set to Oct 29, 2026.",
+        text: "Added a Partial Differential Equations course page (study/pde_course.html) for the 2026 autumn term, covering heat, wave and Laplace equations and methods; the course-notes PDF (notes/pde_course_note_example.pdf) is in place and linked from the About Core Coursework tag list. Moved the AI Output section into a new page (study/ai_output.html) linked from the Materials res-list as AI Output; intro in CET4 English and a 1.7 MB SVM essay PDF. Updated dates on both pages to Oct 29, 2026.",
     },
    {
         date: "2026-10-27",
