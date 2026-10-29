@@ -9,7 +9,7 @@ const siteUpdates = [
     },
    {
         date: "2026-10-29",
-        text: "Added an 'Output from AI' section to the Study Materials page to showcase AI-generated content.",
+        text: "Added 'Output from AI' section to Study Materials page. Added a Machine Learning SVM Essay to the Course Essays page.",
     },
    {
         date: "2026-10-27",
