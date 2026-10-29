@@ -16,6 +16,5 @@ const SITE_MIGRATIONS = [
   { "filename": "proof_of_inequation_0521.pdf", "oldPath": "notes/GraphTheoryHomework/proofofinequation0521.pdf", "newPath": "notes/graph_theory_homework/proof_of_inequation_0521.pdf", "time": "2026-10-18" },
   { "filename": "property_0532.pdf", "oldPath": "notes/GraphTheoryHomework/property0532.pdf", "newPath": "notes/graph_theory_homework/property_0532.pdf", "time": "2026-10-18" },
   { "filename": "powerpoint_pre.pdf", "oldPath": "talks/PowerPiontPre.pdf", "newPath": "talks/powerpoint_pre.pdf", "time": "2026-10-18" },
-  { "filename": "pde_course.html", "oldPath": "pde_course.html", "newPath": "study/pde_course.html", "time": "2026-10-29" },
   { "filename": "pde_course_note_example.pdf", "oldPath": "notes/pde_course_note_example.pdf.pdf", "newPath": "notes/pde_course_note_example.pdf", "time": "2026-10-29" }
 ];
