@@ -5,7 +5,11 @@
 const siteUpdates = [
    {
         date: "2026-10-29",
-        text: "Added a Partial Differential Equations course page (pde_course.html) for the 2026 autumn term, covering the heat, wave, and Laplace equations plus solution methods; linked it from the Core Coursework tag list on the About page. The course-notes sample PDF (notes/pde_course_note_example.pdf) is now in place and the placeholder note was replaced with a real description.",
+        text: "Added a Partial Differential Equations course page (study/pde_course.html) for the 2026 autumn term, covering the heat, wave, and Laplace equations plus solution methods; linked it from the Core Coursework tag list on the About page. The course-notes sample PDF (notes/pde_course_note_example.pdf) is now in place and the placeholder note was replaced with a real description.",
+    },
+   {
+        date: "2026-10-29",
+        text: "Added an 'Output from AI' section to the Study Materials page to showcase AI-generated content.",
     },
    {
         date: "2026-10-27",
