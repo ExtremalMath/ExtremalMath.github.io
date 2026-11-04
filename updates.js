@@ -4,6 +4,10 @@
 
 const siteUpdates = [
    {
+        date: "2026-11-04",
+        text: "Added a Handmade page (handmade.html) to the About Beyond Mathematics section, with a Tracking Vehicle entry describing a labour-education course car project and a link to the project report (notes/labour_edu.pdf). The report file moved from the root to notes/ and the site-wide update dates were refreshed.",
+    },
+   {
         date: "2026-10-29",
         text: "Added a Competition page (study/competition.html, 2026 CUMCM Problem A) linked from Study Materials, and a Now page with five CET4 modules (Study, Tools, Thoughts, Events, Status) rendered from nownow/data/2026autumn.js. Added a Code row to Materials and a Partial Differential Equations course page (study/pde_course.html) linked from the About Core Coursework tag list. Added a 'Book a guided tour' link to the About Docent entry and unlinked the SVM essay from the Course Essays page. Fixed a garbled-code preview by re-encoding four GBK C++ files to UTF-8 and adding an encoding gate to the push script. Updated the File Migration Log to record PDF files only.",
     },
