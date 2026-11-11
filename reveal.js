@@ -41,13 +41,13 @@
 
     // 展开：先 fetch，图片加载到后再打开开关
     img.src = src;
-    if (btn) btn.textContent = "加载中...";
+    if (btn) btn.textContent = "Loading...";
     img.setAttribute("alt", btn ? (btn.getAttribute("data-alt") || "") : "");
 
     img.addEventListener("load", function () {
       block.classList.add("is-open");
       img.classList.add("loaded");
-      if (btn) btn.textContent = "收起图片";
+      if (btn) btn.textContent = "Close image";
     });
   }
 
