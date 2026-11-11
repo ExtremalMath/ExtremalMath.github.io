@@ -59,6 +59,16 @@ const dramaData = [
     venueZh: "南京保利大剧院",
     venueEn: "Nanjing Grand Theatre",
     note: "Adapted from selected chapters of Jia Baoyu in Dream of the Red Chamber"
+  },
+  {
+    titleZh: "音乐剧《粉丝来信》",
+    titleEn: "Fan Letters",
+    date: "2027-01-16T14:00",
+    dateZh: "2027年1月16日下午",
+    dateEn: "Afternoon, January 16, 2027",
+    venueZh: "南京保利大剧院",
+    venueEn: "Nanjing Grand Theatre",
+    note: "Musicians from across the country leave home to chase their dreams, growing through hardships and finding love and friendship in an inspiring youth story with both laughs and tears; after they gain fans, letters arrive from all over the country and many stories begin. Note: one audience member greatly enjoyed this show and saw two performances on the same day; since tickets for one of them were sold out, a companion attended only the other. That audience member has watched the production several times."
   }
 ];
 

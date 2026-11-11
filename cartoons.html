@@ -11,6 +11,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="picture/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="picture/favicon-192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="picture/favicon-512.png">
+    <link rel="stylesheet" href="site.css">
     <style>
         :root {
             --bg:          #fff;
@@ -19,13 +20,12 @@
             --muted:       #6d6a63;
             --line:        #e3ded4;
             --accent:      #8c2f39;
-            --accent-dark: #6b2229;
+            --accent-deep: #6b2229;
             --accent-soft: #fbfaf7;
             --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
         body {
             font-family: var(--sans);
@@ -34,12 +34,6 @@
             line-height: 1.7;
             color: var(--ink);
             background: var(--bg);
-        }
-
-        .page {
-            max-width: 720px;
-            margin: 0 auto;
-            padding: 40px 20px 60px;
         }
 
         /* ---------- loading notice ---------- */
@@ -57,28 +51,8 @@
 
         /* ---------- back link ---------- */
 
-        .back-link {
-            display: inline-block;
-            margin-bottom: 32px;
-            text-decoration: none;
-            color: var(--accent);
-            font-weight: 600;
-            transition: color 0.15s;
-        }
-        .back-link:hover { color: var(--accent-dark); text-decoration: underline; }
-
         /* ---------- page head ---------- */
 
-        .page-head {
-            margin-bottom: 32px;
-        }
-        .page-head h1 {
-            font-size: 1.8em;
-            font-weight: 600;
-            margin-bottom: 8px;
-            border-bottom: 2px solid var(--accent);
-            padding-bottom: 8px;
-        }
         .page-head .lede {
             font-size: 1em;
             color: var(--muted);
@@ -177,7 +151,7 @@
             transition: background 0.15s;
         }
         .play-btn:hover {
-            background: var(--accent-dark);
+            background: var(--accent-deep);
         }
         .play-btn:focus-visible {
             outline: 2px solid var(--accent);
@@ -213,36 +187,16 @@
 
         /* ---------- footer ---------- */
 
-        .footer {
-            margin-top: 48px;
-            padding-top: 20px;
-            border-top: 1px solid var(--line);
-            text-align: center;
-            font-size: 0.85em;
-            color: var(--muted);
-        }
-
         /* ---------- responsive ---------- */
 
         @media (max-width: 600px) {
-            .page { padding: 28px 20px 56px; }
-            .page-head h1 { font-size: 1.6em; }
             .music-section { padding: 18px 20px; }
             .credit-note { font-size: 0.84em; }
         }
 
-        @media (prefers-reduced-motion: reduce) {
-            * { transition: none !important; }
-        }
-
     /* All hyperlinks: hover makes the text deep red and tilted.
        Navigation "Back to ..." links (class .back-link or .btn) keep their original style. */
-    a:not(.back-link):not(.btn):hover {
-      color: #8B0000;
-      transform: skewX(-10deg);
-      transform-origin: left center;
-      transition: color 0.2s ease, transform 0.2s ease;
-    }
+    
     </style>
 </head>
 <body>
@@ -345,7 +299,7 @@
 
     <footer class="footer">
         <p>© 2026 ExtremalMath</p>
-        <p>Last updated Oct 23, 2026</p>
+        <p>Last updated Nov 11, 2026</p>
     </footer>
 
 </div>

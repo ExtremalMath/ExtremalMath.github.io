@@ -11,6 +11,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="../picture/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="../picture/favicon-192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="../picture/favicon-512.png">
+    <link rel="stylesheet" href="../site.css">
     <style>
         :root {
             --bg:         #fbfaf7;
@@ -22,7 +23,6 @@
             --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, sans-serif;
         }
         * { box-sizing: border-box; }
-        :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
         body {
             font-family: var(--sans);
             background: #fff;
@@ -60,14 +60,6 @@
 
         /* 页面骨架 */
         .page { max-width: 860px; margin: 0 auto; padding: 40px 20px 60px; }
-        .back-link {
-            display: inline-block;
-            margin-bottom: 24px;
-            color: var(--accent);
-            font-weight: 600;
-            text-decoration: none;
-        }
-        .back-link:hover { color: var(--accent-deep); text-decoration: underline; }
         .page-head { border-bottom: 2px solid var(--accent); padding-bottom: 14px; margin-bottom: 30px; }
         .page-head h1 { font-size: 1.8em; margin: 0; font-weight: 700; line-height: 1.2; }
         .page-head .page-sub { margin: 8px 0 0; color: var(--muted); font-size: 0.9em; }
@@ -93,19 +85,10 @@
             .page-head h1 { font-size: 1.5em; }
         }
 
-        @media (prefers-reduced-motion: reduce) {
-            * { transition: none !important; }
-        }
     
 /* All hyperlinks: hover makes the text deep red and tilted.
    Navigation "Back to ..." links (class .back-link or .btn) keep their original style. */
-a:not(.back-link):not(.btn):hover {
-  color: #8B0000;
-  transform: skewX(-10deg);
-  transform-origin: left center;
-  transition: color 0.2s ease, transform 0.2s ease;
-}
-</style>
+    </style>
 </head>
 <body>
 

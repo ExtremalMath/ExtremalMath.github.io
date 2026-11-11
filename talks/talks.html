@@ -11,6 +11,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="../picture/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="../picture/favicon-192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="../picture/favicon-512.png">
+<link rel="stylesheet" href="../site.css">
 <style>
         :root {
             --ink:    #1b1b1b;
@@ -22,7 +23,6 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
         body {
             font-family: var(--sans);
@@ -33,29 +33,7 @@
             background: #fff;
         }
 
-        .page { max-width: 720px; margin: 0 auto; padding: 40px 20px 60px; }
-
-        .back-link {
-            display: inline-block;
-            margin-bottom: 24px;
-            text-decoration: none;
-            color: var(--accent);
-            font-weight: 600;
-            font-size: 0.95em;
-        }
-        .back-link:hover { color: var(--accent-deep); text-decoration: underline; }
-
-        .page-head { border-bottom: 2px solid var(--accent); padding-bottom: 12px; margin-bottom: 28px; }
-        .page-head h1 { font-size: 1.8em; color: var(--ink); }
         .page-head .subtitle { font-size: 1em; color: var(--muted); font-weight: 400; margin-top: 4px; }
-
-        h2 {
-            font-size: 1.2em;
-            color: var(--ink);
-            margin: 32px 0 12px;
-            padding-bottom: 6px;
-            border-bottom: 1px solid var(--line);
-        }
 
         .talk {
             display: block;
@@ -91,18 +69,9 @@
             text-align: center;
         }
 
-        @media (prefers-reduced-motion: reduce) {
-            * { transition: none !important; }
-        }
     
 /* All hyperlinks: hover makes the text deep red and tilted.
    Navigation "Back to ..." links (class .back-link or .btn) keep their original style. */
-a:not(.back-link):not(.btn):hover {
-  color: #8B0000;
-  transform: skewX(-10deg);
-  transform-origin: left center;
-  transition: color 0.2s ease, transform 0.2s ease;
-}
 </style>
 </head>
 <body>
@@ -130,7 +99,7 @@ a:not(.back-link):not(.btn):hover {
 
     <footer>
         &copy; 2026 ExtremalMath
-        <p style="margin-top:6px;">Last updated Oct 21, 2026</p>
+        <p style="margin-top:6px;">Last updated Nov 11, 2026</p>
     </footer>
 
 </div>

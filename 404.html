@@ -11,6 +11,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="picture/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="picture/favicon-192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="picture/favicon-512.png">
+    <link rel="stylesheet" href="site.css">
     <style>
         :root {
             --ink:         #1b1b1b;
@@ -21,7 +22,6 @@
             --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
         body {
             font-family: var(--sans);
             color: var(--ink);
@@ -84,19 +84,10 @@
         footer p { margin: 0; }
         footer .updated { margin-top: 6px; }
 
-        @media (prefers-reduced-motion: reduce) {
-            * { transition: none !important; }
-        }
     
 /* All hyperlinks: hover makes the text deep red and tilted.
    Navigation "Back to ..." links (class .back-link or .btn) keep their original style. */
-a:not(.back-link):not(.btn):hover {
-  color: #8B0000;
-  transform: skewX(-10deg);
-  transform-origin: left center;
-  transition: color 0.2s ease, transform 0.2s ease;
-}
-</style>
+    </style>
 </head>
 <body>
     <div class="container">
@@ -118,7 +109,7 @@ a:not(.back-link):not(.btn):hover {
 
         <footer>
             <p>© 2026 ExtremalMath</p>
-            <p class="updated">Last updated Oct 21, 2026</p>
+            <p class="updated">Last updated Nov 11, 2026</p>
         </footer>
     </div>
 </body>

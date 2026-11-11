@@ -11,6 +11,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="picture/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="picture/favicon-192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="picture/favicon-512.png">
+    <link rel="stylesheet" href="site.css">
     <style>
         :root {
             --bg:          #fbfaf7;
@@ -26,7 +27,6 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
         body {
             font-family: var(--sans);
@@ -44,15 +44,6 @@
         }
 
         /* 顶部导航 */
-        .back-link {
-            display: inline-block;
-            margin-bottom: 24px;
-            text-decoration: none;
-            color: var(--accent);
-            font-weight: 600;
-            transition: color 0.15s;
-        }
-        .back-link:hover { color: var(--accent-deep); text-decoration: underline; }
 
         /* 双栏布局 */
         .layout {
@@ -419,14 +410,6 @@
         .contact-box a:hover { color: var(--accent-deep); text-decoration: underline; }
 
         /* 页脚 */
-        .footer {
-            margin-top: 48px;
-            padding-top: 20px;
-            border-top: 1px solid var(--line);
-            text-align: center;
-            font-size: 0.85em;
-            color: var(--muted);
-        }
 
         /* 响应式 */
         @media (max-width: 840px) {
@@ -487,20 +470,11 @@
                 font-size: 2.5rem;
             }
         }
-        @media (prefers-reduced-motion: reduce) {
-            * { transition: none !important; }
-        }
 
     
 /* All hyperlinks: hover makes the text deep red and tilted.
    Navigation "Back to ..." links (class .back-link or .btn) keep their original style. */
-a:not(.back-link):not(.btn):hover {
-  color: #8B0000;
-  transform: skewX(-10deg);
-  transform-origin: left center;
-  transition: color 0.2s ease, transform 0.2s ease;
-}
-</style>
+    </style>
 </head>
 <body>
 
@@ -711,7 +685,7 @@ a:not(.back-link):not(.btn):hover {
     <!-- 页脚 -->
     <div class="footer">
         <p>© 2026 ExtremalMath</p>
-        <p class="updated" style="margin-top:6px;">Last updated Nov 4, 2026</p>
+        <p class="updated" style="margin-top:6px;">Last updated Nov 11, 2026</p>
     </div>
 
 </div>

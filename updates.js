@@ -4,8 +4,12 @@
 
 const siteUpdates = [
    {
+        date: "2026-11-11",
+        text: "Added a Theatre entry for the musical Fan Letters (粉丝来信) at Nanjing Grand Theatre on Jan 16, 2027 to drama-data.js, the data source that drives drama.html. Also consolidated all shared styling into one site.css linked from every page: a single 8-color palette (--accent-deep replaces --accent-dark), one type and spacing baseline, and one copy of each shared component (back link, page head, footer, resource rows, item lists, buttons, focus and reduced-motion rules), plus a 640px/360px responsive layer. Page styles now hold only page-specific rules; five registered container-width exceptions remain. The style guide was updated to match.",
+    },
+   {
         date: "2026-11-04",
-        text: "Added a Handmade page (handmade.html) to the About Beyond Mathematics section, with a Tracking Vehicle entry describing a labour-education course car project and a link to the project report (notes/labour_edu.pdf). The report file moved from the root to notes/ and the site-wide update dates were refreshed.",
+        text: "Refactored the Now page (nownow/now.html) into a data-driven layout: the five modules (Learning & Grinding, Tinkering, Random Thoughts, Recent Events, Current Status) now live in nownow/data/now-data.js as the single source of truth, and now.html renders them at runtime without touching HTML. Added a Node validator (.workbuddy/check-now-data.js) that checks structure, ordering, encoding and emptiness before rendering. Also added a Handmade page (handmade.html) to the About Beyond Mathematics section, with a Tracking Vehicle entry describing a labour-education course car project and a link to the project report (notes/labour_edu.pdf). The report file moved from the root to notes/ and the site-wide update dates were refreshed.",
     },
    {
         date: "2026-10-29",

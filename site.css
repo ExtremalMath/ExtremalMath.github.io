@@ -1,0 +1,247 @@
+/* ============================================================
+   site.css — ExtremalMath 全站共享样式层
+   ------------------------------------------------------------
+   作用：承载所有页面共用的设计变量、排版基线与组件样式。
+   用法：每个 HTML 在自有 <style> 之前引入本文件：
+         <link rel="stylesheet" href="site.css">          （根目录页面）
+         <link rel="stylesheet" href="../site.css">       （一级子目录）
+         <link rel="stylesheet" href="../../site.css">    （二级子目录）
+
+   级联约定：本文件在前，页面 <style> 在后。页面同选择器、同属性的
+   声明会覆盖本文件；本文件只提供「缺省值」。因此：
+     - 全站统一的样式 → 只改这里，30 个页面同时生效
+     - 某页需要偏离   → 写在该页 <style> 内，并在 style-guide.txt 第五节登记
+
+   规范权威：style-guide.txt。本文件是它的可执行形态。
+   ============================================================ */
+
+/* ---------- 1. 设计变量（8 色 + 字体 + 刻度） ---------- */
+
+:root {
+  /* 配色：全站仅此 8 个颜色变量，禁止新增游离色值 */
+  --bg:          #fff;        /* 页面背景 */
+  --cream:       #fbfaf7;     /* 安静区底色：侧栏、声明条、代码块 */
+  --ink:         #1b1b1b;     /* 正文 */
+  --muted:       #6d6a63;     /* 注释、日期、副题（不用于正文） */
+  --line:        #e3ded4;     /* 浅分隔线 */
+  --accent:      #8c2f39;     /* 链接、标题收尾线、关键标记 */
+  --accent-deep: #6b2229;     /* 链接悬停 */
+  --green:       #3a5a40;     /* 仅 About 头像与代码字符串高亮 */
+
+  /* 链接悬停淡入底色（仅首页入口等局部使用） */
+  --accent-soft: rgba(140, 47, 57, 0.08);
+
+  /* 字体：系统字体栈，禁止 Web 字体 */
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
+
+  /* 间距刻度：padding / margin / gap 只取下列值 */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+}
+
+/* ---------- 2. 排版基线 ---------- */
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: var(--sans);
+  line-height: 1.7;            /* 全站唯一行高基准 */
+  color: var(--ink);
+  background: var(--bg);
+}
+
+/* 正文字号不写死，继承浏览器默认 16px（style-guide N1） */
+
+h1, h2, h3 { line-height: 1.35; }
+
+/* 小节标题：1.2em + 1px 浅线 */
+h2 {
+  font-size: 1.2em;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 32px 0 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--line);
+}
+
+/* 链接：内容链接统一绛红；类选择器（.back-link/.res-row/.side-link 等）
+   各自覆盖 text-decoration，故此处下划线只影响正文内联链接 */
+a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: color 0.15s;
+}
+a:hover { color: var(--accent-deep); }
+
+img { max-width: 100%; height: auto; }
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ---------- 3. 页面骨架（四段式） ---------- */
+
+/* 3.1 容器：720px 单列居中 */
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 40px 20px 60px;
+}
+
+/* 3.2 返回链接：置顶、绛红加粗、命名父页 */
+.back-link {
+  display: inline-block;
+  margin-bottom: 24px;
+  font-size: 0.95em;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: color 0.15s;
+}
+.back-link:hover { color: var(--accent-deep); text-decoration: underline; }
+
+/* 3.3 页头：h1 + 一句副题 + 2px 绛红收尾线 */
+.page-head {
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 12px;
+  margin-bottom: 28px;
+}
+.page-head h1 {
+  font-size: 1.8em;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0;
+}
+.page-head .subtitle {
+  color: var(--muted);
+  margin: 6px 0 0;
+  max-width: 62ch;
+}
+
+/* 3.4 引言（页头之下、列表之前的一句或一段） */
+.intro {
+  color: var(--muted);
+  font-size: 0.96em;
+  margin-bottom: 24px;
+}
+
+/* 3.5 页脚：1px 浅线 + 两行安静小字居中 */
+.footer {
+  margin-top: 48px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+  font-size: 0.85em;
+  line-height: 1.8;
+  color: var(--muted);
+}
+
+/* ---------- 4. 组件 ---------- */
+
+/* 4.1 资源行：整行链接 + 右侧小标签 + 行下浅线 */
+.res-list { margin-top: 6px; }
+
+.res-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+  color: var(--ink);
+  transition: color 0.15s;
+}
+.res-row:hover { color: var(--accent); }
+.res-row .name { font-weight: 600; font-size: 1.02em; }
+.res-row .sub {
+  display: block;
+  margin-top: 3px;
+  font-size: 0.85em;
+  font-weight: 400;
+  color: var(--muted);
+}
+.res-row .tag {
+  flex: none;
+  font-size: 0.78em;
+  font-weight: 400;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.res-row:hover .tag { color: var(--accent); }
+
+/* 4.2 清单行（Now / 研究方向等纯文本列表） */
+.item-list { margin: 0; padding: 0; list-style: none; }
+.item { padding: 16px 0; border-bottom: 1px solid var(--line); }
+.item:last-child { border-bottom: none; }
+.item-title { display: block; font-size: 1.05rem; line-height: 1.7; }
+.item-sub {
+  display: block;
+  margin-top: 3px;
+  font-size: 0.84rem;
+  color: var(--muted);
+}
+
+/* 4.3 次要链接行（页脚上方或列表之后） */
+.meta-link { margin-top: 24px; font-size: 0.92em; color: var(--muted); }
+.meta-link a { color: var(--accent); text-decoration: none; }
+.meta-link a:hover { color: var(--accent-deep); text-decoration: underline; }
+
+/* 4.4 小节说明句（h2 之下的引导语） */
+.section-note { font-size: 0.92em; color: var(--muted); margin-bottom: 12px; }
+
+/* 4.5 按钮（404 等少数页面） */
+.btn {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 1px solid var(--line);
+  background: var(--cream);
+  color: var(--accent);
+  font-size: 0.92em;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.15s, border-color 0.15s;
+}
+.btn:hover { color: var(--accent-deep); border-color: var(--accent); }
+
+/* ---------- 5. 响应式（全站统一断点） ---------- */
+
+/* 640px：手机竖屏。只收紧留白与字号层级，不隐藏任何内容。 */
+@media (max-width: 640px) {
+  .page { padding: 28px 16px 48px; }
+  .page-head { padding-bottom: 10px; margin-bottom: 24px; }
+  .page-head h1 { font-size: 1.6em; }
+  .back-link { margin-bottom: 20px; }
+  h2 { margin: 28px 0 12px; }
+  .res-row { gap: 12px; padding: 12px 0; }
+  .footer { margin-top: 40px; }
+}
+
+/* 360px：极小屏，进一步收窄横向留白 */
+@media (max-width: 360px) {
+  .page { padding-left: 12px; padding-right: 12px; }
+}
+
+/* ---------- 6. 全站交互例外（style-guide 第十四节登记） ---------- */
+
+/* 所有链接悬停：深酒红 + 左倾 0.2s。
+   "Back to ..." 导航链（.back-link / .btn）保持原样式。 */
+a:not(.back-link):not(.btn):hover {
+  color: #8B0000;
+  transform: skewX(-10deg);
+  transform-origin: left center;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}

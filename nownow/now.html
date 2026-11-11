@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ExtremalMath | Current Work</title>
+<title>ExtremalMath | Now</title>
 
     <link rel="icon" type="image/x-icon" href="../picture/favicon.ico">
     <link rel="icon" type="image/svg+xml" href="../picture/favicon.svg">
@@ -12,6 +12,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="../picture/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="../picture/favicon-192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="../picture/favicon-512.png">
+<link rel="stylesheet" href="../site.css">
 <style>
   :root {
     --bg:          #fbfaf7;
@@ -25,8 +26,6 @@
   }
 
   * { box-sizing: border-box; }
-  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-  html { -webkit-text-size-adjust: 100%; }
 
   body {
     margin: 0;
@@ -62,7 +61,6 @@
     letter-spacing: 0.02em;
     font-weight: 600;
   }
-  .back-link:hover { color: var(--accent-deep); text-decoration: underline; }
 
   .topbar-right {
     font-family: var(--sans);
@@ -119,16 +117,6 @@
     color: var(--ink);
   }
 
-  .item-list { margin: 0; padding: 0; list-style: none; }
-
-  .item {
-    padding: 16px 0;
-    border-bottom: 1px solid var(--line);
-  }
-  .item:last-child { border-bottom: none; }
-
-  .item-title { display: block; font-size: 1.05rem; line-height: 1.7; }
-
   .item-sub {
     display: block;
     margin-top: 3px;
@@ -142,6 +130,35 @@
     font-weight: 500;
   }
   .item-sub a:hover { color: var(--accent-deep); text-decoration: underline; }
+
+  /* ---------- Now 模块的排版 ---------- */
+
+  .now-item { padding-top: 20px; }
+
+  .now-item .item-title { margin-bottom: 2px; }
+
+  .now-item .item-sub {
+    margin-top: 0;
+    margin-bottom: 8px;
+  }
+
+  .now-body p {
+    margin: 8px 0 0;
+    text-align: justify;
+  }
+  .now-body p:first-child { margin-top: 0; }
+
+  .now-link {
+    margin: 8px 0 0;
+    font-family: var(--sans);
+    font-size: 0.9rem;
+  }
+  .now-link a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .now-link a:hover { color: var(--accent-deep); text-decoration: underline; }
 
   .footnote {
     margin: 48px 0 0;
@@ -270,19 +287,8 @@
     .topbar { flex-wrap: wrap; }
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    * { transition: none !important; }
-  }
-
   /* All hyperlinks: hover makes the text deep red and tilted.
      Navigation "Back to ..." links (class .back-link or .btn) keep their original style. */
-  a:not(.back-link):not(.btn):hover {
-    color: #8B0000;
-    transform: skewX(-10deg);
-    transform-origin: left center;
-    transition: color 0.2s ease, transform 0.2s ease;
-  }
-
 </style>
 </head>
 
@@ -291,7 +297,7 @@
 
     <header class="topbar">
       <a href="../about.html" class="back-link">&larr; Back to About Me</a>
-      <span class="topbar-right">Current Work</span>
+      <span class="topbar-right">Now</span>
     </header>
 
     <div class="layout">
@@ -311,12 +317,13 @@
 
     <footer class="site-footer">
       <p>&copy; 2026 ExtremalMath</p>
-      <p class="updated">Last updated Oct 22, 2026</p>
+      <p class="updated">Last updated Nov 11, 2026</p>
     </footer>
 
   </div>
 
   <script src="data/registry.js"></script>
+  <script src="data/now-data.js"></script>
   <script src="data/semesters.js"></script>
   <script>
   (function () {
@@ -327,11 +334,6 @@
     var yearEl    = document.getElementById("footer-year");
 
     var FILES = Array.isArray(window.SEMESTER_FILES) ? window.SEMESTER_FILES.slice() : [];
-
-    if (FILES.length === 0) {
-      contentEl.innerHTML = '<p class="lede">No semester data yet.</p>';
-      return;
-    }
 
     /* ---------- helpers ---------- */
 
@@ -419,35 +421,35 @@
       if (!now || !Array.isArray(now.modules) || now.modules.length === 0) return "";
 
       var rows = now.modules.map(function (m) {
-        var body = "";
-        if (m.content) {
-          var lines = m.content.replace(/\n+/g, "\n").split(/\n/);
-          lines.forEach(function (line) {
-            line = line.trim();
-            if (line === "") return;
-            body += '<p>' + escapeHTML(line) + "</p>";
-          });
+        var parts = [];
+
+        parts.push('<span class="item-title">' + escapeHTML(m.icon || "") + ' ' +
+          escapeHTML(m.title || "") + '</span>');
+
+        if (m.sub) {
+          parts.push('<span class="item-sub">' + escapeHTML(m.sub) + "</span>");
         }
 
-        var link = "";
+        if (Array.isArray(m.content) && m.content.length) {
+          parts.push('<div class="now-body">' + m.content.map(function (line) {
+            return "<p>" + escapeHTML(line) + "</p>";
+          }).join("") + "</div>");
+        }
+
         if (typeof m.link === "string" && m.link.length) {
-          var text = (typeof m.linkText === "string" && m.linkText.length) ?
-            m.linkText : escapeHTML(m.link);
+          var text = (typeof m.linkText === "string" && m.linkText.length)
+            ? m.linkText
+            : m.link;
           var blank = (/^https?:\/\//.test(m.link) ? ' target="_blank" rel="noopener"' : "");
-          link = '<p><a href="' + escapeHTML(m.link) + '"' + blank + '>' +
-            escapeHTML(text) + "</a></p>";
+          parts.push('<p class="now-link"><a href="' + escapeHTML(m.link) + '"' + blank +
+            ">" + escapeHTML(text) + "</a></p>");
         }
 
-        return (
-          '<li class="item">' +
-            '<span class="item-title">' + escapeHTML(m.icon || "") + ' ' + escapeHTML(m.title || "") + '</span>' +
-            '<span class="item-sub">' + body + link + "</span>" +
-          "</li>"
-        );
+        return '<li class="item now-item">' + parts.join("") + "</li>";
       }).join("");
 
       return (
-        '<section class="block">' +
+        '<section class="block now-section">' +
           '<h2>' + escapeHTML(now.title || "Now") + '</h2>' +
           '<ul class="item-list">' + rows + "</ul>" +
         "</section>"
@@ -479,11 +481,25 @@
       parts.push(renderNow(semester.now));
 
       contentEl.innerHTML = parts.join("");
-      document.title = (semester.title || semester.id) + " — Current Work";
+      document.title = (semester.title || semester.id) + " — Now";
     }
 
     function renderError(message) {
       contentEl.innerHTML = '<p class="lede">' + escapeHTML(message) + "</p>";
+    }
+
+    /* ---------- Now-only view: the five modules, no semester chrome ---------- */
+
+    function renderNowOnly(now) {
+      if (!now) {
+        renderError("No current semester data found.");
+        return;
+      }
+      contentEl.innerHTML = renderNow(now);
+      document.title = "ExtremalMath | Now";
+      var updated = now.updated;
+      var footer = document.querySelector(".site-footer .updated");
+      if (footer) footer.textContent = "Last updated " + escapeHTML(updated);
     }
 
     /* ---------- sidebar ---------- */
@@ -574,7 +590,9 @@
 
     var initialId = decodeURIComponent(window.location.hash.replace(/^#/, ""));
     if (!initialId || FILES.indexOf(initialId + ".js") === -1) {
-      initialId = currentId;
+      // 无 hash 或 hash 不合法：直接展示近况（Now-only 视图），侧栏仍保留
+      renderNowOnly(NowData.get(currentId));
+      return;
     }
     showSemester(initialId, { scrollToTop: false });
 

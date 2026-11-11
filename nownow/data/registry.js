@@ -5,11 +5,13 @@
 
    Shared by data/*.js 的 "注册" 和 nownow/now.html 的 "消费":
 
-     SemesterRegistry.register(id, data)   -> 写（安全校验 + 只读冻结）
-     SemesterRegistry.get(id)              -> 读（空 null-prototype 内核）
-     SemesterRegistry.isRegistered(id)     -> 是否已注册
-     SemesterRegistry.ids()                -> 已注册的 id 列表
-     SemesterRegistry.clear()              -> 归档/注销（页面更新时手动清理）
+   SemesterRegistry.register(id, data)   -> 写（安全校验 + 只读冻结）
+   SemesterRegistry.get(id)              -> 读（空 null-prototype 内核）
+   SemesterRegistry.isRegistered(id)     -> 是否已注册
+   SemesterRegistry.ids()                -> 已注册的 id 列表
+   SemesterRegistry.clear()              -> 归档/注销（页面更新时手动清理）
+
+   同时把 NowData（近况模块）也挂到 window 上，供 now.html 直接读取。
 
    约束：
    - id 必须格式正确 + 不在 Object.prototye 黑名单中（结束 __proto__ / constructor
