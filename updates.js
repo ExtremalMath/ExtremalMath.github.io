@@ -5,7 +5,7 @@
 const siteUpdates = [
    {
         date: "2026-11-11",
-        text: "Added a Theatre entry for the musical Fan Letters (粉丝来信) at Nanjing Grand Theatre on Jan 16, 2027 to drama-data.js, the data source that drives drama.html. Also consolidated all shared styling into one site.css linked from every page: a single 8-color palette (--accent-deep replaces --accent-dark), one type and spacing baseline, and one copy of each shared component (back link, page head, footer, resource rows, item lists, buttons, focus and reduced-motion rules), plus a 640px/360px responsive layer. Page styles now hold only page-specific rules; five registered container-width exceptions remain. The style guide was updated to match.",
+        text: "Added a Theatre entry for Fan Letters (粉丝来信) and a WeChat Official Account card with a scannable QR code on the About page. Also consolidated all shared styling into one site.css linked from every page: an 8-color palette (--accent-deep replaces --accent-dark), one type and spacing baseline, and one copy of each shared component. Page styles now hold only page-specific rules.",
     },
    {
         date: "2026-11-04",

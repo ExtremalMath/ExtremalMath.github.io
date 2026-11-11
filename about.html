@@ -409,6 +409,45 @@
         }
         .contact-box a:hover { color: var(--accent-deep); text-decoration: underline; }
 
+        /* 微信公众号关注卡片（about 专用）
+           遵守 §C1：无阴影、无圆角卡片，仅用细线与留白分区；
+           按钮复用共享层 .btn，不新增色值 */
+        .weixin-card {
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+            padding: 24px 20px;
+            margin-top: 24px;
+            text-align: center;
+        }
+        .weixin-name {
+            font-size: 1.15em;
+            font-weight: 600;
+            color: var(--ink);
+            margin: 0 0 4px;
+        }
+        .weixin-desc {
+            font-size: 0.95em;
+            color: var(--muted);
+            margin: 0 0 16px;
+        }
+        .weixin-qr-img {
+            width: 200px;
+            height: auto;
+            display: block;
+            margin: 0 auto 12px;
+        }
+        .weixin-scan {
+            font-size: 0.85em;
+            color: var(--muted);
+            margin: 0 0 16px;
+        }
+        .weixin-note {
+            font-size: 0.85em;
+            color: var(--muted);
+            margin-top: 14px;
+            line-height: 1.6;
+        }
+
         /* 页脚 */
 
         /* 响应式 */
@@ -653,6 +692,33 @@
                 <p>🔗 ORCID: <a href="https://orcid.org/0009-0007-8831-9591" target="_blank" rel="noopener">0009-0007-8831-9591</a></p>
             </div>
 
+            <!-- 微信公众号 -->
+            <div class="weixin-card">
+                <h3 class="weixin-name">空花图论爱好者</h3>
+                <p class="weixin-desc">分享数学、科研与生活日常</p>
+
+                <img
+                    src="picture/wechat_gzh.jpg"
+                    alt="微信公众号二维码：空花图论爱好者"
+                    class="weixin-qr-img"
+                    width="200"
+                    height="200"
+                >
+                <p class="weixin-scan">Scan the QR code in WeChat to follow</p>
+
+                <a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzYyMTk0MzI0MA==#wechat_redirect"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="btn">
+                    Follow on WeChat
+                </a>
+
+                <p class="weixin-note">
+                    A WeChat Official Account logging math, research and daily notes — mostly
+                    graph theory and my study life. New posts are irregular, so feel free to
+                    follow along.
+                </p>
+            </div>
         </main>
 
         <!-- 右侧栏 -->
