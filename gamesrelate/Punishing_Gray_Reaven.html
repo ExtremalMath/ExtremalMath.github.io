@@ -20,16 +20,7 @@
             color: var(--muted);
             margin-bottom: 32px;
         }
-        .game-empty {
-            text-align: center;
-            padding: 60px 0;
-            font-family: var(--sans);
-            font-size: 0.95em;
-            color: var(--muted);
-        }
-
-        .game-header { text-align: center; margin: 32px 0; }
-        .game-header img { display: block; margin: 0 auto; max-width: 100%; }
+        .game-header img { text-align: center; margin: 32px 0; display: block; margin: 0 auto; max-width: 100%; }
 
         /* 串联栏：The Last Spark */
         .game-link {
@@ -89,11 +80,27 @@
         <p class="subtitle">战双 帕弥什 · A Chinese sci-fi action ARPG by Kuro Games, 2021.</p>
     </header>
 
+    <!--
+      Punishing: Gray Raven — Official game record page.
+      Chapter 5: The Last Spark (绝海星火)
+      Source: Punishing: Gray Raven WIKI (https://wiki.biligame.com/zspms)
+      Simple narrative with images and "Open image" buttons.
+      No image contention; no text changes.
+    -->
     <main>
-        <figure class="game-header">
-            <img src="../gamesrelate/cg/PunishingCG_Matrix.png"
+        <figure class="game-header reveal-block">
+            <div class="reveal-placeholder">
+                <p class="reveal-notice">The image is large. Please click to open it.</p>
+                <button class="reveal-btn" type="button"
+                        data-src="../gamesrelate/cg/PunishingCG_Matrix.png"
+                        data-alt="Punishing: Gray Raven — Matrix screenshot">
+                    Open image
+                </button>
+            </div>
+            <img class="reveal-img"
                  alt="Punishing: Gray Raven — Matrix screenshot">
         </figure>
+
 
         <div class="game-link">
             <p>A story chapter on the final coast. My reflections are
@@ -103,8 +110,8 @@
 
         <div class="game-source">
             <p>
-                来源：<span class="game-source-label">战双WIKI
-                链接：</span>
+                Source: <span class="game-source-label">Punishing: Gray Raven WIKI
+                Link:</span>
                 <a href="https://wiki.biligame.com/zspms"
                    target="_blank" rel="noopener">https://wiki.biligame.com/zspms</a>
             </p>
@@ -117,6 +124,8 @@
     </footer>
 
 </div>
+
+<script src="../reveal.js" async></script>
 
 </body>
 </html>

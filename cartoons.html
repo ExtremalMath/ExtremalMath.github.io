@@ -78,20 +78,10 @@
             padding-bottom: 12px;
         }
 
-        /* 画面占位 — 将图片本身作为广告/window，不加边框与背景块 */
+        /* 画面占位 — 复用 site.css .reveal-* 组件 */
         .cartoon-image {
             display: block;
             margin-bottom: 24px;
-        }
-        .cartoon-image img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .cartoon-image img.loaded {
-            opacity: 1;
         }
         .cartoon-image figcaption {
             text-align: center;
@@ -225,9 +215,19 @@
                 Xiangfeng is a 14-year-old boy who loves adventure. One day, he finds a Star Soul Stone. This wakes up the hero named Lie Kongyan. From that moment on, he takes the duty to protect the Earth. He searches for other Star Soul warriors to fight against the aliens. Many young people join together to form the Dragon Rescue Team. They work well and solve problems together. With their efforts, they keep the peace.
             </p>
 
-            <figure class="cartoon-image">
-                <img data-src="picture/yuanqi_cartoon.png" alt="Star Guardian" class="lazy-image">
-                <figcaption>Star Guardian (2012)</figcaption>
+            <figure class="cartoon-image reveal-block">
+                <div class="reveal-placeholder">
+                    <p class="reveal-notice">
+                        The image is large. Default hidden.<br>
+                        Click to open
+                    </p>
+                    <button class="reveal-btn" type="button"
+                            data-src="picture/yuanqi_cartoon.png"
+                            data-alt="Star Guardian">
+                        Open image
+                    </button>
+                </div>
+                <img class="reveal-img" alt="Star Guardian">
             </figure>
 
             <hr class="section-line">
@@ -265,9 +265,19 @@
                 Kira Yamato is a university student who loves peace. His good friend Athrun goes home. One day, while Kira and his friends are at school, ZAFT soldiers come to the school to take the Robot. Kira gets inside the robot and starts to fight. He must face his good friend Athrun in battle. Kira must decide between protecting his friends or following orders. He uses the power of the Seed, the ability to change the future. This is a story about war, friendship, and becoming a better person.
             </p>
 
-            <figure class="cartoon-image">
-                <img data-src="picture/seed_cartoon.png" alt="Mobile Suit Gundam SEED" class="lazy-image">
-                <figcaption>Mobile Suit Gundam SEED (2002)</figcaption>
+            <figure class="cartoon-image reveal-block">
+                <div class="reveal-placeholder">
+                    <p class="reveal-notice">
+                        The image is large. Default hidden.<br>
+                        Click to open
+                    </p>
+                    <button class="reveal-btn" type="button"
+                            data-src="picture/seed_cartoon.png"
+                            data-alt="Mobile Suit Gundam SEED">
+                        Open image
+                    </button>
+                </div>
+                <img class="reveal-img" alt="Mobile Suit Gundam SEED">
             </figure>
 
             <hr class="section-line">
@@ -354,39 +364,10 @@
             gundamBtn.textContent = '▶ Play';
         });
     }
-
-    // 图片懒加载：延迟加载大图片，减轻页面初始负担
-    var lazyImages = document.querySelectorAll('.lazy-image');
-    if ('IntersectionObserver' in window) {
-        var observer = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-                if (entry.isIntersecting) {
-                    var img = entry.target;
-                    if (img.dataset.src) {
-                        img.src = img.dataset.src;
-                        delete img.dataset.src;
-                    }
-                    img.addEventListener('load', function () {
-                        img.classList.add('loaded');
-                        observer.unobserve(img);
-                    });
-                }
-            });
-        });
-        lazyImages.forEach(function (img) {
-            observer.observe(img);
-        });
-    } else {
-        // 旧浏览器降级方案：立即加载所有图片
-        lazyImages.forEach(function (img) {
-            if (img.dataset.src) {
-                img.src = img.dataset.src;
-                delete img.dataset.src;
-            }
-            img.classList.add('loaded');
-        });
-    }
 })();
 </script>
+
+<script src="reveal.js" async></script>
+
 </body>
 </html>

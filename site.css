@@ -213,6 +213,62 @@ img { max-width: 100%; height: auto; }
 }
 .btn:hover { color: var(--accent-deep); border-color: var(--accent); }
 
+/* 4.6 大图展开/收起（grid 页面优化：大 PNG 默认隐藏，点击按钮加载） */
+.reveal-block {
+  margin: 24px 0;
+}
+.reveal-placeholder {
+  display: block;
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 64px 24px;
+  text-align: center;
+}
+.reveal-notice {
+  font-size: 0.92em;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.reveal-notice-text {
+  font-size: 0.88em;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.reveal-btn {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 8px 16px;
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  border-radius: 4px;
+  font-size: 0.88em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.reveal-btn:hover { background: var(--accent-deep); }
+.reveal-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.reveal-img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  transform: scale(0.98);
+  opacity: 0;
+  pointer-events: none;
+}
+.reveal-img.loaded {
+  transform: scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+/* 打开时隐藏占位区，只留图片 */
+.is-open .reveal-placeholder { display: none; }
+/* 未打开时图片隐藏（保持占位空间） */
+.reveal-block:not(.is-open) .reveal-img { visibility: hidden; }
+.reveal-block.is-open .reveal-img { visibility: visible; }
 /* ---------- 5. 响应式（全站统一断点） ---------- */
 
 /* 640px：手机竖屏。只收紧留白与字号层级，不隐藏任何内容。 */
