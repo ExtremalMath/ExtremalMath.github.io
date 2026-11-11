@@ -1,23 +1,23 @@
 // reveal.js
-// 大图片的 "点开再加载" 控制（节省首屏带宽）
+// "Click to open" control for large images (saves first-screen bandwidth).
 //
-// 页面标记长这样：
+// Page markup:
 //
-//   <figure class="reveal-block">
+//   <div class="reveal-block">
 //     <div class="reveal-placeholder">
-//       <p class="reveal-notice">... 说明 ...</p>
+//       <p class="reveal-notice">The image is large. Please click to open it.</p>
 //       <button class="reveal-btn" type="button"
-//               data-src="../..."
-//               data-alt="...">打开图片</button>
+//               data-src="../...">Open image</button>
 //     </div>
 //     <img class="reveal-img" alt="...">
-//   </figure>
+//   </div>
 //
-// 规则：
-//   1. 页面加载时只出占位（奶油底 + 提示 + "打开图片"按钮），图片不进请求；
-//   2. 点一次按钮：只显示该图的值，同时 fetch data-src；关闭页面再打开不用再点
-//   3. 再点一次：收回图片，返回占位；
-//   4. 样式见 site.css 第 4.6 节（共享层），JS 无需每页重复。
+// Rules:
+//   1. On page load: placeholder only (cream block + notice + button).
+//   2. First click: fetch data-src, show image + "Close image" (is-open + loaded).
+//   3. Second click: collapse image, return to placeholder.
+//   4. CSS lives in site.css section 4.6 (@.reveal-* and .is-open/.loaded).
+//   5. No per-page scripts needed.
 
 (function () {
   "use strict";
@@ -26,39 +26,42 @@
     var btn = block.querySelector(".reveal-btn");
     var placeholder = block.querySelector(".reveal-placeholder");
     var img = block.querySelector(".reveal-img");
-    var notice = block.querySelector(".reveal-notice");
     var src = btn ? btn.getAttribute("data-src") : null;
 
     if (!src || !placeholder || !img) return;
 
-    // 已经加载过：直接显示
+    // Already loaded: open immediately.
     if (img.complete) {
       block.classList.add("is-open");
       img.classList.add("loaded");
-      if (btn) btn.textContent = "收起图片";
+      if (btn) btn.textContent = "Close image";
       return;
     }
 
-    // 展开：先 fetch，图片加载到后再打开开关
+    // Open: set src first (fetch), switch classes on load.
     img.src = src;
     if (btn) btn.textContent = "Loading...";
-    img.setAttribute("alt", btn ? (btn.getAttribute("data-alt") || "") : "");
 
     img.addEventListener("load", function () {
       block.classList.add("is-open");
       img.classList.add("loaded");
       if (btn) btn.textContent = "Close image";
     });
+
+    // Unload if the image cannot be fetched.
+    img.addEventListener("error", function () {
+      if (btn) btn.textContent = "Open image";
+      img.src = "";
+    });
   }
 
   function hide(block) {
     var btn = block.querySelector(".reveal-btn");
-    var placeholder = block.querySelector(".reveal-placeholder");
     var img = block.querySelector(".reveal-img");
 
     block.classList.remove("is-open");
     img.classList.remove("loaded");
-    if (btn) btn.textContent = "打开图片";
+    if (btn) btn.textContent = "Open image";
   }
 
   function init() {
@@ -67,15 +70,18 @@
       var block = blocks[i];
       var btn = block.querySelector(".reveal-btn");
       if (!btn) continue;
-      var target = block;
-      btn.addEventListener("click", function (e) {
-        e.preventDefault();
-        if (target.classList.contains("is-open")) {
-          hide(target);
-        } else {
-          show(target);
-        }
-      });
+      (function (b) {
+        // Instance-specific closure: each button handler closes over its
+        // own block, not the last one in the loop.
+        btn.addEventListener("click", function (e) {
+          e.preventDefault();
+          if (b.classList.contains("is-open")) {
+            hide(b);
+          } else {
+            show(b);
+          }
+        });
+      })(block);
     }
   }
 
