@@ -354,6 +354,19 @@
             text-decoration: underline;
         }
 
+        /* 安静灰色链接：低调，仅在 hover 时显绛红 */
+        .plot-link {
+            margin-top: 18px;
+            font-size: 0.85em;
+            color: var(--muted);
+        }
+        .plot-link a {
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.15s;
+        }
+        .plot-link a:hover { color: var(--accent-deep); }
+
         /* 子章节标题 */
         .sub-heading {
             font-size: 1em;
@@ -664,6 +677,10 @@
                 <a href="handmade.html" class="hobby-item" target="_blank" rel="noopener">handmade</a>
                 <a href="gamesrelate/gamesrelate_00.html" class="hobby-item">🎮 Games</a>
             </div>
+
+            <p class="plot-link">
+                <a href="gamesrelate/gamesrelate_00.html">plot</a>
+            </p>
 
            <h3 class="sub-heading">Department Experience</h3>
 <ul class="exp-list">
