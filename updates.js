@@ -5,7 +5,7 @@
 const siteUpdates = [
    {
         date: "2026-11-11",
-        text: "Added a Games page (gamesrelate/gamesrelate_00.html) with a Punishing: Gray Raven entry linking to its story chapter notes. Added a Theatre entry for Fan Letters. Combined all shared styling into one site.css linked from every page: one palette, one type/spacing baseline, one copy of each shared component. Page styles hold only page-specific rules. The link checker now validates responsive image paths and width descriptors.",
+        text: "Added Games page (gamesrelate/gamesrelate_00.html) with Punishing: Gray Raven entry. Added an About entry under Beyond Mathematics. Also added a Theatre entry for Fan Letters. Combined all shared styling into one site.css. The link checker validates responsive image paths and width descriptors.",
     },
    {
         date: "2026-11-04",
