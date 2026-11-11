@@ -430,9 +430,13 @@
             color: var(--muted);
             margin: 0 0 16px;
         }
+        /* 二维码：srcset 按展示宽度 × 设备像素比选档，这里只固定 CSS 显示宽度。
+           max-width:100% / height:auto 由共享层 site.css 提供，1:1 比例
+           保证任何档位都不被拉伸或压缩；不加边框或底色，保留原图自带
+           白色静区以利扫码识别。 */
         .weixin-qr-img {
             width: 200px;
-            height: auto;
+            aspect-ratio: 1 / 1;
             display: block;
             margin: 0 auto 12px;
         }
@@ -508,6 +512,8 @@
                 height: 80px;
                 font-size: 2.5rem;
             }
+            /* 小屏收窄二维码，与 srcset 的 sizes 断点严格对应 */
+            .weixin-qr-img { width: 180px; }
         }
 
     
@@ -697,14 +703,27 @@
                 <h3 class="weixin-name">空花图论爱好者</h3>
                 <p class="weixin-desc">分享数学、科研与生活日常</p>
 
+                <!-- 响应式二维码：5 个固有尺寸版本全部保留在 picture/wechat_gzh_pic/，
+                     由 srcset + sizes 按展示宽度与设备像素比挑选；CSS 只固定显示宽度、
+                     height:auto，不拉伸或压缩原图，也不改动二维码像素内容。 -->
                 <img
-                    src="picture/wechat_gzh.jpg"
-                    alt="微信公众号二维码：空花图论爱好者"
-                    class="weixin-qr-img"
+                    src="picture/wechat_gzh_pic/qrcode_for_gh_5e5255a4f498_430.jpg"
+                    srcset="picture/wechat_gzh_pic/qrcode_for_gh_5e5255a4f498_258.jpg 258w,
+                            picture/wechat_gzh_pic/qrcode_for_gh_5e5255a4f498_344.jpg 344w,
+                            picture/wechat_gzh_pic/qrcode_for_gh_5e5255a4f498_430.jpg 430w,
+                            picture/wechat_gzh_pic/qrcode_for_gh_5e5255a4f498_860.jpg 860w,
+                            picture/wechat_gzh_pic/qrcode_for_gh_5e5255a4f498_1280.jpg 1280w"
+                    sizes="(max-width: 480px) 180px, 200px"
                     width="200"
                     height="200"
+                    alt="微信公众号二维码：空花图论爱好者"
+                    class="weixin-qr-img"
                 >
-                <p class="weixin-scan">Scan the QR code in WeChat to follow</p>
+                <p class="weixin-scan">
+                    Scan the QR code in WeChat to follow ·
+                    <a href="picture/wechat_gzh_pic/qrcode_for_gh_5e5255a4f498_1280.jpg"
+                       target="_blank" rel="noopener">Open full size</a>
+                </p>
 
                 <a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzYyMTk0MzI0MA==#wechat_redirect"
                    target="_blank"

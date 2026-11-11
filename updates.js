@@ -5,7 +5,7 @@
 const siteUpdates = [
    {
         date: "2026-11-11",
-        text: "Added a Theatre entry for Fan Letters (粉丝来信) and a WeChat Official Account card with a scannable QR code on the About page. Also consolidated all shared styling into one site.css linked from every page: an 8-color palette (--accent-deep replaces --accent-dark), one type and spacing baseline, and one copy of each shared component. Page styles now hold only page-specific rules.",
+        text: "Added a Theatre entry for Fan Letters (粉丝来信) and a WeChat Official Account card with a scannable QR code on the About page. Also consolidated all shared styling into one site.css linked from every page: an 8-color palette (--accent-deep replaces --accent-dark), one type and spacing baseline, and one copy of each shared component. Page styles now hold only page-specific rules. The QR code now serves all five native sizes through srcset, and the link checker validates responsive image paths and width descriptors.",
     },
    {
         date: "2026-11-04",
