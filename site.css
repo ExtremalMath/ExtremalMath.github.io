@@ -266,9 +266,13 @@ img { max-width: 100%; height: auto; }
 }
 /* 打开时隐藏占位区，只留图片 */
 .is-open .reveal-placeholder { display: none; }
+/* 兜底：无 src 的空 <img> 绝不绘制，避免露出浏览器破损图图标。
+   JS 在点击时写入 src 后，[src] 出现，本规则自动失效。 */
+.reveal-img:not([src]) { display: none; }
 /* 未打开时图片隐藏（保持占位空间） */
 .reveal-block:not(.is-open) .reveal-img { visibility: hidden; }
-.reveal-block.is-open .reveal-img { visibility: visible; }
+/* 仅当 load 成功加上 .loaded 后才显示，杜绝"占位已隐藏但图没加载"的破图 */
+.reveal-block.is-open .reveal-img.loaded { visibility: visible; }
 /* ---------- 5. 响应式（全站统一断点） ---------- */
 
 /* 640px：手机竖屏。只收紧留白与字号层级，不隐藏任何内容。 */

@@ -5,7 +5,7 @@
 const siteUpdates = [
    {
         date: "2026-11-11",
-        text: "Added Games page (gamesrelate/gamesrelate_00.html) with Punishing: Gray Raven entry, plus a low-key \"plot\" link under About Beyond Mathematics; removed the \"Games\" capsule entry. Also added a Theatre entry for Fan Letters. Combined all shared styling into one site.css. The link checker validates responsive image paths and width descriptors. Added reveal.js: large images load only on click, reducing first-screen payload.",
+        text: "Added Games page (gamesrelate/gamesrelate_00.html) with Punishing: Gray Raven entry, plus a low-key \"plot\" link under About Beyond Mathematics; removed the \"Games\" capsule entry. Also added a Theatre entry for Fan Letters. Combined all shared styling into one site.css. The link checker validates responsive image paths and width descriptors. Added reveal.js: large images load only on click, reducing first-screen payload. Fixed its Open image button, which had shown an empty broken placeholder instead of fetching the file.",
     },
    {
         date: "2026-11-04",
