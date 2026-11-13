@@ -26,28 +26,28 @@
             max-width: 100%;
         }
 
-        /* 串联栏：The Last Spark */
-        .game-link {
-            display: block;
-            margin: 56px 0;
-            padding: 24px 0;
-            border-top: 1px solid var(--line);
-            border-bottom: 1px solid var(--line);
-            text-align: center;
+        /* 章节链接列表：复用 site.css 的 .item-list / .item 行分隔，
+           两个链接纵向排成紧凑列表，不再各自占一个带边框的大块 */
+        .chapter-list {
+            margin: 40px 0;
         }
-        .game-link p {
-            font-family: var(--sans);
-            font-size: 0.92em;
-            color: var(--muted);
-            margin-bottom: 8px;
-        }
-        .game-link a {
+        .chapter-link {
             color: var(--accent);
             text-decoration: none;
             font-weight: 600;
             font-size: 0.95em;
         }
-        .game-link a:hover { color: var(--accent-deep); text-decoration: underline; }
+        .chapter-link:hover {
+            color: var(--accent-deep);
+            text-decoration: underline;
+        }
+        .chapter-note {
+            margin-top: 3px;
+            font-family: var(--sans);
+            font-size: 0.85em;
+            color: var(--muted);
+            line-height: 1.6;
+        }
 
         /* 来源标注：格式统一，加粗关键标识 */
         .game-source {
@@ -81,16 +81,16 @@
 
     <header class="page-head">
         <h1>Punishing: Gray Raven</h1>
-        <p class="subtitle">战双 帕弥什 · A Chinese sci-fi action ARPG by Kuro Games, 2021.</p>
+        <p class="subtitle">战双 帕弥什 · A Chinese action game by Kuro Games, 2021.</p>
     </header>
 
     <!--
       Punishing: Gray Raven — Official game record page.
-      Chapter 5: The Last Spark (绝海星火)
+      Chapters: The Last Spark (绝海星火), Last Resort (空晓界限)
       Source: Punishing: Gray Raven WIKI (https://wiki.biligame.com/zspms)
       The compressed header image displays directly; clicking it opens the
       full-resolution original PNG (see site.css 4.6 / reveal.js).
-      No buttons; no text changes.
+      No buttons; visible notes in plain English.
     -->
     <main>
         <figure class="game-header">
@@ -103,11 +103,18 @@
         </figure>
 
 
-        <div class="game-link">
-            <p>A story chapter on the final coast. My reflections are
-              collected separately.</p>
-            <a href="LastSpark.html">Read about The Last Spark →</a>
-        </div>
+        <ul class="item-list chapter-list">
+            <li class="item">
+                <a href="LastSpark.html" class="chapter-link">Read about the Last Spark →</a>
+                <p class="chapter-note">Vera helps the chief reach Atlantis and find
+                  the files on Zero-Point Energy Ω.</p>
+            </li>
+            <li class="item">
+                <a href="LastResort.html" class="chapter-link">Read about the Last Resort →</a>
+                <p class="chapter-note">Karenina restarts Zero-Point Energy and causes a
+                  disaster. She decides to destroy the engine to save the Earth.</p>
+            </li>
+        </ul>
 
         <div class="game-source">
             <p>
