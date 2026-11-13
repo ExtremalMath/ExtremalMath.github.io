@@ -47,6 +47,12 @@
             transform: skewX(-10deg);
             display: inline-block;
         }
+        /* Tool-category rows: keep only the site-standard single skew (global
+           a:hover) and drop the extra inner .text-hover skew, so the hover is
+           calmer and matches ordinary site links instead of double-tilting. */
+        .tool-row .text-hover:hover {
+            transform: none;
+        }
 
         .category {
             margin-top: 32px;

@@ -156,7 +156,7 @@ function renderSites(containerId) {
       var note = s.note
         ? '<span class="alert" title="' + esc(s.note) + '">' + esc(s.note) + '</span>'
         : '';
-      html += '<a href="' + esc(s.url) + '" target="_blank" rel="noopener noreferrer" class="res-row">' +
+      html += '<a href="' + esc(s.url) + '" target="_blank" rel="noopener noreferrer" class="res-row' + (s.category === "Tools" ? " tool-row" : "") + '">' +
         '<span class="name"><span class="text-hover">' + esc(s.name) + '</span></span>' +
         '<span class="sub"><span class="text-hover">' + esc(s.desc) + '</span></span>' +
         (note ? '<span class="alert-wrap">' + note + '</span>' : '') + '</a>';
