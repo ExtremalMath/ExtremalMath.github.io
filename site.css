@@ -213,66 +213,63 @@ img { max-width: 100%; height: auto; }
 }
 .btn:hover { color: var(--accent-deep); border-color: var(--accent); }
 
-/* 4.6 大图展开/收起（grid 页面优化：大 PNG 默认隐藏，点击按钮加载） */
-.reveal-block {
-  margin: 24px 0;
-}
-.reveal-placeholder {
+/* 4.6 高清原图查看（压缩图首屏直出，点击图片再看原始 PNG）
+   标记模板（页面只写这一段，不写按钮、不复制样式）：
+     <a class="hd-link" href="<原图>.png">
+       <img class="hd-thumb" src="<压缩图>/compress-*.jpg" alt="...">
+     </a>
+   无 JS 时链接原生打开原图；有 JS 时 reveal.js 拦截 click 并插入 .hd-viewer。
+   组件样式一律只在本节维护，页面 <style> 不得复制。 */
+.hd-link {
   display: block;
-  background: var(--cream);
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  padding: 64px 24px;
-  text-align: center;
+  cursor: zoom-in;
 }
-.reveal-notice {
-  font-size: 0.92em;
-  color: var(--muted);
-  line-height: 1.5;
+.hd-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
-.reveal-notice-text {
-  font-size: 0.88em;
-  color: var(--muted);
-  line-height: 1.5;
-}
-.reveal-btn {
-  display: inline-block;
-  margin-top: 16px;
-  padding: 8px 16px;
-  background: var(--accent);
-  color: var(--bg);
-  border: none;
-  border-radius: 4px;
-  font-size: 0.88em;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.15s;
-}
-.reveal-btn:hover { background: var(--accent-deep); }
-.reveal-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.reveal-img {
+.hd-thumb {
   display: block;
   max-width: 100%;
   height: auto;
-  transition: transform 0.2s ease, opacity 0.2s ease;
-  transform: scale(0.98);
-  opacity: 0;
+}
+
+/* .hd-viewer 由 reveal.js 在点击时动态创建，页面 HTML 中不含此节点 */
+.hd-viewer {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: var(--cream);
+  cursor: zoom-out;
+  overflow: auto;
+}
+.hd-viewer img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  margin: auto;
+  object-fit: contain;
+}
+/* 兜底（trouble 6.16）：src 尚未写入时不绘制，杜绝浏览器破损图图标 */
+.hd-viewer img:not([src]) { display: none; }
+.hd-note {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 12px;
+  margin: 0;
+  text-align: center;
+  font-family: var(--sans);
+  font-size: 0.82em;
+  color: var(--muted);
   pointer-events: none;
 }
-.reveal-img.loaded {
-  transform: scale(1);
-  opacity: 1;
-  pointer-events: auto;
-}
-/* 打开时隐藏占位区，只留图片 */
-.is-open .reveal-placeholder { display: none; }
-/* 兜底：无 src 的空 <img> 绝不绘制，避免露出浏览器破损图图标。
-   JS 在点击时写入 src 后，[src] 出现，本规则自动失效。 */
-.reveal-img:not([src]) { display: none; }
-/* 未打开时图片隐藏（保持占位空间） */
-.reveal-block:not(.is-open) .reveal-img { visibility: hidden; }
-/* 仅当 load 成功加上 .loaded 后才显示，杜绝"占位已隐藏但图没加载"的破图 */
-.reveal-block.is-open .reveal-img.loaded { visibility: visible; }
 /* ---------- 5. 响应式（全站统一断点） ---------- */
 
 /* 640px：手机竖屏。只收紧留白与字号层级，不隐藏任何内容。 */
@@ -294,8 +291,9 @@ img { max-width: 100%; height: auto; }
 /* ---------- 6. 全站交互例外（style-guide 第十四节登记） ---------- */
 
 /* 所有链接悬停：深酒红 + 左倾 0.2s。
-   "Back to ..." 导航链（.back-link / .btn）保持原样式。 */
-a:not(.back-link):not(.btn):hover {
+   "Back to ..." 导航链（.back-link / .btn）保持原样式。
+   .hd-link 是包裹图片的链接，悬停不得倾斜图片（style-guide 第十四节登记）。 */
+a:not(.back-link):not(.btn):not(.hd-link):hover {
   color: #8B0000;
   transform: skewX(-10deg);
   transform-origin: left center;

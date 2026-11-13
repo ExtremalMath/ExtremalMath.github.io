@@ -1,106 +1,116 @@
 // reveal.js
-// "Click to open" control for large images (saves first-screen bandwidth).
+// Full-resolution image viewer. The historical filename is kept so that no
+// file has to be deleted; the old "Open image" placeholder component was
+// retired on 2026-11-13 (see trouble.txt 6.18).
 //
-// Page markup:
+// Page markup (styles live in site.css section 4.6):
 //
-//   <div class="reveal-block">
-//     <div class="reveal-placeholder">
-//       <p class="reveal-notice">The image is large. Please click to open it.</p>
-//       <button class="reveal-btn" type="button"
-//               data-src="../...">Open image</button>
-//     </div>
-//     <img class="reveal-img" alt="...">   <!-- NO src: fetched on click -->
-//   </div>
+//   <a class="hd-link" href="../cg/PunishingCG_Atlantis.png">
+//     <img class="hd-thumb" src="../cg/compress/compress-PunishingCG_Atlantis.jpg"
+//          alt="...">
+//   </a>
 //
-// Rules:
-//   1. On page load: placeholder only (cream block + notice + button).
-//   2. First click: fetch data-src, then show the image and "Close image".
-//   3. Second click: collapse back to the placeholder (src stays cached).
-//   4. CSS lives in site.css section 4.6 (.reveal-*, .is-open, .loaded).
-//   5. No per-page scripts needed.
+// Behaviour:
+//   1. The compressed thumbnail renders immediately (small first-screen
+//      payload, ~50-170 KB each).
+//   2. Clicking the image opens .hd-viewer and fetches the original PNG from
+//      the link's href — only then, on demand.
+//   3. Click anywhere in the viewer, or press Escape, to close. Focus returns
+//      to the image link. Body scrolling is restored.
+//   4. Without JS the <a> opens the original PNG natively (progressive
+//      enhancement); modified clicks (Ctrl/Cmd/Shift/middle) keep native
+//      behaviour too.
+//   5. NO buttons are created anywhere.
 //
-// IMPORTANT — see trouble.txt 6.16:
-//   Never use `img.complete` to mean "already loaded". Per the HTML spec,
-//   an <img> whose src is omitted (or empty) reports complete === true.
-//   The old `if (img.complete) { open; return; }` short-circuited on the
-//   very first click, so `img.src = src` was NEVER reached: the browser
-//   painted a visible, empty <img> — the "broken placeholder" symptom.
-//   The only reliable "decoded" test is `img.naturalWidth > 0`.
+// Reliability notes (trouble.txt 6.16): load state is driven only by
+// onload/onerror assigned BEFORE setting src. Never use img.complete as an
+// "already decoded" test, and never let a src-less <img> be painted — the
+// viewer image starts with an inline display:none and a CSS :not([src])
+// guard, and is revealed only after onload.
 
 (function () {
   "use strict";
 
-  var LABEL_OPEN = "Open image";
-  var LABEL_LOADING = "Loading...";
-  var LABEL_CLOSE = "Close image";
-  var LABEL_RETRY = "Open image (retry)";
+  var TEXT_LOADING = "Loading full-resolution image...";
+  var TEXT_HINT = "Click anywhere or press Esc to close";
+  var TEXT_ERROR = "The full-resolution image could not be loaded. Click anywhere to close.";
 
-  function display(block) {
-    block.classList.add("is-open");
+  var viewer = null;
+  var opener = null;
+  var prevOverflow = "";
+
+  function onKey(e) {
+    if (e.key === "Escape" || e.keyCode === 27) close();
   }
 
-  function collapse(block, label) {
-    block.classList.remove("is-open");
-    var btn = block.querySelector(".reveal-btn");
-    if (btn) btn.textContent = label || LABEL_OPEN;
+  function close() {
+    if (!viewer) return;
+    var v = viewer;
+    viewer = null;
+    document.removeEventListener("keydown", onKey);
+    document.body.style.overflow = prevOverflow;
+    if (v.parentNode) v.parentNode.removeChild(v);
+    if (opener && opener.focus) opener.focus();
+    opener = null;
   }
 
-  function show(block) {
-    var btn = block.querySelector(".reveal-btn");
-    var img = block.querySelector(".reveal-img");
-    if (!btn || !img) return;
-    var src = btn.getAttribute("data-src");
-    if (!src) return;
+  function open(link) {
+    var full = link.getAttribute("href");
+    if (!full) return;
+    if (viewer) close();
 
-    // Reliable "already decoded" test: a real src AND a positive intrinsic
-    // width. `img.complete` alone is NOT valid here (see header note).
-    if (img.getAttribute("src") === src && img.naturalWidth > 0) {
-      img.classList.add("loaded");
-      display(block);
-      btn.textContent = LABEL_CLOSE;
-      return;
-    }
+    var thumb = link.querySelector("img");
+    var alt = thumb ? (thumb.getAttribute("alt") || "") : "";
 
-    // Assignment instead of addEventListener: handlers never accumulate
-    // across repeated open/close cycles.
+    var v = document.createElement("div");
+    v.className = "hd-viewer";
+    v.setAttribute("role", "dialog");
+    v.setAttribute("aria-modal", "true");
+    v.setAttribute("aria-label", "Full-resolution image");
+
+    var note = document.createElement("p");
+    note.className = "hd-note";
+    note.textContent = TEXT_LOADING;
+
+    var img = document.createElement("img");
+    img.alt = alt;
+    img.style.display = "none"; // src-less <img> must never be painted
+    // Assignment (not addEventListener) so handlers cannot accumulate.
     img.onload = function () {
-      img.classList.add("loaded");
-      display(block);
-      btn.textContent = LABEL_CLOSE;
+      img.style.display = "block";
+      note.textContent = TEXT_HINT;
     };
     img.onerror = function () {
-      // Drop the broken state so the next click can retry cleanly.
-      img.onload = null;
-      img.onerror = null;
-      img.classList.remove("loaded");
-      img.removeAttribute("src");
-      collapse(block, LABEL_RETRY);
+      img.style.display = "none";
+      note.textContent = TEXT_ERROR;
     };
 
-    btn.textContent = LABEL_LOADING;
-    img.src = src; // the fetch happens HERE, on click
-  }
+    v.appendChild(img);
+    v.appendChild(note);
+    v.addEventListener("click", close);
+    document.addEventListener("keydown", onKey);
 
-  function hide(block) {
-    // Keep img.src and .loaded: a second open reuses the decoded picture.
-    collapse(block, LABEL_OPEN);
+    prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    opener = link;
+    viewer = v;
+    document.body.appendChild(v);
+
+    img.src = full; // the large original is fetched HERE, on click only
   }
 
   function init() {
-    var blocks = document.querySelectorAll(".reveal-block");
-    for (var i = 0; i < blocks.length; i += 1) {
-      var block = blocks[i];
-      var btn = block.querySelector(".reveal-btn");
-      if (!btn) continue;
-      (function (b) {
-        // Instance-specific closure: each handler owns its own block,
-        // not the last one in the loop (trouble.txt 6.15).
-        btn.addEventListener("click", function (e) {
+    var links = document.querySelectorAll(".hd-link");
+    for (var i = 0; i < links.length; i += 1) {
+      // Instance-specific closure: each handler owns its own link
+      // (trouble.txt 6.15).
+      (function (link) {
+        link.addEventListener("click", function (e) {
+          if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
           e.preventDefault();
-          if (b.classList.contains("is-open")) hide(b);
-          else show(b);
+          open(link);
         });
-      })(block);
+      })(links[i]);
     }
   }
 

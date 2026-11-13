@@ -36,19 +36,6 @@
             background: var(--bg);
         }
 
-        /* ---------- loading notice ---------- */
-
-        .loading-notice {
-            text-align: center;
-            font-size: 0.9em;
-            color: var(--muted);
-            margin-bottom: 16px;
-            padding: 10px 16px;
-            background: var(--cream);
-            border: 1px dashed var(--line);
-            border-radius: 4px;
-        }
-
         /* ---------- back link ---------- */
 
         /* ---------- page head ---------- */
@@ -78,7 +65,7 @@
             padding-bottom: 12px;
         }
 
-        /* 画面占位 — 复用 site.css .reveal-* 组件 */
+        /* 画面 — 复用 site.css 4.6 的 .hd-* 高清查看组件 */
         .cartoon-image {
             display: block;
             margin-bottom: 24px;
@@ -195,10 +182,6 @@
 
     <a href="about.html" class="back-link">← Back to About Me</a>
 
-    <p class="loading-notice">
-        ⏳ The network compilation is slow. Please be patient and wait.
-    </p>
-
     <header class="page-head">
         <h1>Cartoons</h1>
         <p class="lede">My hobbies outside mathematics — animation, theme songs, and a little bit of nostalgia.</p>
@@ -215,18 +198,12 @@
                 Xiangfeng is a 14-year-old boy who loves adventure. One day, he finds a Star Soul Stone. This wakes up the hero named Lie Kongyan. From that moment on, he takes the duty to protect the Earth. He searches for other Star Soul warriors to fight against the aliens. Many young people join together to form the Dragon Rescue Team. They work well and solve problems together. With their efforts, they keep the peace.
             </p>
 
-            <figure class="cartoon-image reveal-block">
-                <div class="reveal-placeholder">
-                    <p class="reveal-notice">
-                        The image is large. Please click to open it.
-                    </p>
-                    <button class="reveal-btn" type="button"
-                            data-src="picture/yuanqi_cartoon.png"
-                            data-alt="Star Guardian">
-                        Open image
-                    </button>
-                </div>
-                <img class="reveal-img" alt="Star Guardian">
+            <figure class="cartoon-image">
+                <a class="hd-link" href="picture/yuanqi_cartoon.png">
+                    <img class="hd-thumb"
+                         src="picture/compress/compress-yuanqi_cartoon.jpg"
+                         alt="Star Guardian">
+                </a>
             </figure>
 
             <hr class="section-line">
@@ -264,18 +241,12 @@
                 Kira Yamato is a university student who loves peace. His good friend Athrun goes home. One day, while Kira and his friends are at school, ZAFT soldiers come to the school to take the Robot. Kira gets inside the robot and starts to fight. He must face his good friend Athrun in battle. Kira must decide between protecting his friends or following orders. He uses the power of the Seed, the ability to change the future. This is a story about war, friendship, and becoming a better person.
             </p>
 
-            <figure class="cartoon-image reveal-block">
-                <div class="reveal-placeholder">
-                    <p class="reveal-notice">
-                        The image is large. Please click to open it.
-                    </p>
-                    <button class="reveal-btn" type="button"
-                            data-src="picture/seed_cartoon.png"
-                            data-alt="Mobile Suit Gundam SEED">
-                        Open image
-                    </button>
-                </div>
-                <img class="reveal-img" alt="Mobile Suit Gundam SEED">
+            <figure class="cartoon-image">
+                <a class="hd-link" href="picture/seed_cartoon.png">
+                    <img class="hd-thumb"
+                         src="picture/compress/compress-seed_cartoon.jpg"
+                         alt="Mobile Suit Gundam SEED">
+                </a>
             </figure>
 
             <hr class="section-line">
@@ -307,7 +278,7 @@
 
     <footer class="footer">
         <p>© 2026 ExtremalMath</p>
-        <p>Last updated Nov 11, 2026</p>
+        <p>Last updated Nov 13, 2026</p>
     </footer>
 
 </div>

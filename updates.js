@@ -5,7 +5,7 @@
 const siteUpdates = [
    {
         date: "2026-11-13",
-        text: "Added a Tools section to the Academic Sites page, with an online Image Compressor (compress.fiveyoboy.com) for shrinking images before upload/compile.",
+        text: "Replaced six large PNG images on the Games and Cartoons pages with compressed JPEG versions (from ~18 MB to 564 KB, same resolutions), so images now appear directly on the page with no Open image buttons. Clicking any picture opens its full-resolution original in a quiet viewer, fetched only on demand. Also added a Tools section to Academic Sites with an online Image Compressor for shrinking images before upload.",
     },
    {
         date: "2026-11-11",
