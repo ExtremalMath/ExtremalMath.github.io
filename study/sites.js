@@ -89,6 +89,15 @@ const SITES = [
     url: "https://unsplash.com/",
     desc: "Free high-resolution photos contributed by a global community",
     note: "Topbook-知乎"
+  },
+
+  // ── Tools ───────────────────────────────────────────────────────────────
+  {
+    category: "Tools",
+    name: "Image Compressor",
+    url: "https://compress.fiveyoboy.com/compress-img",
+    desc: "Online image compression web tool",
+    note: "Images too large — compress before uploading/compiling for convenience."
   }
 ];
 
@@ -99,7 +108,8 @@ var SITE_CATEGORY_ORDER = [
   "AI Work Platform",
   "Math Tools Site",
   "Math Q&A Forum",
-  "Stock Photo Sites"
+  "Stock Photo Sites",
+  "Tools"
 ];
 
 // Escapes the five HTML metacharacters so names, descriptions and notes can
