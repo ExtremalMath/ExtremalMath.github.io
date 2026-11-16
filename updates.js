@@ -4,6 +4,10 @@
 
 const siteUpdates = [
    {
+        date: "2026-11-16",
+        text: "Added solution notes for Chapter 2, Exercise 6 of Finite Fields and Their Applications (Feng & Liao) as a new entry on the Homework page, alongside the existing Chapter 1 exercises.",
+    },
+   {
         date: "2026-11-13",
         text: "Replaced six large PNG images on the Games and Cartoons pages with compressed JPEG versions (from ~18 MB to 564 KB, same resolutions), so images now appear directly on the page with no Open image buttons. Clicking any picture opens its full-resolution original in a quiet viewer, fetched only on demand. Also added a Tools section to Academic Sites with an online Image Compressor for shrinking images before upload. Added a Last Resort (空晓界限) chapter page under Punishing: Gray Raven with two CG images and collected reflections.",
     },
