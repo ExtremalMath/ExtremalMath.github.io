@@ -5,7 +5,7 @@
 const siteUpdates = [
    {
         date: "2026-11-18",
-        text: "Added a Traffic page (traffic.html) with a live visitor feed and a world map of the last 24 hours, moved from the home page. The home page now links to Traffic in place of the File Migration Log link. The tracking pixel stays on the home page so visit data keeps accumulating. Refreshed the Now page with current study and teaching notes; inline links in its text now open the linked homework notes. Updated the reference lists on the Research Directions page.",
+        text: "Added a Traffic page (traffic.html) with a live visitor feed and a world map of the last 24 hours, moved from the home page. The home page now links to Traffic in place of the File Migration Log link. The tracking pixel stays on the home page so visit data keeps accumulating. Refreshed the Now page with current study and teaching notes; inline links in its text now open the linked homework notes. Updated the Research Directions references and added two books on functional analysis and finite fields to the Books page.",
     },
    {
         date: "2026-11-16",
