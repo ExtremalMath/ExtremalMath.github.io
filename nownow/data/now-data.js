@@ -40,12 +40,12 @@
 
   var SEMESTER_NOW = {
     "2026autumn": {
-      updated: "Oct 2026",
+      updated: "Nov 2026",
 
       modules: {
         learning: {
           content: [
-            "Mornings begin with English words for the postgraduate entrance exam. I keep the red book open every day, a few dozen at a time, and review the ones I keep forgetting.",
+            "Mornings begin with English words for the postgraduate entrance exam. I use an app called 不背单词 to help me study, a few dozen at a time, and review the ones I keep forgetting.",
             "Alongside it I work through real analysis, partial differential equations, and finite fields — one theorem and one exercise at a time. The pace is slow, but each step is mine."
           ],
           sub: "Postgraduate English · Real analysis · PDEs · Finite fields"
@@ -54,15 +54,16 @@
         tinkering: {
           content: [
             "I build this site by hand, page by page. Lately I have been moving every block of text into a single data file — change the data, and the page updates on its own, with no HTML to touch.",
-            "I also write small C++ programs to keep my hands sharp: a Huffman coder, a ticket system, a tour map."
+            "I follow teachers from the School of the Environment and Safety Engineering to test the different properties of household paper products."
           ],
-          sub: "Data-driven pages · C++ exercises · Site upkeep"
+          sub: "Data-driven pages · Household paper testing · Site upkeep"
         },
 
         thoughts: {
           content: [
             "I keep turning over one question: can mathematics meet a real problem? One thought that will not let me go is Tuza's conjecture from graph theory, and the collection and transport of kitchen waste. They seem to have nothing to do with each other, yet both ask how to cover a graph with the fewest pieces.",
-            "I write these thoughts down instead of letting them pass. Most will lead nowhere. One might not."
+            "I write these thoughts down instead of letting them pass. Most will lead nowhere. One might not.",
+            "Sometimes the teacher of Finite Fields and Their Applications asks us to give talks and share what we know. My notes for that part are in the lower half of [[homework|../study/homework.html]]. Interested researchers can read them and contact me."
           ],
           sub: "Graph theory × real problems · Notes on reading"
         },

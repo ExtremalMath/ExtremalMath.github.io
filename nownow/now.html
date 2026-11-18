@@ -317,7 +317,7 @@
 
     <footer class="site-footer">
       <p>&copy; 2026 ExtremalMath</p>
-      <p class="updated">Last updated Nov 11, 2026</p>
+      <p class="updated">Last updated Nov 18, 2026</p>
     </footer>
 
   </div>
@@ -344,6 +344,22 @@
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#39;");
+    }
+
+    /* 行内链接：正文用 [[label|href]] 标记一个链接。
+       先整体转义，再只放行 http(s) 与站内相对路径，杜绝 javascript: 等注入。
+       共享层 site.css 已统一正文链接样式，此处不写任何展示样式。 */
+    function renderLinkedText(value) {
+      var safe = escapeHTML(value);
+      return safe.replace(/\[\[([^\]|]+)\|([^\]|]+)\]\]/g, function (all, label, href) {
+        var raw = href.replace(/&amp;/g, "&").replace(/&#39;/g, "'")
+                      .replace(/&quot;/g, '"').replace(/&lt;/g, "<").replace(/&gt;/g, ">");
+        var isHttp = /^https?:\/\//i.test(raw);
+        var isLocal = /^\.\.?\//.test(raw) || /^[A-Za-z0-9_\-\/]+\.(html?|pdf)$/i.test(raw);
+        if (!isHttp && !isLocal) return label;   // 非法协议：降级为纯文本
+        var blank = isHttp ? ' target="_blank" rel="noopener"' : "";
+        return '<a href="' + escapeHTML(raw) + '"' + blank + ">" + label + "</a>";
+      });
     }
 
     function fileToId(fileName) {
@@ -432,7 +448,7 @@
 
         if (Array.isArray(m.content) && m.content.length) {
           parts.push('<div class="now-body">' + m.content.map(function (line) {
-            return "<p>" + escapeHTML(line) + "</p>";
+            return "<p>" + renderLinkedText(line) + "</p>";
           }).join("") + "</div>");
         }
 
