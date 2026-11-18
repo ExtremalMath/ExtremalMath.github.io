@@ -4,6 +4,10 @@
 
 const siteUpdates = [
    {
+        date: "2026-11-18",
+        text: "Added a Traffic page (traffic.html) with a live visitor feed and a world map of the last 24 hours, moved from the home page. The home page now links to Traffic in place of the File Migration Log link. The tracking pixel stays on the home page so visit data keeps accumulating.",
+    },
+   {
         date: "2026-11-16",
         text: "Added solution notes for Chapter 2, Exercise 6 of Finite Fields and Their Applications (Feng & Liao) as a new entry on the Homework page, alongside the existing Chapter 1 exercises.",
     },

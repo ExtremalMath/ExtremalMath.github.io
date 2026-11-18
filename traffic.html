@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExtremalMath | Traffic</title>
+    <link rel="icon" type="image/x-icon" href="picture/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="picture/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="picture/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="picture/favicon-16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="picture/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="picture/favicon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="picture/favicon-512.png">
+    <link rel="stylesheet" href="site.css">
+    <style>
+        /* FeedPulse 外部嵌入组件：居中且不溢出 720px 容器 */
+        .traffic-widget {
+            margin-top: 8px;
+            text-align: center;
+        }
+        .traffic-widget [data-ltf-traffic] {
+            margin: 0 auto;
+        }
+        .traffic-widget [data-fp-globe] {
+            margin-top: 28px;
+        }
+        /* 地图脚本把 canvas 高度写死为固定像素、宽度却 max-width:100%，
+           窄屏会压扁变形；改 height:auto 让它随宽度等比缩放。 */
+        .traffic-widget [data-fp-globe] canvas {
+            height: auto !important;
+        }
+        /* 三档尺寸：桌面用脚本默认 380px；平板收至 300px；手机 258px。
+           均小于各断点可用宽度，配合组件自身 max-width:100% 不溢出。 */
+        @media (max-width: 640px) {
+            .traffic-widget [data-fp-globe] canvas { width: 300px !important; }
+        }
+        @media (max-width: 360px) {
+            .traffic-widget [data-fp-globe] canvas { width: 258px !important; }
+        }
+
+    /* All hyperlinks: hover makes the text deep red and tilted.
+       Navigation "Back to ..." links (class .back-link or .btn) keep their original style. */
+    </style>
+</head>
+<body>
+
+<div class="page">
+
+    <a href="index.html" class="back-link">← Back to Home</a>
+
+    <header class="page-head">
+        <h1>Traffic</h1>
+        <p class="subtitle">A quiet, live look at who has been here.</p>
+    </header>
+
+    <main>
+        <p class="intro">Recent visitors and a world map of the last 24 hours. Both update automatically.</p>
+
+        <!-- FeedPulse：实时访客流 + 世界地图（flat + sky） -->
+        <div class="traffic-widget">
+            <script src="https://feed-pulse.com/api/embed/traffic-feed.js?site_id=91e841a3-1c03-4680-9519-ae495fb3f75d&w=320&bc=ffffff&tc=0A0A0A&brd=E5E7EB&hb=002FA7&hf=ffffff&lnk=002FA7&font=IBM+Plex+Sans&rows=10&poll=3000&lang=en&bstyle=minimal&v=15" async></script>
+            <script async src="https://feed-pulse.com/api/embed/visitor-globe.js?site_id=91e841a3-1c03-4680-9519-ae495fb3f75d&map=flat&theme=sky"></script>
+            <script>(function(){function g(){try{var i=new Image();var t=(document.title||'').slice(0,160);i.src='https://feed-pulse.com/api/track-pixel/91e841a3-1c03-4680-9519-ae495fb3f75d?path='+encodeURIComponent(location.pathname||'/')+'&title='+encodeURIComponent(t)+'&host='+encodeURIComponent(location.host)+'&ref='+encodeURIComponent(document.referrer||'');}catch(e){}}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',g,{once:true});}else{setTimeout(g,80);}})();</script>
+            <noscript><img src="https://feed-pulse.com/api/track-pixel/91e841a3-1c03-4680-9519-ae495fb3f75d?via=img&nojs=1" referrerpolicy="no-referrer-when-downgrade" style="position:absolute;width:1px;height:1px;border:0;opacity:0;pointer-events:none;" alt="" /></noscript>
+            <noscript><a href="https://feed-pulse.com/site/extremalmath.github.io/traffic" target="_blank" rel="noopener">via FeedPulse</a></noscript>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 ExtremalMath</p>
+        <p>Last updated Nov 18, 2026</p>
+    </footer>
+
+</div>
+
+</body>
+</html>
