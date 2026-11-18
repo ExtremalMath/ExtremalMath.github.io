@@ -5,7 +5,7 @@
 const siteUpdates = [
    {
         date: "2026-11-18",
-        text: "Added a Traffic page (traffic.html) with a live visitor feed and a world map of the last 24 hours, moved from the home page. The home page now links to Traffic in place of the File Migration Log link. The tracking pixel stays on the home page so visit data keeps accumulating. Refreshed the Now page with current study and teaching notes; inline links in its text now open the linked homework notes. Updated the Research Directions references and added two books on functional analysis and finite fields to the Books page.",
+        text: "Added a Traffic page (traffic.html) with a live visitor feed and a world map of the last 24 hours, moved from the home page. The home page now links to Traffic in place of the File Migration Log link; the tracking pixel stays to keep visit data accumulating. Refreshed the Now page with current study and teaching notes, whose inline links open the linked homework notes. Updated Research Directions references, added two books on functional analysis and finite fields to Books, and replaced the Chapter 2 Exercise 6 finite fields solution notes PDF.",
     },
    {
         date: "2026-11-16",
