@@ -4,6 +4,10 @@
 
 const siteUpdates = [
    {
+        date: "2026-11-22",
+        text: "Added a Lean page to Study Materials (study/lean4study/my_lean4_file.html), with a Lean 4 setup guide (lean4_download_guide.html) as a right-top link and an empty lean4_file/ folder for future code.",
+    },
+   {
         date: "2026-11-18",
         text: "Added a Traffic page (traffic.html) with a live visitor feed and a world map of the last 24 hours, moved from the home page. The home page now links to Traffic in place of the File Migration Log link; the tracking pixel stays to keep visit data accumulating. Refreshed the Now page with current study and teaching notes, whose inline links open the linked homework notes. Updated Research Directions references, added two books on functional analysis and finite fields to Books, and replaced the Chapter 2 Exercise 6 finite fields solution notes PDF.",
     },

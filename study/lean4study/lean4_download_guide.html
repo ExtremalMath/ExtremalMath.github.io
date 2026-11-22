@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lean 4 极简安装指南：Windows 环境下国内镜像 + 环境变量配置">
+    <title>ExtremalMath | Lean 4 Download Guide</title>
+    <link rel="icon" type="image/x-icon" href="../../picture/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="../../picture/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../picture/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../picture/favicon-16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../picture/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../../picture/favicon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="../../picture/favicon-512.png">
+<link rel="stylesheet" href="../../site.css">
+<style>
+        :root {
+            --ink:         #1b1b1b;
+            --muted:       #6d6a63;
+            --line:        #e3ded4;
+            --accent:      #8c2f39;
+            --accent-deep: #6b2229;
+            --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            --mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--sans); color: var(--ink); background: var(--bg); line-height: 1.7; }
+
+        .back-link:hover { color: var(--accent-deep); }
+
+        /* 代码块：安静底色 + 等宽字体，跟随站点配色。*/
+        pre {
+            background: var(--cream);
+            border-left: 3px solid var(--line);
+            padding: 12px 16px;
+            margin: 12px 0 18px 0;
+            font-family: var(--mono);
+            font-size: 0.9em;
+            line-height: 1.6;
+            overflow-x: auto;
+        }
+        code { font-family: var(--mono); font-size: 0.9em; }
+        p code, ul code { font-size: 0.9em; color: var(--accent-deep); }
+
+        .content h2 {
+            font-size: 1.15em;
+            font-weight: 600;
+            color: var(--ink);
+            margin: 24px 0 12px 0;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--line);
+        }
+        .content h3 {
+            font-size: 1em;
+            font-weight: 600;
+            color: var(--ink);
+            margin: 16px 0 8px 0;
+        }
+        .content p, .content ul { margin: 8px 0; }
+        .content ul { padding-left: 20px; }
+        .content li { margin: 6px 0; }
+        .content li code { color: var(--accent-deep); }
+        .note {
+            font-size: 0.9em;
+            color: var(--muted);
+            margin: 10px 0;
+            padding-left: 12px;
+            border-left: 3px solid var(--line);
+        }
+
+        .footer p { margin: 0; }
+</style>
+</head>
+<body>
+    <div class="page">
+
+        <a href="../materials.html" class="back-link">← Back to Materials</a>
+
+        <div class="page-head">
+            <h1>Lean 4 Setup &amp; Download Guide</h1>
+            <p class="subtitle">Windows 环境下极简安装与避坑：国内镜像 + 手动配置变量。</p>
+        </div>
+
+        <div class="content">
+
+            <p>Lean 4 的运行依赖于 <strong>VS Code 插件（前端界面）</strong> 和 <strong>Lean 工具链（底层编译器）</strong>。
+            由于官方服务器在国外，国内直接下载极易遇到网络超时问题。本攻略采用<strong>国内镜像 + 手动配置环境变量</strong>
+            的方式，确保安装顺利。</p>
+
+            <h2>前置准备</h2>
+
+            <ul>
+                <li>安装 VS Code：确保已安装最新版。</li>
+                <li>安装 Lean 4 扩展：<code>Lean 4</code>（发布者为 <code>leanprover</code>），点击安装。
+                    <div class="note">注：此时先不要急着打开 <code>.lean</code> 文件，否则它会自动触发极慢的官方下载。</div>
+                </li>
+            </ul>
+
+            <h2>第一步：配置系统环境变量</h2>
+
+            <p>为了防止 Lean 霸占 C 盘空间，并确保系统能识别到相关命令，我们需要提前配置环境变量：</p>
+            <ol>
+                <li>按 <code>Win</code> 键，搜索并打开 <strong>“编辑系统环境变量”</strong>。</li>
+                <li>点击 <strong>“环境变量”</strong>。</li>
+                <li><strong>新建 <code>ELAN_HOME</code> 变量（用户变量）：</strong>
+                    变量名：<code>ELAN_HOME</code>，变量值：你希望安装的路径，例如 <code>D:\Lean\elan</code>（路径不要有中文和空格）。</li>
+                <li><strong>修改 <code>Path</code> 变量（用户变量）：</strong>
+                    找到 <code>Path</code>，双击编辑 → 新建 → 填入 <code>%ELAN_HOME%\bin</code> → 一路确定保存。</li>
+            </ol>
+
+            <h2>第二步：通过镜像手动安装 Elan</h2>
+
+            <p>因为官方下载地址在国内经常报 <code>Timeout</code> 错误，我们直接使用上海交大（SJTUG）的镜像：</p>
+            <ol>
+                <li>打开浏览器，访问镜像站列表：<code>https://mirror.sjtu.edu.cn/elan/elan/releases/download/?mirror_intel_list</code></li>
+                <li>找到最新的 Windows 版本压缩包，例如 <code>elan-x86_64-pc-windows-msvc.zip</code>，下载并解压。</li>
+                <li>解压后得到一个 <code>elan-init.exe</code>。</li>
+                <li>打开一个全新的 <code>CMD</code> 或 PowerShell 窗口（必须新开，才能读取刚才设的变量）。</li>
+                <li>运行 <code>elan-init.exe</code>，它会自动将 Elan 安装到刚才设置的 <code>ELAN_HOME</code> 目录。</li>
+            </ol>
+
+            <h2>第三步：使用镜像安装 Lean 工具链</h2>
+
+            <p>Elan 装好后，临时指定镜像源再下载 Lean 编译器：</p>
+            <ol>
+                <li>打开一个<strong>新的</strong> PowerShell 窗口。</li>
+                <li>执行 <code>$env:ELAN_DIST_SERVER = "https://mirror.sjtu.edu.cn/elan"</code>
+                    （CMD 为 <code>set ELAN_DIST_SERVER=https://mirror.sjtu.edu.cn/elan</code>）。</li>
+                <li>安装 Lean 稳定版：<pre><code>elan toolchain install leanprover/lean4:stable</code></pre></li>
+                <li>将其设为默认版本：<pre><code>elan default leanprover/lean4:stable</code></pre></li>
+                <li><strong>验证安装：</strong>
+                    <pre><code>lean --version</code></pre>
+                    输出 <code>Lean (version 4.x.x...)</code> 即说明编译器已就位。</li>
+            </ol>
+
+            <h2>第四步：在 VS Code 中创建并测试项目</h2>
+
+            <div class="note">
+                ⚠️ 避坑警告：绝对不要在 VS Code 中直接打开一个孤立的 <code>.lean</code> 文件！插件需要通过项目根目录下的
+                <code>lakefile</code> 和 <code>lean-toolchain</code> 来识别环境。
+            </div>
+
+            <ol>
+                <li>在命令行中，进入代码目录，创建新项目：<pre><code>lake new myproject
+cd myproject</code></pre></li>
+                <li>在当前项目文件夹下，启动 VS Code：<pre><code>code .</code></pre></li>
+                <li>打开 <code>Main.lean</code>，输入以下测试代码并保存：<pre><code>#eval 1 + 1
+def factorial : Nat → Nat
+  | 0 => 1
+  | n + 1 => (n + 1) * factorial n
+#eval factorial 5
+example (a b : Nat) : a + b = b + a := by
+  omega</code></pre></li>
+                <li>观察现象：
+                    <ul>
+                        <li>代码行号旁会出现绿色对勾 <code>✓</code>。</li>
+                        <li>如果右侧没有面板，按 <code>Ctrl+Shift+P</code> 输入 <code>Lean 4: Show InfoView</code> 打开交互面板。</li>
+                        <li>展开面板中 <code>All Messages</code>，你会看到 <code>1+1</code> 的结果 <code>2</code> 和 <code>factorial 5</code> 的结果 <code>120</code>。</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h2>常见问题排查（FAQ）</h2>
+
+            <ul>
+                <li><strong>Q: 提示 <code>glean.exe</code> 有木马病毒？</strong><br>
+                    A: 这是 360 等杀毒软件的启发式误报。如果不放心，请直接忽略，使用本攻略中手动下载 elan 包的方法。</li>
+                <li><strong>Q: 命令行提示 <code>'elan' 不是内部或外部命令</code>？</strong><br>
+                    A: 说明 <code>Path</code> 环境变量没生效。请<strong>彻底关闭</strong>所有命令行和 VS Code，重新打开再试。</li>
+                <li><strong>Q: VS Code 右下角一直转圈，或者显示连接失败？</strong><br>
+                    A: 按 <code>Ctrl+Shift+U</code> 打开输出面板，在下拉菜单选择 <code>Lean 4</code>，查看具体报错信息。</li>
+            </ul>
+
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2026 ExtremalMath</p>
+            <p style="margin-top:6px;">Last updated Nov 22, 2026</p>
+        </div>
+
+    </div>
+
+</body>
+</html>
