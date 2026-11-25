@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Lean 4 极简安装指南：Windows 环境下国内镜像 + 环境变量配置">
+    <meta name="description" content="Lean 4 极简安装与避坑：国内镜像 + 手动环境变量 + 复用本机 mathlib">
     <title>ExtremalMath | Lean 4 Download Guide</title>
     <link rel="icon" type="image/x-icon" href="../../picture/favicon.ico">
     <link rel="icon" type="image/svg+xml" href="../../picture/favicon.svg">
@@ -25,9 +25,7 @@
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: var(--sans); color: var(--ink); background: var(--bg); line-height: 1.7; }
-
         .back-link:hover { color: var(--accent-deep); }
-
         /* 代码块：安静底色 + 等宽字体，跟随站点配色。*/
         pre {
             background: var(--cream);
@@ -41,7 +39,6 @@
         }
         code { font-family: var(--mono); font-size: 0.9em; }
         p code, ul code { font-size: 0.9em; color: var(--accent-deep); }
-
         .content h2 {
             font-size: 1.15em;
             font-weight: 600;
@@ -67,7 +64,13 @@
             padding-left: 12px;
             border-left: 3px solid var(--line);
         }
-
+        .quote {
+            font-size: 0.92em;
+            color: var(--muted);
+            margin: 10px 0;
+            padding-left: 12px;
+            border-left: 3px solid var(--accent);
+        }
         .footer p { margin: 0; }
 </style>
 </head>
@@ -84,10 +87,20 @@
         <div class="content">
 
             <p>Lean 4 的运行依赖于 <strong>VS Code 插件（前端界面）</strong> 和 <strong>Lean 工具链（底层编译器）</strong>。
-            由于官方服务器在国外，国内直接下载极易遇到网络超时问题。本攻略采用<strong>国内镜像 + 手动配置环境变量</strong>
+            由于官方服务器在国外，国内直接下载极易遇到网络超时问题。本攻略采用<strong>国内镜像 + 手动配置环境变量 + 复用本机已编译 mathlib</strong>
             的方式，确保安装顺利。</p>
 
-            <h2>前置准备</h2>
+            <h2>〇、核心认知（先看这几点，少走 90% 弯路）</h2>
+
+            <ul>
+                <li>本地有 mathlib 源码 ≠ 依赖齐全。mathlib 会拖着一整条依赖链，缺一不可。</li>
+                <li><code>.olean</code> 和编译器版本严格一对一绑定。换 toolchain = 旧产物全废，必须重编。</li>
+                <li>无代理时，<code>lake exe cache get</code>（走 curl 连 Azure / Cloudflare）和 <code>git clone</code> GitHub 基本都连不上；ghproxy 一类镜像只对 <code>git clone</code> 有效、对缓存下载无效，且自身也不稳定。</li>
+                <li>最稳的路不是"下载"，而是"复用本机已编译好的 mathlib"。</li>
+                <li>不要同时开第二个窗口跑 <code>lake exe cache get</code>：并发写同一个 <code>.lake</code> 会弄坏产物（典型症状：报 <code>failed to open ... .olean: 2</code> 缺文件）。</li>
+            </ul>
+
+            <h2>一、前置准备</h2>
 
             <ul>
                 <li>安装 VS Code：确保已安装最新版。</li>
@@ -96,7 +109,15 @@
                 </li>
             </ul>
 
-            <h2>第一步：配置系统环境变量</h2>
+            <h2>二、版本选择</h2>
+
+            <ul>
+                <li>推荐使用一个<strong>已发布但足够稳定</strong>的版本（例如 <code>leanprover/lean4:vX.Y.Z</code>）；候选版（rc）日常学习也够用。</li>
+                <li>选定后<strong>锁死版本，别频繁更新</strong>——<code>.olean</code> 与编译器绑定，更新往往要连带重编 mathlib，成本很高。</li>
+                <li>各项目的 <code>lean-toolchain</code> 内容必须<strong>逐字一致</strong>，否则编译产物无法互相复用。</li>
+            </ul>
+
+            <h2>三、第一步：配置系统环境变量（核心避坑）</h2>
 
             <p>为了防止 Lean 霸占 C 盘空间，并确保系统能识别到相关命令，我们需要提前配置环境变量：</p>
             <ol>
@@ -108,7 +129,7 @@
                     找到 <code>Path</code>，双击编辑 → 新建 → 填入 <code>%ELAN_HOME%\bin</code> → 一路确定保存。</li>
             </ol>
 
-            <h2>第二步：通过镜像手动安装 Elan</h2>
+            <h2>四、第二步：通过镜像手动安装 Elan</h2>
 
             <p>因为官方下载地址在国内经常报 <code>Timeout</code> 错误，我们直接使用上海交大（SJTUG）的镜像：</p>
             <ol>
@@ -119,7 +140,7 @@
                 <li>运行 <code>elan-init.exe</code>，它会自动将 Elan 安装到刚才设置的 <code>ELAN_HOME</code> 目录。</li>
             </ol>
 
-            <h2>第三步：使用镜像安装 Lean 工具链</h2>
+            <h2>五、第三步：使用镜像安装 Lean 工具链</h2>
 
             <p>Elan 装好后，临时指定镜像源再下载 Lean 编译器：</p>
             <ol>
@@ -133,7 +154,39 @@
                     输出 <code>Lean (version 4.x.x...)</code> 即说明编译器已就位。</li>
             </ol>
 
-            <h2>第四步：在 VS Code 中创建并测试项目</h2>
+            <h2>六、项目公用环境：path 复用（推荐路线）</h2>
+
+            <div class="quote">最稳的路是"复用本机已编译好的 mathlib"，核心是走本地路径，不跟下载源较劲。</div>
+
+            <ol>
+                <li>安装 elan + 工具链（约 3 GB）：<pre><code>curl https://elan.lean-lang.org/elan-init.sh -sSf | sh</code></pre>
+                    <div class="note">这一步已在第三章完成，可跳过。</div></li>
+                <li>新建项目：<pre><code>lake init myproject math
+cd &lt;你的项目目录&gt;</code></pre></li>
+                <li>对齐 toolchain（关键）：把本项目 <code>lean-toolchain</code> 改成与"已编译好的那份 mathlib"完全相同。</li>
+                <li>在 <code>lakefile.toml</code> 末尾加 path 依赖：<pre><code>[[require]]
+name = "mathlib"
+path = "&lt;已编译好的 mathlib 包根目录，用正斜杠&gt;"</code></pre>
+                    <div class="note"><code>path</code> 要指到<strong>含 <code>lakefile</code> 的 mathlib 包根目录</strong>，不是更内层的 <code>Mathlib</code> 子目录。</div></li>
+                <li>构建 + 验证：<pre><code>lake build</code></pre>
+                    新建测试文件：<pre><code>import Mathlib
+example : 2 + 2 = 4 := by norm_num   -- 显示 No goals 即成功
+</code></pre></li>
+            </ol>
+
+            <h2>七、备用方案：自己编译 mathlib</h2>
+
+            <p>如果必须自己编译 mathlib（无缓存兜底）：</p>
+            <pre><code>cd &lt;mathlib 源码目录&gt;
+echo "leanprover/lean4:vX.Y.Z" &gt; lean-toolchain
+lake build          # 全量编译较慢，约上万 job</code></pre>
+
+            <ul>
+                <li><strong>中断了直接重跑 <code>lake build</code></strong>：Lake 靠 trace 做增量编译，自动从断点续编，进度不丢；<strong>千万别 <code>lake clean</code></strong>（会清空全部产物、从零重编）。</li>
+                <li>内存吃紧被杀就降并行：<pre><code>lake build -j 2</code></pre></li>
+            </ul>
+
+            <h2>八、在 VS Code 中创建并测试项目</h2>
 
             <div class="note">
                 ⚠️ 避坑警告：绝对不要在 VS Code 中直接打开一个孤立的 <code>.lean</code> 文件！插件需要通过项目根目录下的
@@ -141,10 +194,10 @@
             </div>
 
             <ol>
-                <li>在命令行中，进入代码目录，创建新项目：<pre><code>lake new myproject
+                <li>在命令行中，进入你存放代码的目录，创建一个新项目：<pre><code>lake new myproject
 cd myproject</code></pre></li>
                 <li>在当前项目文件夹下，启动 VS Code：<pre><code>code .</code></pre></li>
-                <li>打开 <code>Main.lean</code>，输入以下测试代码并保存：<pre><code>#eval 1 + 1
+                <li>在 VS Code 左侧资源管理器中，双击打开自带的 <code>Main.lean</code> 文件，输入以下测试代码并保存：<pre><code>#eval 1 + 1
 def factorial : Nat → Nat
   | 0 => 1
   | n + 1 => (n + 1) * factorial n
@@ -155,27 +208,72 @@ example (a b : Nat) : a + b = b + a := by
                     <ul>
                         <li>代码行号旁会出现绿色对勾 <code>✓</code>。</li>
                         <li>如果右侧没有面板，按 <code>Ctrl+Shift+P</code> 输入 <code>Lean 4: Show InfoView</code> 打开交互面板。</li>
-                        <li>展开面板中 <code>All Messages</code>，你会看到 <code>1+1</code> 的结果 <code>2</code> 和 <code>factorial 5</code> 的结果 <code>120</code>。</li>
+                        <li>展开面板中的 <code>All Messages</code>，你会看到 <code>1+1</code> 的结果 <code>2</code>，以及 <code>factorial 5</code> 的结果 <code>120</code>。</li>
                     </ul>
                 </li>
             </ol>
 
-            <h2>常见问题排查（FAQ）</h2>
+            <h2>九、依赖结构（心里有数）</h2>
+
+            <p>只 <code>require mathlib</code>，Lake 会自动拉入约 <strong>9 个包</strong>：mathlib 本体 + batteries、Qq、aesop、proofwidgets、LeanSearchClient、importGraph、plausible、Cli。你<strong>不需要</strong>手动安装或单独编译它们。</p>
+
+            <h2>十、磁盘占用与精简</h2>
+
+            <ul>
+                <li>全量编译后体积较大，<strong>日常学习只需其中一部分</strong>（主要是 <code>.olean</code> / <code>.ilean</code> 产物 + <code>.lean</code> 源码）。</li>
+                <li><strong>安全可删</strong>（不影响写证明）：
+                    <ul>
+                        <li><code>.lake/build/ir</code>（<code>.c</code> / <code>.o</code> 中间文件，不编译可执行文件就没用）</li>
+                        <li>各依赖包 <code>.lake/packages/*/.git</code>（git 历史，不打算 <code>lake update</code> 就没用）</li>
+                        <li>下载缓存目录（如 <code>~/.cache/mathlib</code>、<code>~/.cache/lean</code>）</li>
+                    </ul>
+                </li>
+                <li><strong>绝对别删</strong>：
+                    <ul>
+                        <li><code>.lake/build/lib</code> 里的 <code>.olean</code> / <code>.ilean</code>（mathlib 本体产物）</li>
+                        <li><code>.lean</code> 源码（删了无法跳转定义 / 看源码，学习体验大损）</li>
+                        <li><code>lean-toolchain</code> / <code>lakefile.toml</code> / <code>lake-manifest.json</code>（配置文件）</li>
+                    </ul>
+                </li>
+                <li>删完跑一次 <code>lake build</code> 验证秒过、且能跳转源码即成功。代价仅是以后不能 <code>lake update</code>，锁版本学习无影响。</li>
+            </ul>
+
+            <h2>十一、常见问题排查（FAQ）</h2>
 
             <ul>
                 <li><strong>Q: 提示 <code>glean.exe</code> 有木马病毒？</strong><br>
-                    A: 这是 360 等杀毒软件的启发式误报。如果不放心，请直接忽略，使用本攻略中手动下载 elan 包的方法。</li>
+                    A: 这是 360 等杀毒软件的启发式误报。`glean` 是交大开源工具，如果不放心，请直接忽略，使用本攻略中<strong>手动下载 elan 包</strong>的方法。</li>
                 <li><strong>Q: 命令行提示 <code>'elan' 不是内部或外部命令</code>？</strong><br>
-                    A: 说明 <code>Path</code> 环境变量没生效。请<strong>彻底关闭</strong>所有命令行和 VS Code，重新打开再试。</li>
+                    A: 说明 <code>Path</code> 环境变量没生效。请<strong>彻底关闭</strong>所有命令行和 VS Code，重新打开再试。或者检查 <code>Path</code> 里是否漏了 <code>%ELAN_HOME%\bin</code>。</li>
                 <li><strong>Q: VS Code 右下角一直转圈，或者显示连接失败？</strong><br>
-                    A: 按 <code>Ctrl+Shift+U</code> 打开输出面板，在下拉菜单选择 <code>Lean 4</code>，查看具体报错信息。</li>
+                    A: 按 <code>Ctrl+Shift+U</code> 打开输出面板，在下拉菜单选择 <code>Lean 4</code>，查看具体的报错信息。如果是环境变量问题，尝试完全重启 VS Code（确保任务管理器中无残留进程）。</li>
+                <li><strong>Q: <code>lake build</code> 一直拉 GitHub 卡住？</strong><br>
+                    A: 无代理连不上，改用本地 path 复用，别干等。</li>
+                <li><strong>Q: <code>remote URL changed</code> 后卡死？</strong><br>
+                    A: 镜像规则失效 + 缓存走 curl 救不了，放弃拉缓存。</li>
+                <li><strong>Q: <code>failed to open ... .olean: 2</code>？</strong><br>
+                    A: 并发跑 cache + build 弄坏产物。<code>lake build batteries</code> 补，再 <code>lake build</code>。</li>
+                <li><strong>Q: <code>toolchain mismatch</code>？</strong><br>
+                    A: 两份 <code>lean-toolchain</code> 不一致，对齐 toolchain 即可。</li>
+                <li><strong>Q: 编译中断？</strong><br>
+                    A: 正常现象，重跑 <code>lake build</code>，勿 <code>lake clean</code>。</li>
+                <li><strong>Q: 想换版本？</strong><br>
+                    A: <code>.olean</code> 绑定编译器，必须同步换 mathlib，旧产物全废。</li>
+                <li><strong>Q: 想租远程机器编译再下载？</strong><br>
+                    A: 原理可行（同官方缓存），但远程 toolchain 必须逐字一致、平台尽量相同；如果已在本机编了大半时，不如直接跑完。</li>
             </ul>
+
+            <h2>十二、一句话总结</h2>
+
+            <div class="quote">
+                无代理环境下，别跟 GitHub / Azure 较劲。锁定一个稳定版本，用 `lake override set` 或 path 依赖指向本机已编译好的 mathlib，对齐 toolchain 后 <code>lake build</code> 即可；编完删 <code>ir</code> 和依赖 <code>.git</code> 做精简。能跑就别更新、别 clean、别并发拉缓存。
+            </div>
 
         </div>
 
         <div class="footer">
             <p>&copy; 2026 ExtremalMath</p>
-            <p style="margin-top:6px;">Last updated Nov 22, 2026</p>
+            <p style="margin-top:6px;">Last updated Nov 25, 2026</p>
         </div>
 
     </div>

@@ -4,6 +4,10 @@
 
 const siteUpdates = [
    {
+        date: "2026-11-25",
+        text: "Merged the two Lean 4 setup guides (lean4_download_guide.txt and lean4_download_guide2.txt) into a single document: core的认知, version selection, mirror install, path reuse, dependency and disk clean-up sections. The HTML guide page in study/lean4study/ has been rewritten accordingly.",
+    },
+   {
         date: "2026-11-22",
         text: "Added a Lean page to Study Materials (study/lean4study/my_lean4_file.html), with a Lean 4 setup guide (lean4_download_guide.html) as a right-top link and an empty lean4_file/ folder for future code.",
     },
