@@ -38,6 +38,10 @@ const aboutData = {
 
   awards: [
     {
+      year: "2026",
+      text: "The 18th Chinese Mathematics Competitions (CMC), Category A — Provincial 3rd Prize, Jiangsu"
+    },
+    {
       year: "2025",
       text: "The 17th Chinese Mathematics Competitions (CMC), Category A — Provincial 3rd Prize, Jiangsu"
     }

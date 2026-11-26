@@ -4,6 +4,10 @@
 
 const siteUpdates = [
    {
+        date: "2026-11-26",
+        text: "Added a new award (The 18th Chinese Mathematics Competitions, Category A — Provincial 3rd Prize, Jiangsu) to the Awards & Honors section on the About page, which feeds both the About page and the CV generator.",
+    },
+   {
         date: "2026-11-25",
         text: "Merged the two Lean 4 setup guides (lean4_download_guide.txt and lean4_download_guide2.txt) into a single document: core的认知, version selection, mirror install, path reuse, dependency and disk clean-up sections. The HTML guide page in study/lean4study/ has been rewritten accordingly. Added a Water Absorption Test entry to the Handmade page, with the experiment report and raw lab data spreadsheet, both now in notes/.",
     },
